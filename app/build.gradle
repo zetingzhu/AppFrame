@@ -43,4 +43,6 @@ dependencies {
     // 注解框架
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    // 数据库框架
+    implementation 'org.litepal.android:core:2.0.0'
 }
