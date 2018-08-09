@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 主菜单项 -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center|center_vertical"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/home_menu_item_ivIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:focusable="false"
+        android:paddingBottom="0dp">
+    </ImageView>
+
+    <TextView
+        android:id="@+id/home_menu_item_tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:textColor="@drawable/home_menu_title_color_selector"
+        android:textSize="9sp">
+    </TextView>
+
+</LinearLayout>

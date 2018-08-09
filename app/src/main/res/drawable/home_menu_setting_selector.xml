@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+账号设置 菜单状态
+ -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--
+       <item
+           android:state_selected="true"
+           android:drawable="@drawable/menu_setting_icon_selected" />
+
+       <item
+           android:drawable="@drawable/menu_setting_icon_normal" />
+   -->
+
+    <item
+        android:state_selected="true"
+        android:drawable="@drawable/home_user_tab_true"/>
+
+    <item
+        android:drawable="@drawable/home_user_tab_false"/>
+
+
+</selector>
