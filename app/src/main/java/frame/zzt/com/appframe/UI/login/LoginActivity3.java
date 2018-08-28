@@ -20,6 +20,7 @@ import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import frame.zzt.com.appframe.R;
+import frame.zzt.com.appframe.UI.BaseAppCompatActivity;
 import frame.zzt.com.appframe.UI.home.HomeActivity;
 import frame.zzt.com.appframe.Util.MyMessageUtil;
 import frame.zzt.com.appframe.modle.BaseModel;
@@ -29,10 +30,9 @@ import frame.zzt.com.appframe.mvp.mvpbase.BasePresenter;
  * Created by allen on 18/8/13.
  */
 
-public class LoginActivity3<P extends BasePresenter> extends AppCompatActivity implements LoginView {
+public class LoginActivity3<P extends BasePresenter> extends BaseAppCompatActivity implements LoginView {
 
     public Context context;
-    private ProgressDialog dialog;
     protected LoginPresenter presenter;
 
     @BindView(R.id.email)
@@ -65,8 +65,14 @@ public class LoginActivity3<P extends BasePresenter> extends AppCompatActivity i
 
         mEmailView.setText("13797745363");
         mPasswordView.setText("123456");
+
+        System.out.println("----获取信号值：" + getProgressRssi(-30) );
+
     }
 
+    public int getProgressRssi( int rssi){
+        return Math.round(rssi / Math.abs(-100))  ;
+    }
 
     @Override
     protected void onDestroy() {
@@ -98,22 +104,9 @@ public class LoginActivity3<P extends BasePresenter> extends AppCompatActivity i
         presenter.login3();
     }
 
-    @Override
-    public void showLoading() {
-        showLoadingDialog();
-    }
 
 
-    @Override
-    public void hideLoading() {
-        closeLoadingDialog();
-    }
 
-
-    @Override
-    public void showError(String msg) {
-        showtoast(msg);
-    }
     @Override
     public void onLoginSucc() {
         showtoast("登录成功");
@@ -132,32 +125,5 @@ public class LoginActivity3<P extends BasePresenter> extends AppCompatActivity i
         return mPasswordView.getText().toString();
     }
 
-    @Override
-    public void onErrorCode(BaseModel model) {
-        showtoast("网络错误"+model.getCode()  );
-    }
 
-
-    /**
-     * @param s
-     */
-    public void showtoast(String s) {
-        MyMessageUtil.getInstance(this).setMessage(s);
-    }
-
-    private void closeLoadingDialog() {
-        if (dialog != null && dialog.isShowing()) {
-            dialog.dismiss();
-        }
-    }
-
-
-    private void showLoadingDialog() {
-
-        if (dialog == null) {
-            dialog = new ProgressDialog(context);
-        }
-        dialog.setCancelable(false);
-        dialog.show();
-    }
 }

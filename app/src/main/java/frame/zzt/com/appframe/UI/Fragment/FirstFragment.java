@@ -4,10 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +18,12 @@ import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import frame.zzt.com.appframe.Bluetooth.ActivityBluetooth4;
+import frame.zzt.com.appframe.Bluetooth.ActivityBluetooth5;
 import frame.zzt.com.appframe.R;
+import frame.zzt.com.appframe.Bluetooth.ActivityBluetooth;
+import frame.zzt.com.appframe.Bluetooth.ActivityBluetooth2;
+import frame.zzt.com.appframe.Bluetooth.ActivityBluetooth3;
 import frame.zzt.com.appframe.UI.Activity.ActivityFirst;
 
 /**
@@ -32,11 +35,11 @@ public class FirstFragment extends Fragment {
     @BindView(R.id.listView_first)
     public ListView mListView;
 
-    @BindString(R.string.tab_item_first )
-    public String title ;
+    @BindString(R.string.tab_item_first)
+    public String title;
 
-    @BindString(R.string.tab_item_desc )
-    public String desc ;
+    @BindString(R.string.tab_item_desc)
+    public String desc;
 
     private View mRootView;
     private Unbinder unbinder;
@@ -47,7 +50,7 @@ public class FirstFragment extends Fragment {
 
         mRootView = inflater.inflate(R.layout.fragment_first, container, false);
 
-        unbinder = ButterKnife.bind(this , mRootView);
+        unbinder = ButterKnife.bind(this, mRootView);
 
         initView();
 
@@ -80,21 +83,27 @@ public class FirstFragment extends Fragment {
     }
 
     private DemoInfo[] DEMOS = {
-            new DemoInfo( R.string.tab_item_first  , R.string.tab_item_desc ,ActivityFirst.class),
+            new DemoInfo(R.string.tab_item_first, R.string.tab_item_desc, ActivityFirst.class),
+            new DemoInfo(R.string.tab_item_bluetooth, R.string.tab_item_bluetooth_desc, ActivityBluetooth.class),
+            new DemoInfo(R.string.tab_item_bluetooth2, R.string.tab_item_bluetooth_desc, ActivityBluetooth2.class),
+            new DemoInfo(R.string.tab_item_bluetooth3, R.string.tab_item_bluetooth_desc, ActivityBluetooth3.class),
+            new DemoInfo(R.string.tab_item_bluetooth4, R.string.tab_item_bluetooth_desc, ActivityBluetooth4.class),
+            new DemoInfo(R.string.tab_item_bluetooth5, R.string.tab_item_bluetooth_desc, ActivityBluetooth5.class),
     };
 
     public class DemoListAdapter extends BaseAdapter {
         public DemoListAdapter() {
             super();
         }
+
         @Override
         public View getView(int index, View convertView, ViewGroup parent) {
-            MyViewHolder myViewHolder ;
+            MyViewHolder myViewHolder;
             if (convertView == null) {
                 convertView = View.inflate(getActivity(), R.layout.list_info_item, null);
-                myViewHolder= new MyViewHolder(convertView);
+                myViewHolder = new MyViewHolder(convertView);
                 convertView.setTag(myViewHolder);
-            }else {
+            } else {
                 myViewHolder = (MyViewHolder) convertView.getTag();
             }
             myViewHolder.title.setText(DEMOS[index].title);
@@ -121,8 +130,11 @@ public class FirstFragment extends Fragment {
         }
 
         class MyViewHolder {
-            @BindView(R.id.title)  TextView title;
-            @BindView(R.id.desc)  TextView desc;
+            @BindView(R.id.title)
+            TextView title;
+            @BindView(R.id.desc)
+            TextView desc;
+
             public MyViewHolder(View view) {
                 ButterKnife.bind(this, view);
             }

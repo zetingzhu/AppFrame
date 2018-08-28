@@ -24,5 +24,11 @@
     <string name="tab_item_first">第一条列表</string>
     <string name="tab_item_desc">第一条列表详情</string>
 
+    <string name="tab_item_bluetooth">蓝牙Ble使用</string>
+    <string name="tab_item_bluetooth2">蓝牙Ble使用2</string>
+    <string name="tab_item_bluetooth3">蓝牙Ble使用3</string>
+    <string name="tab_item_bluetooth4">蓝牙Ble19设备</string>
+    <string name="tab_item_bluetooth5">蓝牙Ble外围设备</string>
+    <string name="tab_item_bluetooth_desc">关于蓝牙ble的一些基本使用</string>
 
 </resources>
