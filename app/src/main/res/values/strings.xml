@@ -17,18 +17,30 @@
     <string name="insurance_tarms_text12"><![CDATA[ <body> <font color="#000000" ><b>保险名称：电动自行车综合保险</b></font> <br/> <font color="#000000"><b>投 保 人：</b></font> <font color="#53555c" >上海悦骑智能科技有限公司</font> <br/> <font color="#000000"><b>被保险车辆：</b></font><font color="#53555c" >安装有悦骑智能科技公司智慧芯产品的电动自行车</font> <br/> <font color="#000000"><b>被保险人：</b></font> <font color="#53555c" >详见特别约定</font> <br/> <font color="#000000"><b>保险期限：</b></font> <font color="#53555c" >一年</font></body>  ]]> </string>
 
 
+    <string name="PaintColor">画笔颜色</string>
+    <string name="PaintSize">画笔粗细</string>
+    <string name="PaintShape">画笔形状</string>
+    <string name="Reset">重画</string>
+    <string name="Save">保存</string>
+
     <string name="home_menu_vehicle">详情</string>
     <string name="home_menu_service">服务</string>
     <string name="home_menu_setting">设置</string>
 
-    <string name="tab_item_first">第一条列表</string>
-    <string name="tab_item_desc">第一条列表详情</string>
+    <string name="tab_item_first">自定义的圆形进度条</string>
+    <string name="tab_item_desc">自定义了，一个测试信号强度显示的进度条</string>
 
     <string name="tab_item_bluetooth">蓝牙Ble使用</string>
-    <string name="tab_item_bluetooth2">蓝牙Ble使用2</string>
-    <string name="tab_item_bluetooth3">蓝牙Ble使用3</string>
+    <string name="tab_item_bluetooth2">蓝牙Ble使用 BLE框架 FastBle 使用 </string>
+    <string name="tab_item_bluetooth3">蓝牙Ble使用 BLE设备蓝牙通信框架BluetoothKit</string>
     <string name="tab_item_bluetooth4">蓝牙Ble19设备</string>
     <string name="tab_item_bluetooth5">蓝牙Ble外围设备</string>
     <string name="tab_item_bluetooth_desc">关于蓝牙ble的一些基本使用</string>
+
+    <string name="tab_item_surfaceView">SurfaceView 使用 </string>
+    <string name="tab_item_surfaceView_desc">SurfaceView 简单使用 </string>
+
+    <string name="tab_item_doodleview">自定义涂鸦  </string>
+    <string name="tab_item_doodleview_desc">自定义涂鸦  SurfaceView 使用  还有一些6.0后申请权限的使用 </string>
 
 </resources>

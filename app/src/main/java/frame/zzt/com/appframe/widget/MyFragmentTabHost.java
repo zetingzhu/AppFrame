@@ -62,7 +62,6 @@ public class MyFragmentTabHost extends TabHost
     private boolean mAttached;
     /**
      * 需要保存状态的的Tab标签
-     * @author zeng.ciqing
      */
     private String[] mSaveStateTabTags = null;
 
@@ -147,7 +146,6 @@ public class MyFragmentTabHost extends TabHost
     /**
      * 设置需要保存状态的的Tab标签
      * @param tags 需要保存状态的Tab标签，保存状态的Tab在切换时只显示或隐藏。
-     * @author zeng.ciqing
      */
     public void setSaveStateTabByTags(String[] tags) {
     	mSaveStateTabTags = tags;
@@ -157,7 +155,6 @@ public class MyFragmentTabHost extends TabHost
      * 判断是否需要保存Tab的状态。
      * @param tag Tab对应的标签。
      * @return 如果需要保存返回true，否则返回false。
-     * @author zeng.ciqing
      */
     public boolean shouldSaveTabState(String tag) {
     	if(mSaveStateTabTags == null || mSaveStateTabTags.length == 0) {

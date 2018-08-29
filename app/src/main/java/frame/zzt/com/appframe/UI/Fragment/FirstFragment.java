@@ -25,6 +25,8 @@ import frame.zzt.com.appframe.Bluetooth.ActivityBluetooth;
 import frame.zzt.com.appframe.Bluetooth.ActivityBluetooth2;
 import frame.zzt.com.appframe.Bluetooth.ActivityBluetooth3;
 import frame.zzt.com.appframe.UI.Activity.ActivityFirst;
+import frame.zzt.com.appframe.UI.Activity.ActivitySurfaceView;
+import frame.zzt.com.appframe.doodleview.DoodleViewActivity;
 
 /**
  * Created by allen on 18/8/8.
@@ -89,6 +91,8 @@ public class FirstFragment extends Fragment {
             new DemoInfo(R.string.tab_item_bluetooth3, R.string.tab_item_bluetooth_desc, ActivityBluetooth3.class),
             new DemoInfo(R.string.tab_item_bluetooth4, R.string.tab_item_bluetooth_desc, ActivityBluetooth4.class),
             new DemoInfo(R.string.tab_item_bluetooth5, R.string.tab_item_bluetooth_desc, ActivityBluetooth5.class),
+            new DemoInfo(R.string.tab_item_surfaceView, R.string.tab_item_surfaceView_desc , ActivitySurfaceView.class),
+            new DemoInfo(R.string.tab_item_doodleview  , R.string.tab_item_doodleview_desc   , DoodleViewActivity.class),
     };
 
     public class DemoListAdapter extends BaseAdapter {
