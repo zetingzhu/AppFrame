@@ -82,8 +82,6 @@ public class LoginActivityMvp extends BaseActivity<LoginPresenter> implements Lo
 
             }
         });
-
-
     }
 
 

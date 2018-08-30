@@ -43,4 +43,7 @@
     <string name="tab_item_doodleview">自定义涂鸦  </string>
     <string name="tab_item_doodleview_desc">自定义涂鸦  SurfaceView 使用  还有一些6.0后申请权限的使用 </string>
 
+    <string name="tab_item_rxjava">RxJava 使用</string>
+    <string name="tab_item_rxjava_desc">RxJava 使用</string>
+
 </resources>

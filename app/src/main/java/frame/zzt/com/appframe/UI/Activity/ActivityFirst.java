@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.SeekBar;
 
+import java.io.Reader;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import frame.zzt.com.appframe.R;
@@ -27,7 +29,9 @@ public class ActivityFirst extends Activity {
 
 //		circleProgressBar.setFirstColor(Color.LTGRAY);
 //		circleProgressBar.setColorArray(colors); //觉得进度条颜色丑的，这里可以自行传入一个颜色渐变数组。
-		circleProgressBar.setCircleWidth(20);
+		circleProgressBar.setArcWidth(30);
+		circleProgressBar.setCircleWidth(1);
+        circleProgressBar.setProgress(60 , -60 ); // 使用数字过渡动画
 
         seekbar.setMax(100);
         seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener()
@@ -35,7 +39,7 @@ public class ActivityFirst extends Activity {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar)
             {
-                circleProgressBar.setProgress(seekbar.getProgress() ); // 使用数字过渡动画
+                circleProgressBar.setProgress(seekbar.getProgress()  , - seekbar.getProgress()  ); // 使用数字过渡动画
             }
 
             @Override

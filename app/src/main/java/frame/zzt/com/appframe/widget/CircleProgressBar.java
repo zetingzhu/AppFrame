@@ -11,6 +11,7 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Shader;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.animation.OvershootInterpolator;
@@ -23,6 +24,7 @@ import frame.zzt.com.appframe.R;
 
 
 public class CircleProgressBar extends View {
+    private static final String TAG = CircleProgressBar.class.getSimpleName();
     /**
      * 进度条最大值，默认为100
      */
@@ -53,20 +55,31 @@ public class CircleProgressBar extends View {
      */
     private int circleWidth;
 
+    private int arcWidth;
+
     /**
-     * 画圆弧的画笔
+     *
+     * 圆的画笔
      */
     private Paint circlePaint;
+
+    /**画圆弧的画笔*/
+    private Paint arcPaint;
 
     /**
      * 画文字的画笔
      */
     private Paint textPaint;
-
     /**
-     * 渐变圆周颜色数组
+     * 显示字体颜色
      */
-    private int[] colorArray = new int[] { Color.parseColor("#27B197"), Color.parseColor("#00A6D5") };//
+    private int textColor;
+
+    /**需要显示RSSi值*/
+    private String showRssi ;
+    /**设置显示状态*/
+    private String showMsgState ;
+//    private Paint textStatePaint;
 
     /**
      * 通过代码创建时才使用
@@ -127,14 +140,23 @@ public class CircleProgressBar extends View {
                     secondColor = ta.getColor(attr, Color.BLUE); // 默认进度条颜色为蓝色
                     break;
                 case R.styleable.circleProgressBar_circleWidth:
-                    circleWidth = ta.getDimensionPixelSize(attr, (int) TypedValue.applyDimension(
+                    arcWidth = ta.getDimensionPixelSize(attr, (int) TypedValue.applyDimension(
                             TypedValue.COMPLEX_UNIT_DIP, 6, getResources().getDisplayMetrics())); // 默认圆弧宽度为6dp
                     break;
                 default:
                     break;
             }
         }
+
         ta.recycle();
+
+        // 设置字体默认值
+        textColor =  getResources().getColor(R.color.text_rssi)  ; // 设置默认字体颜色
+
+        arcPaint = new Paint();
+        arcPaint.setAntiAlias(true); // 抗锯齿
+        arcPaint.setDither(true); // 防抖动
+        arcPaint.setStrokeWidth(arcWidth);
 
         circlePaint = new Paint();
         circlePaint.setAntiAlias(true); // 抗锯齿
@@ -159,10 +181,12 @@ public class CircleProgressBar extends View {
     protected void onDraw(Canvas canvas)
     {
         int center = this.getWidth() / 2;
-        int radius = center - circleWidth / 2;
+        int radiusCir = center - arcWidth / 2;
+        int radiusArc = center - arcWidth / 2 - center / 3 ;
 
-        drawCircle(canvas, center, radius); // 绘制进度圆弧
-        drawText(canvas, center, radius);
+        Log.i(TAG , " 计算的圆半径：" +radiusCir+ " - 圆弧半径:" + radiusArc );
+        drawCircle(canvas, center, radiusCir , radiusArc  ); // 绘制进度圆弧
+        drawText(canvas, center, radiusArc);
     }
 
     /**
@@ -175,22 +199,26 @@ public class CircleProgressBar extends View {
      * @param radius
      *            圆的半径
      */
-    private void drawCircle(Canvas canvas, int center, int radius)
+    private void drawCircle(Canvas canvas, int center, int radiusCricle , int radius)
     {
-
         circlePaint.setColor(firstColor); // 设置底部圆环的颜色，这里使用第一种颜色
         circlePaint.setStyle(Paint.Style.STROKE); // 设置绘制的圆为空心
-//        canvas.drawCircle(center, center, radius, circlePaint); // 画底部的空心圆
+        canvas.drawCircle(center, center, radiusCricle, circlePaint); // 画底部的空心圆
+
+        arcPaint.setColor(firstColor); // 设置底部圆环的颜色，这里使用第一种颜色
+        arcPaint.setStyle(Paint.Style.STROKE); // 设置绘制的圆为空心
+        arcPaint.setStrokeCap(Paint.Cap.ROUND); // 把每段圆弧改成圆角的
+
         RectF oval = new RectF(center - radius, center - radius, center + radius, center + radius); // 圆的外接正方形
-        canvas.drawArc(oval, -210, 240, false, circlePaint);
+        canvas.drawArc(oval, -240, 300, false, arcPaint);
 
 
-        circlePaint.setShadowLayer(10, 10, 10, Color.RED);
-        circlePaint.setColor(secondColor); // 设置圆弧的颜色
-        circlePaint.setStrokeCap(Paint.Cap.ROUND); // 把每段圆弧改成圆角的
+//        arcPaint.setShadowLayer(10, 10, 10, Color.RED);
+        arcPaint.setColor(secondColor); // 设置圆弧的颜色
+        arcPaint.setStrokeCap(Paint.Cap.ROUND); // 把每段圆弧改成圆角的
 
-        alphaAngle = currentValue * 240.0f / maxValue * 1.0f; // 计算每次画圆弧时扫过的角度，这里计算要注意分母要转为float类型，否则alphaAngle永远为0
-        canvas.drawArc(oval, -210, alphaAngle, false, circlePaint);
+        alphaAngle = currentValue * 300.0f / maxValue * 1.0f; // 计算每次画圆弧时扫过的角度，这里计算要注意分母要转为float类型，否则alphaAngle永远为0
+        canvas.drawArc(oval, -240, alphaAngle, false, arcPaint);
     }
 
     /**
@@ -205,18 +233,34 @@ public class CircleProgressBar extends View {
      */
     private void drawText(Canvas canvas, int center, int radius)
     {
-        float result = (currentValue * 100.0f / maxValue * 1.0f); // 计算进度
-        String percent = String.format("%.1f", result) + "%";
 
         textPaint.setTextAlign(Paint.Align.CENTER); // 设置文字居中，文字的x坐标要注意
-        textPaint.setColor(Color.BLACK); // 设置文字颜色
-        textPaint.setTextSize(40); // 设置要绘制的文字大小
+        textPaint.setColor(textColor); // 设置文字颜色
+        textPaint.setTextSize(100); // 设置要绘制的文字大小
         textPaint.setStrokeWidth(0); // 注意此处一定要重新设置宽度为0,否则绘制的文字会重叠
+        textPaint.setFakeBoldText(true);// 设置为粗体
         Rect bounds = new Rect(); // 文字边框
-        textPaint.getTextBounds(percent, 0, percent.length(), bounds); // 获得绘制文字的边界矩形
+        textPaint.getTextBounds(showMsgState, 0, showMsgState.length(), bounds); // 获得绘制文字的边界矩形
         Paint.FontMetricsInt fontMetrics = textPaint.getFontMetricsInt(); // 获取绘制Text时的四条线
         int baseline = center + (fontMetrics.bottom - fontMetrics.top) / 2 - fontMetrics.bottom; // 计算文字的基线,方法见http://blog.csdn.net/harvic880925/article/details/50423762
-        canvas.drawText(percent, center, baseline, textPaint); // 绘制表示进度的文字
+        canvas.drawText(showMsgState , center, baseline, textPaint); // 绘制表示进度的文字
+
+
+        textPaint.setTextAlign(Paint.Align.CENTER); // 设置文字居中，文字的x坐标要注意
+        textPaint.setColor(textColor); // 设置文字颜色
+        textPaint.setTextSize(40); // 设置要绘制的文字大小
+        textPaint.setStrokeWidth(0); // 注意此处一定要重新设置宽度为0,否则绘制的文字会重叠
+        textPaint.setFakeBoldText(false);// 设置不为粗体
+        Rect boundsMsg = new Rect(); // 文字边框
+        textPaint.getTextBounds( showRssi, 0, showRssi.length(), boundsMsg); // 获得绘制文字的边界矩形
+        Paint.FontMetricsInt fontMetricsMsg = textPaint.getFontMetricsInt(); // 获取绘制Text时的四条线
+
+        int y = baseline +  (fontMetricsMsg.bottom - fontMetricsMsg.top) * 2 ;
+
+
+//        int y = baseline - (fontMetricsMsg.bottom - fontMetricsMsg.top) + (fontMetricsMsg.bottom - fontMetricsMsg.top) / 2 - fontMetricsMsg.bottom; // 计算文字的基线,方法见http://blog.csdn.net/harvic880925/article/details/50423762
+        canvas.drawText(showRssi, center, y, textPaint); // 绘制表示进度的文字
+
     }
 
     /**
@@ -224,6 +268,14 @@ public class CircleProgressBar extends View {
      *
      * @param width
      */
+    public void setArcWidth(int width)
+    {
+        this.arcWidth = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, width, getResources()
+                .getDisplayMetrics());
+        arcPaint.setStrokeWidth(arcWidth);
+        invalidate();
+    }
+
     public void setCircleWidth(int width)
     {
         this.circleWidth = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, width, getResources()
@@ -240,7 +292,7 @@ public class CircleProgressBar extends View {
     public void setFirstColor(int color)
     {
         this.firstColor = color;
-        circlePaint.setColor(firstColor);
+        arcPaint.setColor(firstColor);
         invalidate();
     }
 
@@ -252,21 +304,18 @@ public class CircleProgressBar extends View {
     public void setSecondColor(int color)
     {
         this.secondColor = color;
-        circlePaint.setColor(secondColor);
+        arcPaint.setColor(secondColor);
         invalidate();
     }
 
-    /**
-     * 设置进度条渐变色颜色数组
-     *
-     * @param colors
-     *            颜色数组，类型为int[]
-     */
-    public void setColorArray(int[] colors)
+    public void setTextColor(int color)
     {
-        this.colorArray = colors;
+        this.textColor = color;
+        textPaint.setColor(secondColor);
         invalidate();
     }
+
+
 
     /**
      * 获取当前进度
@@ -282,8 +331,8 @@ public class CircleProgressBar extends View {
      * @param progress
      *            进度，值通常为0到100
      */
-    public void setProgress(int progress)
-    {
+    public void setProgress(int progress , int rssi) {
+        this.showRssi = rssi + "db" ;
         int percent = progress * maxValue / 100;
         if (percent < 0)
         {
@@ -294,6 +343,20 @@ public class CircleProgressBar extends View {
             percent = 100;
         }
         this.currentValue = percent;
+
+        if (rssi < -90 ) {
+            showMsgState = "弱" ;
+            setSecondColor(getResources().getColor(R.color.rssi_weak ));
+        }else if (rssi <= -75 && rssi >= -90  ){
+            showMsgState = "中" ;
+            setSecondColor(getResources().getColor(R.color.rssi_medium ));
+        }else if (rssi > -75  ){
+            showMsgState = "强" ;
+            setSecondColor(getResources().getColor(R.color.rssi_strong ));
+        }else {
+            showMsgState = "弱" ;
+            setSecondColor(getResources().getColor(R.color.rssi_weak ));
+        }
         invalidate();
     }
 
@@ -335,7 +398,7 @@ public class CircleProgressBar extends View {
         }
         else
         {
-            setProgress(progress);
+//            setProgress(progress);
         }
     }
 }

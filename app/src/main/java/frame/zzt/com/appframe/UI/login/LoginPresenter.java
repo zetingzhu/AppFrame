@@ -9,6 +9,12 @@ import frame.zzt.com.appframe.modle.LoginResponse;
 import frame.zzt.com.appframe.modle.BaseObserver;
 import frame.zzt.com.appframe.mvp.mvpbase.BasePresenter;
 import frame.zzt.com.appframe.retrofit.HttpRequest;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -25,25 +31,6 @@ public class LoginPresenter extends BasePresenter<LoginView> {
     public LoginPresenter(LoginView baseView) {
         super(baseView);
         http = HttpRequest.getInstance();
-    }
-
-    public void login1( ) {
-
-        addDisposable(apiServer.Login1(baseView.getUserName() , baseView.getPassword() ), new BaseObserver(baseView) {
-            @Override
-            public void onSuccess(Object o) {
-                Log.i(TAG ,  "获取的成功login：" + o .toString()) ;
-                baseView.onLoginSucc();
-
-            }
-
-            @Override
-            public void onError(String msg) {
-                Log.i(TAG ,  "获取的失败login：" + msg ) ;
-                baseView.showError(msg);
-
-            }
-        });
     }
 
     public void login(){
@@ -69,6 +56,67 @@ public class LoginPresenter extends BasePresenter<LoginView> {
                 baseView.hideLoading();
             }
         });
+    }
+
+    public void login1 () {
+//        addDisposable(apiServer.Login1(baseView.getUserName() , baseView.getPassword() ), new BaseObserver(baseView) {
+//            @Override
+//            public void onSuccess(Object o) {
+//                Log.i(TAG ,  "获取的成功login：" + o .toString()) ;
+//                baseView.onLoginSucc();
+//
+//            }
+//
+//            @Override
+//            public void onError(String msg) {
+//                Log.i(TAG ,  "获取的失败login：" + msg ) ;
+//                baseView.showError(msg);
+//
+//            }
+//        });
+
+        apiServer.Login1(baseView.getUserName(), baseView.getPassword())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new Observer<LoginResponse>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull LoginResponse loginResponse) {
+
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+
+        new DisposableObserver(){
+
+            @Override
+            public void onNext(@NonNull Object o) {
+
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        };
     }
 
     public void login2(){

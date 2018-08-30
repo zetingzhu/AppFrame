@@ -4,5 +4,15 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
+    <!--自定义视图显示蓝牙rssi信号强度的字体-->
+    <color name="text_rssi">#7f8087</color>
+
+    <!--rssi 信号强中弱 -->
+    <color name="rssi_strong">#8fc31f</color>
+    <color name="rssi_medium">#ffd117</color>
+    <color name="rssi_weak">#1e74b6</color>
+
+
+
 
 </resources>

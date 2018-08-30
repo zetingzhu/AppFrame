@@ -12,11 +12,6 @@
          android:drawable="@drawable/menu_service_icon_normal" />-->
 
 
-    <item
-        android:state_selected="true"
-        android:drawable="@drawable/home_service_tab_true"/>
-
-    <item
-        android:drawable="@drawable/home_service_tab_false"/>
-
+    <item android:state_selected="true" android:drawable="@drawable/home_service_tab_true"/>
+    <item android:drawable="@drawable/home_service_tab_false"/>
 </selector>

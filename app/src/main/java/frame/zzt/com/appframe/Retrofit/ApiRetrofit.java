@@ -55,8 +55,6 @@ public class ApiRetrofit {
         }
     };
 
-
-
     public ApiRetrofit() {
         client = new OkHttpClient.Builder()
                 //添加log拦截器
