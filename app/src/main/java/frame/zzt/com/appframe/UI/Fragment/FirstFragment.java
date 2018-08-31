@@ -25,7 +25,7 @@ import frame.zzt.com.appframe.Bluetooth.ActivityBluetooth;
 import frame.zzt.com.appframe.Bluetooth.ActivityBluetooth2;
 import frame.zzt.com.appframe.Bluetooth.ActivityBluetooth3;
 import frame.zzt.com.appframe.UI.Activity.ActivityFirst;
-import frame.zzt.com.appframe.UI.Activity.ActivityRxJava;
+import frame.zzt.com.appframe.rxjava.ActivityRxJava;
 import frame.zzt.com.appframe.UI.Activity.ActivitySurfaceView;
 import frame.zzt.com.appframe.doodleview.DoodleViewActivity;
 

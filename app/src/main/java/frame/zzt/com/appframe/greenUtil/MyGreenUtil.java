@@ -2,6 +2,8 @@ package frame.zzt.com.appframe.greenUtil;
 
 import android.content.Context;
 
+import org.greenrobot.greendao.query.QueryBuilder;
+
 import frame.zzt.com.appframe.greendao.DaoMaster;
 import frame.zzt.com.appframe.greendao.DaoSession;
 
@@ -14,8 +16,8 @@ public class MyGreenUtil {
     private DaoMaster mDaoMaster;
     private String DatabasePath =  "appFrameDb"  ;
     private DaoSession mDaoSession;
-    private DaoMaster.OpenHelper mOpenHelper;
-
+//    private DaoMaster.OpenHelper mOpenHelper;
+    private MyOpenHelper myOpenHelper ;
     /**
      * 取得DaoMaster
      *
@@ -24,8 +26,15 @@ public class MyGreenUtil {
      */
     public DaoMaster getDaoMaster(Context context) {
         if (mDaoMaster == null) {
-            mOpenHelper = new DaoMaster.DevOpenHelper(context, DatabasePath, null);
-            mDaoMaster = new DaoMaster(mOpenHelper.getWritableDatabase());
+//            mOpenHelper = new DaoMaster.DevOpenHelper(context, DatabasePath, null);
+//            mDaoMaster = new DaoMaster(mOpenHelper.getWritableDatabase());
+            // 加密操作
+//            mDaoMaster = new DaoMaster(mOpenHelper.getEncryptedWritableDb("1111"));
+
+            myOpenHelper = new MyOpenHelper(context, DatabasePath, null);
+            mDaoMaster = new DaoMaster(myOpenHelper.getWritableDatabase());
+//            mDaoMaster = new DaoMaster(myOpenHelper.getEncryptedWritableDb("1111"));
+
         }
         return mDaoMaster;
     }
@@ -57,9 +66,9 @@ public class MyGreenUtil {
     }
 
     public void closeHelper() {
-        if (mOpenHelper != null) {
-            mOpenHelper.close();
-            mOpenHelper = null;
+        if (myOpenHelper != null) {
+            myOpenHelper.close();
+            myOpenHelper = null;
         }
     }
 

@@ -5,6 +5,12 @@ import android.util.Log;
 import java.util.HashMap;
 import java.util.Map;
 
+import frame.zzt.com.appframe.MyApplication;
+import frame.zzt.com.appframe.greendao.DaoSession;
+import frame.zzt.com.appframe.greendao.Location;
+import frame.zzt.com.appframe.greendao.LocationDao;
+import frame.zzt.com.appframe.greendao.User;
+import frame.zzt.com.appframe.greendao.UserDao;
 import frame.zzt.com.appframe.modle.LoginResponse;
 import frame.zzt.com.appframe.modle.BaseObserver;
 import frame.zzt.com.appframe.mvp.mvpbase.BasePresenter;
@@ -47,6 +53,25 @@ public class LoginPresenter extends BasePresenter<LoginView> {
                 Log.i(TAG ,  "获取的成功 login3：" + response.body()   ) ;
                 baseView.onLoginSucc();
                 baseView.hideLoading();
+
+                DaoSession daoSession = MyApplication.getInstance().getDaoSession() ;
+
+                UserDao userDao = daoSession.getUserDao();
+                User user = new User();
+                user.setEmail(baseView.getUserName());
+                user.setPassword(baseView.getPassword());
+                user.setTime(System.currentTimeMillis() + "" );
+                long lon = userDao.insert(user);
+                Log.i(TAG ,  "登录保存user数据：" + lon  ) ;
+
+                LocationDao locationDao = daoSession.getLocationDao() ;
+                Location loc = new Location();
+                loc.setId(System.currentTimeMillis() );
+                loc.setLat("1.1111111");
+                loc.setLng("2.2222222");
+                loc.setTime(System.currentTimeMillis() + "" );
+                long lon1 = locationDao.insertOrReplace(loc);
+                Log.i(TAG ,  "登录保存location数据：" + lon1  ) ;
             }
 
             @Override
@@ -86,37 +111,32 @@ public class LoginPresenter extends BasePresenter<LoginView> {
 
                     @Override
                     public void onNext(@NonNull LoginResponse loginResponse) {
-
+                        Log.i(TAG ,  "获取的登录数据login：" + loginResponse.toString() ) ;
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-
+                        Log.i(TAG ,  "获取的失败login：" + e ) ;
+                        baseView.showError(e.getMessage());
                     }
 
                     @Override
                     public void onComplete() {
-
+                        Log.i(TAG ,  "获取的成功login："  ) ;
+                        baseView.onLoginSucc();
                     }
                 });
+        /**
 
-        new DisposableObserver(){
+         看似很完美, 但我们忽略了一点, 如果在请求的过程中Activity已经退出了, 这个时候如果回到主线程去更新UI, 那么APP肯定就崩溃了, 怎么办呢,
+         上一节我们说到了Disposable , 说它是个开关, 调用它的dispose()方法时就会切断水管, 使得下游收不到事件, 既然收不到事件,
+         那么也就不会再去更新UI了. 因此我们可以在Activity中将这个Disposable 保存起来, 当Activity退出时, 切断它即可.
 
-            @Override
-            public void onNext(@NonNull Object o) {
+         那如果有多个Disposable 该怎么办呢, RxJava中已经内置了一个容器CompositeDisposable,
+         每当我们得到一个Disposable时就调用CompositeDisposable.add()将它添加到容器中,
+         在退出的时候, 调用CompositeDisposable.clear() 即可切断所有的水管.
 
-            }
-
-            @Override
-            public void onError(@NonNull Throwable e) {
-
-            }
-
-            @Override
-            public void onComplete() {
-
-            }
-        };
+         */
     }
 
     public void login2(){

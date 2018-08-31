@@ -119,5 +119,27 @@ public class LoginResponse extends BaseModel {
         public void setIs_first_login(String is_first_login) {
             this.is_first_login = is_first_login;
         }
+
+        @Override
+        public String toString() {
+            return "DataBean{" +
+                    "g1='" + g1 + '\'' +
+                    ", token='" + token + '\'' +
+                    ", user_id='" + user_id + '\'' +
+                    ", is_first_login='" + is_first_login + '\'' +
+                    ", phone='" + phone + '\'' +
+                    ", udid='" + udid + '\'' +
+                    ", is_super_manager=" + is_super_manager +
+                    ", s1='" + s1 + '\'' +
+                    ", show_dianmen='" + show_dianmen + '\'' +
+                    '}';
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "LoginResponse{" +
+                "data=" + data  +
+                "} " + super.toString();
     }
 }

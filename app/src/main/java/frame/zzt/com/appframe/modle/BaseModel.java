@@ -35,4 +35,13 @@ public class BaseModel<T> implements Serializable {
     public void setResult(T result) {
         this.result = result;
     }
+
+    @Override
+    public String toString() {
+        return "BaseModel{" +
+                "code='" + code + '\'' +
+                ", msg='" + msg + '\'' +
+                ", result=" + result +
+                '}';
+    }
 }

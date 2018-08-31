@@ -63,7 +63,7 @@
 
         <activity android:name=".UI.Activity.ActivitySurfaceView"></activity>
         <activity android:name=".doodleview.DoodleViewActivity"></activity>
-        <activity android:name=".UI.Activity.ActivityRxJava"></activity>
+        <activity android:name=".rxjava.ActivityRxJava"></activity>
 
         <service android:name=".Bluetooth.BleService"></service>
         <service android:name=".Bluetooth.BleService19"></service>
