@@ -1,6 +1,5 @@
 package frame.zzt.com.appframe.rxjava;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,7 +19,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import frame.zzt.com.appframe.R;
 import frame.zzt.com.appframe.UI.BaseAppCompatActivity;
-import frame.zzt.com.appframe.UI.login.LoginPresenter;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
@@ -69,6 +67,7 @@ public class ActivityRxJava extends BaseAppCompatActivity implements RxView {
         mList.add("创建上下游线程关系");
         mList.add("线程调度");
         mList.add("线程observeOn 多次切换");//4
+        mList.add("读写数据库操作");//4
 
 
         mAdapterRecycle = new AdapterRecycle();
@@ -174,6 +173,7 @@ public class ActivityRxJava extends BaseAppCompatActivity implements RxView {
 
                     break ;
                     case 5:
+                        mPresenter.readAllUser();
                     break;
                     case 6:
                     break ;

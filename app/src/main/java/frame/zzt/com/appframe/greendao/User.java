@@ -60,4 +60,14 @@ public class User {
         return this.id;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "email='" + email + '\'' +
+                ", id=" + id +
+                ", password='" + password + '\'' +
+                ", phone='" + phone + '\'' +
+                ", time='" + time + '\'' +
+                '}';
+    }
 }

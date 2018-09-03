@@ -25,7 +25,10 @@ public class MyGreenUtil {
      * @return
      */
     public DaoMaster getDaoMaster(Context context) {
+
         if (mDaoMaster == null) {
+            setLog();
+
 //            mOpenHelper = new DaoMaster.DevOpenHelper(context, DatabasePath, null);
 //            mDaoMaster = new DaoMaster(mOpenHelper.getWritableDatabase());
             // 加密操作
@@ -37,6 +40,12 @@ public class MyGreenUtil {
 
         }
         return mDaoMaster;
+    }
+
+    public void setLog(){
+        MigrationHelper.DEBUG = true; //如果你想查看日志信息，请将 DEBUG 设置为 true
+        QueryBuilder.LOG_SQL = true;
+        QueryBuilder.LOG_VALUES = true;
     }
 
     /**
