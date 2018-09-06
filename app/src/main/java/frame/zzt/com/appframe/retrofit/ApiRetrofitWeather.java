@@ -20,13 +20,12 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
  * Created by allen on 18/8/13.
  */
 
-public class ApiRetrofit {
+public class ApiRetrofitWeather {
 
-    public final String BASE_SERVER_URL = "http://admin.vipcare.com/";
     // https://search.heweather.com/find?location=北京&key=4b61a68895b149f1a5ea53fe43782e17
-    public final String BASE_SERVER_URL_WEATHER = "http://admin.vipcare.com/";
+    public final String BASE_SERVER_URL_WEATHER = "https://search.heweather.com/";
 
-    private static ApiRetrofit apiRetrofit;
+    private static ApiRetrofitWeather apiRetrofit;
     private Retrofit retrofit;
     private OkHttpClient client;
     private ApiServer apiServer;
@@ -57,7 +56,7 @@ public class ApiRetrofit {
         }
     };
 
-    public ApiRetrofit() {
+    public ApiRetrofitWeather() {
         client = new OkHttpClient.Builder()
                 //添加log拦截器
                 .addInterceptor(interceptor)
@@ -66,7 +65,7 @@ public class ApiRetrofit {
                 .build();
 
         retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_SERVER_URL)
+                .baseUrl(BASE_SERVER_URL_WEATHER)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addConverterFactory(ScalarsConverterFactory.create())
                 //支持RxJava2
@@ -77,11 +76,12 @@ public class ApiRetrofit {
         apiServer = retrofit.create(ApiServer.class);
     }
 
-    public static ApiRetrofit getInstance() {
+
+    public static ApiRetrofitWeather getInstance() {
         if (apiRetrofit == null) {
             synchronized (Object.class) {
                 if (apiRetrofit == null) {
-                    apiRetrofit = new ApiRetrofit();
+                    apiRetrofit = new ApiRetrofitWeather();
                 }
             }
         }

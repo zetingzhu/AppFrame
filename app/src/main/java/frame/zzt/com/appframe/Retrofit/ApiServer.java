@@ -3,6 +3,7 @@ package frame.zzt.com.appframe.retrofit;
 import java.util.Map;
 
 import frame.zzt.com.appframe.modle.LoginResponse;
+import frame.zzt.com.appframe.modle.MyWeather;
 import io.reactivex.Observable;
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -32,6 +33,7 @@ public interface ApiServer {
     @GET("TestToolforApp/Login/login")
     Observable<LoginResponse> Login1(@Query("phone") String phone, @Query("password") String password);
 
+
     @GET("TestToolforApp/Login/login?phone=13797745363&password=123456")
     Call<LoginResponse> getLogin2();
 
@@ -48,5 +50,12 @@ public interface ApiServer {
 
 
     // http://api.map.baidu.com/telematics/v3/weather?location=上海&output=json&ak=5slgyqGDENN7Sy7pw29IUvrZ
+
+    // https://search.heweather.com/find?location=北京&key=4b61a68895b149f1a5ea53fe43782e17
+    @GET("find?key=4b61a68895b149f1a5ea53fe43782e17")
+    Observable<MyWeather> getWheatherBeijin(@Query("location") String location );
+    //https://search.heweather.com/top?group=cn&key=4b61a68895b149f1a5ea53fe43782e17&number=20
+    @GET("top?key=4b61a68895b149f1a5ea53fe43782e17")
+    Observable<MyWeather> getWheatherGroup(@Query("group") String group , @Query("number") String number);
 
 }

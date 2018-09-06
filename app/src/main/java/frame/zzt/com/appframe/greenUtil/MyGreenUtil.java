@@ -46,6 +46,7 @@ public class MyGreenUtil {
         MigrationHelper.DEBUG = true; //如果你想查看日志信息，请将 DEBUG 设置为 true
         QueryBuilder.LOG_SQL = true;
         QueryBuilder.LOG_VALUES = true;
+
     }
 
     /**
