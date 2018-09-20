@@ -57,9 +57,22 @@ public class ApiRetrofitWeather {
     };
 
     public ApiRetrofitWeather() {
+
+        //日志显示级别
+        HttpLoggingInterceptor.Level level = HttpLoggingInterceptor.Level.BODY;
+        //新建log拦截器
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
+            @Override
+            public void log(String message) {
+                Log.e( TAG ,"httpLog :" + message);
+            }
+        });
+        loggingInterceptor.setLevel(level);
+
         client = new OkHttpClient.Builder()
                 //添加log拦截器
-                .addInterceptor(interceptor)
+//                .addInterceptor(interceptor)
+                .addInterceptor(loggingInterceptor)
                 .connectTimeout(10, TimeUnit.SECONDS)
                 .readTimeout(10, TimeUnit.SECONDS)
                 .build();

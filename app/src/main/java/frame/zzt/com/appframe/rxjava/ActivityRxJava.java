@@ -311,7 +311,7 @@ public class ActivityRxJava extends BaseAppCompatActivity implements RxView {
                         mPresenter.rxjavaJust();
                         break;
                     case 32 :
-                        mPresenter.rxjavaFromArray();;
+                        mPresenter.rxjavaFromArray();
                         break;
                     case 33 :
                         mPresenter.rxjavaFromIterable();

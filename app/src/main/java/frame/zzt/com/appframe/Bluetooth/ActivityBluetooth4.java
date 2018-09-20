@@ -26,7 +26,7 @@ import frame.zzt.com.appframe.R;
 import frame.zzt.com.appframe.UI.BaseAppCompatActivity;
 
 /**
- * 蓝牙作为中心设备
+ * 蓝牙作为外围设备
  */
 public class ActivityBluetooth4 extends BaseAppCompatActivity implements BluetoothView {
 
@@ -76,6 +76,7 @@ public class ActivityBluetooth4 extends BaseAppCompatActivity implements Bluetoo
 
     @OnClick(R.id.btn_connect)
     public void OnClickConnect() {
+        // 三星手机的蓝牙地址
         String address = "68:05:71:19:F1:DF" ;
         mAQPresenter.connectBletooth(address);
     }

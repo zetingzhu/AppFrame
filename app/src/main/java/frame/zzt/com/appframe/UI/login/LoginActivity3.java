@@ -3,13 +3,20 @@ package frame.zzt.com.appframe.UI.login;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -53,6 +60,8 @@ public class LoginActivity3<P extends BasePresenter> extends BaseAppCompatActivi
     public List<Button> btnList ;
     @BindView(R.id.button3)
     Button button3;
+    @BindView(R.id.imageView)
+    ImageView imageView ;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -68,8 +77,26 @@ public class LoginActivity3<P extends BasePresenter> extends BaseAppCompatActivi
 
         System.out.println("----获取信号值：" + getProgressRssi(-30) );
 
-    }
+        Bitmap bitmap =   BitmapFactory.decodeResource( getResources(), R.drawable.home_vehicle_tab_false);
+        Drawable drawable =  ContextCompat.getDrawable(this , R.drawable.map_location_oval);
+//        BitmapDrawable bd = (BitmapDrawable) drawable;
 
+        Bitmap bm = drawableToBitamp(drawable);
+        imageView.setImageBitmap(bitmap) ;
+
+//        imageView.setImageDrawable(drawable);
+
+
+
+
+    }
+    private Bitmap drawableToBitamp(Drawable drawable)
+    {
+        int w = drawable.getIntrinsicWidth();
+        int h = drawable.getIntrinsicHeight();
+        Bitmap bitmap = Bitmap.createBitmap(w,h,Bitmap.Config.ARGB_8888);
+        return  bitmap ;
+    }
     public int getProgressRssi( int rssi){
         return Math.round(rssi / Math.abs(-100))  ;
     }

@@ -5,6 +5,7 @@ import java.util.Map;
 import frame.zzt.com.appframe.modle.LoginResponse;
 import frame.zzt.com.appframe.modle.MyWeather;
 import io.reactivex.Observable;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
@@ -16,6 +17,8 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
+import retrofit2.http.Streaming;
+import retrofit2.http.Url;
 
 /**
  * Created by allen on 18/8/13.
@@ -51,11 +54,19 @@ public interface ApiServer {
 
     // http://api.map.baidu.com/telematics/v3/weather?location=上海&output=json&ak=5slgyqGDENN7Sy7pw29IUvrZ
 
+    /** 天气预报 */
     // https://search.heweather.com/find?location=北京&key=4b61a68895b149f1a5ea53fe43782e17
     @GET("find?key=4b61a68895b149f1a5ea53fe43782e17")
     Observable<MyWeather> getWheatherBeijin(@Query("location") String location );
+    /** 天气预报 */
     //https://search.heweather.com/top?group=cn&key=4b61a68895b149f1a5ea53fe43782e17&number=20
     @GET("top?key=4b61a68895b149f1a5ea53fe43782e17")
     Observable<MyWeather> getWheatherGroup(@Query("group") String group , @Query("number") String number);
+
+
+    /**下载文件  @Streaming注解可用于下载大文件 */
+    @Streaming
+    @GET
+    Observable<ResponseBody> download(@Url String url);
 
 }

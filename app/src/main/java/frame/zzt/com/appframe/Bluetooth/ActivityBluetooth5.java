@@ -38,7 +38,7 @@ import frame.zzt.com.appframe.UI.BaseAppCompatActivity;
 import static java.sql.DriverManager.println;
 
 /**
- * 蓝牙作为外围设备
+ * 蓝牙作为中心设备
  */
 public class ActivityBluetooth5 extends BaseAppCompatActivity implements BluetoothView {
 
@@ -47,10 +47,10 @@ public class ActivityBluetooth5 extends BaseAppCompatActivity implements Bluetoo
     private static final int REQUEST_CODE_BLUETOOTH_ON = 1313;
 
 
-    public static String SERV_UUID = "00001234-0000-1000-8000-00805f9b34fb" ;
-    public static String DESC_UUID = "00001235-0000-1000-8000-00805f9b34fb" ;
-    public static String CHAR_UUID = "00001236-0000-1000-8000-00805f9b34fb" ;
-    public static String CHAR_UUID_1 = "00001237-0000-1000-8000-00805f9b34fb" ;
+    public static String SERV_UUID = "00001834-0000-1000-8000-00805f9b34fb" ;
+    public static String DESC_UUID = "00001835-0000-1000-8000-00805f9b34fb" ;
+    public static String CHAR_UUID = "00001836-0000-1000-8000-00805f9b34fb" ;
+    public static String CHAR_UUID_1 = "00001837-0000-1000-8000-00805f9b34fb" ;
 
 
     private Context mContext ;
