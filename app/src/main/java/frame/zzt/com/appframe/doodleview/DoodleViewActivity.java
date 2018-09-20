@@ -18,7 +18,7 @@ import android.widget.Toast;
 import frame.zzt.com.appframe.R;
 
 /**
- * 用于展示 DoodleView 功能的 Activity
+ * 用于展示 自定义涂鸦 功能的 Activity
  *
  */
 
@@ -67,6 +67,7 @@ public class DoodleViewActivity extends AppCompatActivity {
                 mDoodleView.reset();
                 break;
             case R.id.main_save:
+                // 申请权限的使用
                 if (ContextCompat.checkSelfPermission(this, Manifest.permission_group.STORAGE) != PackageManager.PERMISSION_GRANTED) {
                     // 没有权限，申请权限。
                     if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
@@ -77,7 +78,7 @@ public class DoodleViewActivity extends AppCompatActivity {
                         //  申请读取系统磁盘权限
                         ActivityCompat.requestPermissions(this ,new String[]{Manifest.permission_group.STORAGE} , 1101 );
                     }
-                }else{
+                } else {
                     // 有权限了，去放肆吧。
 
                     String path = mDoodleView.saveBitmap(mDoodleView);
