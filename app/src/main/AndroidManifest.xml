@@ -60,10 +60,12 @@
         <activity android:name=".Bluetooth.ActivityBluetooth3"></activity>
         <activity android:name=".Bluetooth.ActivityBluetooth4"></activity>
         <activity android:name=".Bluetooth.ActivityBluetooth5"></activity>
-
         <activity android:name=".UI.Activity.ActivitySurfaceView"></activity>
         <activity android:name=".doodleview.DoodleViewActivity"></activity>
         <activity android:name=".rxjava.ActivityRxJava"></activity>
+        <activity android:name=".rxjava.ActivityRxJavaUse"></activity>
+        <activity android:name=".UI.Activity.ActivityProgress2"></activity>
+
 
         <service android:name=".Bluetooth.BleService"></service>
         <service android:name=".Bluetooth.BleService19"></service>

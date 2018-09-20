@@ -14,5 +14,13 @@
 
 
 
+    <color name="color_2828d9">#772828d9</color>
+    <color name="color_333333">#716f6f</color>
+    <color name="color_1e74b6">#1e74b6</color>
+
+    <color name="color_start_gradient">#0e70ad</color>
+    <color name="color_end_gradient">#0bd9ed</color>
+    <!--渐变颜色的背景色-->
+    <color name="color_bg_gradient">#47484e</color>
 
 </resources>
