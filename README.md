@@ -2,6 +2,79 @@
 把自己平时使用的功能整理起来
 
 
+- 1 project build.gradle
+
+buildscript {
+    ext.kotlin_version = '1.1.2-5'
+
+    repositories {
+        mavenCentral() // add repository
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.2.2'
+
+        classpath 'org.greenrobot:greendao-gradle-plugin:3.2.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version" // add plugin
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+apply plugin: 'kotlin'
+
+allprojects {
+    repositories {
+        mavenCentral() // add repository
+        jcenter()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+repositories {
+    mavenCentral()
+    jcenter()
+}
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+}
+
+
+- 2 app build.gradle
+
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'org.greenrobot.greendao' // apply plugin
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "26.0.1"
+    defaultConfig {
+        applicationId "frame.zzt.com.appframe"
+        minSdkVersion 18
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+//        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    //数据库db版本
+    greendao {
+        schemaVersion 7
+        daoPackage 'frame.zzt.com.appframe.greendao'//这个是生成代码保存的包名
+        targetGenDir 'src/main/java'//保存到java代码路径
+    }
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:25.3.1'
@@ -35,4 +108,9 @@ dependencies {
     // 蓝牙ble框架
     compile 'com.clj.fastble:FastBleLib:2.3.2'
     compile 'com.inuker.bluetooth:library:1.4.0'
+    // 添加kotlin 插件
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+}
+repositories {
+    mavenCentral()
 }
