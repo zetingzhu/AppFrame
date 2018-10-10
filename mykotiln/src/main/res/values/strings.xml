@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">MyKotiln</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="tab_item">第一列</string>
+    <string name="tab_item_desc">这是第一条数据</string>
+
+</resources>
