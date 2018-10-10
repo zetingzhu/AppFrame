@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -26,7 +27,9 @@ import frame.zzt.com.appframe.R;
 import frame.zzt.com.appframe.UI.BaseAppCompatActivity;
 
 /**
- * 蓝牙作为外围设备
+ * 蓝牙作为中心设备
+ * 客户端(也叫主机/中心设备/Central)
+ * 客户端的核心类是 BluetoothGatt
  */
 public class ActivityBluetooth4 extends BaseAppCompatActivity implements BluetoothView {
 
@@ -36,6 +39,13 @@ public class ActivityBluetooth4 extends BaseAppCompatActivity implements Bluetoo
 
     @BindView(R.id.btn_scan)
     Button btn_scan ;
+    @BindView(R.id.btn_stop_scan)
+    Button btn_stop_scan ;
+
+    @BindView(R.id.btn_wirte)
+    Button btn_wirte ;
+    @BindView(R.id.btn_read)
+    Button btn_read ;
 
     private MyBleAQPresenter19 mAQPresenter ;
     private String bleManufacturers; //厂商ID   扫描～
@@ -74,6 +84,9 @@ public class ActivityBluetooth4 extends BaseAppCompatActivity implements Bluetoo
     }
 
 
+    /**
+     *  连接 服务端
+     */
     @OnClick(R.id.btn_connect)
     public void OnClickConnect() {
         // 三星手机的蓝牙地址
@@ -81,6 +94,9 @@ public class ActivityBluetooth4 extends BaseAppCompatActivity implements Bluetoo
         mAQPresenter.connectBletooth(address);
     }
 
+    /**
+     *  断开连接服务端
+     */
     @OnClick(R.id.btn_dis)
     public void OnClickDisconnect() {
         mAQPresenter.disCloseDevice();
@@ -105,6 +121,22 @@ public class ActivityBluetooth4 extends BaseAppCompatActivity implements Bluetoo
     @OnClick(R.id.btn_stop_rssi )
     public void OnClickCloseReadRssi() {
         mAQPresenter.closeReadRssi();
+    }
+
+    /**
+     * 向 服务端 写入数据
+     */
+    @OnClick(R.id.btn_wirte)
+    public void OnClickWirteData(){
+        mAQPresenter.writeData("wirte" + + (int) (Math.random() * 100));
+    }
+
+    /**
+     * 读 服务端 返回的数据
+     */
+    @OnClick(R.id.btn_read)
+    public void OnClickReadData(){
+        mAQPresenter.readData();
     }
 
 

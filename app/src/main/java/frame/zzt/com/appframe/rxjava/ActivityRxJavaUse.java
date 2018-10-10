@@ -70,6 +70,7 @@ public class ActivityRxJavaUse extends BaseAppCompatActivity implements RxView {
 
         mList = new ArrayList<>();
         mList.add(new MyListItem(0, "RxJava 使用，安装应用apk "));
+        mList.add(new MyListItem(1, "跳转系统设置里的通知使用权页面"));
 
 
         mAdapterRecycle = new AdapterRecycle();
@@ -86,7 +87,7 @@ public class ActivityRxJavaUse extends BaseAppCompatActivity implements RxView {
                         mPresenter.downloadApkFile() ;
                         break;
                     case 1:
-
+                        mPresenter.gotoNotificationAccessSetting(ActivityRxJavaUse.this);
                         break;
                     case 2:
 

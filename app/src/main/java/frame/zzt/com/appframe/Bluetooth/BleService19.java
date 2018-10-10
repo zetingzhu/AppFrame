@@ -32,7 +32,7 @@ import java.util.UUID;
  */
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
 public class BleService19 extends Service {
-    private static final String TAG = "BleService";
+    private static final String TAG = "ActivityBluetooth serv" ;
     private IBinder iBinder = new BleService19.LocalBinder();
 
     public final static String ACTION_GATT_CONNECTED =
@@ -209,7 +209,7 @@ public class BleService19 extends Service {
 //                        mCharacteristic = serviceList.get(i).getCharacteristic(UUID.fromString( ActivityBluetooth5.CHAR_UUID_1));
 //                        Log.i(TAG, "onReceive: ACTION_GATT_SERVICES_DISCOVERED111");
 //                        myInterfaceCallback.bleServicesDiscovered(ACTION_GATT_SERVICES_DISCOVERED , mCharacteristic );
-                        myInterfaceCallback.bleServicesDiscoveredCharacteristic(ACTION_GATT_SERVICES_DISCOVERED , serviceList.get(i).getCharacteristics() );
+                        myInterfaceCallback.bleServicesDiscoveredCharacteristic(gatt , ACTION_GATT_SERVICES_DISCOVERED , serviceList.get(i).getCharacteristics() );
                     }
                 }
 
@@ -238,8 +238,8 @@ public class BleService19 extends Service {
                                 + " read "
                                 + characteristic.getUuid().toString()
                                 + " -> "
-                                + byte2HexStr(characteristic
-                                .getValue()));
+                                + new String(characteristic.getValue())
+            );
 
             if (TextUtils.isEmpty(byte2HexStr(characteristic.getValue()))) {
                 new Thread(new Runnable() {
@@ -265,7 +265,9 @@ public class BleService19 extends Service {
 
         @Override
         public void onCharacteristicWrite(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, int status) {
-            Log.i(TAG, "onCharacteristicWrite: " + status);
+            Log.i(TAG, String.format("onCharacteristicWrite：device name = %s, address = %s", gatt.getDevice().getName(), gatt.getDevice().getAddress()));
+            Log.i(TAG, String.format("onCharacteristicWrite：requestId = %s", new String (characteristic.getValue()) ));
+            Log.i(TAG, "onCharacteristicWrite: status = " + status);
 
 
 //            BluetoothGattDescriptor descriptor = characteristic.getDescriptor(
@@ -273,8 +275,15 @@ public class BleService19 extends Service {
 //            descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
 //            mBluetoothGatt.writeDescriptor(descriptor);
 
-            gatt.setCharacteristicNotification(characteristic, true);
+            /**
+             *  设置该特征值可以收到通知
+             *  当服务端调用 bluetoothGattServer.notifyCharacteristicChanged(device, characteristicRead, false);
+             *  客户端可以在 onCharacteristicChanged 方法中收到通知
+             */
+//            gatt.setCharacteristicNotification(characteristic, true);
 
+            // 读取特征值
+            readCharacteristic(characteristic);
 
             //写入后读取数据
 //            readCharacteristic(mCharacteristic);
@@ -300,14 +309,18 @@ public class BleService19 extends Service {
             Log.i(TAG, "onDescriptorWrite: " + status);
         }
 
-        //当我们执行了gatt.setCharacteristicNotification或写入特征的时候，结果会回调在此
+        /**
+         * 当我们执行了gatt.setCharacteristicNotification或写入特征的时候，结果会回调在此
+         */
         @Override
         public void onCharacteristicChanged(BluetoothGatt gatt, final BluetoothGattCharacteristic characteristic) {
-            Log.i(TAG, "onCharacteristicChanged: " +  bytesToHexString(characteristic.getValue()) );
+            Log.i(TAG, String.format("onCharacteristicChanged：device name = %s, address = %s", gatt.getDevice().getName(), gatt.getDevice().getAddress()));
+            Log.i(TAG, String.format("onCharacteristicChanged：requestId = %s", new String (characteristic.getValue()) ));
+            Log.i(TAG, "onCharacteristicChanged: " +  new String(characteristic.getValue()) );
             Handler handler=new Handler(Looper.getMainLooper());
             handler.post(new Runnable(){
                 public void run(){
-            Toast.makeText(BleService19.this , bytesToHexString(characteristic.getValue())  , Toast.LENGTH_SHORT).show();
+                    Toast.makeText(BleService19.this , new String(characteristic.getValue())  , Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -376,6 +389,25 @@ public class BleService19 extends Service {
 
 
 
+        return true ;
+    }
+
+    /**
+     *  写入字节数据
+     * @param characteristic
+     * @param md5Text
+     * @return
+     */
+    public boolean wirteCharacteristic2(BluetoothGattCharacteristic characteristic, String md5Text) {
+        if (mBluetoothAdapter == null || mBluetoothGatt == null) {
+            Log.w(TAG, "BluetoothAdapter not initialized");
+            return false;
+        }
+        mCharacteristic = characteristic;
+        characteristic.setWriteType(BluetoothGattCharacteristic.WRITE_TYPE_NO_RESPONSE);
+        characteristic.setValue(md5Text.getBytes());
+        boolean booWrite = mBluetoothGatt.writeCharacteristic(characteristic);
+        Log.i("VehiclePresenter" , "执行蓝牙写数据操作是否成功：" + booWrite);
         return true ;
     }
 

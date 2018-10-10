@@ -1,5 +1,7 @@
 package frame.zzt.com.appframe.rxjava;
 
+import android.content.ActivityNotFoundException;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -177,5 +179,28 @@ public class RxUsePersenter extends BasePresenter<RxView> {
         }
         return null;
     }
+
+    public boolean gotoNotificationAccessSetting(Context context) {
+        try {
+            Intent intent = new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS");
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+            return true;
+        } catch(ActivityNotFoundException e) {
+            try {
+                Intent intent = new Intent();
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                ComponentName cn = new ComponentName("com.android.settings","com.android.settings.Settings$NotificationAccessSettingsActivity");
+                intent.setComponent(cn);
+                intent.putExtra(":settings:show_fragment", "NotificationAccessSettings");
+                context.startActivity(intent);
+                return true;
+            } catch(Exception ex) {
+                ex.printStackTrace();
+            }
+            return false;
+        }
+    }
+
 
 }

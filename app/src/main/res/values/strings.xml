@@ -33,9 +33,12 @@
     <string name="tab_item_bluetooth">蓝牙Ble使用</string>
     <string name="tab_item_bluetooth2">蓝牙Ble使用 BLE框架 FastBle 使用 </string>
     <string name="tab_item_bluetooth3">蓝牙Ble使用 BLE设备蓝牙通信框架BluetoothKit</string>
-    <string name="tab_item_bluetooth4">蓝牙Ble19设备</string>
-    <string name="tab_item_bluetooth5">蓝牙Ble中心设备</string>
+    <string name="tab_item_bluetooth4">蓝牙Ble19 客户端</string>
+    <string name="tab_item_bluetooth5">蓝牙Ble   服务端</string>
+    <string name="tab_item_bluetooth6">蓝牙socket 客户端</string>
+    <string name="tab_item_bluetooth7">蓝牙socket 服务端</string>
     <string name="tab_item_bluetooth_desc">关于蓝牙ble的一些基本使用</string>
+    <string name="tab_item_bluetooth6_desc">关于蓝牙Socket 数据传输的一些基本使用</string>
 
     <string name="tab_item_surfaceView">SurfaceView 使用 </string>
     <string name="tab_item_surfaceView_desc">SurfaceView 简单使用 </string>
@@ -51,5 +54,8 @@
 
     <string name="tab_item_pro">自定义的圆形进度条2</string>
     <string name="tab_item_pro_desc">自定义经度条，用来设置其他时候的进度控制</string>
+
+    <string name="tab_item_Kotlin">Kotlin 使用</string>
+    <string name="tab_item_Kotlin_desc">Kotlin 简单使用</string>
 
 </resources>

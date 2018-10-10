@@ -1,7 +1,9 @@
 package frame.zzt.com.appframe.Bluetooth;
 
 import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattCharacteristic;
 import android.bluetooth.le.ScanResult;
 import android.content.BroadcastReceiver;
@@ -107,6 +109,31 @@ public class MyBleAQPresenter19 {
 
     }
 
+    /**
+     *  写入数据
+     */
+    public void writeData(String str ){
+        if (mGattCharacteristic != null) {
+            Log.w(TAG, "蓝牙连接 写入  数据： booWirte " + str);
+            boolean booWirte = mBleService.wirteCharacteristic2(mGattCharacteristic, str);
+            Log.i(TAG, "蓝牙连接 写入  数据： booWirte " + booWirte);
+        }else {
+            Log.i(TAG, "蓝牙连接 写入  数据 错误： mGattCharacteristic " + mGattCharacteristic);
+        }
+    }
+
+    /**
+     *  写入数据
+     */
+    public void readData(){
+        if (mGattCharacteristic != null) {
+            Log.w(TAG, "蓝牙连接 读取  数据：");
+             mBleService.readCharacteristic(mGattCharacteristic);
+        }else {
+            Log.i(TAG, "蓝牙连接 读取  数据 错误： mGattCharacteristic " + mGattCharacteristic);
+        }
+    }
+
     //判断特征可读
     public static boolean ifCharacteristicReadable(BluetoothGattCharacteristic characteristic){
         return ((characteristic.getProperties() & BluetoothGattCharacteristic.PROPERTY_READ) > 0);
@@ -182,9 +209,47 @@ public class MyBleAQPresenter19 {
                 BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);  //这个就是所获得的蓝牙设备。
 //                mDevices.add(device );
                 Log.i(TAG, "onScanDevice:  ====" + device.getName() + " - " +  device.getAddress() + " - " +  device.getType()    );
+
+                typeOfJudge(device) ;
+
             }
         }
     };
+
+
+    /**
+     *  判断设备类型
+     */
+    public void typeOfJudge(BluetoothDevice device ){
+        //如何判断 其他蓝牙设备实现了哪些Profile呢？即是如何判断某设备是媒体音频、电话音频的呢？
+        int deviceClass = device.getBluetoothClass().getDeviceClass();
+        int deviceClassMasked = deviceClass & 0x1F00;
+
+        if(deviceClass == BluetoothClass.Device.AUDIO_VIDEO_HEADPHONES)
+        {
+            //耳机
+        }
+        else if(deviceClass == BluetoothClass.Device.AUDIO_VIDEO_MICROPHONE)
+        {
+            //麦克风
+        }
+        else if(deviceClassMasked == BluetoothClass.Device.Major.COMPUTER)
+        {
+            //电脑
+        }
+        else if(deviceClassMasked == BluetoothClass.Device.Major.PHONE)
+        {
+            //手机
+        }
+        else if(deviceClassMasked == BluetoothClass.Device.Major.HEALTH)
+        {
+            //健康类设备
+        }
+        else
+        {
+            //蓝牙：比如蓝牙音响。
+        }
+    }
 
 
     public void stopBleScanDevice( ) {
@@ -197,6 +262,7 @@ public class MyBleAQPresenter19 {
         @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
         @Override
         public void onScanResult(ScanResult result) {
+            Log.i(TAG, "onScanDevice:  ====" + result  );
         }
 
         @Override
@@ -233,16 +299,13 @@ public class MyBleAQPresenter19 {
         public void bleServiceRed(String action, BluetoothGattCharacteristic characteristic) {
             Log.i(TAG, "蓝牙连接 bleServiceRed "  );
             byte[] data = characteristic.getValue();
-            String str = BleService.byte2HexStr(data);
-            if (!TextUtils.isEmpty(str)) {
-                String bluetoothResult = str.substring(str.length() - 1, str.length());
-                Log.i(TAG, "蓝牙连接 写入数据： bluetoothResult " + bluetoothResult );
-            }
+
+            Log.i(TAG, "蓝牙连接 读到的数据： bluetoothResult " + new String(data)  );
+
         }
 
         @Override
-        public void bleServicesDiscoveredCharacteristic(String action, List<BluetoothGattCharacteristic> characteristicList) {
-
+        public void bleServicesDiscoveredCharacteristic(BluetoothGatt gatt, String action, List<BluetoothGattCharacteristic> characteristicList) {
             for (int i = 0; i < characteristicList.size(); i++) {
                 BluetoothGattCharacteristic characteristic = characteristicList.get(i);
                 Log.i(TAG, "蓝牙连接 特征值：uuid：" + characteristic.getUuid());
@@ -250,9 +313,16 @@ public class MyBleAQPresenter19 {
                 Log.i(TAG, "蓝牙连接 characteristic 可写状态：" + ifCharacteristicWritable(characteristic) );
                 Log.i(TAG, "蓝牙连接 characteristic 通知状态：" + ifCharacteristicNotifiable(characteristic) );
 
+                /**
+                 *  如果是可通知的 设置通知属性
+                 */
+                if (ifCharacteristicNotifiable(characteristic)){
+                    gatt.setCharacteristicNotification(characteristic, true);
+                }
+
                 if (ifCharacteristicWritable(characteristic) ){
                     mGattCharacteristic = characteristic ;
-                    break;
+                    break ;
                 }
 
             }

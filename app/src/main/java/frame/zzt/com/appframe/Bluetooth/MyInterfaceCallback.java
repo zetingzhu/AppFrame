@@ -1,5 +1,6 @@
 package frame.zzt.com.appframe.Bluetooth;
 
+import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattCharacteristic;
 
 import java.util.List;
@@ -14,5 +15,5 @@ public interface MyInterfaceCallback {
     void bleServicesDiscovered (String action , BluetoothGattCharacteristic characteristic);
     void bleServiceReadError (String action);
     void bleServiceRed (String action , BluetoothGattCharacteristic characteristic);
-    void bleServicesDiscoveredCharacteristic (String action , List<BluetoothGattCharacteristic> characteristicList);
+    void bleServicesDiscoveredCharacteristic (BluetoothGatt gatt , String action , List<BluetoothGattCharacteristic> characteristicList);
 }

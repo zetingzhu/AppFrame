@@ -11,25 +11,23 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
-    <!--这个权限允许程序连接到已配对的蓝牙设备, 请求连接/接收连接/传输数据需要改权限, 主要用于对配对后进行操作;-->
+    <!-- 这个权限允许程序连接到已配对的蓝牙设备, 请求连接/接收连接/传输数据需要改权限, 主要用于对配对后进行操作; -->
     <uses-permission android:name="android.permission.BLUETOOTH"/>
-    <!--这个权限允许程序发现和配对蓝牙设备, 该权限用来管理蓝牙设备, 有了这个权限, 应用才能使用本机的蓝牙设备, 主要用于对配对前的操作;-->
+    <!-- 这个权限允许程序发现和配对蓝牙设备, 该权限用来管理蓝牙设备, 有了这个权限, 应用才能使用本机的蓝牙设备, 主要用于对配对前的操作; -->
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
-    <!--Android 6.0以后，这两个权限是必须的，蓝牙扫描周围的设备需要获取模糊的位置信息。这两个权限属于同一组危险权限，在清单文件中声明之后，还需要再运行时动态获取。-->
+    <!-- Android 6.0以后，这两个权限是必须的，蓝牙扫描周围的设备需要获取模糊的位置信息。这两个权限属于同一组危险权限，在清单文件中声明之后，还需要再运行时动态获取。 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <!--当android:required为true的时候，app只能强制运行在支持BLE功能的设备商，为false的时候，可以运行在所有设备上，-->
+    <!-- 当android:required为true的时候，app只能强制运行在支持BLE功能的设备商，为false的时候，可以运行在所有设备上， -->
     <uses-feature
         android:name="android.hardware.bluetooth_le"
         android:required="true"/>
-    <uses-feature android:name="android.hardware.location.gps" />
+    <uses-feature android:name="android.hardware.location.gps"/>
 
-
-    <!--读写文件权限-->
+    <!-- 读写文件权限 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission  android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
-
 
     <application
         android:name=".MyApplication"
@@ -51,28 +49,27 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".UI.home.HomeActivity"/>
+        <activity android:name=".UI.Activity.ActivityFirst"/>
+        <activity android:name=".Bluetooth.ActivityBluetooth"/>
+        <activity android:name=".Bluetooth.ActivityBluetooth2"/>
+        <activity android:name=".Bluetooth.ActivityBluetooth3"/>
+        <activity android:name=".Bluetooth.ActivityBluetooth4"/>
+        <activity android:name=".Bluetooth.ActivityBluetooth5"/>
+        <activity android:name=".Bluetooth.ActivityBluetooth6"/>
+        <activity android:name=".Bluetooth.ActivityBluetooth7"/>
+        <activity android:name=".UI.Activity.ActivitySurfaceView"/>
+        <activity android:name=".doodleview.DoodleViewActivity"/>
+        <activity android:name=".rxjava.ActivityRxJava"/>
+        <activity android:name=".rxjava.ActivityRxJavaUse"/>
+        <activity android:name=".UI.Activity.ActivityProgress2"/>
 
+        <service android:name=".Bluetooth.BleService"/>
+        <service android:name=".Bluetooth.BleService19"/>
+        <service android:name="com.inuker.bluetooth.library.BluetoothService"/>
 
-        <activity android:name=".UI.home.HomeActivity"></activity>
-        <activity android:name=".UI.Activity.ActivityFirst"></activity>
-        <activity android:name=".Bluetooth.ActivityBluetooth"></activity>
-        <activity android:name=".Bluetooth.ActivityBluetooth2"></activity>
-        <activity android:name=".Bluetooth.ActivityBluetooth3"></activity>
-        <activity android:name=".Bluetooth.ActivityBluetooth4"></activity>
-        <activity android:name=".Bluetooth.ActivityBluetooth5"></activity>
-        <activity android:name=".UI.Activity.ActivitySurfaceView"></activity>
-        <activity android:name=".doodleview.DoodleViewActivity"></activity>
-        <activity android:name=".rxjava.ActivityRxJava"></activity>
-        <activity android:name=".rxjava.ActivityRxJavaUse"></activity>
-        <activity android:name=".UI.Activity.ActivityProgress2"></activity>
-
-
-        <service android:name=".Bluetooth.BleService"></service>
-        <service android:name=".Bluetooth.BleService19"></service>
-
-        <service
-            android:name="com.inuker.bluetooth.library.BluetoothService"/>
-
+        <activity android:name="frame.zzt.com.appframe.kotlin.ActivityKotlin">
+        </activity>
     </application>
 
 </manifest>

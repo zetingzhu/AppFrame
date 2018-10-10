@@ -1,6 +1,7 @@
 package frame.zzt.com.appframe.Bluetooth;
 
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattCharacteristic;
 import android.bluetooth.le.ScanResult;
 import android.content.ComponentName;
@@ -189,7 +190,7 @@ public class MyBleAQPresenter {
         }
 
         @Override
-        public void bleServicesDiscoveredCharacteristic(String action, List<BluetoothGattCharacteristic> characteristicList) {
+        public void bleServicesDiscoveredCharacteristic(BluetoothGatt gatt, String action, List<BluetoothGattCharacteristic> characteristicList) {
 
         }
     };

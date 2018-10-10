@@ -20,11 +20,14 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import frame.zzt.com.appframe.Bluetooth.ActivityBluetooth4;
 import frame.zzt.com.appframe.Bluetooth.ActivityBluetooth5;
+import frame.zzt.com.appframe.Bluetooth.ActivityBluetooth6;
+import frame.zzt.com.appframe.Bluetooth.ActivityBluetooth7;
 import frame.zzt.com.appframe.R;
 import frame.zzt.com.appframe.Bluetooth.ActivityBluetooth;
 import frame.zzt.com.appframe.Bluetooth.ActivityBluetooth2;
 import frame.zzt.com.appframe.Bluetooth.ActivityBluetooth3;
 import frame.zzt.com.appframe.UI.Activity.ActivityFirst;
+import frame.zzt.com.appframe.kotlin.ActivityKotlin;
 import frame.zzt.com.appframe.UI.Activity.ActivityProgress2;
 import frame.zzt.com.appframe.rxjava.ActivityRxJava;
 import frame.zzt.com.appframe.UI.Activity.ActivitySurfaceView;
@@ -94,11 +97,14 @@ public class FirstFragment extends Fragment {
             new DemoInfo(R.string.tab_item_bluetooth3, R.string.tab_item_bluetooth_desc, ActivityBluetooth3.class),
             new DemoInfo(R.string.tab_item_bluetooth4, R.string.tab_item_bluetooth_desc, ActivityBluetooth4.class),
             new DemoInfo(R.string.tab_item_bluetooth5, R.string.tab_item_bluetooth_desc, ActivityBluetooth5.class),
+            new DemoInfo(R.string.tab_item_bluetooth6, R.string.tab_item_bluetooth6_desc, ActivityBluetooth6.class),
+            new DemoInfo(R.string.tab_item_bluetooth7, R.string.tab_item_bluetooth6_desc, ActivityBluetooth7.class),
             new DemoInfo(R.string.tab_item_surfaceView, R.string.tab_item_surfaceView_desc , ActivitySurfaceView.class),
             new DemoInfo(R.string.tab_item_doodleview  , R.string.tab_item_doodleview_desc   , DoodleViewActivity.class),
             new DemoInfo(R.string.tab_item_rxjava  , R.string.tab_item_rxjava_desc   , ActivityRxJava.class),
             new DemoInfo(R.string.tab_item_rxjava_use  , R.string.tab_item_rxjava_use_desc  , ActivityRxJavaUse.class),
             new DemoInfo(R.string.tab_item_pro, R.string.tab_item_pro_desc, ActivityProgress2.class),
+            new DemoInfo(R.string.tab_item_Kotlin , R.string.tab_item_Kotlin_desc, ActivityKotlin.class),
     };
 
     public class DemoListAdapter extends BaseAdapter {
