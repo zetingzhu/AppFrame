@@ -3,13 +3,18 @@ package frame.zzt.com.appframe.UI.Activity;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.SeekBar;
+
+import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import frame.zzt.com.appframe.R;
 import frame.zzt.com.appframe.widget.CarStartAnimation;
 import frame.zzt.com.appframe.widget.ProgressBarStart;
+import frame.zzt.com.appframe.widget.progress.DialProgress;
+import frame.zzt.com.appframe.widget.progress.WaveProgress;
 
 /**
  * 启动按钮需要的进度条
@@ -23,6 +28,54 @@ public class ActivityProgress2 extends Activity {
     @BindView(R.id.custom_car_start_status1)
     public CarStartAnimation progressbar1; // 蓝牙车辆启动动画
 
+
+    /**
+
+
+     <frame.zzt.com.appframe.widget.progress.DialProgress
+     android:id="@+id/dial_progress_bar"
+     android:layout_width="300dp"
+     android:layout_height="300dp"
+     android:layout_gravity="center_horizontal"
+     android:padding="@dimen/medium"
+     app:animTime="1000"
+     app:arcColors="@array/gradient_arc_color"
+     app:arcWidth="@dimen/large"
+     app:dialIntervalDegree="3"
+     app:dialWidth="2dp"
+     app:hint="当前时速"
+     app:hintSize="@dimen/text_size_25"
+     app:maxValue="300"
+     app:startAngle="135"
+     app:sweepAngle="270"
+     app:unit="km/h"
+     app:unitSize="@dimen/text_size_25"
+     app:value="300"
+     app:valueSize="@dimen/text_size_35" />
+
+     <frame.zzt.com.appframe.widget.progress.WaveProgress
+     android:id="@+id/wave_progress_bar"
+     android:layout_width="300dp"
+     android:layout_height="300dp"
+     android:layout_gravity="center_horizontal"
+     app:darkWaveAnimTime="1000"
+     app:darkWaveColor="@color/dark"
+     app:lightWaveAnimTime="2000"
+     app:lightWaveColor="@color/light"
+     app:lightWaveDirect="R2L"
+     app:lockWave="false"
+     app:valueSize="@dimen/text_size_35"
+     app:waveHeight1="30dp"
+     app:waveNum="1" />
+
+     */
+    @BindView(R.id.dial_progress_bar)
+    public DialProgress mDialProgress;
+    @BindView(R.id.wave_progress_bar)
+    public WaveProgress mWaveProgress;
+
+
+    private Random mRandom;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,6 +135,22 @@ public class ActivityProgress2 extends Activity {
             @Override
             public void onProgressTimeout() {
 
+            }
+        });
+
+        mRandom = new Random();
+        mWaveProgress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mWaveProgress .setValue(mRandom.nextFloat() * mDialProgress.getMaxValue());
+            }
+        });
+
+
+        mDialProgress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDialProgress.setValue(mRandom.nextFloat() * mWaveProgress.getMaxValue());
             }
         });
 

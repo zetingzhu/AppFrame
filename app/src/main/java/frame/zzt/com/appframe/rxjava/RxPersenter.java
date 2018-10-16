@@ -696,6 +696,7 @@ public class RxPersenter extends BasePresenter<RxView> {
      * BackpressureStrategy.BUFFER      BUFFER 没有上线可以无限存储
      * BackpressureStrategy.DROP        Drop 就是直接把存不下的事件丢弃,  满了128 个后面的丢掉舍弃，下游获取到96个的时候整理上游被压数据，重新存储
      * BackpressureStrategy.LATEST      Latest 就是只保留最新的事件，替换最后一个
+     * BackpressureStrategy.MISSING      MISSING 不丢弃，不缓存
      */
     public void rxjavaFlowable3() {
         Flowable.create(new FlowableOnSubscribe<Integer>() {

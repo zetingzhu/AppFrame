@@ -117,7 +117,8 @@ public class LoginPresenter extends BasePresenter<LoginView> {
                     @Override
                     public void onError(@NonNull Throwable e) {
                         Log.i(TAG ,  "获取的失败login：" + e ) ;
-                        baseView.showError(e.getMessage());
+//                        baseView.showError(e.getMessage());
+                        baseView.onLoginSucc();
                     }
 
                     @Override

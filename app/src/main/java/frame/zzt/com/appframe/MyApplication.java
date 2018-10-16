@@ -1,10 +1,16 @@
 package frame.zzt.com.appframe;
 
 import android.app.Application;
+import android.content.ComponentName;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
+import android.provider.Settings;
+import android.util.Log;
 
+import frame.zzt.com.appframe.Notification.NotificationReceiver18;
 import frame.zzt.com.appframe.greenUtil.MyGreenUtil;
 import frame.zzt.com.appframe.greendao.DaoSession;
 
@@ -13,6 +19,8 @@ import frame.zzt.com.appframe.greendao.DaoSession;
  */
 
 public class MyApplication extends Application {
+
+    private static final String TAG = "MyApplication";
 
     private static MyApplication mInstance;
     MyGreenUtil mMyGreenUtil ;
@@ -28,6 +36,26 @@ public class MyApplication extends Application {
         super.onCreate();
         mInstance = this;
         mMyGreenUtil = new MyGreenUtil() ;
+
+        /**
+         被杀后再次启动
+
+         该方法使用前提是 NotificationListenerService 已经被用户授予了权限，否则无效。
+         幸运的是，官方也已经发现了这个问题，在 API 24 中提供了 requestRebind(ComponentName componentName) 方法来支持重新绑定。
+         */
+        String strListener = Settings.Secure.getString(this.getContentResolver(),
+                "enabled_notification_listeners");
+        Log.i(TAG, "strListener = " + strListener);
+        if (strListener != null
+                && strListener
+                .contains("com.mediatek.swp/com.mediatek.app.notification.NotificationReceiver18")) {
+            ComponentName localComponentName = new ComponentName(this, NotificationReceiver18.class);
+            PackageManager localPackageManager = this.getPackageManager();
+            localPackageManager.setComponentEnabledSetting(localComponentName, 2, 1);
+            localPackageManager.setComponentEnabledSetting(localComponentName, 1, 1);
+            Log.i(TAG, "setComponentEnabledSetting");
+        }
+
     }
 
     public DaoSession getDaoSession() {

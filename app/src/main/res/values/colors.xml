@@ -23,4 +23,18 @@
     <!--渐变颜色的背景色-->
     <color name="color_bg_gradient">#47484e</color>
 
+
+    <color name="dark">#803cbcb7</color>
+    <color name="light">#800de6e8</color>
+
+    <color name="green">#00FF00</color>
+    <color name="blue">#EE9A00</color>
+    <color name="red">#EE0000</color>
+
+    <integer-array name="gradient_arc_color">
+        <item>@color/green</item>
+        <item>@color/blue</item>
+        <item>@color/red</item>
+    </integer-array>
+
 </resources>

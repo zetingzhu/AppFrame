@@ -58,4 +58,15 @@
     <string name="tab_item_Kotlin">Kotlin 使用</string>
     <string name="tab_item_Kotlin_desc">Kotlin 简单使用</string>
 
+    <string name="tab_item_Notification">Notification 使用</string>
+    <string name="tab_item_Notification_desc">Notification 简单使用</string>
+
+    <string name="ok">确认</string>
+    <string name="cancel">取消</string>
+    <string name="notificationlistener_prompt_title">启用通知</string>
+    <string name="notificationlistener_prompt_content">需要发送通知的权限。请去通知访问设置来打开它。</string>
+
+    <string name="tab_item_observable">观察者模式的简单使用</string>
+    <string name="tab_item_observable_desc">观察者模式的简单使用</string>
+
 </resources>

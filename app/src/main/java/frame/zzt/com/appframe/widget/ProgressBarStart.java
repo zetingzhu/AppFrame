@@ -219,8 +219,8 @@ public class ProgressBarStart extends TextView {
 
         SweepGradient sweepGradient = new SweepGradient(center, center, new int[]{ ContextCompat.getColor(mContext ,R.color.color_start_gradient) ,
                 ContextCompat.getColor(mContext ,R.color.color_end_gradient) }, null);
-        arcPaint.setShader(sweepGradient );
-//        arcPaint.setColor(secondColor); // 设置圆弧的颜色
+//        arcPaint.setShader(sweepGradient );
+        arcPaint.setColor(secondColor); // 设置圆弧的颜色
         arcPaint.setStrokeCap(Paint.Cap.ROUND); // 把每段圆弧改成圆角的
 
         alphaAngle = currentValue * 300.0f / maxValue * 1.0f; // 计算每次画圆弧时扫过的角度，这里计算要注意分母要转为float类型，否则alphaAngle永远为0

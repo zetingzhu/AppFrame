@@ -17,7 +17,7 @@ public class BaseAppCompatActivity extends AppCompatActivity implements BaseView
     /**
      * @param s
      */
-    protected void showtoast(String s) {
+    public void showtoast(String s) {
         MyMessageUtil.getInstance(this).setMessage(s);
     }
 
