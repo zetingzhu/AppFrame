@@ -74,8 +74,14 @@ public class ActivityBluetooth4 extends BaseAppCompatActivity implements Bluetoo
 
     @OnClick(R.id.btn_scan)
     public void OnClickScan() {
-        mAQPresenter.startBleScanDevice();
-//        mAQPresenter.startBleScanDevice1();
+        Log.i(TAG, "开始扫描");
+        // 5.0 已下
+//        Galaxy S5 - 51:A8:58:E5:38:4E - 2
+//        mAQPresenter.startBleScanDevice();
+        // 5.0 以上
+        // ble 需要蓝牙，位置 权限，没有就不能扫描
+        // Galaxy S5 - 6E:51:CD:53:83:A5 - 2
+        mAQPresenter.startBleScanDevice50();
     }
 
     @OnClick(R.id.btn_stop_scan)

@@ -10,27 +10,15 @@ import android.content.ServiceConnection;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.net.Uri;
 import android.os.Build;
-import android.os.Handler;
 import android.os.IBinder;
-import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.NotificationCompat;
-import android.support.v4.graphics.BitmapCompat;
 import android.util.Log;
 
-import frame.zzt.com.appframe.Notification.bus.EventMsg;
-import frame.zzt.com.appframe.Notification.bus.RxBus;
-import frame.zzt.com.appframe.Notification.bus.RxBusTwo;
+import frame.zzt.com.appframe.rxbus.EventMsg;
+import frame.zzt.com.appframe.rxbus.RxBusTwo;
 import frame.zzt.com.appframe.R;
-import frame.zzt.com.appframe.UI.login.LoginActivity;
-import frame.zzt.com.appframe.mvp.mvpbase.BasePresenter;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
 
 /**
  * Created by allen on 18/10/11.

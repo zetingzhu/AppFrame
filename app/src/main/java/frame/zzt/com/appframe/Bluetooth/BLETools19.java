@@ -29,13 +29,13 @@ public class BLETools19 {
     public static final String SECRET = "TqtRDxZWVsGRibHsvCyRUTv9"; //秘钥
     public static final String SERIAL_NUMBER = "2001"; // 序列号
 
-//    private BluetoothLeScanner scanner;
+    private BluetoothLeScanner scanner;
+    private ScanSettings scanSettings;
+
     private ScanCallback mScanCallback;
 
     public String mTestImei = "357550110390180"; // 测试设备的IMEI
-
     private List<ScanFilter> bleScanFilters;
-//    private ScanSettings scanSettings;
 
     private BluetoothManager bluetoothManager;
     private BluetoothAdapter bluetoothAdapter;
@@ -57,9 +57,9 @@ public class BLETools19 {
             bluetoothManager = (BluetoothManager) context.getSystemService(BLUETOOTH_SERVICE);//这里与标准蓝牙略有不同
             bluetoothAdapter = bluetoothManager.getAdapter();
             bleScanFilters = new ArrayList<>();
-//            scanSettings = new ScanSettings.Builder().setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY).build();
-//            scanner = bluetoothAdapter.getBluetoothLeScanner();
 
+            scanSettings = new ScanSettings.Builder().setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY).build();
+            scanner = bluetoothAdapter.getBluetoothLeScanner();
         }
 
     }
@@ -90,10 +90,37 @@ public class BLETools19 {
                         //也可以发广播通知activity发现了新设备，更新活动设备列表的显示等。
                         //这里需要注意一点，在onLeScan当中不能执行耗时操作，不宜执行复杂运算操作，切记，
                         //下面即将提到的onScanResult，onBatchScanResults同理。
+                        Log.i(TAG, "扫描蓝牙扫描结果");
                         callback.onScanDevice( device );
                     }
                 }
                 );
+            }
+        }
+    }
+
+    /**
+     *  5.0 以上蓝牙扫描
+     * @param sign
+     * @param context
+     * @param callback
+     */
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    public void scanDevice( int sign ,Context context, final BLETools19.DeviceCallback callback) {
+        if (judgmentVersion()) {
+            if (bluetoothAdapter.isEnabled() && scanner != null) {
+                mBleStartStatus = true;
+                if (mScanCallback != null) {
+                    scanner.stopScan(mScanCallback);
+                }
+                scanner.startScan(bleScanFilters, scanSettings, mScanCallback = new ScanCallback() {
+                    @Override
+                    public void onScanResult(int callbackType, ScanResult result) {
+                        super.onScanResult(callbackType, result);
+                        Log.i(TAG, "这没有扫描蓝牙的结果");
+                        callback.onScanResult(result);
+                    }
+                });
             }
         }
     }

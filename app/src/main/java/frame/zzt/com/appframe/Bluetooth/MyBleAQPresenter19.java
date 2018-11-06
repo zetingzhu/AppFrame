@@ -15,6 +15,7 @@ import android.content.ServiceConnection;
 import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
+import android.os.ParcelUuid;
 import android.support.annotation.RequiresApi;
 import android.text.TextUtils;
 import android.util.Log;
@@ -179,9 +180,13 @@ public class MyBleAQPresenter19 {
                 mBletools.stopScan();
             }
         }, SCAN_PERIOD);
+        Log.i(TAG, "扫描蓝牙");
         mBletools.scanDevice(mContext, mScanDeviceCallback);//开始搜索
+    }
 
+    public void startBleScanDevice50() {
 
+        mBletools.scanDevice(1 , mContext, mScanDeviceCallback);//开始搜索
     }
 
     public void startBleScanDevice1(  ) {
@@ -262,12 +267,28 @@ public class MyBleAQPresenter19 {
         @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
         @Override
         public void onScanResult(ScanResult result) {
-            Log.i(TAG, "onScanDevice:  ====" + result  );
+            Log.i(TAG, "onScanResult:  ====" + result.getDevice().getName() + " - " +  result.getDevice().getAddress() );
+            if (result.getDevice().fetchUuidsWithSdp()){
+                ParcelUuid[] uuids = result.getDevice().getUuids();
+                if (uuids != null) {
+                    Log.i(TAG, "onScanResult:  ==== uuids:" + uuids.toString());
+                }else {
+                    Log.i(TAG, "onScanResult:  ==== uuids:" + uuids );
+                }
+            }
         }
 
         @Override
         public void onScanDevice(BluetoothDevice result) {
             Log.i(TAG, "onScanDevice:  ====" + result.getName() + " - " +  result.getAddress() + " - " +  result.getType()    );
+            if (result.fetchUuidsWithSdp()){
+                ParcelUuid[] uuids = result.getUuids();
+                if (uuids != null) {
+                    Log.i(TAG, "onScanDevice:  ==== uuids:" + uuids.toString()  );
+                }else {
+                    Log.i(TAG, "onScanDevice:  ==== uuids:" + uuids );
+                }
+            }
         }
     };
 

@@ -54,6 +54,9 @@ public class ActivityBluetooth5 extends BaseAppCompatActivity implements Bluetoo
     public static String CHAR_READ_UUID = "00001836-0000-1000-8000-00805f9b34fb" ;
     public static String CHAR_WRITE_UUID = "00001837-0000-1000-8000-00805f9b34fb" ;
 
+    // 智慧芯服务UUID
+    public static String DEVICE_SERVICE_UUID = "000028af-0000-1000-8000-00805f9b34fb" ;
+
 
     private Context mContext ;
     BluetoothManager mBluetoothManager ;

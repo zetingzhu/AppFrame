@@ -4,7 +4,10 @@ import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.icu.text.AlphabeticIndex;
+import android.os.SystemClock;
 import android.util.Log;
+
+import com.google.gson.Gson;
 
 import org.greenrobot.greendao.query.QueryBuilder;
 import org.reactivestreams.Subscriber;
@@ -51,12 +54,27 @@ import io.reactivex.SingleOnSubscribe;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.exceptions.Exceptions;
+import io.reactivex.flowables.GroupedFlowable;
+import io.reactivex.functions.Action;
 import io.reactivex.functions.BiConsumer;
 import io.reactivex.functions.BiFunction;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.functions.Predicate;
+import io.reactivex.observables.GroupedObservable;
 import io.reactivex.schedulers.Schedulers;
+import io.reactivex.subjects.AsyncSubject;
+import io.reactivex.subjects.BehaviorSubject;
+import io.reactivex.subjects.PublishSubject;
+import io.reactivex.subjects.ReplaySubject;
+import okhttp3.Call;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import okhttp3.ResponseBody;
+
+import static android.R.id.list;
 
 
 /**
@@ -203,7 +221,8 @@ public class RxPersenter extends BasePresenter<RxView> {
                 for (int i = 0; i < 3; i++) {
                     list.add("I am value " + integer);
                 }
-                return Observable.fromIterable(list).delay(10, TimeUnit.MILLISECONDS);
+                int delayTime = (int) (1 + Math.random() * 10);
+                return Observable.fromIterable(list).delay(delayTime, TimeUnit.MILLISECONDS);
             }
         }).subscribe(new Consumer<String>() {
             @Override
@@ -235,7 +254,8 @@ public class RxPersenter extends BasePresenter<RxView> {
                 for (int i = 0; i < 3; i++) {
                     list.add("I am value " + integer);
                 }
-                return Observable.fromIterable(list).delay(10, TimeUnit.MILLISECONDS);
+                int delayTime = (int) (1 + Math.random() * 10);
+                return Observable.fromIterable(list).delay(delayTime, TimeUnit.MILLISECONDS);
             }
         }).subscribe(new Consumer<String>() {
             @Override
@@ -250,20 +270,24 @@ public class RxPersenter extends BasePresenter<RxView> {
      * switchMap 如果是同一个线程就没有顺序发出所有数据，如果是异步线程就截取到最后最后 observable 流数据
      */
     public void rxjavaSwitchMap() {
-        Observable.create(new ObservableOnSubscribe<Integer>() {
-            @Override
-            public void subscribe(ObservableEmitter<Integer> emitter) throws Exception {
-                emitter.onNext(1);
-                emitter.onNext(2);
-                emitter.onNext(3);
-                emitter.onNext(4);
-                emitter.onNext(5);
-                emitter.onNext(6);
-                emitter.onNext(7);
-            }
-        }).switchMap(new Function<Integer, ObservableSource<String>>() {
+        List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
+//        Observable.create(new ObservableOnSubscribe<Integer>() {
+//            @Override
+//            public void subscribe(ObservableEmitter<Integer> emitter) throws Exception {
+//                emitter.onNext(1);
+//                emitter.onNext(2);
+//                emitter.onNext(3);
+//                emitter.onNext(4);
+//                emitter.onNext(5);
+//                emitter.onNext(6);
+//                emitter.onNext(7);
+//            }
+//        }).
+        Observable.fromIterable(list)
+                .switchMap(new Function<Integer, ObservableSource<String>>() {
             @Override
             public ObservableSource<String> apply(Integer integer) throws Exception {
+                Log.i(TAG, "发送的数据："+ integer);
                 return Observable.just("I am value " + integer);//.subscribeOn(Schedulers.io()) ;
             }
         }).subscribe(new Consumer<String>() {
@@ -285,6 +309,7 @@ public class RxPersenter extends BasePresenter<RxView> {
 
                     @Override
                     public ObservableSource<String> apply(Integer integer) throws Exception {
+                        Log.i(TAG, "发送的数据："+ integer);
                         return Observable.just("integer=" + integer).subscribeOn(Schedulers.newThread());
                     }
                 }).subscribe(new Consumer<String>() {
@@ -400,7 +425,7 @@ public class RxPersenter extends BasePresenter<RxView> {
                 Log.d(TAG, "emit complete1");
                 emitter.onComplete();
             }
-        });
+        }).subscribeOn(Schedulers.newThread() );
 
         Observable<String> observable2 = Observable.create(new ObservableOnSubscribe<String>() {
             @Override
@@ -411,10 +436,8 @@ public class RxPersenter extends BasePresenter<RxView> {
                 emitter.onNext("B");
                 Log.d(TAG, "emit C");
                 emitter.onNext("C");
-                Log.d(TAG, "emit complete2");
-                emitter.onComplete();
             }
-        });
+        }).subscribeOn(Schedulers.newThread());
 
         Observable.zip(observable1, observable2, new BiFunction<Integer, String, String>() {
             @Override
@@ -442,7 +465,6 @@ public class RxPersenter extends BasePresenter<RxView> {
                 Log.d(TAG, "onComplete");
             }
         });
-
     }
 
     Disposable dd;
@@ -453,20 +475,23 @@ public class RxPersenter extends BasePresenter<RxView> {
             public void subscribe(ObservableEmitter<Integer> emitter) throws Exception {
                 Log.d(TAG, "emit 1");
                 emitter.onNext(1);
-                TimeUnit.MILLISECONDS.sleep(1000);
-
+//                TimeUnit.MILLISECONDS.sleep(1000);
+                SystemClock.sleep(1000);
 
                 Log.d(TAG, "emit 2");
                 emitter.onNext(2);
-                TimeUnit.MILLISECONDS.sleep(1000);
+//                TimeUnit.MILLISECONDS.sleep(1000);
+                SystemClock.sleep(1000);
 
                 Log.d(TAG, "emit 3");
                 emitter.onNext(3);
-                TimeUnit.MILLISECONDS.sleep(1000);
+//                TimeUnit.MILLISECONDS.sleep(1000);
+                SystemClock.sleep(1000);
 
                 Log.d(TAG, "emit 4");
                 emitter.onNext(4);
 //                TimeUnit.MILLISECONDS.sleep(1000);
+                SystemClock.sleep(1000);
 
                 Log.d(TAG, "emit complete1");
                 emitter.onComplete();
@@ -478,15 +503,18 @@ public class RxPersenter extends BasePresenter<RxView> {
             public void subscribe(ObservableEmitter<String> emitter) throws Exception {
                 Log.d(TAG, "emit A");
                 emitter.onNext("A");
-                TimeUnit.MILLISECONDS.sleep(1000);
+//                TimeUnit.MILLISECONDS.sleep(1000);
+                SystemClock.sleep(1000);
 
                 Log.d(TAG, "emit B");
                 emitter.onNext("B");
-                TimeUnit.MILLISECONDS.sleep(1000);
+//                TimeUnit.MILLISECONDS.sleep(1000);
+                SystemClock.sleep(1000);
 
                 Log.d(TAG, "emit C");
                 emitter.onNext("C");
-                TimeUnit.MILLISECONDS.sleep(1000);
+//                TimeUnit.MILLISECONDS.sleep(1000);
+                SystemClock.sleep(1000);
 
                 Log.d(TAG, "emit complete2");
                 emitter.onComplete();
@@ -552,8 +580,6 @@ public class RxPersenter extends BasePresenter<RxView> {
         }).subscribe(new Observer<MyWeather.Basic>() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {
-//                d.isDisposed() ;
-//                d.dispose();
                 Log.d(TAG, "onSubscribe");
             }
 
@@ -606,7 +632,7 @@ public class RxPersenter extends BasePresenter<RxView> {
                 Log.d(TAG, "emit complete");
                 emitter.onComplete();
             }
-        }, BackpressureStrategy.ERROR); //增加了一个参数
+        }, BackpressureStrategy.ERROR ) ; //增加了一个参数
 
         Subscriber<Integer> downstream = new Subscriber<Integer>() {
 
@@ -634,7 +660,6 @@ public class RxPersenter extends BasePresenter<RxView> {
         };
 
         upstream.subscribe(downstream);
-
     }
 
     /***
@@ -1247,7 +1272,7 @@ public class RxPersenter extends BasePresenter<RxView> {
     public void rxjavaFilterDistinct(){
         Observable
                 .fromArray(1 , 1 , 2, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 9 )
-                .distinct()
+//                .distinct()
                 .filter(new Predicate<Integer>() {
                     @Override
                     public boolean test(@NonNull Integer integer) throws Exception {
@@ -1273,6 +1298,542 @@ public class RxPersenter extends BasePresenter<RxView> {
             @Override
             public void onComplete() {
                 Log.d(TAG, "onComplete: ");
+            }
+        });
+    }
+
+
+    /**
+     * Observer只接收PublishSubject被订阅之后发送的数据。
+     */
+    public void rxjavaPublishSubject(){
+        PublishSubject<String> subject = PublishSubject.create();
+        subject.onNext("publicSubject1");
+        subject.onNext("publicSubject2");
+
+        subject.subscribe(new Consumer<String>() {
+            @Override
+            public void accept(@NonNull String s) throws Exception {
+                System.out.println("publicSubject:"+s);
+            }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(@NonNull Throwable throwable) throws Exception {
+                System.out.println("publicSubject onError");  //不输出（异常才会输出）
+            }
+        }, new Action() {
+            @Override
+            public void run() throws Exception {
+                System.out.println("publicSubject:complete");  //输出 publicSubject onComplete
+            }
+        });
+        subject.onNext("publicSubject3");
+        subject.onNext("publicSubject4");
+        subject.onComplete();
+        subject.onNext("publicSubject5");
+    }
+
+    /**
+     * 该subject只有在被观察者（subject）结束的时候（即执行了onCompleted）后观察者才能够接收到事件，并且也只有能接收到最后一个事件。
+     */
+    public void rxjavaAsyncSubject(){
+        AsyncSubject<String> subject = AsyncSubject.create();
+        subject.onNext("asyncSubject1");
+        subject.onNext("asyncSubject2");
+        subject.subscribe(new Consumer<String>() {
+            @Override
+            public void accept(@NonNull String s) throws Exception {
+                System.out.println("asyncSubject:"+s);
+            }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(@NonNull Throwable throwable) throws Exception {
+                System.out.println("asyncSubject onError");  //不输出（异常才会输出）
+            }
+        }, new Action() {
+            @Override
+            public void run() throws Exception {
+                System.out.println("asyncSubject:complete");  //输出 asyncSubject onComplete
+            }
+        });
+        subject.onNext("asyncSubject3");
+        subject.onNext("asyncSubject4");
+        subject.onComplete();
+        subject.onNext("asyncSubject5");
+    }
+
+    /**
+     * Observer会接收到BehaviorSubject被订阅之前的最后一个数据，再接收订阅之后发射过来的数据。如果BehaviorSubject被订阅之前没有发送任何数据，则会发送一个默认数据。
+     */
+    public void rxjavaBehaviorSubject(){
+        BehaviorSubject<String> subject = BehaviorSubject.createDefault("behaviorSubject0");
+        subject.onNext("behaviorSubject1");
+        subject.onNext("behaviorSubject2");
+
+        subject.subscribe(new Consumer<String>() {
+            @Override
+            public void accept(@NonNull String s) throws Exception {
+                System.out.println("behaviorSubject:"+s);  //输出asyncSubject:asyncSubject3
+            }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(@NonNull Throwable throwable) throws Exception {
+                System.out.println("behaviorSubject onError");  //不输出（异常才会输出）
+            }
+        }, new Action() {
+            @Override
+            public void run() throws Exception {
+                System.out.println("behaviorSubject:complete");  //输出 behaviorSubject onComplete
+            }
+        });
+        subject.onNext("behaviorSubject3");
+        subject.onNext("behaviorSubject4") ;
+    }
+
+    /**
+     * ReplaySubject会发射所有来自原始Observable的数据给观察者，无论它们是何时订阅的。
+     * 事件不会直接被消化。下个观察者订阅的时候可以再次接收到事件。
+     */
+    public void rxjavaReplaySubject(){
+        ReplaySubject<String> subject = ReplaySubject.create();
+        subject.onNext("replaySubject1");
+        subject.onNext("replaySubject2");
+
+        subject.subscribe(new Consumer<String>() {
+            @Override
+            public void accept(@NonNull String s) throws Exception {
+                System.out.println("replaySubject:"+s);
+            }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(@NonNull Throwable throwable) throws Exception {
+                System.out.println("replaySubject onError");  //不输出（异常才会输出）
+            }
+        }, new Action() {
+            @Override
+            public void run() throws Exception {
+                System.out.println("replaySubject:complete");  //输出 replaySubject onComplete
+            }
+        });
+
+        subject.onNext("replaySubject3");
+        subject.onNext("replaySubject4");
+    }
+
+    public void rxjavaReplaySubject1(){
+        ReplaySubject<String> subject = ReplaySubject.createWithSize(2);
+        subject.onNext("replaySubject1");
+        subject.onNext("replaySubject2");
+        subject.onNext("replaySubject3");
+        subject.onNext("replaySubject4");
+
+        subject.subscribe(new Consumer<String>() {
+            @Override
+            public void accept(@NonNull String s) throws Exception {
+                System.out.println("replaySubject:"+s);
+            }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(@NonNull Throwable throwable) throws Exception {
+                System.out.println("replaySubject onError");  //不输出（异常才会输出）
+            }
+        }, new Action() {
+            @Override
+            public void run() throws Exception {
+                System.out.println("replaySubject:complete");  //输出 replaySubject onComplete
+            }
+        });
+
+        subject.onNext("replaySubject5");
+        subject.onNext("replaySubject6");
+    }
+
+
+    public void RxJavaMapRequest() {
+        Observable.create(new ObservableOnSubscribe<Response>() {
+            @Override
+            public void subscribe(@NonNull ObservableEmitter<Response> e) throws Exception {
+                Request.Builder builder = new Request.Builder()
+                        .url(" https://search.heweather.com/find?key=4b61a68895b149f1a5ea53fe43782e17&location=上海")
+                        .get();
+                Request request = builder.build();
+                Call call = new OkHttpClient().newCall(request);
+                Response response = call.execute();
+                e.onNext(response);
+            }
+        }).map(new Function<Response, MyWeather>() {
+            @Override
+            public MyWeather apply(@NonNull Response response) throws Exception {
+                if (response.isSuccessful()) {
+                    ResponseBody body = response.body();
+                    if (body != null) {
+                        Log.e(TAG, "map:转换前:" + response.body());
+                        return new Gson().fromJson(body.string(), MyWeather.class);
+                    }
+                }
+                return null;
+            }
+        }).observeOn(AndroidSchedulers.mainThread())
+                .doOnNext(new Consumer<MyWeather>() {
+                    @Override
+                    public void accept(@NonNull MyWeather s) throws Exception {
+                        Log.e(TAG, "doOnNext: 保存成功：" + s.toString() + "\n");
+                    }
+                }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<MyWeather>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull MyWeather myWeather) {
+                        Log.i(TAG, "获取天气数据 onNext ：" + myWeather.toString());
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Log.i(TAG, "获取天气数据 onError ：" + e);
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.i(TAG, "获取天气数据 onComplete ：");
+
+                    }
+                });
+    }
+
+    public void rxjavaConcat() {
+        Observable<String> observable1 = Observable.create(new ObservableOnSubscribe<String>(){
+            @Override
+            public void subscribe(@NonNull ObservableEmitter<String> e) throws Exception {
+                e.onNext("1");
+                e.onNext("2");
+                e.onComplete();
+                e.onNext("3");
+                e.onNext("4");
+            }
+        });
+        Observable<String> observable2 = Observable.create(new ObservableOnSubscribe<String>(){
+            @Override
+            public void subscribe(@NonNull ObservableEmitter<String> e) throws Exception {
+                e.onNext("5");
+                e.onNext("6");
+                e.onComplete();
+                e.onNext("7");
+            }
+        });
+        Observable.concat(observable1, observable2)
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        Log.i(TAG, "onSubscribe ：" + d.isDisposed() );
+                    }
+
+                    @Override
+                    public void onNext(@NonNull String s) {
+                        Log.i(TAG, "onNext ：" + s);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Log.i(TAG, "onError ：" + e.getMessage());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.i(TAG, "onComplete ：" );
+                    }
+                });
+    }
+
+    public class Student {
+        public String name;//学生名字
+        public int id;
+        public List<Source> mSources;//每个学生的所有课程
+
+        public Student() {
+        }
+        public Student(String name, int id, List<Source> sources) {
+            this.name = name;
+            this.id = id;
+            mSources = sources;
+        }
+    }
+
+    public class Source {
+        public int sourceId;//id
+        public String name;//课程名
+        public int score;//成绩
+
+        public Source(int sourceId, String name, int score) {
+            this.sourceId = sourceId;
+            this.name = name;
+            this.score = score;
+        }
+    }
+
+    public List<Student> getStudentData(){
+        List<Student> mStList = new ArrayList<>();
+        List<Source> mSoList0 = new ArrayList<>();
+        Source mSou0 = new Source( 1 , "语文" , 100 );
+        Source mSou1 = new Source( 2 , "数学" , 99 );
+        Source mSou2 = new Source( 2 , "英语" , 90 );
+        mSoList0.add(mSou0);
+        mSoList0.add(mSou1);
+        mSoList0.add(mSou2);
+        Student mStu0 = new Student("张一"  , 1  , mSoList0);
+        mStList.add(mStu0);
+
+        List<Source> mSoList1 = new ArrayList<>();
+        Source mSou3 = new Source( 1 , "语文" , 90 );
+        Source mSou4 = new Source( 2 , "数学" , 89 );
+        Source mSou5 = new Source( 2 , "英语" , 88 );
+        mSoList1.add(mSou3);
+        mSoList1.add(mSou4);
+        mSoList1.add(mSou5);
+        Student mStu1 = new Student("张二"  , 2  , mSoList1);
+        mStList.add(mStu1);
+
+        return mStList ;
+    }
+
+    /**
+     *  举例flatmap 使用，传统方法
+     */
+    public void rxjavaFlatMapEG1(){
+        //开启一个线程
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                // 从服务器获取班级所有同学信息
+                List<Student> students = getStudentData();
+                for(int i=0;i<students.size();i++){
+                    List<Source> sources = students.get(i).mSources;
+                    String stu = "student Name:"+students.get(i).name;
+                    Log.i(TAG,stu);
+                    for (int index=0;index<sources.size();index++){
+                        final Source source = sources.get(index);
+                        //主线程更改UI
+                        String content = "sourceName:"+source.name +" source score:"+source.score;
+                        Log.i(TAG,content);
+                    }
+                }
+            }
+        }).start();
+    }
+
+    public void rxjavaFlatMapEG2(){
+        Observable.fromIterable(getStudentData())
+                .flatMap(new Function<Student, ObservableSource<Source>>() {
+                    @Override
+                    public ObservableSource<Source> apply(@NonNull Student student) throws Exception {
+                        String stu = "student Name:"+student.name ;
+                        Log.i(TAG,stu);
+                        return Observable.fromIterable(student.mSources);
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Source>() {
+                    @Override
+                    public void accept(@NonNull Source source) throws Exception {
+                        String content = "sourceName:"+source.name +" source score:"+source.score;
+                        Log.i(TAG,content);
+
+                    }
+                });
+    }
+
+    public void rxjavaBuffer(){
+        Observable.just(1, 2, 3, 4, 5, 6).repeat(2)
+                .buffer(3).subscribe(new Consumer<List<Integer>>() {
+            @Override
+            public void accept(List<Integer> integers) throws Exception {
+                Log.i(TAG, "integers:" + integers );
+            }
+        });
+    }
+
+    public void rxjavaGroupBy(){
+        Observable.range(7 , 7).groupBy(new Function<Integer, Object>() {
+            @Override
+            public Object apply(@NonNull Integer integer) throws Exception {
+                return integer > 10 ? "1组" : "2组" ;
+            }
+        }).subscribe(new Consumer<GroupedObservable<Object, Integer>>() {
+            @Override
+            public void accept(final GroupedObservable<Object, Integer> objectIntegerGroupedObservable) throws Exception {
+                Log.i(TAG, "onNext  - 1 :" + objectIntegerGroupedObservable.getKey() );
+                objectIntegerGroupedObservable.subscribe(new Observer<Integer>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        Log.i(TAG, "onSubscribe:" + d.isDisposed() );
+                    }
+
+                    @Override
+                    public void onNext(@NonNull Integer integer) {
+                        System.out.println(  objectIntegerGroupedObservable.getKey() + ":" + String.valueOf(integer));
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Log.i(TAG, "onError:" + e.getMessage() );
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.i(TAG, "onComplete" );
+                    }
+                });
+            }
+        });
+    }
+
+    public void rxjavaflatMapIterable () {
+        Observable.range(1, 7).flatMapIterable(new Function<Integer, Iterable<?>>() {
+            @Override
+            public Iterable<String> apply(@NonNull Integer integer) throws Exception {
+                ArrayList<String> mList = new ArrayList<>();
+                mList.add("数字 : " + integer);
+                return mList;
+            }
+        }).subscribe(new Observer<Object>() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+                Log.i(TAG, "onSubscribe" + d.isDisposed());
+            }
+
+            @Override
+            public void onNext(@NonNull Object o) {
+                Log.i(TAG, "onNext" + o.toString() );
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+                Log.i(TAG, "onError" );
+            }
+
+            @Override
+            public void onComplete() {
+                Log.i(TAG, "onComplete" );
+            }
+        });
+    }
+
+
+    //throttleWithTimeout操作符
+    //源发射数据时，如果两次数据的发射间隔小于指定时间，就会丢弃前一次的数据,直到指定时间内都没有新数据发射时才进行发射
+    public void rxjavathrottleWithTimeout() {
+
+        Observable.create(new ObservableOnSubscribe<Object>() {
+            @Override
+            public void subscribe(@NonNull ObservableEmitter<Object> oe) throws Exception {
+
+                oe.onNext(1);
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    throw Exceptions.propagate(e);
+                }
+                oe.onNext(2);
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    throw Exceptions.propagate(e);
+                }
+                oe.onNext(3);
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    throw Exceptions.propagate(e);
+                }
+                oe.onNext(4);
+                oe.onNext(5);
+                oe.onComplete();
+
+            }
+        })
+                .throttleWithTimeout(800, TimeUnit.MILLISECONDS)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Object>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        Log.i(TAG, "onSubscribe" + d.isDisposed());
+                    }
+
+                    @Override
+                    public void onNext(@NonNull Object o) {
+                        Log.i(TAG, "onNext" + o.toString());
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Log.i(TAG, "onError");
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.i(TAG, "onComplete");
+                    }
+                });
+    }
+
+
+    public void rxjavamerge() {
+        //merge操作符，会将多个Observable对象合并到一个Observable对象中进行发送
+        Observable<Integer> firstObservable = Observable.just(0, 1, 2 ).subscribeOn(Schedulers.io()).delay(500,TimeUnit.MILLISECONDS);
+        Observable<Integer> secondObservable = Observable.just(3 , 4, 5)
+                .delay(100,TimeUnit.MILLISECONDS);
+        Observable
+                .merge(firstObservable, secondObservable).subscribe(new Consumer<Integer>() {
+            @Override
+            public void accept(Integer integer) throws Exception {
+                Log.i(TAG, "onNext" + integer );
+            }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+                Log.i(TAG, "onComplete");
+            }
+        });
+    }
+
+    public void rxjavaretry() {
+        //retry操作符，当遇到exception时会进行重试，重试次数可以由用户进行定义
+        Observable.create(new ObservableOnSubscribe<Object>() {
+            @Override
+            public void subscribe(@NonNull ObservableEmitter<Object> e) throws Exception {
+                for (int i = 0; i < 5; i++) {
+                    if (i > 1) {
+//                        e.onError(new Throwable("User Alex Defined Error"));
+                        e.onError(new Exception("Maybe error exception "));
+                    }
+                    e.onNext(i);
+                }
+            }
+        } ).retry(2).subscribe(new Observer<Object>() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+                Log.i(TAG, "onSubscribe" + d.isDisposed());
+            }
+
+            @Override
+            public void onNext(@NonNull Object o) {
+                Log.i(TAG, "onNext" + o.toString());
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+                Log.i(TAG, "onError");
+            }
+
+            @Override
+            public void onComplete() {
+                Log.i(TAG, "onComplete");
             }
         });
     }

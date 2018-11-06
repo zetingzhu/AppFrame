@@ -1,34 +1,27 @@
 
 package frame.zzt.com.appframe.Notification;
 
-import android.app.ActivityManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.PackageManager;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
 import android.os.Message;
-import android.os.Process;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import java.util.HashMap;
-import java.util.List;
 
 import frame.zzt.com.appframe.MyApplication;
-import frame.zzt.com.appframe.Notification.bus.EventMsg;
-import frame.zzt.com.appframe.Notification.bus.RxBus;
-import frame.zzt.com.appframe.Notification.bus.RxBusTwo;
+import frame.zzt.com.appframe.rxbus.EventMsg;
+import frame.zzt.com.appframe.rxbus.RxBusTwo;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
 
 /**
  * This class will receive and process all notifications.

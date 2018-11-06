@@ -16,7 +16,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import frame.zzt.com.appframe.R;
-import frame.zzt.com.appframe.rxjava.ActivityRxJava;
 
 /**
  * Created by allen on 18/10/11.

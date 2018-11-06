@@ -1,4 +1,4 @@
-package frame.zzt.com.appframe.Notification.bus;
+package frame.zzt.com.appframe.rxbus;
 
 import io.reactivex.Observable;
 import io.reactivex.subjects.PublishSubject;

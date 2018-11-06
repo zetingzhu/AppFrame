@@ -73,6 +73,8 @@ public class ActivityRxJava extends BaseAppCompatActivity implements RxView {
         mList.add(new MyListItem(15 , "RxJava concatMap 操作符的使用 ， 有序的"));
         mList.add(new MyListItem(16 , "RxJava switchMap 操作符的使用 , 获取最后一次  "));
         mList.add(new MyListItem(17 , "RxJava switchMap 2 操作符的使用 , 获取最后一次 "));
+        mList.add(new MyListItem(41 , "RxJava Map 使用获取上海天气天气"));
+        mList.add(new MyListItem(42 , "RxJava Concat 操作符使用"));
         mList.add(new MyListItem(8 , "获取北京天气"));//8
         mList.add(new MyListItem(9 , "获取热门城市列表"));//9
         mList.add(new MyListItem(10 , "两个接口连在一起Flat Map操作符 "));//10
@@ -98,6 +100,24 @@ public class ActivityRxJava extends BaseAppCompatActivity implements RxView {
         mList.add(new MyListItem(33 , "fromIterable RxJava 创建操作符使用"));
         mList.add(new MyListItem(34 , "range RxJava 创建操作符使用"));
         mList.add(new MyListItem(35 , "filter distinct RxJava 过滤操作符使用"));
+
+        mList.add(new MyListItem(36 , "Subject 使用  PublishSubject"));
+        mList.add(new MyListItem(37 , "Subject 使用  AsyncSubject"));
+        mList.add(new MyListItem(38 , "Subject 使用  BehaviorSubject"));
+        mList.add(new MyListItem(39 , "Subject 使用  ReplaySubject"));
+        mList.add(new MyListItem(40 , "Subject 使用  ReplaySubject.createWithSize(2)"));
+
+
+        mList.add(new MyListItem(43 , "RxJava FlatMap 没有使用操作符的方法"));
+        mList.add(new MyListItem(44 , "RxJava FlatMap 使用操作符的方法"));
+
+        mList.add(new MyListItem(45 , "RxJava Buffer 操作符的使用"));
+        mList.add(new MyListItem(46 , "RxJava groupby 操作符的使用"));
+        mList.add(new MyListItem(47 , "RxJava flatMapIterable 操作符的使用"));
+        mList.add(new MyListItem(48 , "RxJava throttleWithTimeOut 操作符的使用"));
+        mList.add(new MyListItem(49 , "RxJava merge 操作符的使用"));
+        mList.add(new MyListItem(50 , "RxJava retry 操作符的使用"));
+
 
 
         mAdapterRecycle = new AdapterRecycle();
@@ -207,8 +227,14 @@ public class ActivityRxJava extends BaseAppCompatActivity implements RxView {
 
                         break;
                     case 4:
-                        mPresenter.setSubscribe1();
-                        mPresenter.getObservale1().subscribeOn(Schedulers.newThread())
+                        Observable.create(new ObservableOnSubscribe<Integer>() {
+                            @Override
+                            public void subscribe(ObservableEmitter<Integer> emitter) throws Exception {
+                                Log.d(TAG, "Observable thread is : " + Thread.currentThread().getName());
+                                Log.d(TAG, "emit 1");
+                                emitter.onNext(1);
+                            }
+                        }).subscribeOn(Schedulers.newThread())
                                 .subscribeOn(Schedulers.io())
                                 .observeOn(AndroidSchedulers.mainThread())
                                 .doOnNext(new Consumer<Integer>() {
@@ -224,7 +250,34 @@ public class ActivityRxJava extends BaseAppCompatActivity implements RxView {
                                         Log.d(TAG, "After observeOn(io), current thread is : " + Thread.currentThread().getName());
                                     }
                                 })
-                                .subscribe(mPresenter.getConsumer1());
+                                .observeOn(Schedulers.newThread() )
+                                .doOnNext(new Consumer<Integer>() {
+                                    @Override
+                                    public void accept(Integer integer) throws Exception {
+                                        Log.d(TAG, "After observeOn(newThread), current thread is: " + Thread.currentThread().getName());
+                                    }
+                                })
+                                .observeOn(Schedulers.io())
+                                .doOnNext(new Consumer<Integer>() {
+                                    @Override
+                                    public void accept(Integer integer) throws Exception {
+                                        Log.d(TAG, "After observeOn(io), current thread is : " + Thread.currentThread().getName());
+                                    }
+                                })
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .doOnNext(new Consumer<Integer>() {
+                                    @Override
+                                    public void accept(Integer integer) throws Exception {
+                                        Log.d(TAG, "After observeOn(mainThread), current thread is: " + Thread.currentThread().getName());
+                                    }
+                                })
+                                .subscribe(new Consumer<Integer>() {
+                                    @Override
+                                    public void accept(Integer integer) throws Exception {
+                                        Log.d(TAG, "Observer thread is :" + Thread.currentThread().getName());
+                                        Log.d(TAG, "onNext: " + integer);
+                                    }
+                                });
 
                         break;
                     case 5:
@@ -323,17 +376,51 @@ public class ActivityRxJava extends BaseAppCompatActivity implements RxView {
                         mPresenter.rxjavaFilterDistinct();
                         break;
                     case 36 :
+                        mPresenter.rxjavaPublishSubject();
                         break;
                     case 37 :
+                        mPresenter.rxjavaAsyncSubject();
                         break;
                     case 38 :
+                        mPresenter.rxjavaBehaviorSubject();
                         break;
                     case 39 :
+                        mPresenter.rxjavaReplaySubject();
                         break;
                     case 40 :
+                        mPresenter.rxjavaReplaySubject1();
                         break;
                     case 41 :
+                        mPresenter.RxJavaMapRequest();
                         break;
+                    case 42 :
+                        mPresenter.rxjavaConcat();
+                        break;
+                    case 43 :
+                        mPresenter.rxjavaFlatMapEG1();
+                        break;
+                    case 44 :
+                        mPresenter.rxjavaFlatMapEG2();
+                        break;
+                    case 45 :
+                        mPresenter.rxjavaBuffer();
+                        break;
+                    case 46 :
+                        mPresenter.rxjavaGroupBy();
+                        break;
+                    case 47 :
+                        mPresenter.rxjavaflatMapIterable();
+                        break;
+                    case 48 :
+                        mPresenter.rxjavathrottleWithTimeout();
+                        break;
+                    case 49 :
+                        mPresenter.rxjavamerge();
+                        break;
+                    case 50 :
+                        mPresenter.rxjavaretry();
+                        break;
+
                 }
             }
         };
