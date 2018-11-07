@@ -62,6 +62,7 @@ import io.reactivex.functions.BiFunction;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.functions.Predicate;
+import io.reactivex.observables.ConnectableObservable;
 import io.reactivex.observables.GroupedObservable;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.AsyncSubject;
@@ -1836,6 +1837,166 @@ public class RxPersenter extends BasePresenter<RxView> {
                 Log.i(TAG, "onComplete");
             }
         });
+    }
+
+    public void rxjavaClodObservble() {
+        Consumer<Long> subscriber1 = new Consumer<Long>() {
+            @Override
+            public void accept(@NonNull Long aLong) throws Exception {
+                System.out.println("subscriber1: "+aLong);
+            }
+        };
+        Consumer<Long> subscriber2 = new Consumer<Long>() {
+            @Override
+            public void accept(@NonNull Long aLong) throws Exception {
+                System.out.println("   subscriber2: "+aLong);
+            }
+        };
+        Observable<Long> observable = Observable.interval(500, TimeUnit.MILLISECONDS , AndroidSchedulers.mainThread())
+                .take(10)
+                .observeOn(Schedulers.newThread());
+        observable.subscribe(subscriber1);
+        observable.subscribe(subscriber2);
+
+
+    }
+
+    public void rxjavaHotObservble() {
+        Consumer<Long> subscriber1 = new Consumer<Long>() {
+            @Override
+            public void accept(@NonNull Long aLong) throws Exception {
+                System.out.println("subscriber1: "+aLong);
+            }
+        };
+        Consumer<Long> subscriber2 = new Consumer<Long>() {
+            @Override
+            public void accept(@NonNull Long aLong) throws Exception {
+                System.out.println("   subscriber2: "+aLong);
+            }
+        };
+        Consumer<Long> subscriber3 = new Consumer<Long>() {
+            @Override
+            public void accept(@NonNull Long aLong) throws Exception {
+                System.out.println("      subscriber3: "+aLong);
+            }
+        };
+        ConnectableObservable<Long> observable = Observable.interval(500, TimeUnit.MILLISECONDS , Schedulers.newThread())
+                .take(10)
+                .observeOn(Schedulers.newThread()).publish();
+        observable.connect();
+
+        observable.subscribe(subscriber1);
+        observable.subscribe(subscriber2);
+
+        observable.subscribeOn(Schedulers.io());
+        try {
+            Thread.sleep(2000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        observable.subscribe(subscriber3);
+    }
+
+    public void rxjavaHotObservble2() {
+        Consumer<Long> subscriber1 = new Consumer<Long>() {
+            @Override
+            public void accept(@NonNull Long aLong) throws Exception {
+                System.out.println("subscriber1: "+aLong);
+            }
+        };
+        Consumer<Long> subscriber2 = new Consumer<Long>() {
+            @Override
+            public void accept(@NonNull Long aLong) throws Exception {
+                System.out.println("   subscriber2: "+aLong);
+            }
+        };
+        Consumer<Long> subscriber3 = new Consumer<Long>() {
+            @Override
+            public void accept(@NonNull Long aLong) throws Exception {
+                System.out.println("      subscriber3: "+aLong);
+            }
+        };
+        Observable<Long> observable = Observable.interval(500, TimeUnit.MILLISECONDS , Schedulers.newThread())
+                .take(6)
+                .observeOn(Schedulers.newThread()) ;
+        PublishSubject<Long> subject = PublishSubject.create();
+        observable.subscribe(subject);
+
+        subject.subscribe(subscriber1);
+        subject.subscribe(subscriber2);
+        SystemClock.sleep(1000);
+        subject.subscribe(subscriber3);
+    }
+
+
+    public void rxjavaClodObservble1() {
+        Consumer<Long> subscriber1 = new Consumer<Long>() {
+            @Override
+            public void accept(@NonNull Long aLong) throws Exception {
+                System.out.println("subscriber1: " + aLong);
+            }
+        };
+        Consumer<Long> subscriber2 = new Consumer<Long>() {
+            @Override
+            public void accept(@NonNull Long aLong) throws Exception {
+                System.out.println("   subscriber2: " + aLong);
+            }
+        };
+        ConnectableObservable<Long> connectableObservable = Observable.interval(500, TimeUnit.MILLISECONDS , Schedulers.newThread())
+                .take(10)
+                .observeOn(Schedulers.newThread()).publish();
+        connectableObservable.connect();
+        Observable<Long> observable = connectableObservable.refCount();
+
+        Disposable disposable1 = observable.subscribe(subscriber1);
+        Disposable disposable2 = observable.subscribe(subscriber2);
+
+        SystemClock.sleep(2000);
+        disposable1.dispose();
+        disposable2.dispose();
+
+        System.out.println("重新开始数据流");
+
+        disposable1 = observable.subscribe(subscriber1);
+        disposable2 = observable.subscribe(subscriber2);
+    }
+    public void rxjavaClodObservble2() {
+        Consumer<Long> subscriber1 = new Consumer<Long>() {
+            @Override
+            public void accept(@NonNull Long aLong) throws Exception {
+                System.out.println("subscriber1: " + aLong);
+            }
+        };
+        Consumer<Long> subscriber2 = new Consumer<Long>() {
+            @Override
+            public void accept(@NonNull Long aLong) throws Exception {
+                System.out.println("   subscriber2: " + aLong);
+            }
+        };
+        Consumer<Long> subscriber3 = new Consumer<Long>() {
+            @Override
+            public void accept(@NonNull Long aLong) throws Exception {
+                System.out.println("      subscriber3: "+aLong);
+            }
+        };
+        ConnectableObservable<Long> connectableObservable = Observable.interval(500, TimeUnit.MILLISECONDS , Schedulers.newThread())
+                .take(10)
+                .observeOn(Schedulers.newThread()).publish();
+        connectableObservable.connect();
+        Observable<Long> observable = connectableObservable.refCount();
+
+        Disposable disposable1 = observable.subscribe(subscriber1);
+        Disposable disposable2 = observable.subscribe(subscriber2);
+        observable.subscribe(subscriber3);
+
+        SystemClock.sleep(2000);
+        disposable1.dispose();
+        disposable2.dispose();
+
+        System.out.println("重新开始数据流");
+
+        disposable1 = observable.subscribe(subscriber1);
+        disposable2 = observable.subscribe(subscriber2);
     }
 
 }

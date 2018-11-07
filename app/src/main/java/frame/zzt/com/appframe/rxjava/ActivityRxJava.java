@@ -118,6 +118,12 @@ public class ActivityRxJava extends BaseAppCompatActivity implements RxView {
         mList.add(new MyListItem(49 , "RxJava merge 操作符的使用"));
         mList.add(new MyListItem(50 , "RxJava retry 操作符的使用"));
 
+        mList.add(new MyListItem(51 , "RxJava Cold Observable"));
+        mList.add(new MyListItem(52 , "RxJava Cold Observable 转 Hot Observable "));
+        mList.add(new MyListItem(53 , "RxJava Cold Observable 转 Hot Observable 2 "));
+        mList.add(new MyListItem(54 , "RxJava Hot Observable 转 Cold Observable 1 "));
+        mList.add(new MyListItem(55 , "RxJava Hot Observable 转 Cold Observable 2 "));
+
 
 
         mAdapterRecycle = new AdapterRecycle();
@@ -419,6 +425,21 @@ public class ActivityRxJava extends BaseAppCompatActivity implements RxView {
                         break;
                     case 50 :
                         mPresenter.rxjavaretry();
+                        break;
+                    case 51 :
+                        mPresenter.rxjavaClodObservble();
+                        break;
+                    case 52 :
+                        mPresenter.rxjavaHotObservble();
+                        break;
+                    case 53 :
+                        mPresenter.rxjavaHotObservble2();
+                        break;
+                    case 54 :
+                        mPresenter.rxjavaClodObservble1();
+                        break;
+                    case 55 :
+                        mPresenter.rxjavaClodObservble2();
                         break;
 
                 }
