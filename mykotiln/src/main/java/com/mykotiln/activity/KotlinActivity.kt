@@ -8,7 +8,8 @@ import kotlinx.android.synthetic.main.activity_kotlin.*
 
 
 class KotlinActivity : AppCompatActivity() , View.OnClickListener {
-    var mPer = KotilnPersenter()
+
+    var mPer = KotilnPersenter(this)
 
     override fun onClick(v: View?) {
         when(v!!.id){

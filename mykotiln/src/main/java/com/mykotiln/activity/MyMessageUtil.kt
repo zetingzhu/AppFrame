@@ -41,9 +41,9 @@ class MyMessageUtil private constructor(internal var mContext: Context) {
 
         @Synchronized fun getInstance(mContext: Context): MyMessageUtil {
             if (instance == null) {
-                instance = MyMessageUtil(mContext.applicationContext)
+                instance = MyMessageUtil(mContext)
             }
-            return instance
+            return instance as MyMessageUtil
         }
     }
 }

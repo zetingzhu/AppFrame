@@ -1,5 +1,7 @@
 package com.mykotiln.activity
 
+import android.content.Context
+import android.widget.Toast
 import com.mykotiln.DemoIn
 import java.lang.Integer.parseInt
 
@@ -7,7 +9,12 @@ import java.lang.Integer.parseInt
  * Created by allen on 18/9/21.
  */
 
-class KotilnPersenter{
+class KotilnPersenter : BasePersenter  {
+
+    constructor() : super()
+
+    constructor(mContext: Context?) : super(mContext)
+
 
     // 测试
     fun mainClazz (args: Array<String>) {
@@ -15,13 +22,13 @@ class KotilnPersenter{
 
         person.lastName = "wang"
 
-        println( " id:${person.id}  - lastName:${person.lastName}")
+        showToast( " id:${person.id}  - lastName:${person.lastName}")
 
         person.no = 9
-        println("no:${person.no}")
+        showToast("no:${person.no}")
 
         person.no = 20
-        println("no:${person.no}")
+        showToast("no:${person.no}")
 
     }
 
@@ -29,12 +36,13 @@ class KotilnPersenter{
         var a = 1
         // 模板中的简单名称：
         val s1 = "a is $a"
-        println(s1)
+
+        showToast(s1)
 
         a = 2
         // 模板中的任意表达式：
         val s2 = "${s1.replace("is", "was")}, but now is $a"
-        println(s2)
+        showToast(s2)
     }
 
     /**
@@ -42,7 +50,7 @@ class KotilnPersenter{
      */
     fun mainNull(args: Array<String>){
         if (args.size < 2) {
-            print("Two integers expected")
+            showToast("Two integers expected")
             return
         }
         val x = parseInt(args[0])
@@ -50,7 +58,7 @@ class KotilnPersenter{
         // 直接使用 `x * y` 会导致错误, 因为它们可能为 null.
         if (x != null && y != null) {
             // 在进行过 null 值检查之后, x 和 y 的类型会被自动转换为非 null 变量
-            print(x * y)
+            showToast(x * y)
         }
     }
 
