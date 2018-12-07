@@ -64,6 +64,8 @@ import io.reactivex.functions.Function;
 import io.reactivex.functions.Predicate;
 import io.reactivex.observables.ConnectableObservable;
 import io.reactivex.observables.GroupedObservable;
+import io.reactivex.observers.DisposableCompletableObserver;
+import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.AsyncSubject;
 import io.reactivex.subjects.BehaviorSubject;
@@ -1040,13 +1042,6 @@ public class RxPersenter extends BasePresenter<RxView> {
         Single.create(new SingleOnSubscribe<Integer>() {
             @Override
             public void subscribe(@NonNull SingleEmitter<Integer> e) throws Exception {
-//                try {
-//                    e.onSuccess(1);
-//                    TimeUnit.MILLISECONDS.sleep(2000);
-//                } catch (InterruptedException e1) {
-//                    e1.printStackTrace();
-//                    e.onError(e1);
-//                }
                 e.onError(new Exception("Single error exception"));
                 e.onSuccess(1);
             }
@@ -1852,12 +1847,24 @@ public class RxPersenter extends BasePresenter<RxView> {
                 System.out.println("   subscriber2: "+aLong);
             }
         };
-        Observable<Long> observable = Observable.interval(500, TimeUnit.MILLISECONDS , AndroidSchedulers.mainThread())
+        Consumer<Long> subscriber3 = new Consumer<Long>() {
+            @Override
+            public void accept(@NonNull Long aLong) throws Exception {
+                System.out.println("      subscriber3: "+aLong);
+            }
+        };
+        Observable<Long> observable = Observable.interval(500, TimeUnit.MILLISECONDS , Schedulers.io())
                 .take(10)
                 .observeOn(Schedulers.newThread());
         observable.subscribe(subscriber1);
         observable.subscribe(subscriber2);
 
+        try {
+            Thread.sleep(2000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        observable.subscribe(subscriber3);
 
     }
 
@@ -1943,7 +1950,7 @@ public class RxPersenter extends BasePresenter<RxView> {
             }
         };
         ConnectableObservable<Long> connectableObservable = Observable.interval(500, TimeUnit.MILLISECONDS , Schedulers.newThread())
-                .take(10)
+                .take(6)
                 .observeOn(Schedulers.newThread()).publish();
         connectableObservable.connect();
         Observable<Long> observable = connectableObservable.refCount();
@@ -1951,7 +1958,7 @@ public class RxPersenter extends BasePresenter<RxView> {
         Disposable disposable1 = observable.subscribe(subscriber1);
         Disposable disposable2 = observable.subscribe(subscriber2);
 
-        SystemClock.sleep(2000);
+        SystemClock.sleep(1500);
         disposable1.dispose();
         disposable2.dispose();
 
@@ -1980,7 +1987,7 @@ public class RxPersenter extends BasePresenter<RxView> {
             }
         };
         ConnectableObservable<Long> connectableObservable = Observable.interval(500, TimeUnit.MILLISECONDS , Schedulers.newThread())
-                .take(10)
+                .take(6)
                 .observeOn(Schedulers.newThread()).publish();
         connectableObservable.connect();
         Observable<Long> observable = connectableObservable.refCount();
@@ -1989,7 +1996,7 @@ public class RxPersenter extends BasePresenter<RxView> {
         Disposable disposable2 = observable.subscribe(subscriber2);
         observable.subscribe(subscriber3);
 
-        SystemClock.sleep(2000);
+        SystemClock.sleep(1500);
         disposable1.dispose();
         disposable2.dispose();
 
@@ -1997,6 +2004,102 @@ public class RxPersenter extends BasePresenter<RxView> {
 
         disposable1 = observable.subscribe(subscriber1);
         disposable2 = observable.subscribe(subscriber2);
+    }
+
+
+    public void rxJavaSigle(){
+        Disposable d = Single.just("Hello World")
+                .delay(1, TimeUnit.SECONDS, Schedulers.io())
+                .subscribeWith(new DisposableSingleObserver<String>() {
+                    @Override
+                    public void onStart() {
+                        System.out.println("Started");
+                    }
+
+                    @Override
+                    public void onSuccess(String value) {
+                        System.out.println("Success: " + value);
+                    }
+
+                    @Override
+                    public void onError(Throwable error) {
+                        System.out.println("onError" + error.getMessage());
+                    }
+                });
+        SystemClock.sleep(5000);
+        d.dispose();
+    }
+
+    public void rxJavaComplete() {
+        Disposable d = Completable.create(new CompletableOnSubscribe() {
+            @Override
+            public void subscribe(@NonNull CompletableEmitter emitter) throws Exception {
+                try {
+                    TimeUnit.SECONDS.sleep(1);
+                    emitter.onComplete();
+//                    emitter.onError(new Exception(" 嘿嘿，我在这可是要发送一个错误的信息了 "));
+                } catch (InterruptedException e) {
+                    emitter.onError(e);
+                }
+            }
+        })
+                .delay(1, TimeUnit.SECONDS, Schedulers.io())
+                .subscribeWith(new DisposableCompletableObserver() {
+                    @Override
+                    public void onStart() {
+                        System.out.println("Started");
+                    }
+
+                    @Override
+                    public void onError(Throwable error) {
+                        System.out.println("onError" + error.getMessage());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        System.out.println("Done!");
+                    }
+                });
+
+        SystemClock.sleep(5000);
+
+        d.dispose();
+    }
+
+    public void rxJavaComplete1() {
+        Completable.create(new CompletableOnSubscribe() {
+            @Override
+            public void subscribe(@NonNull CompletableEmitter emitter) throws Exception {
+                try {
+                    TimeUnit.SECONDS.sleep(1);
+                    emitter.onComplete();
+//                    emitter.onError(new Exception(" 嘿嘿，我在这可是要发送一个错误的信息了 "));
+                } catch (InterruptedException e) {
+                    emitter.onError(e);
+                }
+            }
+        }).andThen(Observable.range(1, 10))
+                .subscribe(new Observer<Integer>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        Log.d(TAG, "onSubscribe: ");
+                    }
+
+                    @Override
+                    public void onNext(@NonNull Integer integer) {
+                        Log.d(TAG, "onNext: " + integer );
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Log.d(TAG, "onError: " + e );
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.d(TAG, "onComplete: ");
+                    }
+                });
     }
 
 }

@@ -12,6 +12,7 @@ import java.util.HashMap;
 import frame.zzt.com.appframe.MyApplication;
 
 /**
+ * 一个音频的工具类
  * Created by zeting
  * Date 18/12/5.
  */

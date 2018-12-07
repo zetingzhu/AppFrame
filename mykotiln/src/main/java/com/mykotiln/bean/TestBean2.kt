@@ -7,13 +7,12 @@ import android.util.Log
  * Created by zeting
  * Date 18/11/30.
  */
-class TestBean1 constructor(var id : Int ) {
+class TestBean2 constructor(var id : Int = 666 ) {
 
-    val TAG : String = TestBean1::class.simpleName!!
+    val TAG : String = TestBean2::class.java.simpleName!!
 
     init {
-        id = -1
-        Log.i(TAG , "这是一个init代码块 ，这个代码块的id值： $id ")
+        Log.i(TAG , "这是 ${TAG} 一个init代码块 ，这个代码块的id值： $id ")
     }
 
 

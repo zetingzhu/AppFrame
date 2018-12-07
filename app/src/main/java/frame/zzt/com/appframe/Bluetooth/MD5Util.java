@@ -58,6 +58,16 @@ public class MD5Util {
      *
      * @author allen
      */
+    public static byte[] getMD5Byte(byte[] bytes) {
+        messagedigest.update(bytes);
+        return messagedigest.digest();
+    }
+
+    /**
+     * 对byte类型的数组进行MD5加密
+     *
+     * @author allen
+     */
     public static String getMD5String(byte[] bytes) {
         messagedigest.update(bytes);
         return bufferToHex(messagedigest.digest());

@@ -6,7 +6,18 @@
 
     <string name="action_settings">Settings</string>
 
-    <string name="tab_item">第一列</string>
-    <string name="tab_item_desc">这是第一条数据</string>
+    <string name="tab_item">Kotlin Activity</string>
+    <string name="tab_item_desc">这个是Kotlin初级篇使用</string>
+
+    <string name="tab_item_2">Java Activity </string>
+    <string name="tab_item_2_desc">这个是java代码</string>
+
+
+    <string name="tab_item_3">Kotlin Class </string>
+    <string name="tab_item_3_desc">Kotlin 中级篇使用</string>
+
+    <string name="tab_item_4">Kotlin Use </string>
+    <string name="tab_item_4_desc">Kotlin 高级篇实际使用</string>
+
 
 </resources>

@@ -193,6 +193,12 @@ public class MyBleAQPresenter {
         public void bleServicesDiscoveredCharacteristic(BluetoothGatt gatt, String action, List<BluetoothGattCharacteristic> characteristicList) {
 
         }
+
+        @Override
+        public void getCmdSn(Integer sn, byte[] btC6) {
+
+        }
+
     };
 
     //scanRecords的格式转换

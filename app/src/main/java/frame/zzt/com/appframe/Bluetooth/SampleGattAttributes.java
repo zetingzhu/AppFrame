@@ -47,6 +47,9 @@ public class SampleGattAttributes {
     // 锁车、解锁特征
     public static String DEVICE_CHARACTERISTIC_UUID = "00002aa2-0000-1000-8000-00805f9b34fb" ;
 
+    // 蓝牙操作锁车解锁特征值
+    public static String DEVICE_KEY_UUID = "00002aa4-0000-1000-8000-00805f9b34fb" ;
+
     //调试
     public static String testServiceUuid = "0000180f-0000-1000-8000-00805f9b34fb" ;
     public static String testCharacteristicUuid = "00002a19-0000-1000-8000-00805f9b34fb" ;

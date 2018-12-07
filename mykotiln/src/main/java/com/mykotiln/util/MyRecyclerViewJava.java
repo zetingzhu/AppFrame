@@ -11,11 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.mykotiln.R;
+
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import frame.zzt.com.appframe.R;
 
 /**
  * Created by allen on 18/10/11.
@@ -91,34 +90,12 @@ public class MyRecyclerViewJava extends RecyclerView {
     }
 
     public class DateHolder extends ViewHolder {
-        @BindView(R.id.textView)
+
         TextView mTextview;
 
         public DateHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this, itemView);
-        }
-    }
-
-    public interface MyRecycleOnClick {
-        void onClickListener(int position);
-    }
-
-    public class MyRecycleListItem{
-        public int itemId ;
-        public String itemValue ;
-
-        public MyRecycleListItem(int itemId, String itemValue) {
-            this.itemId = itemId;
-            this.itemValue = itemValue;
-        }
-
-        public int getItemId() {
-            return itemId;
-        }
-
-        public String getItemValue() {
-            return itemValue;
+            mTextview = (TextView) itemView.findViewById(R.id.textView);
         }
     }
 

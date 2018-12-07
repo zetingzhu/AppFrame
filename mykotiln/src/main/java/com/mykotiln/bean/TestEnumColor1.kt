@@ -26,9 +26,9 @@ enum class TestEnumColor1(var argb : Int) {
             println("我是枚举常量 GREEN ")
         }
     },
-    YELLOW(0x0000FF){
+    BLUE(0x0000FF){
         override fun print(){
-            println("我是枚举常量 YELLOW ")
+            println("我是枚举常量 BLUE ")
         }
     }
     ;

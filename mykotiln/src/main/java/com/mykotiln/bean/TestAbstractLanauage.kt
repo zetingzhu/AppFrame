@@ -11,8 +11,10 @@ abstract class TestAbstractLanauage {
     // 自身的函数
     fun test() : Unit{
         // exp
+        println("抽象类实现，抽象属性 = $name ")
     }
     abstract var name : String           // 抽象属性
     abstract fun init()                  // 抽象方法
 
 }
+

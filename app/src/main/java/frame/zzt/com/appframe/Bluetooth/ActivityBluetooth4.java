@@ -97,7 +97,10 @@ public class ActivityBluetooth4 extends BaseAppCompatActivity implements Bluetoo
     public void OnClickConnect() {
         // 三星手机的蓝牙地址
         String address = "68:05:71:19:F1:DF" ;
-        mAQPresenter.connectBletooth(address);
+
+        // 测试设备的连接地址
+        String addressCS = "E6:F8:DB:40:C0:BF" ;
+        mAQPresenter.connectBletooth(addressCS);
     }
 
     /**
@@ -142,8 +145,26 @@ public class ActivityBluetooth4 extends BaseAppCompatActivity implements Bluetoo
      */
     @OnClick(R.id.btn_read)
     public void OnClickReadData(){
+
         mAQPresenter.readData();
     }
+
+    /** 蓝牙开锁*/
+    @OnClick(R.id.btn_ble_open)
+    public void OnClickBleOpen(){
+        byte open = (byte) 0xC2;
+        mAQPresenter.writeDataOpenCloseLock(open) ;
+    }
+
+    /** 蓝牙关锁*/
+    @OnClick(R.id.btn_ble_close)
+    public void OnClickBleClose(){
+            byte close = (byte) 0xC1;
+        mAQPresenter.writeDataOpenCloseLock(close) ;
+    }
+
+
+
 
 
 

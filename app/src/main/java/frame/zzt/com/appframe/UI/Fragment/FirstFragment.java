@@ -27,7 +27,9 @@ import frame.zzt.com.appframe.R;
 import frame.zzt.com.appframe.Bluetooth.ActivityBluetooth;
 import frame.zzt.com.appframe.Bluetooth.ActivityBluetooth2;
 import frame.zzt.com.appframe.Bluetooth.ActivityBluetooth3;
+import frame.zzt.com.appframe.ReadCode.ActivityReadCodeClass;
 import frame.zzt.com.appframe.UI.Activity.ActivityFirst;
+import frame.zzt.com.appframe.eventbus.ActivityEventBus;
 import frame.zzt.com.appframe.kotlin.ActivityKotlin;
 import frame.zzt.com.appframe.UI.Activity.ActivityProgress2;
 import frame.zzt.com.appframe.observable.ActivityObservable;
@@ -35,6 +37,7 @@ import frame.zzt.com.appframe.rxjava.ActivityRxJava;
 import frame.zzt.com.appframe.UI.Activity.ActivitySurfaceView;
 import frame.zzt.com.appframe.doodleview.DoodleViewActivity;
 import frame.zzt.com.appframe.rxjava.ActivityRxJavaUse;
+import frame.zzt.com.appframe.touchAnim.ActivityTouchAnim;
 
 /**
  * Created by allen on 18/8/8.
@@ -109,6 +112,9 @@ public class FirstFragment extends Fragment {
             new DemoInfo(R.string.tab_item_Kotlin , R.string.tab_item_Kotlin_desc, ActivityKotlin.class),
             new DemoInfo(R.string.tab_item_Notification , R.string.tab_item_Notification_desc , ActivityNotification.class),
             new DemoInfo(R.string.tab_item_observable  , R.string.tab_item_observable_desc , ActivityObservable.class),
+            new DemoInfo(R.string.tab_item_eventbus  , R.string.tab_item_eventbus_desc , ActivityEventBus.class),
+            new DemoInfo(R.string.tab_item_read_clazz  , R.string.tab_item_read_clazz_desc , ActivityReadCodeClass.class),
+            new DemoInfo(R.string.tab_item_anim  , R.string.tab_item_anim_desc , ActivityTouchAnim.class),
     };
 
     public class DemoListAdapter extends BaseAdapter {

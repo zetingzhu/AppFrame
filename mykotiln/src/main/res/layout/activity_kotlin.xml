@@ -2,16 +2,22 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_kotlin"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.mykotiln.activity.KotlinActivity">
+    android:orientation="vertical"
+    tools:context="com.mykotiln.activity.ActivityKotlin">
+
+    <com.mykotiln.util.MyRecyclerViewKotlin
+        android:id="@+id/rv_kotlin_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </com.mykotiln.util.MyRecyclerViewKotlin>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" >
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -19,23 +25,29 @@
             android:orientation="vertical">
 
             <TextView
-                android:text="TextView"
+                android:id="@+id/tv_item_01"
                 android:layout_width="match_parent"
-                android:gravity="center_vertical"
                 android:layout_height="@dimen/item_height"
-                android:id="@+id/tv_item_01" />
+                android:gravity="center_vertical"
+                android:text="TextView"/>
+
             <TextView
-                android:text="TextView"
+                android:id="@+id/tv_item_02"
                 android:layout_width="match_parent"
-                android:gravity="center_vertical"
                 android:layout_height="@dimen/item_height"
-                android:id="@+id/tv_item_02" />
+                android:gravity="center_vertical"
+                android:text="TextView"/>
+
             <TextView
-                android:text="TextView"
+                android:id="@+id/tv_item_03"
                 android:layout_width="match_parent"
-                android:gravity="center_vertical"
                 android:layout_height="@dimen/item_height"
-                android:id="@+id/tv_item_03" />
+                android:gravity="center_vertical"
+                android:text="TextView"/>
+            <Button
+                android:id="@+id/btn_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

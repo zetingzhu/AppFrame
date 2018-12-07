@@ -69,4 +69,13 @@
     <string name="tab_item_observable">观察者模式的简单使用</string>
     <string name="tab_item_observable_desc">观察者模式的简单使用</string>
 
+    <string name="tab_item_eventbus">EventBus简单使用</string>
+    <string name="tab_item_eventbus_desc">EventBus的简单使用</string>
+
+    <string name="tab_item_read_clazz">看源码</string>
+    <string name="tab_item_read_clazz_desc">看源码！看源码！看源码！</string>
+
+    <string name="tab_item_anim">滑动动画</string>
+    <string name="tab_item_anim_desc">点击按钮实现滑动动画</string>
+
 </resources>

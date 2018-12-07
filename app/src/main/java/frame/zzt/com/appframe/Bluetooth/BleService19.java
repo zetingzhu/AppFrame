@@ -69,6 +69,7 @@ public class BleService19 extends Service {
     private static final int STATE_CONNECTED = 2;
 
     private BluetoothGattCharacteristic mCharacteristic;
+    private BluetoothGattCharacteristic mCharacteristic2AA4;
     private int accessReadFrequency; // 访问读取方法次数
     public static BleService19 bleService;
 
@@ -205,12 +206,23 @@ public class BleService19 extends Service {
                 List<BluetoothGattService> serviceList = getSupportedGattServices();
                 for (int i = 0; i < serviceList.size(); i++) {
                     // 找到对应的UUID
-                    if (serviceList.get(i).getUuid().toString().equals( ActivityBluetooth5.SERV_UUID)) {
-//                        mCharacteristic = serviceList.get(i).getCharacteristic(UUID.fromString( ActivityBluetooth5.CHAR_UUID_1));
-//                        Log.i(TAG, "onReceive: ACTION_GATT_SERVICES_DISCOVERED111");
-//                        myInterfaceCallback.bleServicesDiscovered(ACTION_GATT_SERVICES_DISCOVERED , mCharacteristic );
+//                    if (serviceList.get(i).getUuid().toString().equals( ActivityBluetooth5.SERV_UUID)) {
+////                        mCharacteristic = serviceList.get(i).getCharacteristic(UUID.fromString( ActivityBluetooth5.CHAR_UUID_1));
+////                        Log.i(TAG, "onReceive: ACTION_GATT_SERVICES_DISCOVERED111");
+////                        myInterfaceCallback.bleServicesDiscovered(ACTION_GATT_SERVICES_DISCOVERED , mCharacteristic );
+//                        myInterfaceCallback.bleServicesDiscoveredCharacteristic(gatt , ACTION_GATT_SERVICES_DISCOVERED , serviceList.get(i).getCharacteristics() );
+//                    }
+
+                    if (serviceList.get(i).getUuid().toString().equals(SampleGattAttributes.DEVICE_SERVICE_UUID)) {
                         myInterfaceCallback.bleServicesDiscoveredCharacteristic(gatt , ACTION_GATT_SERVICES_DISCOVERED , serviceList.get(i).getCharacteristics() );
                     }
+
+                    if (serviceList.get(i).getUuid().toString().equals(SampleGattAttributes.DEVICE_SERVICE_UUID)) {
+                        mCharacteristic2AA4 = serviceList.get(i).getCharacteristic(UUID.fromString(SampleGattAttributes.DEVICE_KEY_UUID));
+                        Log.i(TAG, "onReceive: ACTION_GATT_SERVICES_DISCOVERED111");
+                        mBluetoothGatt.readCharacteristic(mCharacteristic2AA4);
+                    }
+
                 }
 
 //                List<BluetoothGattService> serviceList1 = gatt.getServices();
@@ -239,7 +251,18 @@ public class BleService19 extends Service {
                                 + characteristic.getUuid().toString()
                                 + " -> "
                                 + new String(characteristic.getValue())
+                                + " -> "
+                                + byte2HexStr(characteristic.getValue())
             );
+
+
+            if (characteristic.getUuid().toString().equals(SampleGattAttributes.DEVICE_KEY_UUID)) {
+
+                byte[] mKeyByte = new byte[2];
+                System.arraycopy(characteristic.getValue(), 5, mKeyByte, 0, 2);
+                int snStr1 = ByteUtil.byteHexToInt(mKeyByte);
+                myInterfaceCallback.getCmdSn(snStr1 ,characteristic.getValue() );
+            }
 
             if (TextUtils.isEmpty(byte2HexStr(characteristic.getValue()))) {
                 new Thread(new Runnable() {
@@ -406,6 +429,19 @@ public class BleService19 extends Service {
         mCharacteristic = characteristic;
         characteristic.setWriteType(BluetoothGattCharacteristic.WRITE_TYPE_NO_RESPONSE);
         characteristic.setValue(md5Text.getBytes());
+        boolean booWrite = mBluetoothGatt.writeCharacteristic(characteristic);
+        Log.i("VehiclePresenter" , "执行蓝牙写数据操作是否成功：" + booWrite);
+        return true ;
+    }
+
+    public boolean wirteCharacteristic3(BluetoothGattCharacteristic characteristic, byte[] md5byte) {
+        if (mBluetoothAdapter == null || mBluetoothGatt == null) {
+            Log.w(TAG, "BluetoothAdapter not initialized");
+            return false;
+        }
+        mCharacteristic = characteristic;
+        characteristic.setWriteType(BluetoothGattCharacteristic.WRITE_TYPE_NO_RESPONSE);
+        characteristic.setValue(md5byte);
         boolean booWrite = mBluetoothGatt.writeCharacteristic(characteristic);
         Log.i("VehiclePresenter" , "执行蓝牙写数据操作是否成功：" + booWrite);
         return true ;

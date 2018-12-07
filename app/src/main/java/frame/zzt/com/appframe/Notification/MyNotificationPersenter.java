@@ -10,6 +10,7 @@ import android.content.ServiceConnection;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Build;
 import android.os.IBinder;
 import android.support.annotation.RequiresApi;
@@ -195,17 +196,18 @@ public class MyNotificationPersenter {
                 .setContentTitle("我是伴有铃声效果的通知")
                 .setContentText("美妙么?安静听~")
                 //调用系统默认响铃,设置此属性后setSound()会无效
-                .setDefaults(Notification.DEFAULT_SOUND);
+//                .setDefaults(Notification.DEFAULT_SOUND);
                 //调用系统多媒体裤内的铃声
 //                .setSound(Uri.withAppendedPath(MediaStore.Audio.Media.INTERNAL_CONTENT_URI,"2"));
                 //调用自己提供的铃声，位于 /res/values/raw 目录下
-//                .setSound(Uri.parse("android.resource://com.littlejie.notification/" + R.raw.sound));
+                .setSound(Uri.parse("android.resource://" + mContext.getPackageName() + "/" + R.raw.error_vibrator));
+//                .setSound(Uri.parse("android.resource://" + mContext.getPackageName() + "/" + R.raw.ble_find_car_01));
         //另一种设置铃声的方法
-        //Notification notify = builder.build();
+//        Notification notify = builder.build();
         //调用系统默认铃声
         //notify.defaults = Notification.DEFAULT_SOUND;
         //调用自己提供的铃声
-        //notify.sound = Uri.parse("android.resource://com.littlejie.notification/"+R.raw.sound);
+//        notify.sound = Uri.parse("android.resource://com.littlejie.notification/"+R.raw.sound);
         //调用系统自带的铃声
         //notify.sound = Uri.withAppendedPath(MediaStore.Audio.Media.INTERNAL_CONTENT_URI,"2");
         //mManager.notify(2,notify);
@@ -283,7 +285,8 @@ public class MyNotificationPersenter {
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle("我是一个死循环,除非你取消或者响应")
                 .setContentText("啦啦啦~")
-                .setDefaults(Notification.DEFAULT_ALL);
+//                .setDefaults(Notification.DEFAULT_ALL);
+                .setSound(Uri.parse("android.resource://" + mContext.getPackageName() + "/" + R.raw.error_vibrator));
         Notification notify = builder.build();
         notify.flags |= Notification.FLAG_INSISTENT;
         mNotifyManager.notify(8, notify);

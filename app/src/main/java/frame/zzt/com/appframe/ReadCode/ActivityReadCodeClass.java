@@ -5,6 +5,8 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
 
 import butterknife.BindView;
@@ -37,7 +39,7 @@ public class ActivityReadCodeClass extends BaseAppCompatActivity {
 
     private void initView() {
         mList = new ArrayList<>();
-        mList.add(new MyRecyclerView(this).new MyRecycleListItem(0, "HashMap和Hashtable区别"));
+        mList.add(new MyRecyclerView(this).new MyRecycleListItem(0, "HashMap和Hashtable"));
 
 
         rv_observable.setMyAdapter(mList, new MyRecyclerView.MyRecycleOnClick() {
@@ -46,7 +48,7 @@ public class ActivityReadCodeClass extends BaseAppCompatActivity {
                 Log.i(TAG, "点击数据：" + position);
                 switch (position) {
                     case 0:
-
+                        testHash();
                         break;
                     case 1:
 
@@ -60,6 +62,16 @@ public class ActivityReadCodeClass extends BaseAppCompatActivity {
                 }
             }
         });
+    }
+
+    public void testHash(){
+        HashMap<String , String> mHashMap = new HashMap();
+        mHashMap.put("m1" , "111") ;
+        mHashMap.get("m1") ;
+        mHashMap.hashCode();
+
+        Hashtable mHashtable = new Hashtable();
+        mHashtable.put("t1" , "1");
     }
 
 }

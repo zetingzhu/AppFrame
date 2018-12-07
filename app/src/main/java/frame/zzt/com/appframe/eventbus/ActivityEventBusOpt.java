@@ -17,11 +17,13 @@ import frame.zzt.com.appframe.R;
 import frame.zzt.com.appframe.UI.BaseAppCompatActivity;
 
 /**
+ * EventBus 发送消息的界面
  * Created by zeting
  * Date 18/11/28.
  */
 
 public class ActivityEventBusOpt extends BaseAppCompatActivity {
+    private final static String TAG = ActivityEventBusOpt.class.getSimpleName() ;
 
     @BindView(R.id.tv_msg)
     TextView tv_msg ;
@@ -33,30 +35,25 @@ public class ActivityEventBusOpt extends BaseAppCompatActivity {
 
         setContentView(R.layout.activity_eventbus);
         ButterKnife.bind(this );
+
+        tv_msg.setText("发送消息界面");
+        btn_skip.setText("我发送消息到上一个界面接收");
     }
 
     @OnClick(R.id.btn_skip)
     public void onClickSend(){
-        startActivity(new Intent(this, ));
+        EventBus.getDefault().post(new MessageEvent("嘿嘿，来了老弟。。。" + System.currentTimeMillis() ));
+        finish();
     }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMoonEvent(MessageEvent messageEvent){
-        tv_msg.setText(messageEvent.getMessage());
-    }
-
 
     @Override
     protected void onStart() {
         super.onStart();
-        //注册事件
-        EventBus.getDefault().register(this);
+
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        //取消注册事件
-        EventBus.getDefault().unregister(this);
     }
 }

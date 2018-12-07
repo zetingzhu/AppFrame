@@ -46,7 +46,7 @@ public class RxBusTwo {
     /**
      * 默认私有化构造函数
      * 当前这个地方没有进行背压
-     * 背压：http://flyou.ren/2017/04/05/%E5%85%B3%E4%BA%8ERxJava%E8%83%8C%E5%8E%8B/?utm_source=tuicool&utm_medium=referral
+     *
      */
     private RxBusTwo() {
         mBus = PublishSubject.create().toSerialized();

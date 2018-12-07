@@ -14,4 +14,7 @@ open class BaseDao {
     open fun dao(){
         println("这是需要重写的方法")
     }
+
+    open fun getId() = "id_01"
+
 }

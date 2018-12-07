@@ -1,7 +1,9 @@
 package com.mykotiln.activity
 
 import android.content.Context
-import com.mykotiln.bean.*
+import android.widget.Button
+import com.mykotiln.R
+import com.mykotiln.bean.DemoIn
 import com.mykotiln.util.MyRecycleListItem
 import com.mykotiln.util.MyRecycleOnClick
 import com.mykotiln.util.MyRecyclerViewKotlin
@@ -9,7 +11,7 @@ import com.mykotiln.util.MyRecyclerViewKotlin
 /**
  * class persenter 类
  */
-class KotilnClassPersenter : BasePersenter {
+class KotilnUsePersenter : BasePersenter {
 
     // 列表数据
     var mList: MutableList<MyRecycleListItem>? = null
@@ -25,7 +27,7 @@ class KotilnClassPersenter : BasePersenter {
      */
     fun setItemKotlinClass(rvList: MyRecyclerViewKotlin) {
         setItemOperateData();
-        rvList!!.setMyAdapter(mList!!, myROC!!)
+        rvList.setMyAdapter(mList!!, myROC!!)
     }
 
     /**
@@ -33,18 +35,28 @@ class KotilnClassPersenter : BasePersenter {
      */
     fun setItemOperateData() {
         mList = ArrayList<MyRecycleListItem>() as MutableList<MyRecycleListItem>?
-        mList!!.add(MyRecycleListItem(0, "Class constructor 构造器 "))
-        mList!!.add(MyRecycleListItem(1, "Class lateinit 修饰符 "))
-        mList!!.add(MyRecycleListItem(2, "Class 四种修饰符 "))
-        mList!!.add(MyRecycleListItem(3, "Class 继承 "))
-        mList!!.add(MyRecycleListItem(4, "Class 覆盖 "))
-        mList!!.add(MyRecycleListItem(5, "枚举常量的匿名类 "))
-        mList!!.add(MyRecycleListItem(6, "枚举类的使用 "))
-        mList!!.add(MyRecycleListItem(7, "接口类的使用 "))
-        mList!!.add(MyRecycleListItem(8, "Data 数据类的使用 "))
-        mList!!.add(MyRecycleListItem(9, "Sealed 密封类的使用 "))
-        mList!!.add(MyRecycleListItem(10, "抽象类和接口使用 "))
-        mList!!.add(MyRecycleListItem(11, "匿名内部类使用 "))
+        mList!!.add(MyRecycleListItem(0, "Kotlin Lambda 表达式 "))
+        mList!!.add(MyRecycleListItem(1, "Kotlin Lambda 单个参数的隐式名称 "))
+        mList!!.add(MyRecycleListItem(2, "Kotlin Lambda 表达式 2 "))
+        mList!!.add(MyRecycleListItem(3, "Kotlin Lambda 遍历集合 "))
+        mList!!.add(MyRecycleListItem(4, "Kotlin Lambda 传入函数实现值 "))
+        mList!!.add(MyRecycleListItem(5, "Kotlin Lambda TODO "))
+        mList!!.add(MyRecycleListItem(6, "Kotlin Lambda run1 "))
+        mList!!.add(MyRecycleListItem(7, "Kotlin Lambda run2 "))
+        mList!!.add(MyRecycleListItem(8, "Kotlin Lambda run3 "))
+        mList!!.add(MyRecycleListItem(9, "Kotlin Lambda with1 "))
+        mList!!.add(MyRecycleListItem(10, "Kotlin Lambda T.apply "))
+        mList!!.add(MyRecycleListItem(11, "Kotlin Lambda T.also "))
+        mList!!.add(MyRecycleListItem(12, "Kotlin Lambda T.let "))
+        mList!!.add(MyRecycleListItem(13, "Kotlin Lambda T.takeIf "))
+        mList!!.add(MyRecycleListItem(14, "Kotlin Lambda T.takeUnless "))
+        mList!!.add(MyRecycleListItem(15, "Kotlin Lambda repeat "))
+        mList!!.add(MyRecycleListItem(16, "Kotlin Array component "))
+        mList!!.add(MyRecycleListItem(17, "Kotlin Array reverse "))
+        mList!!.add(MyRecycleListItem(18, "Kotlin List MutableList set MutableSet "))
+        mList!!.add(MyRecycleListItem(19, "Kotlin Map "))
+        mList!!.add(MyRecycleListItem(20, "Kotlin List 赋值 "))
+
 
 
         /**
@@ -59,188 +71,353 @@ class KotilnClassPersenter : BasePersenter {
                 /**
                  * 和逗号结合使用即添加了都好后 position = 0,1 都执行第一个方法。
                  */
-                    -1, 0  ->  funClassNew()
-                    1 -> funLateinit()
-                    2 -> funPublic()
-                    3 -> funExtend()
-                    4 -> funClassFG()
-                    5 -> funEnumInner()
-                    6 -> funEnumOperator()
-                    7 -> funJkLSY()
-                    8 -> funData()
-                    9 -> funSealed()
-                    10 -> funAbatract()
-                    11 -> funListenerA()
+                    -1, 0  ->  funLambda()
+                    1  ->  funLambda1()
+                    2  ->  funLambda2()
+                    3  ->  funLambda3()
+                    4  ->  funLambda4()
+                    5  ->  funLambdaTodo()
+                    6  ->  testRun1()
+                    7  ->  testRun2()
+                    8  ->  testRun3()
+                    9  ->  testWith1()
+                    10  ->  testApply()
+                    11  ->  testAlso()
+                    12  ->  testLet()
+                    13  ->  testTakeIf()
+                    14  ->  testTakeUnless()
+                    15  ->  testRepeat()
+                    16  ->  testComponent()
+                    17  ->  testReverse()
+                    18  ->  testList()
+                    19  ->  testMap()
+                    20  ->  testListV()
 
                 }
             }
         }
     }
 
-    fun funListenerA(){
-        // 测试匿名内部类
-        val other = TestListenerClazz()
-        other.setOnClickListener ( object : TestOnClickListener {
-            override fun onItemClick(str: String) {
-                    println(str)
-            }
 
-        })
-        other.testListener()
+    private fun testListV() {
+        var listBasedao: List<Any>
+        val listDemo : List<DemoIn> = listOf( DemoIn(1), DemoIn(2) )
+        listBasedao = listDemo
+
+        listBasedao.forEach { println(" list 赋值  ${it.toString() } " ) }
+    }
+
+    private fun testMap() {
+        // 以键值对的形式出现，键与值之间使用to
+        val map1 = mapOf("key1" to 2 , "key2" to 3)
+        val map2 = mapOf<Int,String>(1 to "value1" , 2 to "value2")
+        val mutableMap = mutableMapOf("key1" to 2 , "key2" to 3)
+        val hashMap = hashMapOf("key1" to 2 , "key1" to 3)   // 同Java中的HashMap
+
+        mutableMap.forEach{
+            (key,value) -> println("map forEach key = $key \t value = $value")
+        }
+        for ((key, value) in map2 ) {
+            println("map key = $key \t value = $value")
+        }
+
+
+        val map3 = mapOf("key1" to 2 , "key1" to 3 , "key1" to "value1" , "key2" to "value2")
+
+        map3.forEach{
+            (key,value) -> println("$key \t $value")
+        }
     }
 
     /**
-     * 接口和抽象类使用
+     * 在定义集合类型变量的时候如果使用List<E>、Set<E>、Map<K,V>声明的时候该集合则是不可变集合，
+     * 而使用MutableList<E>、MutableSet<E>、MutableMap<K,V>的时候该集合才是可变类型集合
      */
-    fun funAbatract(){
-        // val lanauage = Lanauage() 是错误的，因为抽象类不能直接被实例化
+    private fun testList() {
+        /** 使用listOf()初始化不可变的List类型集合 */
+        val arr = arrayOf("1","2",3,4,5)
+        val list1 = listOf(1,2,"3",4,"5")                // 随意创建
+        val list2 = listOf<String>("1","2","3","4","5")  // 确定元素的值类型
+        val list3 = listOf(arr)                          // 可传入一个数组
+        // 遍历
+        for(value in list1){
+            println(" list $value \t")
+        }
+        /**使用mutableListOf()初始化不可变的List类型集合使用mutableListOf()初始化不可变的List类型集合*/
+        val mutableList1 = mutableListOf(1,2,"3",4,"5")                // 随意创建
+        val mutableList2 = mutableListOf<String>("1","2","3","4","5")  // 确定元素的值类型
+        val mutableList3 = mutableListOf(arr)                          // 可传入一个数组
+        val mutableList : ArrayList<String>  // 这里的ArrayList<>和Java里面的ArrayList一致
 
-        val mTestAbstarctA = TestAbstractA()
-        val mTestAbstarctB = TestAbstractA()
+        mutableList1.add("6")  // 添加元素
+        mutableList1.add("7")
+        mutableList1.remove(1)   // 删除某一元素
 
-        println(mTestAbstarctA.name)
-        mTestAbstarctA.init()
-        mTestAbstarctA.test()
+        // 遍历
+        for(value in mutableList1){
+            println(" mutable $value \t")
+        }
+        mutableList1.clear()   // 清空集合
 
-        println(mTestAbstarctB.name)
-        mTestAbstarctB.init()
-        mTestAbstarctB.test()
-
+        val set1 = setOf(1,2,"3","4","2",1,2,3,4,5)
+        val mutableSet1 = mutableSetOf(1,2,"3","4","2",1,2,3,4,5)
+        val mutableSet2 : HashSet<String>  // 这里的HashSet<>和Java里面的HashSet<>一致
+        // 遍历
+        for(value in set1){
+            println(" set $value \t")
+        }
     }
 
     /**
-     * 密封类的使用
+     * 反转元素
      */
-    fun funSealed(){
-        val mPerson1 = TestSealedExample.User("name1",22)
-        showToast(mPerson1)
+    private fun testReverse() {
+        val arr = arrayOf("1",2,3,4)
+        arr.reverse()
 
-        val mPerson2 = TestSealedExample.User("name2",23)
-        showToast(mPerson2)
-
-        showToast(mPerson1.hashCode())
-        showToast(mPerson2.hashCode())
+        // 文章后面会讲解forEach高阶函数。比for循环简洁多了
+        for (index in arr){
+            println("$index \t")
+        }
     }
 
     /**
-     * 数据类的使用
-     * Kotlin是使用其独有的copy()函数去修改属性值，而Java是使用setXXX()去修改
+     * 获取数组的前几个元素
      */
-    fun funData(){
-        val mPreson = Preson("kotlin",1 , 2  )
-        showToast(mPreson)
-        val mNewUser = mPreson.copy(name = "new Kotlin")
-        showToast(mNewUser)
-        val mNewUser1 = mNewUser.copy(age = 20 )
-        showToast(mNewUser1)
-        val mNewUser2 = mPreson.copy( name = "Kotlin 2" , sex = 2 , age = 99 )
-        showToast(mNewUser2)
+    private fun testComponent() {
+        val arr = arrayOf("1",2,3,4)
 
-        /**
-         * 系统会默认自动根据参数的个数生成component1() ... componentN()函数。其...,componentN()函数就是用于解构声明的
-         */
-        val (name,age , sex ) = mNewUser1
-        println("name = $name \t age = $age  \t sex = $sex ")
-        val (name1,sex1,age1) = mNewUser2
-        println("name = $name1 \t sex = $sex1 \t age = $age1 ")
+        println(arr.component1())
+        println(arr.component2())
+        println(arr.component3())
+        println(arr.component4())
 
-
-        val pair = Pair(1,2)        // 实例
-        val triple = Triple(1,2,3)  // 实例
-        println("$pair \t $triple") // 打印：即调用了各自的toString()方法
-        println(pair.toList())      // 转换成List集合
-        println(triple.toList())    // 转换成List集合
-        println(pair.to(3))         // Pair类特有: 其作用是把参数Pair类中的第二个参数替换
+        // 程序崩溃，因为元素只有4个，所以在不确定元素个数的情况，慎用这些函数，还是使用遍历安全些。
+//        println(arr.component5())
+    }
+    /**
+     * 根据传入的重复次数去重复执行一个我们想要的动作(函数)
+     */
+    private fun testRepeat() {
+        repeat(5){
+            println("我是重复的第${it + 1}次，我的索引为：$it")
+        }
     }
 
     /**
-     *  接口类的使用 ， 属性的单独使用
+     * 这个函数的作用和T.takeIf()函数的作用是一样的。只是和其的逻辑是相反的。即：传入一个你希望的一个条件，如果对象符合你的条件则返回null，反之，则返回自身。
      */
-    fun funJkLSY(){
-        var calzzd : TestClazzD = TestClazzD(2,3)
-        showToast( "接口属性的使用 $calzzd " )
-        showToast( "接口属性的使用1 ${calzzd.num1 } " )
-        showToast( "接口属性的使用2 ${calzzd.num2} " )
+    private fun testTakeUnless() {
+        val str = "kotlin"
 
-        showToast( "接口属性的使用3 ${calzzd.num3} " )
-        showToast( "接口属性的使用4 ${calzzd.num4} " )
+        val result = str.takeUnless {
+            it.startsWith("ko")
+        }
 
+        println("result = $result")
+    }
+    /**
+     * 传入一个你希望的一个条件，如果对象符合你的条件则返回自身，反之，则返回null。
+     */
+    private fun testTakeIf() {
+        val str = "kotlin"
 
+        val result = str.takeIf {
+            it.startsWith("ko")
+        }
+
+        println("result = $result")
+    }
+    /**
+     * 它其实和T.also以及T.apply都很相似。而T.let的作用也不仅仅在使用空安全这一个点上
+     */
+    private fun testLet() {
+        "kotlin".let {
+            println("原字符串：$it")         // kotlin
+            it.reversed()
+        }.let {
+            println("反转字符串后的值：$it")     // niltok
+            it.plus("-java")
+        }.let {
+            println("新的字符串：$it")          // niltok-java
+        }
+
+        "kotlin".also {
+            println("原字符串：$it")     // kotlin
+            it.reversed()
+        }.also {
+            println("反转字符串后的值：$it")     // kotlin
+            it.plus("-java")
+        }.also {
+            println("新的字符串：$it")        // kotlin
+        }
+
+        "kotlin".apply {
+            println("原字符串：$this")     // kotlin
+            this.reversed()
+        }.apply {
+            println("反转字符串后的值：$this")     // kotlin
+            this.plus("-java")
+        }.apply {
+            println("新的字符串：$this")        // kotlin
+        }
     }
 
     /**
-     *  枚举的使用
+     * T.also中只能使用it调用自身,而T.apply中只能使用this调用自身
      */
-    private fun funEnumOperator(){
-        showToast("name = " + TestEnumColor.RED.name + "\t  ordinal = " + TestEnumColor.RED.ordinal  + "\t String = " + TestEnumColor.RED.toString() + "\t hashCode = " + TestEnumColor.RED.hashCode())
-        showToast("name = " + TestEnumColor.WHITE.name + "\tordinal = " + TestEnumColor.WHITE.ordinal+ "\t String = " + TestEnumColor.WHITE.toString() )
-        showToast("name = " + TestEnumColor.BLACK.name + "\tordinal = " + TestEnumColor.BLACK.ordinal+ "\t String = " + TestEnumColor.BLACK.toString() )
-        showToast("name = " + TestEnumColor.GREEN.name + "\tordinal = " + TestEnumColor.GREEN.ordinal+ "\t String = " + TestEnumColor.GREEN.toString() )
-        showToast("name = " + TestEnumColor.BLUE.name + "\t ordinal = " + TestEnumColor.BLUE.ordinal + "\t String = " + TestEnumColor.BLUE.toString() )
+    private fun testAlso() {
+        "kotlin".also {
+            println("结果：${it.plus("-java")}")
+        }.also {
+            println("结果：${it.plus("-php")}")
+        }
+
+        "kotlin".apply {
+            println("结果：${this.plus("-java")}")
+        }.apply {
+            println("结果：${this.plus("-php")}")
+        }
+    }
+    private fun testApply() {
+        val mTvBtn = R.id.btn_1 as Button
+        mTvBtn.apply{
+            text = "kotlin"
+            textSize = 13f
+        }.apply{
+            // 这里可以继续去设置属性或一些TextView的其他一些操作
+        }.apply{
+            setOnClickListener{ view -> showToast("这个是点击事件")}
+        }
+    }
+    private fun testWith1() {
+        val newStr = "kotlin"
+        with(newStr){
+            println( "length = ${this?.length}" )
+            println( "first = ${this?.first()}")
+            println( "last = ${this?.last()}" )
+        }
+
+        newStr?.run {
+            println( "length = $length" )
+            println( "first = ${first()}")
+            println( "last = ${last()}" )
+        }
+    }
+    private fun testRun3() {
+        val mTvBtn : Button =  R.id.btn_1 as Button
+        mTvBtn.run{
+            text = "kotlin"
+            textSize = 13f
+        }
+
+        showToast( " Button 的字 ${mTvBtn.text} " )
+    }
+
+    private fun testRun2() {
+        val str = "kotlin"
+        str.run {
+            println( "length = ${this.length}" )
+            println( "first = ${first()}")
+            println( "last = ${last()}" )
+        }
+    }
+    private fun testRun1() {
+        val str = "kotlin"
+
+        run{
+            val str = "java"   // 和上面的变量不会冲突
+            println("str = $str")
+        }
+
+        println("str = $str")
+    }
+    private fun funLambdaTodo(){
+        TODO("测试TODO函数，是否显示抛出错误")
+    }
 
 
-        showToastD(enumValues<TestEnumColor>().joinToString { it.name })
-        showToast(enumValueOf<TestEnumColor>("BLUE"))
+    // 源代码
+    fun test(){
+        println("无参数")
+    }
+
+    // lambda代码
+    val test0 = {
+        println("lambda 表达式 无参数")
+    }
+
+    // 源代码
+    fun test1(a : Int , b : Int) : Int{
+        return a + b
+    }
+
+    // lambda
+    val test2 : (Int , Int) -> Int = {a , b -> a + b}
+    // 或者
+    val test2_1 = {a : Int , b : Int -> a + b}
 
 
-        showToastA(TestEnumColor.valueOf("RED"))
-        showToastA(TestEnumColor.values()[0])
-        showToastA(TestEnumColor.values()[1])
-        showToastA(TestEnumColor.values()[2])
-        showToastA(TestEnumColor.values()[3])
+    private fun funLambda() {
+        test()
+        test0()
+        showToast("计算结果值1：${test1(1,2)}")
+        showToast("计算结果值2：${test2(2,3)}")
+        showToast("计算结果值3：${test2_1(3,4)}")
 
     }
 
-    /**
-     * 枚举常量匿名类
-     */
-    private fun funEnumInner(){
-        TestEnumColor1.BLACK.print()
+    fun funLambda1() {
+        // 这里举例一个语言自带的一个高阶函数filter,此函数的作用是过滤掉不满足条件的值。
+        val arr = arrayOf(1, 3, 5, 7, 9)
+        // 过滤掉数组中元素小于2的元素，取其第一个打印。这里的it就表示每一个元素。
+        println(arr.filter { it < 5 }.component1())
     }
 
-    private fun funClassFG(){
-        var tcc :TestClassC = TestClassC()
-        tcc.test1()
+    fun test(num1 : Int, bool : (Int) -> Boolean) : Int{
+        return if (bool(num1)){ num1 } else 0
+    }
+    fun funLambda2() {
+        println(test(10, { it > 5 }))
+        println(test(4, { it > 5 }))
     }
 
+    var map = mapOf("key1" to "value1","key2" to "value2","key3" to "value3")
+    fun funLambda3() {
+        map.forEach{
+            (key , value) -> println("$key \t $value")
+        }
 
-    private fun funExtend() {
-        var mDemoIn = DemoIn()
-        showToast( "继承得到值：  ${mDemoIn.getId() }" )
+        // 不需要key的时候
+        map.forEach{
+            (_ , value) -> println("$value")
+        }
     }
 
-
-    private fun funClassNew() {
-        var mTestBean0 : TestBean = TestBean( 0 )
-        var mTestBean2 : TestBean2 = TestBean2()
-        var mTestBean3 = TestBean( 301 , "次级构造函数" )
+    fun resultByOpt(num1 : Int , num2 : Int , result : (Int ,Int) -> Int) : Int{
+        return result(num1,num2)
     }
 
+    fun funLambda4() {
+        val result1 = resultByOpt(1,2){
+            num1, num2 ->  num1 + num2
+        }
 
-    /**
-    后期初始化属性
-    通常，声明为非空类型的属性必须在构造函数中进行初始化。然而，这通常不方便。例如，可以通过依赖注入或单元测试的设置方法初始化属性。
-    在这种情况下，不能在构造函数中提供非空的初始值设置，但是仍然希望在引用类的正文中的属性时避免空检查。故而，后期初始化属性就应运而生了。
-     */
-    var mTestBean1 : TestBean ?= null
-    lateinit var mTestBean2 : TestBean
-    private fun funLateinit() {
-        mTestBean1
-        mTestBean2
+        val result2 = resultByOpt(3,4){
+            num1, num2 ->  num1 - num2
+        }
+
+        val result3 = resultByOpt(5,6){
+            num1, num2 ->  num1 * num2
+        }
+
+        val result4 = resultByOpt(6,3){
+            num1, num2 ->  num1 / num2
+        }
+
+        println("result1 = $result1")
+        println("result2 = $result2")
+        println("result3 = $result3")
+        println("result4 = $result4")
     }
-
-
-    /***
-    四种修饰符的说明
-    public修饰符表示 公有 。此修饰符的范围最大。当不声明任何修饰符时，系统会默认使用此修饰符。
-    internal修饰符表示 模块 。对于模块的范围在下面会说明。
-    protected修饰符表示 私有+子类。值得注意的是，此修饰符不能用于顶层声明，在下面可以看到。
-    private修饰符表示 私有 。此修饰符的范围最小，即可见性范围最低。
-     */
-    fun funPublic(){
-
-    }
-
-
-
 }

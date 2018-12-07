@@ -4,7 +4,7 @@ package com.mykotiln.bean
  * Created by allen on 18/9/21.
  */
 
-class DemoIn() : com.mykotiln.BaseDao() {
+class DemoIn() : BaseDao() {
     /** 上面的是类的主构造函数 */
     /** 下面是类的成员属性 */
 
@@ -45,8 +45,13 @@ class DemoIn() : com.mykotiln.BaseDao() {
             }
         }
 
+
     var heiht: Float = 145.4f
         private set
+
+
+
+
 
     /**
     getter 和 setter
@@ -70,5 +75,9 @@ class DemoIn() : com.mykotiln.BaseDao() {
         /** 这里可以用泛型，指引需要调用哪个类的方法 */
         super<BaseDao>.dao()
 
+    }
+
+    override fun toString(): String {
+        return "DemoIn(desc=$desc, heiht=$heiht, title=$title)"
     }
 }

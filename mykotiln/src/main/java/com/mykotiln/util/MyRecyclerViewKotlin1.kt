@@ -83,10 +83,5 @@ class MyRecyclerViewKotlin1 : RecyclerView {
         }
     }
 
-    interface MyRecycleOnClick {
-        fun onClickListener(position: Int)
-    }
-
-    inner class MyRecycleListItem(var itemId: Int, var itemValue: String)
 
 }

@@ -58,4 +58,15 @@
         android:layout_height="wrap_content"
         android:id="@+id/btn_read"/>
 
+    <Button
+        android:text="蓝牙开锁"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_ble_open"/>
+    <Button
+        android:text="蓝牙关锁"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_ble_close"/>
+
 </LinearLayout>

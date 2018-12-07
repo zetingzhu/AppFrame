@@ -58,6 +58,7 @@ public class ActivityBluetooth5 extends BaseAppCompatActivity implements Bluetoo
     public static String DEVICE_SERVICE_UUID = "000028af-0000-1000-8000-00805f9b34fb" ;
 
 
+
     private Context mContext ;
     BluetoothManager mBluetoothManager ;
     BluetoothAdapter mBluetoothAdapter;
@@ -412,6 +413,7 @@ public class ActivityBluetooth5 extends BaseAppCompatActivity implements Bluetoo
 
         return arr;
     }
+
 
     public static String bytesToHexString(byte[] src) {
         StringBuilder stringBuilder = new StringBuilder("");

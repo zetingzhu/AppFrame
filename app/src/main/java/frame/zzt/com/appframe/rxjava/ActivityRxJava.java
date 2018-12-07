@@ -124,6 +124,10 @@ public class ActivityRxJava extends BaseAppCompatActivity implements RxView {
         mList.add(new MyListItem(54 , "RxJava Hot Observable 转 Cold Observable 1 "));
         mList.add(new MyListItem(55 , "RxJava Hot Observable 转 Cold Observable 2 "));
 
+        mList.add(new MyListItem(56 , "RxJava Sigle 使用"));
+        mList.add(new MyListItem(57 , "RxJava Complete 使用"));
+        mList.add(new MyListItem(58 , "RxJava Complete 1 使用"));
+
 
 
         mAdapterRecycle = new AdapterRecycle();
@@ -440,6 +444,15 @@ public class ActivityRxJava extends BaseAppCompatActivity implements RxView {
                         break;
                     case 55 :
                         mPresenter.rxjavaClodObservble2();
+                        break;
+                    case 56 :
+                        mPresenter.rxJavaSigle();
+                        break;
+                    case 57 :
+                        mPresenter.rxJavaComplete();
+                        break;
+                    case 58 :
+                        mPresenter.rxJavaComplete1();
                         break;
 
                 }

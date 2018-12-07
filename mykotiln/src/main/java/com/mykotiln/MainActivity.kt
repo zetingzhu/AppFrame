@@ -19,7 +19,10 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.BaseAdapter
 import android.widget.TextView
-import com.mykotiln.activity.KotlinActivity
+import com.mykotiln.activity.ActivityJava
+import com.mykotiln.activity.ActivityKotlin
+import com.mykotiln.activity.ActivityKotlinClass
+import com.mykotiln.activity.ActivityKotlinUse
 import kotlinx.android.synthetic.main.content_main.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -48,7 +51,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     )
 
     private val DEMOS = arrayOf(
-        DemoInfo(R.string.tab_item, R.string.tab_item_desc, KotlinActivity::class.java)
+        DemoInfo(R.string.tab_item, R.string.tab_item_desc, ActivityKotlin::class.java ) ,
+        DemoInfo(R.string.tab_item_2, R.string.tab_item_2_desc, ActivityJava::class.java ) ,
+        DemoInfo(R.string.tab_item_3, R.string.tab_item_3_desc, ActivityKotlinClass::class.java ),
+        DemoInfo(R.string.tab_item_4, R.string.tab_item_4_desc, ActivityKotlinUse::class.java )
     )
 
 

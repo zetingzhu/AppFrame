@@ -49,6 +49,8 @@ public class MyBleAQPresenter19 {
 
     BluetoothGattCharacteristic mGattCharacteristic ;
 
+    Integer cmdsn = 0 ;
+
     public MyBleAQPresenter19(Context mContext) {
         this.mContext = mContext ;
         mHandler = new Handler();
@@ -116,12 +118,125 @@ public class MyBleAQPresenter19 {
     public void writeData(String str ){
         if (mGattCharacteristic != null) {
             Log.w(TAG, "蓝牙连接 写入  数据： booWirte " + str);
+
+
+            Log.i(TAG, "蓝牙连接 写入  数据： mGattCharacteristic " + mGattCharacteristic.getUuid());
             boolean booWirte = mBleService.wirteCharacteristic2(mGattCharacteristic, str);
             Log.i(TAG, "蓝牙连接 写入  数据： booWirte " + booWirte);
+
         }else {
             Log.i(TAG, "蓝牙连接 写入  数据 错误： mGattCharacteristic " + mGattCharacteristic);
         }
+
     }
+
+    /**
+     *
+     没有验证md5的时候 - 加密前：c1001600000000000000000044a4253c41510695d17e74646466786a6f4136776b41716e6a505043557848745154
+     没有验证md5的时候 - 加密后：b964f1b8e606b694f6a116ee1868dd15
+     蓝牙连接 写入wmd5值：c10016000000000000000000e606b694f6a116ee
+
+     没有验证md5的时候 - 加密前：c2001600000000000000000044a4253c41510695d17e74646466786a6f4136776b41716e6a505043557848745154
+     没有验证md5的时候 - 加密后：f77c12a7ba985c1d7b42d7a7c1bb4661
+     蓝牙连接 写入wmd5值：c20016000000000000000000ba985c1d7b42d7a7
+
+     * @param bt
+     */
+    public void writeDataOpenCloseLock(byte bt ){
+        if (mGattCharacteristic != null) {
+
+//            byte open = (byte) 0xC1;
+//            byte close = (byte) 0xC2;
+//            String wmd5 =  writeData(bt) ;
+            byte[] wmd5 =  writeData(bt) ;
+            Log.e(TAG, "蓝牙连接 写入wmd5值：" + ByteUtil.bytesToHex2( wmd5 ) );
+
+
+            Log.i(TAG, "蓝牙连接 写入  数据： mGattCharacteristic " + mGattCharacteristic.getUuid());
+            boolean booWirte = mBleService.wirteCharacteristic3(mGattCharacteristic, wmd5);
+            Log.i(TAG, "蓝牙连接 写入  数据： booWirte " + booWirte);
+
+        }else {
+            Log.i(TAG, "蓝牙连接 写入  数据 错误： mGattCharacteristic " + mGattCharacteristic);
+        }
+
+    }
+
+
+    /**
+     * 0xC1 锁车
+     * 0xC2 解锁
+     * @param bt
+     * @return
+     */
+    public byte[] writeData(byte bt){
+        byte[] writeByte = new byte[20];
+
+        writeByte[0] = bt ;
+        byte [] cmdSnByte = ByteUtil.intToByteHex(cmdsn + 1);
+        System.arraycopy(cmdSnByte, 0, writeByte, 1, 2);
+
+        writeByte[3] = 0x00 ;
+        byte[] dataByte = new byte[8];
+
+        System.arraycopy(dataByte, 0, writeByte, 4, 8);
+
+        Log.w(TAG, "没有验证md5的时候" + ByteUtil.bytesToHex2(  writeByte ) );
+
+        // md5 验证 需要验证
+        //前 12 字节数据 +
+        byte[] byte12 = new byte[12] ;
+        System.arraycopy(writeByte , 0 ,byte12 , 0 , 12);
+        // 遥控器 ID +
+//        byte[] keyId = "1009099844".getBytes() ;
+        byte[] keyId = ByteUtil.intToByteArrayLittel(Integer.valueOf(1009099844))  ;
+        // 需配对的产商信息+
+        // 110481790
+        String imei = "357550110481790" ;
+        byte[] imeiByte = ByteUtil.intToByteArrayBig(Integer.valueOf(imei.substring(6 , imei.length())));
+        Log.w(TAG, "电车的imei:" +   ByteUtil.bytesToHex2(imeiByte)  );
+        String mHex = "41510695d17e" ;
+//        String mHex = "0695d17e" ;
+        byte[] manufByte = ByteUtil.hexToByteArray(mHex) ;
+        //固定 秘钥("tddfxjoA6wkAqnjPPCUxHtQT")
+        byte[] byteStr = "tddfxjoA6wkAqnjPPCUxHtQT".getBytes() ;
+        // 组合所有的byte数组
+        byte[] byteMd5L = byteMerger(byte12 , keyId  , manufByte , byteStr) ;
+
+        Log.w(TAG, "没有验证md5的时候 - 加密前：" + ByteUtil.bytesToHex2(  byteMd5L ) );
+        // md5 加密后的byte
+        byte[] md5DataDigest = MD5Util.getMD5Byte(byteMd5L);
+        Log.w(TAG, "没有验证md5的时候 - 加密后：" + ByteUtil.bytesToHex2(  md5DataDigest ) );
+        // md5 截取验证的字符串
+        byte[] md5Byte = new byte[8];
+        System.arraycopy(md5DataDigest, 4 , md5Byte, 0, 8);
+        // 将MD5 数组放入到数据中
+        System.arraycopy(md5Byte, 0, writeByte, 12, 8);
+
+
+//        return  ByteUtil.bytesToHex2(writeByte) ;
+        return  writeByte ;
+    }
+
+
+    public static byte[] byteMerger(byte[]... byteN ){
+        int byteLength = 0 ;
+        for (int i = 0; i <byteN.length ; i++) {
+            byteLength += byteN[i].length ;
+        }
+        Log.i(TAG, "所有数组长度：" + byteLength);
+
+        byte[] byteNew = new byte[byteLength];
+
+        int byteIndex = 0 ;
+        for (int j = 0; j < byteN.length ; j++) {
+            byte[] bInd = byteN[j] ;
+            System.arraycopy(bInd, 0, byteNew, byteIndex, bInd.length);
+            byteIndex += bInd.length ;
+        }
+        return byteNew;
+    }
+
 
     /**
      *  写入数据
@@ -341,13 +456,69 @@ public class MyBleAQPresenter19 {
                     gatt.setCharacteristicNotification(characteristic, true);
                 }
 
-                if (ifCharacteristicWritable(characteristic) ){
+//                if (ifCharacteristicWritable(characteristic) ){
+//                    mGattCharacteristic = characteristic ;
+//                    break ;
+//                }
+
+                if (characteristic.getUuid().toString().equals(SampleGattAttributes.DEVICE_KEY_UUID)){
                     mGattCharacteristic = characteristic ;
                     break ;
                 }
 
             }
         }
+
+        @Override
+        public void getCmdSn(Integer sn, byte[] btC6) {
+            Log.i(TAG, "蓝牙连接 给我了cmd_sn " + sn   );
+            cmdsn = sn ;
+
+            /**
+            String readData = ByteUtil.bytesToHex2(  btC6 ) ;
+            // 截取获取到的md5 校验数据
+            String writeMd5 = readData.substring(24 , 40);
+            // md5 验证 需要验证
+            Log.w(TAG, "验证前的： " + writeMd5   );
+
+            // md5 验证 需要验证
+            //前 12 字节数据 +
+            byte[] byte12 = new byte[12] ;
+            System.arraycopy(btC6 , 0 ,byte12 , 0 , 12);
+            // 遥控器 ID +
+//        byte[] keyId = "1009099844".getBytes() ;
+            byte[] keyId = ByteUtil.intToByteArrayLittel(Integer.valueOf(1009099844))  ;
+            // 需配对的产商信息+
+            // 110481790
+            String imei = "357550110481790" ;
+            byte[] imeiByte = ByteUtil.intToByteArrayBig(Integer.valueOf(imei.substring(6 , imei.length())));
+            Log.w(TAG, "电车的imei:" +   ByteUtil.bytesToHex2(imeiByte)  );
+            String mHex = "41510695d17e" ;
+//        String mHex = "0695d17e" ;
+            byte[] manufByte = ByteUtil.hexToByteArray(mHex) ;
+            //固定 秘钥("tddfxjoA6wkAqnjPPCUxHtQT")
+            byte[] byteStr = "tddfxjoA6wkAqnjPPCUxHtQT".getBytes() ;
+            // 组合所有的byte数组
+            byte[] byteMd5L = byteMerger(byte12 , keyId  , manufByte , byteStr) ;
+
+
+            Log.w(TAG, "没有验证md5的时候 - 加密前：" + ByteUtil.bytesToHex2(  byteMd5L ) );
+            // md5 加密后的byte
+            byte[] md5DataDigest = MD5Util.getMD5Byte(byteMd5L);
+            Log.w(TAG, "没有验证md5的时候 - 加密后：" + ByteUtil.bytesToHex2(  md5DataDigest ) );
+
+            // md5 加密后的字符串
+            String md5DataDigestString = ByteUtil.bytesToHex2(  md5DataDigest ).substring(8 , 22) ;
+
+            Log.i(TAG, "4.md5 验证：  md5DataDigest:" + md5DataDigest + "\n md5Cut:" + md5DataDigestString );
+            if (writeMd5.equalsIgnoreCase(md5DataDigestString)) {
+                Log.i(TAG, "验证MD5算法-成功" );
+            }else {
+                Log.i(TAG, "验证MD5算法-失败" );
+            }
+*/
+        }
+
     };
 
     //scanRecords的格式转换

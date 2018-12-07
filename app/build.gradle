@@ -12,7 +12,7 @@ android {
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
-//        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -64,6 +64,8 @@ dependencies {
     compile 'com.inuker.bluetooth:library:1.4.0'
     // 添加kotlin 插件
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    // 添加eventbus 框架
+    compile "org.greenrobot:eventbus:3.1.1"
 }
 repositories {
     mavenCentral()

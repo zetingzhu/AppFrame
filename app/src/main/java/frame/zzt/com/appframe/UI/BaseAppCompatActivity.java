@@ -1,6 +1,8 @@
 package frame.zzt.com.appframe.UI;
 
 import android.app.ProgressDialog;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import frame.zzt.com.appframe.Util.MyMessageUtil;
@@ -12,7 +14,15 @@ import frame.zzt.com.appframe.mvp.mvpbase.BaseView;
  */
 
 public class BaseAppCompatActivity extends AppCompatActivity implements BaseView {
+    public final static String TAG_BASE =  BaseAppCompatActivity.class.getSimpleName() ;
+
     protected ProgressDialog dialog;
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+    }
 
     /**
      * @param s

@@ -7,9 +7,9 @@ import com.mykotiln.util.MyRecyclerViewKotlin
 /**
  * kotlin Activity 的创建
  */
-class ActivityKotlinClass : BaseActivity()  {
+class ActivityKotlinUse : BaseActivity()  {
 
-    var mPer = KotilnClassPersenter(this)
+    var mPer = KotilnUsePersenter(this)
     var rv_kotlin_list : MyRecyclerViewKotlin?= null
 
     override fun onCreate(savedInstanceState: Bundle?) {

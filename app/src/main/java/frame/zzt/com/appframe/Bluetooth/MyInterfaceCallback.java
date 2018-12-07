@@ -16,4 +16,5 @@ public interface MyInterfaceCallback {
     void bleServiceReadError (String action);
     void bleServiceRed (String action , BluetoothGattCharacteristic characteristic);
     void bleServicesDiscoveredCharacteristic (BluetoothGatt gatt , String action , List<BluetoothGattCharacteristic> characteristicList);
+    void getCmdSn (Integer sn , byte[] btC6);
 }

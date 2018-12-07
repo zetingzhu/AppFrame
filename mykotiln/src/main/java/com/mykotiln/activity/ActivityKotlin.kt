@@ -1,6 +1,5 @@
 package com.mykotiln.activity
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.mykotiln.R
@@ -8,12 +7,14 @@ import com.mykotiln.util.MyRecycleListItem
 import com.mykotiln.util.MyRecyclerViewKotlin
 import kotlinx.android.synthetic.main.activity_kotlin.*
 
-
-class ActivityKotlin : AppCompatActivity(), View.OnClickListener {
+/**
+ * kotlin Activity 的创建
+ */
+class ActivityKotlin : BaseActivity(), View.OnClickListener {
 
     var mPer = KotilnPersenter(this)
     var rv_kotlin_list : MyRecyclerViewKotlin?= null
-    var mList : List<MyRecycleListItem> ?= mutableListOf()
+    var returnInt :Int = 0 // 返回的值
 
     override fun onClick(v: View?) {
         when(v!!.id){
@@ -31,12 +32,7 @@ class ActivityKotlin : AppCompatActivity(), View.OnClickListener {
 
     fun initView(){
         rv_kotlin_list = findViewById(R.id.rv_kotlin_list) as MyRecyclerViewKotlin
-
-        rv_kotlin_list!!.setMyAdapter(mList!!, object : MyRecyclerViewKotlin.MyRecycleOnClick{
-            override fun onClickListener(position: Int) {
-
-            }
-        })
+        returnInt = mPer.setItemOperateKotlin(rv_kotlin_list!!)
 
         tv_item_01.setOnClickListener (this@ActivityKotlin)
         tv_item_01.setText("mainStr")
