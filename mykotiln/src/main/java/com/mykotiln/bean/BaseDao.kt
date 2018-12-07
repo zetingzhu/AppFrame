@@ -1,4 +1,4 @@
-package com.mykotiln
+package com.mykotiln.bean
 
 /**
 

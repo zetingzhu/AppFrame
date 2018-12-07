@@ -1,18 +1,16 @@
-package com.mykotiln
-
-import android.app.Activity
+package com.mykotiln.bean
 
 /**
  * Created by allen on 18/9/21.
  */
 
-class DemoIn() : BaseDao() {
+class DemoIn() : com.mykotiln.BaseDao() {
     /** 上面的是类的主构造函数 */
     /** 下面是类的成员属性 */
 
     var title: Int? = null
     var desc: Int? = null
-    var demoClass: Class<out Activity>? = null
+    var demoClass: Class<out android.app.Activity>? = null
 
     /**
      * 第一个构造函数
@@ -24,7 +22,7 @@ class DemoIn() : BaseDao() {
     /**
      * 第二个构造函数
      */
-    constructor (title: Int?, desc: Int?, demoClass: Class<out Activity>?) : this(title) {
+    constructor (title: Int?, desc: Int?, demoClass: Class<out android.app.Activity>?) : this(title) {
         this.desc = desc
         this.demoClass = demoClass
     }
