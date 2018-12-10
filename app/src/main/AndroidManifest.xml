@@ -82,6 +82,8 @@
         <activity android:name="frame.zzt.com.appframe.kotlin.ActivityKotlin"/>
         <activity android:name=".eventbus.ActivityEventBus"/>
         <activity android:name=".eventbus.ActivityEventBusOpt"/>
+        <activity android:name=".slidelock.ActivitySlideLock"/>
+        <activity android:name=".WebView.AcvitityWebview"/>
 
 
 
