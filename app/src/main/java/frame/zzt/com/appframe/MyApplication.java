@@ -2,12 +2,14 @@ package frame.zzt.com.appframe;
 
 import android.app.Application;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
 import android.provider.Settings;
+import android.support.multidex.MultiDex;
 import android.util.Log;
 
 import frame.zzt.com.appframe.Notification.NotificationReceiver18;
@@ -29,6 +31,12 @@ public class MyApplication extends Application {
 
     public static synchronized MyApplication getInstance() {
         return mInstance;
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
     }
 
     @Override

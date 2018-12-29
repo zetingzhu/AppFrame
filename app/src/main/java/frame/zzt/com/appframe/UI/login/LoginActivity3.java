@@ -8,10 +8,12 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -29,7 +31,9 @@ import butterknife.OnClick;
 import frame.zzt.com.appframe.R;
 import frame.zzt.com.appframe.UI.BaseAppCompatActivity;
 import frame.zzt.com.appframe.UI.home.HomeActivity;
+import frame.zzt.com.appframe.Util.BuildHelper;
 import frame.zzt.com.appframe.Util.MyMessageUtil;
+import frame.zzt.com.appframe.Util.SystemUtil;
 import frame.zzt.com.appframe.modle.BaseModel;
 import frame.zzt.com.appframe.mvp.mvpbase.BasePresenter;
 
@@ -58,22 +62,28 @@ public class LoginActivity3<P extends BasePresenter> extends BaseAppCompatActivi
     public String htmlText ;
     @BindViews({R.id.button1 , R.id.button2})
     public List<Button> btnList ;
-    @BindView(R.id.button3)
-    Button button3;
     @BindView(R.id.imageView)
     ImageView imageView ;
+    @BindView(R.id.button3)
+    Button button3;
+
+    @BindView(R.id.button4)
+    Button button4;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // 隐藏系统虚拟按键
+//        SystemUtil.hideBottomUIMenu(this);
+//        SystemUtil.hideNavigationBar(this);
         context = this;
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
 
         presenter =  new LoginPresenter(this);
 
-        mEmailView.setText("13797745363");
-        mPasswordView.setText("123456");
+//        mEmailView.setText("13797745363");
+//        mPasswordView.setText("123456");
 
         System.out.println("----获取信号值：" + getProgressRssi(-30) );
 
@@ -85,6 +95,19 @@ public class LoginActivity3<P extends BasePresenter> extends BaseAppCompatActivi
         imageView.setImageBitmap(bitmap) ;
 
 //        imageView.setImageDrawable(drawable);
+
+
+        Log.w(TAG_BASE , "name:" + BuildHelper.getName());
+        Log.w(TAG_BASE , "version:" + BuildHelper.getVersion());
+        Log.w(TAG_BASE , "prop:" + BuildHelper.getProp("ro.build.version.emui"));
+        Log.w(TAG_BASE , "prop:" + BuildHelper.getProp("ro.product.manufacturer"));
+        Log.w(TAG_BASE , "是否是三星:" + BuildHelper.isSamsung());
+        Log.w(TAG_BASE , "getMode:" + BuildHelper.getMode());
+        Log.w(TAG_BASE , "getBrand:" + BuildHelper.getBrand());
+        Log.w(TAG_BASE , "getProduct:" + BuildHelper.getProduct());
+        Log.w(TAG_BASE , "getManufacturer:" + BuildHelper.getManufacturer());
+        Log.w(TAG_BASE , "getHardWare:" + BuildHelper.getHardWare());
+        Log.w(TAG_BASE , "DISPLAY:" + Build.DISPLAY );
 
 
 
@@ -131,7 +154,10 @@ public class LoginActivity3<P extends BasePresenter> extends BaseAppCompatActivi
         presenter.login3();
     }
 
+    @OnClick( R.id.button4)
+    public void testBtn(){
 
+    }
 
 
     @Override

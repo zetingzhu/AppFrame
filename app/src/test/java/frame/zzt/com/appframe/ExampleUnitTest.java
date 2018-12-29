@@ -5,7 +5,8 @@ import org.junit.Test;
 import java.math.BigDecimal;
 import java.util.Random;
 
-import frame.zzt.com.appframe.Bluetooth.ByteUtil;
+
+import frame.zzt.com.appframe.Util.ByteUtil;
 
 import static org.junit.Assert.*;
 
@@ -19,7 +20,30 @@ public class ExampleUnitTest {
     public void addition_isCorrect() {
         assertEquals(4, 2 + 2);
 
-    System.out.println("----获取信号值：" + getProgressRssi(-70) );
+        byte[] byte0 = "1".getBytes();
+
+        Integer i01 = 20180717 ;
+        byte by02 = i01.byteValue() ;
+        byte[] by03 = ByteUtil.intToByteArrayBig(i01) ;
+
+        byte by01 = ByteUtil.intToByte(22222);
+        byte by04 =  0x14 ;
+        byte by05 =  20 ;
+
+        int int01 = ByteUtil.byteToInt(by01);
+
+        byte byte1 = ByteUtil.bitToByte("00010010");
+
+        String byStr = ByteUtil.getBit(by02) ;
+        String byStr01 = ByteUtil.getBit(by03[0]) ;
+        String byStr02 = ByteUtil.getBit(by03[1]) ;
+        String byStr03 = ByteUtil.getBit(by03[2]) ;
+        String byStr04 = ByteUtil.getBit(by03[3]) ;
+
+        System.out.println("---- byStr：" + byStr );
+
+
+        System.out.println("----获取信号值：" + getProgressRssi(-70) );
 
         int max = 85;
         int min = 70;

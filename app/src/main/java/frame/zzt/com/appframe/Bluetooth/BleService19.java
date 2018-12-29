@@ -26,6 +26,8 @@ import android.widget.Toast;
 import java.util.List;
 import java.util.UUID;
 
+import frame.zzt.com.appframe.Util.ByteUtil;
+
 /**
  * Created by allen on 17/6/26.
  * 蓝牙服务

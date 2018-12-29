@@ -12,6 +12,7 @@ android {
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -27,14 +28,21 @@ android {
         daoPackage 'frame.zzt.com.appframe.greendao'//这个是生成代码保存的包名
         targetGenDir 'src/main/java'//保存到java代码路径
     }
+
+    /**
+     * 使用packagingOptions排除不想添加到apk中的文件
+     */
+    packagingOptions {
+        exclude 'LICENSE.txt'
+    }
+
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:design:25.3.1'
     testCompile 'junit:junit:4.12'
-
     compile 'com.google.code.gson:gson:2.8.5'
     // yanzhenjie/AndPermission 运行权限管理库
     compile 'com.yanzhenjie:permission:1.1.2'
@@ -65,7 +73,18 @@ dependencies {
     // 添加kotlin 插件
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     // 添加eventbus 框架
-    compile "org.greenrobot:eventbus:3.1.1"
+    compile 'org.greenrobot:eventbus:3.1.1'
+    //引入Uiautomator
+    compile 'com.android.support.test:rules:0.5'
+    compile 'com.android.support.test:runner:0.5'
+    //跨应用的测试（Ui automator）
+    testCompile 'com.android.support.test.uiautomator:uiautomator-v18:2.1.2'
+    //内部测试（Espresso）
+    compile 'com.android.support.test.espresso:espresso-core:2.2.2'
+    //Android工程方法数超过65535，解决办法
+    compile 'com.android.support:multidex:1.0.0'
+    // 滚动图片展示
+    compile 'com.bigkoo:ConvenientBanner:2.1.4'
 }
 repositories {
     mavenCentral()

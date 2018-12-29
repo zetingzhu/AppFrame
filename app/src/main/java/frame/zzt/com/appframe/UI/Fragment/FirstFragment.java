@@ -37,6 +37,7 @@ import frame.zzt.com.appframe.rxjava.ActivityRxJava;
 import frame.zzt.com.appframe.UI.Activity.ActivitySurfaceView;
 import frame.zzt.com.appframe.doodleview.DoodleViewActivity;
 import frame.zzt.com.appframe.rxjava.ActivityRxJavaUse;
+import frame.zzt.com.appframe.slidelock.ActivitySlideLock;
 import frame.zzt.com.appframe.touchAnim.ActivityTouchAnim;
 
 /**
@@ -114,7 +115,7 @@ public class FirstFragment extends Fragment {
             new DemoInfo(R.string.tab_item_observable  , R.string.tab_item_observable_desc , ActivityObservable.class),
             new DemoInfo(R.string.tab_item_eventbus  , R.string.tab_item_eventbus_desc , ActivityEventBus.class),
             new DemoInfo(R.string.tab_item_read_clazz  , R.string.tab_item_read_clazz_desc , ActivityReadCodeClass.class),
-            new DemoInfo(R.string.tab_item_anim  , R.string.tab_item_anim_desc , ActivityTouchAnim.class),
+            new DemoInfo(R.string.tab_item_anim  , R.string.tab_item_anim_desc , ActivitySlideLock.class),
     };
 
     public class DemoListAdapter extends BaseAdapter {
@@ -164,19 +165,6 @@ public class FirstFragment extends Fragment {
             public MyViewHolder(View view) {
                 ButterKnife.bind(this, view);
             }
-        }
-    }
-
-    private class DemoInfo {
-        private final int title;
-        private final int desc;
-        private final Class<? extends Activity> demoClass;
-
-        public DemoInfo(int title, int desc,
-                        Class<? extends Activity> demoClass) {
-            this.title = title;
-            this.desc = desc;
-            this.demoClass = demoClass;
         }
     }
 }

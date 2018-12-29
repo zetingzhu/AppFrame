@@ -75,7 +75,7 @@
     <string name="tab_item_read_clazz">看源码</string>
     <string name="tab_item_read_clazz_desc">看源码！看源码！看源码！</string>
 
-    <string name="tab_item_anim">滑动动画</string>
+    <string name="tab_item_anim">滑动解锁动画</string>
     <string name="tab_item_anim_desc">点击按钮实现滑动动画</string>
 
 </resources>

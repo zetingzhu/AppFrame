@@ -22,7 +22,7 @@ import android.view.animation.AccelerateInterpolator;
  */
 
 public class SlideLockView extends ViewGroup {
-    private static final String TAG = "SlideLockView" ;
+    private static final String TAG = "SlideLock" ;
 
     private ViewDragHelper viewDragHelper;
 
@@ -223,12 +223,14 @@ public class SlideLockView extends ViewGroup {
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         int viewHeight = b - t;
 
-        int lockViewWidth = mLockView.getMeasuredWidth();
+//        int lockViewWidth = mLockView.getMeasuredWidth();
         int lockViewHeight = mLockView.getMeasuredHeight();
+        int lockViewWidth = lockViewHeight ;
 
+        Log.i(TAG , "-----是不是一直在画-----lockViewWidth:"+ lockViewWidth +" - lockViewHeight:"+ lockViewHeight);
+        Log.i(TAG , "-----mLockView-----l:" +0+ "-t:"  +(viewHeight - lockViewHeight) / 2+ "-t:"  +lockViewWidth+ "-t:" + (viewHeight - lockViewHeight) / 2 + lockViewHeight);
         mLockView.layout(0, (viewHeight - lockViewHeight) / 2, lockViewWidth, (viewHeight - lockViewHeight) / 2 + lockViewHeight);
         mTextView.layout( 0, 0, getWidth() , getHeight() );
-        Log.i(TAG , "-----是不是一直在画-----");
     }
 
 }
