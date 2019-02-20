@@ -74,6 +74,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".UI.home.HomeActivity"/>
         </activity>
+        <activity android:name=".Notification.ActivityIntentShow2" />
         <activity android:name=".doodleview.DoodleViewActivity"/>
         <activity android:name=".rxjava.ActivityRxJava"/>
         <activity android:name=".rxjava.ActivityRxJavaUse"/>
@@ -84,13 +85,15 @@
         <activity android:name=".eventbus.ActivityEventBusOpt"/>
         <activity android:name=".slidelock.ActivitySlideLock"/>
         <activity android:name=".WebView.AcvitityWebview"/>
+        <activity android:name=".UI.Activity.ActivitySystemUi"/>
 
 
-
+        <receiver android:name=".Notification.ReceiverNotification"/>
 
         <service android:name=".Bluetooth.BleService"/>
         <service android:name=".Bluetooth.BleService19"/>
         <service android:name="com.inuker.bluetooth.library.BluetoothService"/>
+        <service android:name=".Notification.ServiceNotification"/>
 
         <!--  和蓝牙设备连接进行电话交互  -->
         <service

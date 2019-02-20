@@ -29,6 +29,7 @@ import frame.zzt.com.appframe.Bluetooth.ActivityBluetooth2;
 import frame.zzt.com.appframe.Bluetooth.ActivityBluetooth3;
 import frame.zzt.com.appframe.ReadCode.ActivityReadCodeClass;
 import frame.zzt.com.appframe.UI.Activity.ActivityFirst;
+import frame.zzt.com.appframe.UI.Activity.ActivitySystemUi;
 import frame.zzt.com.appframe.eventbus.ActivityEventBus;
 import frame.zzt.com.appframe.kotlin.ActivityKotlin;
 import frame.zzt.com.appframe.UI.Activity.ActivityProgress2;
@@ -116,7 +117,9 @@ public class FirstFragment extends Fragment {
             new DemoInfo(R.string.tab_item_eventbus  , R.string.tab_item_eventbus_desc , ActivityEventBus.class),
             new DemoInfo(R.string.tab_item_read_clazz  , R.string.tab_item_read_clazz_desc , ActivityReadCodeClass.class),
             new DemoInfo(R.string.tab_item_anim  , R.string.tab_item_anim_desc , ActivitySlideLock.class),
-    };
+            new DemoInfo(R.string.tab_item_anim  , R.string.tab_item_anim_desc , ActivitySlideLock.class),
+            new DemoInfo(R.string.tab_item_sys_ui  , R.string.tab_item_sys_ui_desc , ActivitySystemUi.class),
+    } ;
 
     public class DemoListAdapter extends BaseAdapter {
         public DemoListAdapter() {

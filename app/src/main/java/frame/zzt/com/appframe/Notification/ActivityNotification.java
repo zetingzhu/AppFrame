@@ -1,8 +1,10 @@
 package frame.zzt.com.appframe.Notification;
 
 import android.app.AlertDialog;
+import android.bluetooth.BluetoothDevice;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -34,7 +36,7 @@ public class ActivityNotification extends BaseAppCompatActivity implements MyNot
     private List<MyRecyclerView.MyRecycleListItem> mList;
 
 
-    private MyNotificationPersenter mNoti;
+    private MyNotificationPersenter mNoti ;
 
 
     @Override
@@ -52,7 +54,10 @@ public class ActivityNotification extends BaseAppCompatActivity implements MyNot
 
         // 数据初始化
         mNoti.onCreate();
+
+        initReceiver();
     }
+
 
     @Override
     protected void onDestroy() {
@@ -84,6 +89,11 @@ public class ActivityNotification extends BaseAppCompatActivity implements MyNot
         mList.add(new MyRecyclerView(this).new MyRecycleListItem(16, "绑定服务"));
         mList.add(new MyRecyclerView(this).new MyRecycleListItem(17, "解绑服务"));
         mList.add(new MyRecyclerView(this).new MyRecycleListItem(18, "点击的是第几个按钮"));
+        mList.add(new MyRecyclerView(this).new MyRecycleListItem(19, "显示自定义通知栏"));
+        mList.add(new MyRecyclerView(this).new MyRecycleListItem(20, "启动服务"));
+        mList.add(new MyRecyclerView(this).new MyRecycleListItem(21, "更新通知栏样式"));
+        mList.add(new MyRecyclerView(this).new MyRecycleListItem(22, "显示自定义通知栏"));
+        mList.add(new MyRecyclerView(this).new MyRecycleListItem(23, "更新自定义通知栏"));
 
         rv_noti.setMyAdapter(mList, new MyRecyclerView.MyRecycleOnClick() {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -151,8 +161,19 @@ public class ActivityNotification extends BaseAppCompatActivity implements MyNot
                         mNoti.skipAction(1);
                         break;
                     case 19:
+                        mNoti.showCustomViewNotification();
                         break;
                     case 20:
+                        mNoti.startService();
+                        break;
+                    case 21:
+                        mNoti.notifyCustomViewNotification();
+                        break;
+                    case 22:
+                        mNoti.showNotify();
+                        break;
+                    case 23:
+                        mNoti.refreshNotify();
                         break;
                 }
             }
@@ -213,4 +234,23 @@ public class ActivityNotification extends BaseAppCompatActivity implements MyNot
     public void showMsg(String msg) {
         showtoast(msg);
     }
+
+
+    /**
+     * 初始化广播
+     */
+    private void initReceiver() {
+        ReceiverNotification mRn = new ReceiverNotification();
+        mRn.setNotifyUi(new NotifyListener() {
+            @Override
+            public void notifyUi() {
+                Log.d(TAG , "更新界面 -- " );
+                mNoti.notifyCustomViewNotification();
+            }
+        });
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(ReceiverNotification.BECEIVER_CHECK);
+        registerReceiver(mRn, intentFilter);
+    }
+
 }

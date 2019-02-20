@@ -78,4 +78,7 @@
     <string name="tab_item_anim">滑动解锁动画</string>
     <string name="tab_item_anim_desc">点击按钮实现滑动动画</string>
 
+    <string name="tab_item_sys_ui">状态栏和导航栏控制</string>
+    <string name="tab_item_sys_ui_desc">状态栏，虚拟键盘的显示和隐藏</string>
+
 </resources>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:src="@mipmap/icon_06"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_big_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:text="名称"
+            android:textSize="15sp"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/ib_big_01"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:background="@null"
+                android:scaleType="fitCenter"
+                android:src="@mipmap/icon_01"/>
+
+            <ImageView
+                android:id="@+id/ib_big_02"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:layout_marginLeft="20dp"
+                android:scaleType="fitCenter"
+                android:src="@mipmap/icon_02"/>
+
+            <ImageView
+                android:id="@+id/ib_big_03"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:layout_marginLeft="20dp"
+                android:src="@mipmap/icon_03"/>
+            <ImageButton
+                android:id="@+id/ib_big_04"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:layout_marginLeft="20dp"
+                android:scaleType="fitCenter"
+                android:src="@mipmap/icon_04"/>
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -1,11 +1,15 @@
 package frame.zzt.com.appframe;
 
+import android.util.Log;
+
 import org.junit.Test;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.Random;
 
 
+import frame.zzt.com.appframe.Bluetooth.MD5Util;
 import frame.zzt.com.appframe.Util.ByteUtil;
 
 import static org.junit.Assert.*;
@@ -72,7 +76,8 @@ public class ExampleUnitTest {
 
         //定义一个十进制值
         // 357550110481790
-        int valueTen = 110481790;
+//        int valueTen = 110481790;
+        int valueTen =  102100002 ;
         //将其转换为十六进制并输出
         String strHex = Integer.toHexString(valueTen);
         System.out.println(valueTen + " [十进制]---->[十六进制] " + strHex);
@@ -110,10 +115,61 @@ public class ExampleUnitTest {
 
         System.out.println(valueTen + " [十进制]---->[十六进制] " + Integer.toBinaryString(valueTen)) ;
 
+
+        byte[] keyId = ByteUtil.intToByteArrayBig(valueTen)  ;
+        String strHex7 =  ByteUtil.bytesToHex2(keyId) ;
+        System.out.println(valueTen + " [十进制]---->[十六进制] " + strHex7);
+
         System.out.println("--结束线--");
 
-}
 
+        int val =  getGpsGsm(30) ;
+
+        System.out.println("--val:" + val);
+
+//        String autoCode = autoGenericCode( "111" , 15 ) ;
+//        System.out.println("补充后的code : " + autoCode );
+
+
+        String str = "a141b40301028000000000000615EC21585f4b66786a6f4136772a41716e2850502478487451547a" ;
+        byte[] byteMd5L = ByteUtil.hexStr2bytes(str) ;
+//        byte[] byteMd5L = ByteUtil.hexToByteArray(str);
+        // md5 加密后的byte
+        byte[] md5DataDigest = MD5Util.getMD5Byte(byteMd5L);
+        System.out.println("没有验证md5的时候 - 加密后：" + ByteUtil.bytesToHex2(  md5DataDigest ) );
+
+        System.out.println("--结束线--");
+    }
+
+    public static String autoGenericCode(String code, int num) {
+        String result = "";
+        // 保留num的位数
+        // 0 代表前面补充0
+        // num 代表长度为4
+        // d 代表参数为正数型
+        result = String.format("%0" + num + "s", code );
+        return result;
+    }
+
+
+    public int getGpsGsm(int val){
+        BigDecimal b1 = new BigDecimal(val);
+        BigDecimal b2 = new BigDecimal(24);
+        BigDecimal res = b1.divide(b2, 0, BigDecimal.ROUND_HALF_UP) ;
+        Double resDb = res.doubleValue() ;
+        System.out.println("--res:" + res);
+        System.out.println("--resDb:" + resDb);
+        int ii = (int) Math.ceil(resDb);
+        System.out.println("--ii:" + ii);
+
+        DecimalFormat df = new DecimalFormat("######0");
+        DecimalFormat df1 = new DecimalFormat("#.00");
+
+        System.out.println("--df:" + df.format(resDb));
+        System.out.println("--df1:" + df1.format(resDb));
+        BigDecimal bd=new BigDecimal(resDb).setScale(0, BigDecimal.ROUND_HALF_UP);
+        return resDb.intValue() ; // 四舍五入，保留2位小数
+    }
 
     public int getProgressRssi( int rssi){
         return Math.round( Math.abs(  div(rssi , 120).floatValue() ) * 100)  ;

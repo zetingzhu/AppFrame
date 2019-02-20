@@ -84,49 +84,49 @@ public class LoginPresenter extends BasePresenter<LoginView> {
     }
 
     public void login1 () {
-//        addDisposable(apiServer.Login1(baseView.getUserName() , baseView.getPassword() ), new BaseObserver(baseView) {
-//            @Override
-//            public void onSuccess(Object o) {
-//                Log.i(TAG ,  "获取的成功login：" + o .toString()) ;
-//                baseView.onLoginSucc();
+        addDisposable(apiServer.Login1(baseView.getUserName() , baseView.getPassword() ), new BaseObserver(baseView) {
+            @Override
+            public void onSuccess(Object o) {
+                Log.i(TAG ,  "获取的成功login：" + o .toString()) ;
+                baseView.onLoginSucc();
+
+            }
+
+            @Override
+            public void onError(String msg) {
+                Log.i(TAG ,  "获取的失败login：" + msg ) ;
+                baseView.showError(msg);
+
+            }
+        });
+
+//        apiServer.Login1(baseView.getUserName(), baseView.getPassword())
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribeWith(new Observer<LoginResponse>() {
+//                    @Override
+//                    public void onSubscribe(@NonNull Disposable d) {
 //
-//            }
+//                    }
 //
-//            @Override
-//            public void onError(String msg) {
-//                Log.i(TAG ,  "获取的失败login：" + msg ) ;
-//                baseView.showError(msg);
+//                    @Override
+//                    public void onNext(@NonNull LoginResponse loginResponse) {
+//                        Log.i(TAG ,  "获取的登录数据login：" + loginResponse.toString() ) ;
+//                    }
 //
-//            }
-//        });
-
-        apiServer.Login1(baseView.getUserName(), baseView.getPassword())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new Observer<LoginResponse>() {
-                    @Override
-                    public void onSubscribe(@NonNull Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(@NonNull LoginResponse loginResponse) {
-                        Log.i(TAG ,  "获取的登录数据login：" + loginResponse.toString() ) ;
-                    }
-
-                    @Override
-                    public void onError(@NonNull Throwable e) {
-                        Log.i(TAG ,  "获取的失败login：" + e ) ;
-//                        baseView.showError(e.getMessage());
-                        baseView.onLoginSucc();
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        Log.i(TAG ,  "获取的成功login："  ) ;
-                        baseView.onLoginSucc();
-                    }
-                });
+//                    @Override
+//                    public void onError(@NonNull Throwable e) {
+//                        Log.i(TAG ,  "获取的失败login：" + e ) ;
+////                        baseView.showError(e.getMessage());
+//                        baseView.onLoginSucc();
+//                    }
+//
+//                    @Override
+//                    public void onComplete() {
+//                        Log.i(TAG ,  "获取的成功login："  ) ;
+//                        baseView.onLoginSucc();
+//                    }
+//                });
         /**
 
          看似很完美, 但我们忽略了一点, 如果在请求的过程中Activity已经退出了, 这个时候如果回到主线程去更新UI, 那么APP肯定就崩溃了, 怎么办呢,

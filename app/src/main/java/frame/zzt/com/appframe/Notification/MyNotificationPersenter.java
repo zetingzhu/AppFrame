@@ -16,10 +16,18 @@ import android.os.IBinder;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+import android.widget.RemoteViews;
+
+import org.greenrobot.eventbus.EventBus;
+
+import java.util.Random;
 
 import frame.zzt.com.appframe.rxbus.EventMsg;
 import frame.zzt.com.appframe.rxbus.RxBusTwo;
 import frame.zzt.com.appframe.R;
+
+import static android.content.Context.BIND_AUTO_CREATE;
+import static android.content.Context.NOTIFICATION_SERVICE;
 
 /**
  * Created by allen on 18/10/11.
@@ -39,7 +47,7 @@ public class MyNotificationPersenter {
         this.mContext = mContext;
         this.myNotificationView = myNotificationView ;
         //获取NotificationManager实例
-        mNotifyManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
+        mNotifyManager = (NotificationManager) mContext.getSystemService(NOTIFICATION_SERVICE);
 
     }
 
@@ -486,6 +494,109 @@ public class MyNotificationPersenter {
 
     protected void onDestroy() {
 //        RxBusTwo.getInstance().unSubscribe( mContext );
+    }
+
+
+    /**
+     * 显示自定义通知栏
+     */
+    NotificationCompat.Builder notificationBuilder ;
+    RemoteViews bigView ;
+    public void showCustomViewNotification(){
+        Intent mIntent1 = new Intent(mContext, ActivityIntentShow.class);
+        mIntent1.putExtra("msg" , "自定义消息通知 1");
+        PendingIntent CustomViewIntent = PendingIntent.getActivity(mContext, 0, mIntent1, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        Intent mIntent2 = new Intent(mContext, ActivityIntentShow2.class);
+        mIntent2.putExtra("msg" , "自定义消息通知 2");
+        PendingIntent CustomViewIntent2 = PendingIntent.getActivity(mContext, 0, mIntent2, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        Intent mIntent3 = new Intent(mContext, ServiceNotification.class);
+        mIntent3.putExtra("msg" , "自定义消息通知 3");
+        PendingIntent CustomViewIntent3 = PendingIntent.getService(mContext, 0, mIntent3, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        Intent mIntent4 = new Intent();
+        mIntent4.putExtra("msg" , "自定义消息通知 4");
+        mIntent4.setAction(ReceiverNotification.BECEIVER_CHECK) ;
+        PendingIntent CustomViewIntent4 = PendingIntent.getBroadcast(mContext, 0, mIntent4, PendingIntent.FLAG_UPDATE_CURRENT);
+
+
+        /** * 双指上下滑动切换大小视图 * */
+        //普通notification用到的视图
+        RemoteViews normalView = new RemoteViews( mContext.getPackageName(), R.layout.notify_small_layout );
+        //显示bigView的notification用到的视图
+        bigView = new RemoteViews( mContext.getPackageName(), R.layout.notify_bit_layout);
+        //给一个控件设置内容
+        bigView.setTextViewText(R.id.tv_big_name , "大图标标题" );
+        //给一个控件添加单击事件
+        bigView.setOnClickPendingIntent(R.id.ib_big_01, CustomViewIntent );
+        bigView.setOnClickPendingIntent(R.id.ib_big_02, CustomViewIntent2 );
+        bigView.setOnClickPendingIntent(R.id.ib_big_03, CustomViewIntent3 );
+        bigView.setOnClickPendingIntent(R.id.ib_big_04, CustomViewIntent4 );
+
+        notificationBuilder = new NotificationCompat.Builder( mContext )
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setTicker("开始啦~~")
+                .setOngoing(true)
+//                .setContent(normalView)//设置普通notification视图
+                .setCustomBigContentView(bigView)//设置显示bigView的notification视图
+                .setPriority(NotificationCompat.PRIORITY_MAX)//设置最大优先级
+                // 绑定到按钮上后，去掉这个
+//                .setContentIntent(CustomViewIntent)
+                // 悬挂式通知栏
+//                .setFullScreenIntent(CustomViewIntent3 , false)
+                ;
+
+        mNotifyManager.notify(12, notificationBuilder.build() );
+    }
+
+    boolean isBindService;
+    ServiceNotification myService ;
+    public void startService(){
+        ServiceConnection conn = new ServiceConnection() {
+            @Override
+            public void onServiceConnected(ComponentName name, IBinder service) {
+                ServiceNotification.MyNorifyBinder binder = (ServiceNotification.MyNorifyBinder) service;
+                myService = binder.getService() ;
+                Log.d(TAG , "启动服务成功");
+            }
+
+            @Override
+            public void onServiceDisconnected(ComponentName name) {
+                myService = null ;
+                Log.d(TAG , "启动服务失败");
+            }
+        } ;
+
+        Intent intent = new Intent(mContext , ServiceNotification.class);
+        isBindService = mContext.bindService(intent, conn, BIND_AUTO_CREATE); //绑定服务即开始下载 调用onBind()
+        Log.d(TAG , "启动服务状态：" + isBindService );
+    }
+
+    public void notifyCustomViewNotification(){
+        if (notificationBuilder != null ) {
+            Random random = new Random();
+            int i = random.nextInt(100) ;
+            bigView.setTextViewText(R.id.tv_big_name , "大图标标题 - " + i );
+            notificationBuilder.setCustomBigContentView(bigView) ;
+            mNotifyManager.notify(12, notificationBuilder.build() ) ;
+        }
+    }
+
+
+    NotificationUtil mNotificationUtil ;
+    public void showNotify(){
+        if (mNotificationUtil == null){
+            mNotificationUtil = new NotificationUtil(mContext);
+        }
+        mNotificationUtil.notifyShow();
+    }
+
+    public void refreshNotify(){
+        if (mNotificationUtil == null){
+            mNotificationUtil = new NotificationUtil(mContext);
+        }
+        mNotificationUtil.notifyRefresh();
     }
 
 
