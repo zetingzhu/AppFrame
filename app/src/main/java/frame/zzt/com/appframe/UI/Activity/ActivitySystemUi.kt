@@ -24,6 +24,7 @@ class ActivitySystemUi : AppCompatActivity() {
     private val button6: Button by bindView(R.id.button6)
     private val button7: Button by bindView(R.id.button7)
     private val button8: Button by bindView(R.id.button8)
+    private val button9: Button by bindView(R.id.button9)
 
     private val textView: TextView by bindView(R.id.textView)
 
@@ -33,8 +34,8 @@ class ActivitySystemUi : AppCompatActivity() {
 //        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);// 设置全屏
         setContentView(R.layout.activity_system_ui )
 
-        val actionBar = supportActionBar
-        actionBar!!.hide()
+//        val actionBar = supportActionBar
+//        actionBar!!.hide()
 
         initView()
 
@@ -105,6 +106,11 @@ class ActivitySystemUi : AppCompatActivity() {
         button8.setText("全屏显示")
         button8.setOnClickListener {
             this@ActivitySystemUi.window.decorView.systemUiVisibility = View.INVISIBLE
+        }
+
+        button9.setText("改变状态栏颜色")
+        button9.setOnClickListener {
+            SysUISetting.showBarStatBack(this@ActivitySystemUi)
         }
 
     }

@@ -16,6 +16,7 @@ import java.util.List;
 import frame.zzt.com.appframe.R;
 import frame.zzt.com.appframe.UI.Fragment.FirstFragment;
 import frame.zzt.com.appframe.UI.Fragment.SecondFragment;
+import frame.zzt.com.appframe.UI.Fragment.ThirdFragment;
 import frame.zzt.com.appframe.widget.MyFragmentTabHost;
 
 /**
@@ -97,7 +98,7 @@ public class HomeActivity extends FragmentActivity {
         item.setTag(MENU_ITEM_TAG_SETTING);
         item.setTitle(getString(R.string.home_menu_setting));
         item.setIcon(R.drawable.home_menu_setting_selector);
-        item.setFragmentClass(FirstFragment.class);
+        item.setFragmentClass(ThirdFragment.class);
         menuItemList.add(item);
 
         //实例化TabHost对象，得到TabHost

@@ -156,7 +156,7 @@ public class LoginActivity3<P extends BasePresenter> extends BaseAppCompatActivi
 
     @OnClick( R.id.button4)
     public void testBtn(){
-
+        onLoginSucc();
     }
 
 

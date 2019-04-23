@@ -81,4 +81,11 @@
     <string name="tab_item_sys_ui">状态栏和导航栏控制</string>
     <string name="tab_item_sys_ui_desc">状态栏，虚拟键盘的显示和隐藏</string>
 
+
+    <string name="tab_item_anim_activity">启动一个动画到activity</string>
+    <string name="tab_item_anim_activity_desc">启动一个activity已动画方式</string>
+
+    <string name="show_scene_transition_anim">跳转联动</string>
+    <string name="show_scene_transition_anim_title">文本跳转联动</string>
+
 </resources>
