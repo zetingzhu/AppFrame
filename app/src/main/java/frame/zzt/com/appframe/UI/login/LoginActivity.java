@@ -339,18 +339,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         protected void onPostExecute(final Boolean success) {
             mAuthTask = null;
             showProgress(false);
-
             if (success) {
-<<<<<<< HEAD:app/src/main/java/frame/zzt/com/appframe/LoginActivity.java
-//                finish();
-=======
 //                mPasswordView.setError("登录成功");
 //                mPasswordView.requestFocus();
                 Intent mIntent = new Intent();
                 mIntent.setClass(LoginActivity.this , HomeActivity.class);
                 startActivity(mIntent);
                 finish();
->>>>>>> 5b4d1b35f97ab5e72b658d83d4a8a88994734f65:app/src/main/java/frame/zzt/com/appframe/UI/login/LoginActivity.java
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();

@@ -88,4 +88,10 @@
     <string name="show_scene_transition_anim">跳转联动</string>
     <string name="show_scene_transition_anim_title">文本跳转联动</string>
 
+
+    <string name="show_item_h_slide_lock">水平滑动动画</string>
+    <string name="show_item_h_slide_lock_desc">水平滑动动画</string>
+    <string name="show_item_seek_bar">水平滑动条</string>
+    <string name="show_item_seek_bar_desc">水平滑动条</string>
+
 </resources>

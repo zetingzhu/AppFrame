@@ -40,5 +40,8 @@
     <color name="anim_black_bg">#7f2d2f36</color>
     <color name="anim_white_bg">#70FFFFFF</color>
     <color name="color_768392">#768392</color>
+    <color name="color_a8aef6">#a8aef6</color>
+
+    <color name="xd_color_eef0f5">#eef0f5</color>
 
 </resources>

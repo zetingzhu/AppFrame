@@ -38,6 +38,8 @@ import frame.zzt.com.appframe.kotlin.ActivityKotlin;
 import frame.zzt.com.appframe.observable.ActivityObservable;
 import frame.zzt.com.appframe.rxjava.ActivityRxJava;
 import frame.zzt.com.appframe.rxjava.ActivityRxJavaUse;
+import frame.zzt.com.appframe.seekbar.ActivitySeekBar;
+import frame.zzt.com.appframe.slidelock.ActivityHorizontalSlideLock;
 import frame.zzt.com.appframe.slidelock.ActivitySlideLock;
 
 /**
@@ -98,6 +100,10 @@ public class ThirdFragment extends Fragment {
 
     private DemoInfo[] DEMOS = {
             new DemoInfo(R.string.tab_item_anim_activity, R.string.tab_item_anim_activity_desc, AnimActivity.class),
+            new DemoInfo(R.string.show_item_h_slide_lock, R.string.show_item_h_slide_lock_desc, ActivityHorizontalSlideLock.class),
+
+            new DemoInfo(R.string.show_item_seek_bar , R.string.show_item_seek_bar_desc , ActivitySeekBar.class),
+
 
     } ;
 

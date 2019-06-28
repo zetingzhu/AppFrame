@@ -88,6 +88,8 @@
         <activity android:name=".UI.Activity.ActivitySystemUi"/>
         <activity android:name=".anim.AnimActivity"/>
         <activity android:name=".anim.AnimShowActivity"/>
+        <activity android:name=".slidelock.ActivityHorizontalSlideLock"/>
+        <activity android:name=".seekbar.ActivitySeekBar"/>
 
 
         <receiver android:name=".Notification.ReceiverNotification"/>
@@ -96,6 +98,7 @@
         <service android:name=".Bluetooth.BleService19"/>
         <service android:name="com.inuker.bluetooth.library.BluetoothService"/>
         <service android:name=".Notification.ServiceNotification"/>
+
 
         <!--  和蓝牙设备连接进行电话交互  -->
         <service
