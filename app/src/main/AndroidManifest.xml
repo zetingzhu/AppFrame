@@ -3,6 +3,8 @@
           package="frame.zzt.com.appframe">
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
     <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
     <uses-permission android:name="android.permission.READ_PROFILE"/>
     <uses-permission android:name="android.permission.READ_CONTACTS"/>
@@ -29,8 +31,8 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
 
-    <!--添加默认震动效果,需要申请震动权限-->
-    <uses-permission android:name="android.permission.VIBRATE" />
+    <!-- 添加默认震动效果,需要申请震动权限 -->
+    <uses-permission android:name="android.permission.VIBRATE"/>
 
     <application
         android:name=".MyApplication"
@@ -52,8 +54,9 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".UI.home.HomeActivity"
-                  android:screenOrientation="portrait" />
+        <activity
+            android:name=".UI.home.HomeActivity"
+            android:screenOrientation="portrait"/>
         <activity android:name=".UI.Activity.ActivityFirst"/>
         <activity android:name=".Bluetooth.ActivityBluetooth"/>
         <activity android:name=".Bluetooth.ActivityBluetooth2"/>
@@ -65,8 +68,9 @@
         <activity android:name=".Notification.ActivityNotification"/>
         <activity android:name=".UI.Activity.ActivitySurfaceView"/>
         <activity android:name=".touchAnim.ActivityTouchAnim"/>
-        <activity android:name=".ReadCode.ActivityReadCodeClass"
-            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ReadCode.ActivityReadCodeClass"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Notification.ActivityIntentShow"
             android:parentActivityName=".UI.home.HomeActivity">
@@ -74,13 +78,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".UI.home.HomeActivity"/>
         </activity>
-        <activity android:name=".Notification.ActivityIntentShow2" />
+        <activity android:name=".Notification.ActivityIntentShow2"/>
         <activity android:name=".doodleview.DoodleViewActivity"/>
         <activity android:name=".rxjava.ActivityRxJava"/>
         <activity android:name=".rxjava.ActivityRxJavaUse"/>
         <activity android:name=".UI.Activity.ActivityProgress2"/>
         <activity android:name=".observable.ActivityObservable"/>
-        <activity android:name="frame.zzt.com.appframe.kotlin.ActivityKotlin"/>
+        <activity android:name=".kotlin.ActivityKotlin"/>
         <activity android:name=".eventbus.ActivityEventBus"/>
         <activity android:name=".eventbus.ActivityEventBusOpt"/>
         <activity android:name=".slidelock.ActivitySlideLock"/>
@@ -90,17 +94,17 @@
         <activity android:name=".anim.AnimShowActivity"/>
         <activity android:name=".slidelock.ActivityHorizontalSlideLock"/>
         <activity android:name=".seekbar.ActivitySeekBar"/>
-
+        <activity android:name=".widgetview.ActivityWidget"/>
+        <activity android:name=".signed.ActivitySigned"/>
+        <activity android:name=".networkopt.ActivityNetwork"/>
 
         <receiver android:name=".Notification.ReceiverNotification"/>
-
         <service android:name=".Bluetooth.BleService"/>
         <service android:name=".Bluetooth.BleService19"/>
         <service android:name="com.inuker.bluetooth.library.BluetoothService"/>
         <service android:name=".Notification.ServiceNotification"/>
 
-
-        <!--  和蓝牙设备连接进行电话交互  -->
+        <!-- 和蓝牙设备连接进行电话交互 -->
         <service
             android:name=".Notification.NotificationReceiver18"
             android:label="@string/app_name"
@@ -109,7 +113,27 @@
                 <action android:name="android.service.notification.NotificationListenerService"/>
             </intent-filter>
         </service>
-        <!--  和蓝牙设备连接进行电话交互  -->
+        <!-- 和蓝牙设备连接进行电话交互 -->
+
+        <receiver android:name=".widgetview.NewAppWidget">
+            <intent-filter>
+                <!--这个是必须要有的系统规定-->
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+                <!--这个是我们自定义的 action ，用来更新UI，还可以自由添加更多 -->
+                <action android:name="com.lyl.widget.UPDATE_ALL"/>
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/new_app_widget_info"/>
+        </receiver>
+        <!-- 用来计时，发送 通知桌面部件更新 -->
+        <service android:name=".widgetview.WidgetService" >
+            <intent-filter>
+                <!--用来启动服务-->
+                <action android:name="android.appwidget.action.APP_WIDGET_SERVICE" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

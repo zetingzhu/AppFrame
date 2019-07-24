@@ -5,6 +5,8 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v4.app.NotificationCompat;
 import android.widget.RemoteViews;
 
@@ -46,19 +48,28 @@ public class NotificationUtil {
 
     private Notification createNotification(Context context , String textMsg ) {
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(mContext);
+
+//        notificationBuilder.setContentTitle("Wonderful music");
+//        notificationBuilder.setContentText("My Awesome Band");
+
         notificationBuilder.setSmallIcon(R.mipmap.ic_launcher);
+        // 设置大图标
+        Bitmap largeBitmap = BitmapFactory.decodeResource( context.getResources(), R.drawable.icon_01 ) ;
+        notificationBuilder.setLargeIcon(largeBitmap);
+
         notificationBuilder.setTicker("开始啦~~");
+        // 不能滑动清除
         notificationBuilder.setOngoing(true);
-        notificationBuilder.setContent(CreateNormalView(context));//设置普通notification视图
+//        notificationBuilder.setContent(CreateNormalView(context));//设置普通notification视图
         notificationBuilder.setCustomBigContentView(CreateBigView(context , textMsg  ));//设置显示bigView的notification视图
         notificationBuilder.setPriority(NotificationCompat.PRIORITY_MAX);//设置最大优先级
         // 绑定到按钮上后，去掉这个
-        Intent mIntent2 = new Intent(mContext, ActivityIntentShow2.class);
-        mIntent2.putExtra("msg" , "点击整个通知栏的跳转");
-        PendingIntent ContentIntent = PendingIntent.getActivity(mContext, ++requestCode , mIntent2, PendingIntent.FLAG_UPDATE_CURRENT);
-        notificationBuilder.setContentIntent(ContentIntent);
+//        Intent mIntent2 = new Intent(mContext, ActivityIntentShow2.class);
+//        mIntent2.putExtra("msg" , "点击整个通知栏的跳转");
+//        PendingIntent ContentIntent = PendingIntent.getActivity(mContext, ++requestCode , mIntent2, PendingIntent.FLAG_UPDATE_CURRENT);
+//        notificationBuilder.setContentIntent(ContentIntent);
         // 悬挂式通知栏
-//                .setFullScreenIntent(CustomViewIntent3 , false)
+//        notificationBuilder.setFullScreenIntent(CustomViewIntent3 , false) ;
 
         Notification notification = notificationBuilder.build();
         return notification;

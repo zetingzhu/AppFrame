@@ -17,30 +17,13 @@ import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import frame.zzt.com.appframe.Bluetooth.ActivityBluetooth;
-import frame.zzt.com.appframe.Bluetooth.ActivityBluetooth2;
-import frame.zzt.com.appframe.Bluetooth.ActivityBluetooth3;
-import frame.zzt.com.appframe.Bluetooth.ActivityBluetooth4;
-import frame.zzt.com.appframe.Bluetooth.ActivityBluetooth5;
-import frame.zzt.com.appframe.Bluetooth.ActivityBluetooth6;
-import frame.zzt.com.appframe.Bluetooth.ActivityBluetooth7;
-import frame.zzt.com.appframe.Notification.ActivityNotification;
 import frame.zzt.com.appframe.R;
-import frame.zzt.com.appframe.ReadCode.ActivityReadCodeClass;
-import frame.zzt.com.appframe.UI.Activity.ActivityFirst;
-import frame.zzt.com.appframe.UI.Activity.ActivityProgress2;
-import frame.zzt.com.appframe.UI.Activity.ActivitySurfaceView;
-import frame.zzt.com.appframe.UI.Activity.ActivitySystemUi;
 import frame.zzt.com.appframe.anim.AnimActivity;
-import frame.zzt.com.appframe.doodleview.DoodleViewActivity;
-import frame.zzt.com.appframe.eventbus.ActivityEventBus;
-import frame.zzt.com.appframe.kotlin.ActivityKotlin;
-import frame.zzt.com.appframe.observable.ActivityObservable;
-import frame.zzt.com.appframe.rxjava.ActivityRxJava;
-import frame.zzt.com.appframe.rxjava.ActivityRxJavaUse;
+import frame.zzt.com.appframe.networkopt.ActivityNetwork;
 import frame.zzt.com.appframe.seekbar.ActivitySeekBar;
+import frame.zzt.com.appframe.signed.ActivitySigned;
 import frame.zzt.com.appframe.slidelock.ActivityHorizontalSlideLock;
-import frame.zzt.com.appframe.slidelock.ActivitySlideLock;
+import frame.zzt.com.appframe.widgetview.ActivityWidget;
 
 /**
  * Created by allen on 18/8/8.
@@ -101,10 +84,10 @@ public class ThirdFragment extends Fragment {
     private DemoInfo[] DEMOS = {
             new DemoInfo(R.string.tab_item_anim_activity, R.string.tab_item_anim_activity_desc, AnimActivity.class),
             new DemoInfo(R.string.show_item_h_slide_lock, R.string.show_item_h_slide_lock_desc, ActivityHorizontalSlideLock.class),
-
             new DemoInfo(R.string.show_item_seek_bar , R.string.show_item_seek_bar_desc , ActivitySeekBar.class),
-
-
+            new DemoInfo(R.string.show_item_widget , R.string.show_item_widget_desc , ActivityWidget.class),
+            new DemoInfo(R.string.show_item_view_signed , R.string.show_item_view_signed_desc , ActivitySigned.class),
+            new DemoInfo(R.string.show_item_network_evbus , R.string.show_item_network_evbus , ActivityNetwork.class),
     } ;
 
     public class DemoListAdapter extends BaseAdapter {
