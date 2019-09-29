@@ -44,7 +44,7 @@ class ActivitySystemUi : AppCompatActivity() {
     fun initView(){
         textView.text = "ActivitySystemUi"
 
-        button1 = findViewById(R.id.button1) as Button
+        button1 = findViewById<Button>(R.id.button1)
         button1.text = "隐藏状态栏和虚拟按键"
         button1.setOnClickListener {
                               hideUiMenu( this@ActivitySystemUi )
@@ -142,7 +142,7 @@ class ActivitySystemUi : AppCompatActivity() {
      * 延迟加载控件id
      */
     fun <T : View> Activity.bindView(@IdRes res: Int): Lazy<T> {
-        return lazy { findViewById(res) as T }
+        return lazy { findViewById<T>(res) }
     }
 
 }

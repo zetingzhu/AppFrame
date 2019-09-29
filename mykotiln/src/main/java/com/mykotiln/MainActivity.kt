@@ -12,13 +12,13 @@ import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.BaseAdapter
 import android.widget.TextView
+import android.widget.Toolbar
 import com.mykotiln.activity.ActivityJava
 import com.mykotiln.activity.ActivityKotlin
 import com.mykotiln.activity.ActivityKotlinClass
@@ -97,8 +97,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             var desc: TextView? = null
 
             init {
-                title = view.findViewById(R.id.title) as TextView?
-                desc = view.findViewById(R.id.desc) as TextView?
+                title = view.findViewById<TextView>(R.id.title) as TextView?
+                desc = view.findViewById<TextView>(R.id.desc) as TextView?
             }
         }
     }
@@ -109,28 +109,28 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         listView_content.setAdapter(DemoListAdapter())
         listView_content.setOnItemClickListener(AdapterView.OnItemClickListener { arg0, v, index, arg3 -> onListItemClick(index) })
 
-        val toolbar = findViewById(R.id.toolbar) as Toolbar
-        setSupportActionBar(toolbar)
+//        val toolbar = findViewById<android.widget.Toolbar>(R.id.toolbar)
+//        setSupportActionBar(toolbar)
 
-        val fab = findViewById(R.id.fab) as FloatingActionButton
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
-        }
-
-        val drawer = findViewById(R.id.drawer_layout) as DrawerLayout
-        val toggle = ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
-        drawer.setDrawerListener(toggle)
-        toggle.syncState()
-
-        val navigationView = findViewById(R.id.nav_view) as NavigationView
-        navigationView.setNavigationItemSelectedListener(this)
+//        val fab = findViewById<FloatingActionButton>(R.id.fab)
+//        fab.setOnClickListener { view ->
+//            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                    .setAction("Action", null).show()
+//        }
+//
+//        val drawer = findViewById<DrawerLayout>(R.id.drawer_layout)
+//        val toggle = ActionBarDrawerToggle(
+//                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+//        drawer.setDrawerListener(toggle)
+//        toggle.syncState()
+//
+//        val navigationView = findViewById<NavigationView>(R.id.nav_view)
+//        navigationView.setNavigationItemSelectedListener(this)
 
     }
 
     override fun onBackPressed() {
-        val drawer = findViewById(R.id.drawer_layout) as DrawerLayout
+        val drawer = findViewById<DrawerLayout>(R.id.drawer_layout)
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START)
         } else {
@@ -176,7 +176,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         }
 
-        val drawer = findViewById(R.id.drawer_layout) as DrawerLayout
+        val drawer = findViewById<DrawerLayout>(R.id.drawer_layout)
         drawer.closeDrawer(GravityCompat.START)
         return true
     }

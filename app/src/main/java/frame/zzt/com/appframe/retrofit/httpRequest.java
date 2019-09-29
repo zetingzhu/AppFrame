@@ -24,21 +24,21 @@ public class HttpRequest {
 
 
     public void getLogin(Map<String, String> map, Callback<String> callback) {
-        RetrofitManager manager = RetrofitManager.getInstance();
+        frame.zzt.com.appframe.retrofit.RetrofitManager manager = frame.zzt.com.appframe.retrofit.RetrofitManager.getInstance();
         Call<String> call = manager.create().getLogin(map);
         manager.enqueue(call, callback);
     }
 
 
     public void getLogin2(  Callback<LoginResponse> callback) {
-        RetrofitManager manager = RetrofitManager.getInstance();
+        frame.zzt.com.appframe.retrofit.RetrofitManager manager = frame.zzt.com.appframe.retrofit.RetrofitManager.getInstance();
         Call<LoginResponse> call = manager.create().getLogin2();
         manager.enqueue(call, callback);
     }
 
 
     public void getLogin3(  String type, String phone, String password , Callback<LoginResponse> callback) {
-        RetrofitManager manager = RetrofitManager.getInstance();
+        frame.zzt.com.appframe.retrofit.RetrofitManager manager = frame.zzt.com.appframe.retrofit.RetrofitManager.getInstance();
         Call<LoginResponse> call = manager.create().getLogin3(type , phone , password);
         manager.enqueue(call, callback);
     }

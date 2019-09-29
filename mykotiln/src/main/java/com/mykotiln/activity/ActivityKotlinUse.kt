@@ -20,7 +20,7 @@ class ActivityKotlinUse : BaseActivity()  {
 
 
     fun initView(){
-        rv_kotlin_list = findViewById(R.id.rv_kotlin_list) as MyRecyclerViewKotlin
+        rv_kotlin_list = findViewById<MyRecyclerViewKotlin>(R.id.rv_kotlin_list)
         mPer.setItemKotlinClass(rv_kotlin_list!!)
 
     }

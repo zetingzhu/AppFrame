@@ -31,7 +31,7 @@ class ActivityKotlin : BaseActivity(), View.OnClickListener {
     }
 
     fun initView(){
-        rv_kotlin_list = findViewById(R.id.rv_kotlin_list) as MyRecyclerViewKotlin
+        rv_kotlin_list = findViewById<MyRecyclerViewKotlin>(R.id.rv_kotlin_list)
         returnInt = mPer.setItemOperateKotlin(rv_kotlin_list!!)
 
         tv_item_01.setOnClickListener (this@ActivityKotlin)

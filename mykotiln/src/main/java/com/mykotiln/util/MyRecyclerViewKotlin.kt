@@ -90,7 +90,7 @@ class MyRecyclerViewKotlin : RecyclerView{
         /** internal   // 同一个模块中可见 */
         internal var mTextview: TextView? = null
         init {
-            mTextview = itemView.findViewById(R.id.textView) as TextView
+            mTextview = itemView.findViewById<TextView>(R.id.textView) as TextView
         }
     }
 

@@ -79,7 +79,7 @@ class MyRecyclerViewKotlin1 : RecyclerView {
         internal var mTextview: TextView
 
         init {
-            mTextview = itemView.findViewById(R.id.textView) as TextView
+            mTextview = itemView.findViewById<TextView>(R.id.textView) as TextView
         }
     }
 
