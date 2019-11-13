@@ -107,6 +107,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="测试按钮" />
+
+            <CheckBox
+                android:id="@+id/cb_test"
+                android:layout_width="match_parent"
+                android:text="11111111"
+                android:button="@drawable/funds_select_radio_enable"
+                android:layout_height="40dp" />
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

@@ -17,6 +17,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -55,20 +57,22 @@ public class LoginActivity3<P extends BasePresenter> extends BaseAppCompatActivi
     @BindView(R.id.login_progress)
     public View mLoginFormView;
     @BindView(R.id.email_sign_in_button)
-    public Button mEmailSignInButton ;
+    public Button mEmailSignInButton;
     @BindView(R.id.tv_html)
-    public TextView tv_html ;
+    public TextView tv_html;
     @BindString(R.string.insurance_tarms_text12)
-    public String htmlText ;
-    @BindViews({R.id.button1 , R.id.button2})
-    public List<Button> btnList ;
+    public String htmlText;
+    @BindViews({R.id.button1, R.id.button2})
+    public List<Button> btnList;
     @BindView(R.id.imageView)
-    ImageView imageView ;
+    ImageView imageView;
     @BindView(R.id.button3)
     Button button3;
 
     @BindView(R.id.button4)
     Button button4;
+    @BindView(R.id.cb_test)
+    CheckBox cb_test;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -80,48 +84,67 @@ public class LoginActivity3<P extends BasePresenter> extends BaseAppCompatActivi
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
 
-        presenter =  new LoginPresenter(this);
+        presenter = new LoginPresenter(this);
 
 //        mEmailView.setText("13797745363");
 //        mPasswordView.setText("123456");
 
-        System.out.println("----获取信号值：" + getProgressRssi(-30) );
+        System.out.println("----获取信号值：" + getProgressRssi(-30));
 
-        Bitmap bitmap =   BitmapFactory.decodeResource( getResources(), R.drawable.home_vehicle_tab_false);
-        Drawable drawable =  ContextCompat.getDrawable(this , R.drawable.map_location_oval);
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.home_vehicle_tab_false);
+        Drawable drawable = ContextCompat.getDrawable(this, R.drawable.map_location_oval);
 //        BitmapDrawable bd = (BitmapDrawable) drawable;
 
         Bitmap bm = drawableToBitamp(drawable);
-        imageView.setImageBitmap(bitmap) ;
+        imageView.setImageBitmap(bitmap);
 
 //        imageView.setImageDrawable(drawable);
 
 
-        Log.w(TAG_BASE , "name:" + BuildHelper.getName());
-        Log.w(TAG_BASE , "version:" + BuildHelper.getVersion());
-        Log.w(TAG_BASE , "prop:" + BuildHelper.getProp("ro.build.version.emui"));
-        Log.w(TAG_BASE , "prop:" + BuildHelper.getProp("ro.product.manufacturer"));
-        Log.w(TAG_BASE , "是否是三星:" + BuildHelper.isSamsung());
-        Log.w(TAG_BASE , "getMode:" + BuildHelper.getMode());
-        Log.w(TAG_BASE , "getBrand:" + BuildHelper.getBrand());
-        Log.w(TAG_BASE , "getProduct:" + BuildHelper.getProduct());
-        Log.w(TAG_BASE , "getManufacturer:" + BuildHelper.getManufacturer());
-        Log.w(TAG_BASE , "getHardWare:" + BuildHelper.getHardWare());
-        Log.w(TAG_BASE , "DISPLAY:" + Build.DISPLAY );
+        Log.w(TAG_BASE, "name:" + BuildHelper.getName());
+        Log.w(TAG_BASE, "version:" + BuildHelper.getVersion());
+        Log.w(TAG_BASE, "prop:" + BuildHelper.getProp("ro.build.version.emui"));
+        Log.w(TAG_BASE, "prop:" + BuildHelper.getProp("ro.product.manufacturer"));
+        Log.w(TAG_BASE, "是否是三星:" + BuildHelper.isSamsung());
+        Log.w(TAG_BASE, "getMode:" + BuildHelper.getMode());
+        Log.w(TAG_BASE, "getBrand:" + BuildHelper.getBrand());
+        Log.w(TAG_BASE, "getProduct:" + BuildHelper.getProduct());
+        Log.w(TAG_BASE, "getManufacturer:" + BuildHelper.getManufacturer());
+        Log.w(TAG_BASE, "getHardWare:" + BuildHelper.getHardWare());
+        Log.w(TAG_BASE, "DISPLAY:" + Build.DISPLAY);
 
 
-
+        initView();
 
     }
-    private Bitmap drawableToBitamp(Drawable drawable)
-    {
+
+    private void initView() {
+
+        cb_test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.w(TAG_BASE, "cb_test - setOnClickListener");
+            }
+        });
+
+        cb_test.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                Log.w(TAG_BASE, "cb_test - setOnCheckedChangeListener");
+            }
+        });
+
+    }
+
+    private Bitmap drawableToBitamp(Drawable drawable) {
         int w = drawable.getIntrinsicWidth();
         int h = drawable.getIntrinsicHeight();
-        Bitmap bitmap = Bitmap.createBitmap(w,h,Bitmap.Config.ARGB_8888);
-        return  bitmap ;
+        Bitmap bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
+        return bitmap;
     }
-    public int getProgressRssi( int rssi){
-        return Math.round(rssi / Math.abs(-100))  ;
+
+    public int getProgressRssi(int rssi) {
+        return Math.round(rssi / Math.abs(-100));
     }
 
     @Override
@@ -139,23 +162,23 @@ public class LoginActivity3<P extends BasePresenter> extends BaseAppCompatActivi
         presenter.login();
     }
 
-    @OnClick( R.id.button1)
-    public void login01(){
+    @OnClick(R.id.button1)
+    public void login01() {
         presenter.login1();
     }
 
-    @OnClick( R.id.button2)
-    public void login02(){
+    @OnClick(R.id.button2)
+    public void login02() {
         presenter.login2();
     }
 
-    @OnClick( R.id.button3)
-    public void login03(){
+    @OnClick(R.id.button3)
+    public void login03() {
         presenter.login3();
     }
 
-    @OnClick( R.id.button4)
-    public void testBtn(){
+    @OnClick(R.id.button4)
+    public void testBtn() {
         onLoginSucc();
     }
 
@@ -164,7 +187,7 @@ public class LoginActivity3<P extends BasePresenter> extends BaseAppCompatActivi
     public void onLoginSucc() {
         showtoast("登录成功");
         Intent intent = new Intent();
-        intent.setClass(this , HomeActivity.class);
+        intent.setClass(this, HomeActivity.class);
         startActivity(intent);
     }
 
