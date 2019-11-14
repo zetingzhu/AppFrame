@@ -23,6 +23,7 @@ import frame.zzt.com.appframe.networkopt.ActivityNetwork;
 import frame.zzt.com.appframe.seekbar.ActivitySeekBar;
 import frame.zzt.com.appframe.signed.ActivitySigned;
 import frame.zzt.com.appframe.slidelock.ActivityHorizontalSlideLock;
+import frame.zzt.com.appframe.tablayout.ActivityTablayout;
 import frame.zzt.com.appframe.widgetview.ActivityWidget;
 
 /**
@@ -84,11 +85,12 @@ public class ThirdFragment extends Fragment {
     private DemoInfo[] DEMOS = {
             new DemoInfo(R.string.tab_item_anim_activity, R.string.tab_item_anim_activity_desc, AnimActivity.class),
             new DemoInfo(R.string.show_item_h_slide_lock, R.string.show_item_h_slide_lock_desc, ActivityHorizontalSlideLock.class),
-            new DemoInfo(R.string.show_item_seek_bar , R.string.show_item_seek_bar_desc , ActivitySeekBar.class),
-            new DemoInfo(R.string.show_item_widget , R.string.show_item_widget_desc , ActivityWidget.class),
-            new DemoInfo(R.string.show_item_view_signed , R.string.show_item_view_signed_desc , ActivitySigned.class),
-            new DemoInfo(R.string.show_item_network_evbus , R.string.show_item_network_evbus , ActivityNetwork.class),
-    } ;
+            new DemoInfo(R.string.show_item_seek_bar, R.string.show_item_seek_bar_desc, ActivitySeekBar.class),
+            new DemoInfo(R.string.show_item_widget, R.string.show_item_widget_desc, ActivityWidget.class),
+            new DemoInfo(R.string.show_item_view_signed, R.string.show_item_view_signed_desc, ActivitySigned.class),
+            new DemoInfo(R.string.show_item_network_evbus, R.string.show_item_network_evbus, ActivityNetwork.class),
+            new DemoInfo(R.string.show_item_tablayout, R.string.show_item_tablayout, ActivityTablayout.class),
+    };
 
     public class DemoListAdapter extends BaseAdapter {
         public DemoListAdapter() {

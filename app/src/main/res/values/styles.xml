@@ -24,4 +24,28 @@
         <item name="sign_in_text_siz">12sp</item>
     </style>
 
+
+    <!-- 修改tablayout的背景色，提示线的颜色，字体颜色等-->
+    <style name="My_TabLayout" parent="android:Widget">
+        <!--        背景色-->
+        <item name="tabBackground">@drawable/tablayout_title</item>
+        <!--        指示线颜色-->
+        <item name="tabIndicatorColor">#3D87FB</item>
+        <!--        指示线高度-->
+        <item name="tabIndicatorHeight">2dp</item>
+        <!--        文字默认颜色-->
+        <item name="tabTextAppearance">@style/TextAppearance.Design.Tab</item>
+        <!--        文字选中颜色-->
+        <item name="tabSelectedTextColor">#3D87FB</item>
+        <!--        固定和滚动样式- 默认是fixed，固定的；scrollable：可滚动的 -->
+        <item name="tabMode">fixed</item>
+    </style>
+
+    <style name="TextAppearance.Design.Tab" parent="TextAppearance.AppCompat.Button">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">#666666</item>
+        <item name="textAllCaps">true</item>
+    </style>
+
+
 </resources>

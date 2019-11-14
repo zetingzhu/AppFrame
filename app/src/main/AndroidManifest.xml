@@ -97,8 +97,13 @@
         <activity android:name=".widgetview.ActivityWidget" />
         <activity android:name=".signed.ActivitySigned" />
         <activity android:name=".networkopt.ActivityNetwork" />
+        <activity android:name=".tablayout.ActivityTablayout" />
+
+
 
         <receiver android:name=".Notification.ReceiverNotification" />
+
+
 
         <service android:name=".Bluetooth.BleService" />
         <service android:name=".Bluetooth.BleService19" />

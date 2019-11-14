@@ -106,5 +106,7 @@
 
     <string name="show_item_network_evbus">网络监听，注解回调</string>
 
+    <string name="show_item_tablayout">TabLayout 使用</string>
+
 
 </resources>
