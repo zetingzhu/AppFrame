@@ -1,49 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/tv_anim_msg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="启动动画的activity"
-        android:transitionName="@string/show_scene_transition_anim_title"/>
+        android:transitionName="@string/show_scene_transition_anim_title" />
+
     <Button
         android:id="@+id/btn_anim_start"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="启动"/>
+        android:text="启动" />
 
     <Spinner
         android:id="@+id/spinner_anim"
-        android:layout_width="match_parent" android:layout_height="wrap_content"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <ImageView
         android:id="@+id/iv_yx"
         android:layout_width="wrap_content"
         android:layout_height="200dp"
         android:transitionName="@string/show_scene_transition_anim"
-        app:srcCompat="@drawable/icon_yx"/>
+        app:srcCompat="@drawable/icon_yx" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                      android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
             <Button
                 android:id="@+id/btn_01"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="4.0 隐藏"/>
+                android:text="4.0 隐藏" />
+
             <Button
-                android:text="4.0 显示"
+                android:id="@+id/btn_02"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/btn_02"/>
+                android:layout_height="wrap_content"
+                android:text="4.0 显示" />
+
             <Button
-                android:text="4.0 显示"
+                android:id="@+id/btn_03"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/btn_03"/>
+                android:layout_height="wrap_content"
+                android:text="4.0 显示" />
+
+            <Button
+                android:id="@+id/btn_04"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="左右抖动动画" />
+
+            <Button
+                android:id="@+id/btn_05"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="左右抖动动画" />
+
         </LinearLayout>
     </ScrollView>
 
