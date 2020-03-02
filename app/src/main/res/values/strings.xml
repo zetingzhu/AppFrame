@@ -108,5 +108,7 @@
 
     <string name="show_item_tablayout">TabLayout 使用</string>
 
+    <string name="show_item_drag">竖子方向拖动效果 使用</string>
+
 
 </resources>

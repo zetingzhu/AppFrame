@@ -17,6 +17,7 @@ import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import frame.zzt.com.appframe.DragView.DragLayoutActivity;
 import frame.zzt.com.appframe.R;
 import frame.zzt.com.appframe.anim.AnimActivity;
 import frame.zzt.com.appframe.networkopt.ActivityNetwork;
@@ -90,6 +91,7 @@ public class ThirdFragment extends Fragment {
             new DemoInfo(R.string.show_item_view_signed, R.string.show_item_view_signed_desc, ActivitySigned.class),
             new DemoInfo(R.string.show_item_network_evbus, R.string.show_item_network_evbus, ActivityNetwork.class),
             new DemoInfo(R.string.show_item_tablayout, R.string.show_item_tablayout, ActivityTablayout.class),
+            new DemoInfo(R.string.show_item_drag, R.string.show_item_drag, DragLayoutActivity.class),
     };
 
     public class DemoListAdapter extends BaseAdapter {
