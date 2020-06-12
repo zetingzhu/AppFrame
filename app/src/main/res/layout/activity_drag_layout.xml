@@ -9,12 +9,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:background="@color/violet"
-            android:gravity="center"
-            android:text="11111111" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:background="@color/violet"
+                android:gravity="center"
+                android:text="11111111" />
+        </RelativeLayout>
     </frame.zzt.com.appframe.DragView.DragLayout>
 </LinearLayout>

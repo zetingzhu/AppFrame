@@ -75,6 +75,16 @@ public class DragLayout extends LinearLayout {
             }
 
             @Override
+            public int getViewHorizontalDragRange(View child) {
+                return getMeasuredWidth() - child.getMeasuredWidth();
+            }
+
+            @Override
+            public int getViewVerticalDragRange(View child) {
+                return getMeasuredHeight() - child.getMeasuredHeight();
+            }
+
+            @Override
             public int clampViewPositionHorizontal(View child, int left, int dx) {
                 return layoutWidth - child.getWidth();
             }
@@ -142,6 +152,6 @@ public class DragLayout extends LinearLayout {
         dragViewWidth = dragView.getMeasuredWidth();
         dragViewHeight = dragView.getMeasuredHeight();
 
-        dragView.layout(layoutWidth - dragViewWidth, t, r, dragViewHeight);
+        dragView.layout(layoutWidth - dragViewWidth, b - dragViewHeight, r, b);
     }
 }

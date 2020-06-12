@@ -23,6 +23,7 @@ import frame.zzt.com.appframe.anim.AnimActivity;
 import frame.zzt.com.appframe.networkopt.ActivityNetwork;
 import frame.zzt.com.appframe.seekbar.ActivitySeekBar;
 import frame.zzt.com.appframe.signed.ActivitySigned;
+import frame.zzt.com.appframe.singleList.ActivitySingleList;
 import frame.zzt.com.appframe.slidelock.ActivityHorizontalSlideLock;
 import frame.zzt.com.appframe.tablayout.ActivityTablayout;
 import frame.zzt.com.appframe.widgetview.ActivityWidget;
@@ -92,6 +93,8 @@ public class ThirdFragment extends Fragment {
             new DemoInfo(R.string.show_item_network_evbus, R.string.show_item_network_evbus, ActivityNetwork.class),
             new DemoInfo(R.string.show_item_tablayout, R.string.show_item_tablayout, ActivityTablayout.class),
             new DemoInfo(R.string.show_item_drag, R.string.show_item_drag, DragLayoutActivity.class),
+            new DemoInfo(R.string.show_item_drag, R.string.show_item_drag, DragLayoutActivity.class),
+            new DemoInfo(R.string.show_item_signlist, R.string.show_item_signlist, ActivitySingleList.class),
     };
 
     public class DemoListAdapter extends BaseAdapter {
