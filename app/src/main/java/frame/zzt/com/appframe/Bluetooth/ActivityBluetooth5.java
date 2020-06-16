@@ -21,21 +21,17 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.ParcelUuid;
-import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import android.util.Log;
-import android.widget.Button;
 import android.widget.Toast;
 
 import java.util.UUID;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import frame.zzt.com.appframe.R;
 import frame.zzt.com.appframe.UI.BaseAppCompatActivity;
-
-import static java.sql.DriverManager.println;
 
 /**
  * 蓝牙作为外围设备

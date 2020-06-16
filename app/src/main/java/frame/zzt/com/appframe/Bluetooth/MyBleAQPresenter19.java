@@ -16,10 +16,9 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.ParcelUuid;
-import android.support.annotation.RequiresApi;
-import android.text.TextUtils;
+import androidx.annotation.RequiresApi;
+
 import android.util.Log;
-import android.util.SparseArray;
 
 import java.util.List;
 import java.util.Timer;

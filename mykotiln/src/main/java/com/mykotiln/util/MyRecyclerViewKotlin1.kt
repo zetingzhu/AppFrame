@@ -1,9 +1,9 @@
 package com.mykotiln.util
 
 import android.content.Context
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
@@ -17,7 +17,7 @@ import com.mykotiln.R
  * Created by allen on 18/10/11.
  */
 
-class MyRecyclerViewKotlin1 : RecyclerView {
+class MyRecyclerViewKotlin1 : androidx.recyclerview.widget.RecyclerView {
 
 
     private var mAdapterRecycle: AdapterRecycle? = null
@@ -49,14 +49,14 @@ class MyRecyclerViewKotlin1 : RecyclerView {
         this.mOnClick = mOnClick
 
         mAdapterRecycle = AdapterRecycle()
-        layoutManager = LinearLayoutManager(mContext)
+        layoutManager = androidx.recyclerview.widget.LinearLayoutManager(mContext)
         //添加Android自带的分割线
-        addItemDecoration(DividerItemDecoration(mContext!!, DividerItemDecoration.VERTICAL))
+        addItemDecoration(androidx.recyclerview.widget.DividerItemDecoration(mContext!!, androidx.recyclerview.widget.DividerItemDecoration.VERTICAL))
         adapter = mAdapterRecycle
 
     }
 
-    inner class AdapterRecycle : RecyclerView.Adapter<DateHolder>() {
+    inner class AdapterRecycle : androidx.recyclerview.widget.RecyclerView.Adapter<DateHolder>() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DateHolder {
             val view = LayoutInflater.from(parent.context).inflate(R.layout.item_recycle, parent, false)
@@ -74,7 +74,7 @@ class MyRecyclerViewKotlin1 : RecyclerView {
         }
     }
 
-    inner class DateHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class DateHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
 
         internal var mTextview: TextView
 

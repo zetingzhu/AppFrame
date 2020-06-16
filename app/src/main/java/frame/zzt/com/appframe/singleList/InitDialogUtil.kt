@@ -3,8 +3,8 @@ package com.trade.eight.moudle.initDialog
 import android.app.Activity
 import android.content.DialogInterface
 import android.os.Handler
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
@@ -37,7 +37,7 @@ class InitDialogUtil private constructor() {
     /**
      * 根据不同的类型来请求不同的接口，展示不同的对话框效果
      */
-    fun requestInitDialogType(baseActivity: Activity, requestType: Int, callBack: Handler.Callback?, mRecyclerView: RecyclerView) {
+    fun requestInitDialogType(baseActivity: Activity, requestType: Int, callBack: Handler.Callback?, mRecyclerView: androidx.recyclerview.widget.RecyclerView) {
         var request = mapOf(Pair("111111111111111111111111111111111111111111111", requestType?.toString()))
 //        HttpUtils.post(AndroidAPIConfig.   , request, object : HttpCallback< >(){}  )
 
@@ -48,7 +48,7 @@ class InitDialogUtil private constructor() {
     /**
      * 显示dialog
      */
-    fun showTypeDialog(baseActivity: Activity, typeData: InitTypeDialogData, mRecyclerView: RecyclerView) {
+    fun showTypeDialog(baseActivity: Activity, typeData: InitTypeDialogData, mRecyclerView: androidx.recyclerview.widget.RecyclerView) {
 
 //        var dialog: InitListDialog = InitListDialog(baseActivity)
 //        var mRecyclerView = dialog.getDialogRecyclerview()
@@ -56,7 +56,7 @@ class InitDialogUtil private constructor() {
 
         var adapter: InitDialogAdapter = InitDialogAdapter()
 
-        mRecyclerView.layoutManager = LinearLayoutManager(baseActivity)
+        mRecyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(baseActivity)
 
         // 添加头
         val header = LayoutInflater.from(baseActivity).inflate(R.layout.init_dialog_header_layout, mRecyclerView, false)

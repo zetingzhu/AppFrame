@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="frame.zzt.com.appframe.mvvmbind.util.VmUtilKt" />
+
+        <import type="frame.zzt.com.appframe.mvvmbind.util.TextUtil" />
+
+        <import type="frame.zzt.com.appframe.mvvmbind.MVVMData" />
+
+        <variable
+            name="vmData"
+            type="MVVMData" />
+
+        <variable
+            name="handlers"
+            type="frame.zzt.com.appframe.mvvmbind.ActivityMVVMDemo.MyHandlers" />
+
+        <variable
+            name="vmModel"
+            type="frame.zzt.com.appframe.mvvmbind.MvvmModel" />
+
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{vmData.text2 +`::`+ vmData.text1 }" />
+
+        <EditText
+            android:id="@+id/et_text1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="@={vmData.text1}" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{ VmUtilKt.showClickCount( vmData.clickCount) }" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{ TextUtil.showClickCount( vmData.clickCount) }" />
+
+        </LinearLayout>
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/btn_click_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="btnClick1"
+                    android:text="测试点击按钮1" />
+                <!--android:onClick="@{myClick::onClickBtn}" -->
+
+                <Button
+                    android:id="@+id/btn_click_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{handlers::onClickFriend}"
+                    android:text="测试点击按钮2" />
+
+                <Button
+                    android:id="@+id/btn_click_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{view -> vmModel.btnTextClick3(vmData)}"
+                    android:text="测试点击按钮3" />
+
+                <Button
+                    android:id="@+id/btn_click_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="测试点击按钮4" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{view -> vmModel.updataListData(vmData)}"
+                    android:text="修改列表数据5" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{view -> vmModel.addListData(vmData)}"
+                    android:text="添加列表数据6" />
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <include
+            layout="@layout/layout_mvvm_item"
+            app:background="@{@color/gold}"
+            app:srcImg="@{@drawable/sign}"
+            app:text="@{vmData.text1}"
+            app:vis="@{true}" />
+
+        <include
+            layout="@layout/layout_mvvm_item"
+            app:background="@{@color/darkorange}"
+            app:srcImg="@{@drawable/mytrip_start_point}"
+            app:text="@{`第二个布局`}"
+            app:vis="@{true}" />
+
+        <include
+            layout="@layout/layout_mvvm_item"
+            app:background="@{@color/darkviolet}"
+            app:text="@{`第三个布局`}"
+            app:vis="@{false}" />
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            app:imageUrl="@{vmData.picUrl}" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/vm_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</layout>

@@ -1,11 +1,10 @@
 package frame.zzt.com.appframe.UI.Fragment;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +38,6 @@ import frame.zzt.com.appframe.UI.Activity.ActivitySurfaceView;
 import frame.zzt.com.appframe.doodleview.DoodleViewActivity;
 import frame.zzt.com.appframe.rxjava.ActivityRxJavaUse;
 import frame.zzt.com.appframe.slidelock.ActivitySlideLock;
-import frame.zzt.com.appframe.touchAnim.ActivityTouchAnim;
 
 /**
  * Created by allen on 18/8/8.

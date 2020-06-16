@@ -4,22 +4,32 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'org.greenrobot.greendao' // apply plugin
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.3"
+    compileSdkVersion 28
+    buildToolsVersion "28.0.3"
     defaultConfig {
         applicationId "frame.zzt.com.appframe"
         minSdkVersion 18
-        targetSdkVersion 26
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+
+    //引入对 DataBinding 的支持
+    dataBinding {
+        enabled = true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     //数据库db版本
@@ -35,13 +45,12 @@ android {
     packagingOptions {
         exclude 'LICENSE.txt'
     }
-
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.android.support:appcompat-v7:26.1.0'
-    implementation 'com.android.support:design:26.1.0'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'com.google.android.material:material:1.1.0'
     testImplementation 'junit:junit:4.12'
     implementation 'com.google.code.gson:gson:2.8.5'
     // yanzhenjie/AndPermission 运行权限管理库
@@ -59,32 +68,56 @@ dependencies {
     //CallAdapterFactory的Rx依赖包
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
     // butterknife 注解框架
-    implementation 'com.jakewharton:butterknife:8.8.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    implementation 'com.jakewharton:butterknife:10.0.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
     // 数据库框架
     implementation 'org.litepal.android:core:2.0.0'
     // greendao 数据库框架
-    implementation 'org.greenrobot:greendao:3.2.0'
+    implementation 'org.greenrobot:greendao:3.3.0'
     // greendao 使用加密数据库时需要添加
     implementation 'net.zetetic:android-database-sqlcipher:3.5.7'
     // 蓝牙ble框架
     implementation 'com.clj.fastble:FastBleLib:2.3.2'
     implementation 'com.inuker.bluetooth:library:1.4.0'
     // 添加kotlin 插件
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     // 添加eventbus 框架
     implementation 'org.greenrobot:eventbus:3.1.1'
     //引入Uiautomator
-    implementation 'com.android.support.test:rules:0.5'
-    implementation 'com.android.support.test:runner:0.5'
+    implementation 'androidx.test:rules:1.2.0'
+    implementation 'androidx.test.ext:junit:1.1.1'
     //跨应用的测试（Ui automator）
-    testImplementation 'com.android.support.test.uiautomator:uiautomator-v18:2.1.2'
+    testImplementation 'androidx.test.uiautomator:uiautomator:2.2.0'
     //内部测试（Espresso）
-    implementation 'com.android.support.test.espresso:espresso-core:2.2.2'
+    implementation 'androidx.test.espresso:espresso-core:3.2.0'
     //Android工程方法数超过65535，解决办法
-    implementation 'com.android.support:multidex:1.0.0'
+    implementation 'androidx.multidex:multidex:2.0.1'
     // 滚动图片展示
     implementation 'com.bigkoo:ConvenientBanner:2.1.4'
+    // 图片加载框架
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+
+    def lifecycle_version = "2.2.0"
+    // ViewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
+    // LiveData
+    implementation "androidx.lifecycle:lifecycle-livedata:$lifecycle_version"
+    // Lifecycles only (without ViewModel or LiveData)
+    implementation "androidx.lifecycle:lifecycle-runtime:$lifecycle_version"
+    // Saved state module for ViewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version"
+    // Annotation processor
+    annotationProcessor "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
+    // alternately - if using Java8, use the following instead of lifecycle-compiler
+    implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
+    // optional - helpers for implementing LifecycleOwner in a Service
+    implementation "androidx.lifecycle:lifecycle-service:$lifecycle_version"
+    // optional - ProcessLifecycleOwner provides a lifecycle for the whole application process
+    implementation "androidx.lifecycle:lifecycle-process:$lifecycle_version"
+    // optional - ReactiveStreams support for LiveData
+    implementation "androidx.lifecycle:lifecycle-reactivestreams:$lifecycle_version"
+
+
 }
 repositories {
     mavenCentral()

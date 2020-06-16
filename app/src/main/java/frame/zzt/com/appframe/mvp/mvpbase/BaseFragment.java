@@ -1,15 +1,5 @@
 package frame.zzt.com.appframe.mvp.mvpbase;
 
-import android.content.Context;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import io.reactivex.annotations.Nullable;
-
 //public abstract class BaseFragment<T extends BasePresenter> extends Fragment implements BaseFragmentView {
 //    protected T mPresenter;
 //    protected Context mContext;//activity的上下文对象

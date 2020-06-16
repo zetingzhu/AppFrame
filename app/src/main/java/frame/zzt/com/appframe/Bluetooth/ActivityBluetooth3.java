@@ -2,26 +2,16 @@ package frame.zzt.com.appframe.Bluetooth;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothGattCallback;
-import android.bluetooth.BluetoothGattCharacteristic;
-import android.bluetooth.le.ScanResult;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.IBinder;
-import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
-import android.text.TextUtils;
-import android.util.Log;
-import android.util.SparseArray;
-import android.widget.Button;
 
-import java.util.Timer;
-import java.util.TimerTask;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+
+import android.util.Log;
+import android.widget.Button;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

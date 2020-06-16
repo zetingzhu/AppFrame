@@ -4,10 +4,9 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.app.Activity;
-import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
-import android.os.Message;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,13 +15,10 @@ import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 
 import butterknife.BindView;
-import butterknife.BindViews;
 import butterknife.ButterKnife;
 import frame.zzt.com.appframe.R;
-import frame.zzt.com.appframe.UI.BaseAppCompatActivity;
 import frame.zzt.com.appframe.Util.DisplayUtils;
 import frame.zzt.com.appframe.Util.SystemUtil;
 import frame.zzt.com.appframe.widget.MyScrollView;

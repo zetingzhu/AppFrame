@@ -3,8 +3,10 @@ package frame.zzt.com.appframe.UI.Fragment;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +22,9 @@ import butterknife.Unbinder;
 import frame.zzt.com.appframe.DragView.DragLayoutActivity;
 import frame.zzt.com.appframe.R;
 import frame.zzt.com.appframe.anim.AnimActivity;
+import frame.zzt.com.appframe.databind.ActDataBind;
+import frame.zzt.com.appframe.databind.ActDoubleDataBind;
+import frame.zzt.com.appframe.mvvmbind.ActivityMVVMDemo;
 import frame.zzt.com.appframe.networkopt.ActivityNetwork;
 import frame.zzt.com.appframe.seekbar.ActivitySeekBar;
 import frame.zzt.com.appframe.signed.ActivitySigned;
@@ -85,6 +90,9 @@ public class ThirdFragment extends Fragment {
     }
 
     private DemoInfo[] DEMOS = {
+            new DemoInfo(R.string.show_item_databingding_mvvm, R.string.show_item_databingding_mvvm, ActivityMVVMDemo.class),
+            new DemoInfo(R.string.show_item_databingding, R.string.show_item_databingding, ActDataBind.class),
+            new DemoInfo(R.string.show_item_databingding_double, R.string.show_item_databingding_double, ActDoubleDataBind.class),
             new DemoInfo(R.string.tab_item_anim_activity, R.string.tab_item_anim_activity_desc, AnimActivity.class),
             new DemoInfo(R.string.show_item_h_slide_lock, R.string.show_item_h_slide_lock_desc, ActivityHorizontalSlideLock.class),
             new DemoInfo(R.string.show_item_seek_bar, R.string.show_item_seek_bar_desc, ActivitySeekBar.class),
@@ -95,6 +103,7 @@ public class ThirdFragment extends Fragment {
             new DemoInfo(R.string.show_item_drag, R.string.show_item_drag, DragLayoutActivity.class),
             new DemoInfo(R.string.show_item_drag, R.string.show_item_drag, DragLayoutActivity.class),
             new DemoInfo(R.string.show_item_signlist, R.string.show_item_signlist, ActivitySingleList.class),
+
     };
 
     public class DemoListAdapter extends BaseAdapter {

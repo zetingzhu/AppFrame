@@ -1,18 +1,15 @@
 package frame.zzt.com.appframe.UI.login;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
@@ -34,9 +31,6 @@ import frame.zzt.com.appframe.R;
 import frame.zzt.com.appframe.UI.BaseAppCompatActivity;
 import frame.zzt.com.appframe.UI.home.HomeActivity;
 import frame.zzt.com.appframe.Util.BuildHelper;
-import frame.zzt.com.appframe.Util.MyMessageUtil;
-import frame.zzt.com.appframe.Util.SystemUtil;
-import frame.zzt.com.appframe.modle.BaseModel;
 import frame.zzt.com.appframe.mvp.mvpbase.BasePresenter;
 
 /**

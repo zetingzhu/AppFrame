@@ -101,7 +101,7 @@
     <string name="add_widget">Add widget</string>
 
 
-    <string name="show_item_view_signed">签到功能</string>
+    <string name="show_item_view_signed">签到功能</string>x
     <string name="show_item_view_signed_desc">自定义签到</string>
 
     <string name="show_item_network_evbus">网络监听，注解回调</string>
@@ -111,6 +111,9 @@
     <string name="show_item_drag">竖子方向拖动效果 使用</string>
 
     <string name="show_item_signlist">单选按钮列表对话框</string>
+    <string name="show_item_databingding">databingind 使用</string>
+    <string name="show_item_databingding_double">databingind double 使用</string>
+    <string name="show_item_databingding_mvvm">databingind MVVM 使用</string>
 
 
 </resources>

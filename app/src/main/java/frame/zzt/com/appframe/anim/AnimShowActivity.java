@@ -1,17 +1,14 @@
 package frame.zzt.com.appframe.anim;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import android.transition.Explode;
 import android.transition.Fade;
 import android.transition.Slide;
-import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
 
 import butterknife.ButterKnife;
 import frame.zzt.com.appframe.R;

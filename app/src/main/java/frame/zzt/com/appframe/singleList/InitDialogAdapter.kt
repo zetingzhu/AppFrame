@@ -1,6 +1,6 @@
 package com.trade.eight.moudle.initDialog
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,7 +34,7 @@ class InitDialogAdapter : RecyclerAdapter() {
     }
 
 
-    override fun onCreateHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder? {
+    override fun onCreateHolder(parent: ViewGroup, viewType: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder? {
         if (viewType == InitTypDataList.ITEM_TYPE_CREDIT_GENERAL ||
                 viewType == InitTypDataList.ITEM_TYPE_CREDIT_FOR_PRODUCT) {
             return InitCreditViewHolder(LayoutInflater.from(parent?.context).inflate(R.layout.init_dialog_item_credit, parent, false))
@@ -55,7 +55,7 @@ class InitDialogAdapter : RecyclerAdapter() {
         return dataList?.get(convert(position))
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
         if (isHeaderView(position) || isBottomView(position)) {
             return
         }
@@ -95,7 +95,7 @@ class InitDialogAdapter : RecyclerAdapter() {
     /**
      * vip
      */
-    inner class InitVipViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class InitVipViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
         var btn_init_buy = itemView.findViewById<Button>(R.id.btn_init_buy)
         var tv_init_vip_title = itemView.findViewById<TextView>(R.id.tv_init_vip_title)
         var tv_init_vip_desc = itemView.findViewById<TextView>(R.id.tv_init_vip_desc)
@@ -104,7 +104,7 @@ class InitDialogAdapter : RecyclerAdapter() {
     /**
      * 通用卷，产品卷
      */
-    inner class InitCreditViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class InitCreditViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
         var rl_init_bg = itemView.findViewById<RelativeLayout>(R.id.rl_init_bg)
         var btn_init_trade = itemView.findViewById<Button>(R.id.btn_init_trade)
         var tv_init_amount = itemView.findViewById<TextView>(R.id.tv_init_amount)
@@ -114,7 +114,7 @@ class InitDialogAdapter : RecyclerAdapter() {
     /**
      * 充值卷，交易卷
      */
-    inner class InitTradeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class InitTradeViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
         var rl_init_bg = itemView.findViewById<RelativeLayout>(R.id.rl_init_bg)
         var btn_init_trade = itemView.findViewById<Button>(R.id.btn_init_trade)
         var tv_init_amount = itemView.findViewById<TextView>(R.id.tv_init_amount)

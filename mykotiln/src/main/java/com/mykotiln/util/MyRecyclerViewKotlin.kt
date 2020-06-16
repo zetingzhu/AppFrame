@@ -1,9 +1,9 @@
 package com.mykotiln.util
 
 import android.content.Context
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.item_recycle.*
  * Created by allen on 18/11/15.
  */
 
-class MyRecyclerViewKotlin : RecyclerView{
+class MyRecyclerViewKotlin : androidx.recyclerview.widget.RecyclerView {
 
     /**
      * var 声明为可变的
@@ -52,8 +52,8 @@ class MyRecyclerViewKotlin : RecyclerView{
         this.mList = mList
         this.mOnClick = mOnClick
         mAdapterRecycle = AdapterRecycle()
-        layoutManager = LinearLayoutManager(mContext)
-        addItemDecoration(DividerItemDecoration(mContext , DividerItemDecoration.VERTICAL))
+        layoutManager = androidx.recyclerview.widget.LinearLayoutManager(mContext)
+        addItemDecoration(androidx.recyclerview.widget.DividerItemDecoration(mContext, androidx.recyclerview.widget.DividerItemDecoration.VERTICAL))
         adapter = mAdapterRecycle
     }
 
@@ -61,7 +61,7 @@ class MyRecyclerViewKotlin : RecyclerView{
      * 定义一个适配器
      */
     /**内部类 内部类使用 inner 关键字来表示。 */
-    inner class AdapterRecycle : RecyclerView.Adapter<DateHolder>() {
+    inner class AdapterRecycle : androidx.recyclerview.widget.RecyclerView.Adapter<DateHolder>() {
         override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): DateHolder {
 
             var view = LayoutInflater.from(parent!!.context).inflate(R.layout.item_recycle , parent , false)

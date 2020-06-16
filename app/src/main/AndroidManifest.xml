@@ -100,11 +100,12 @@
         <activity android:name=".tablayout.ActivityTablayout" />
         <activity android:name=".DragView.DragLayoutActivity" />
         <activity android:name=".singleList.ActivitySingleList" />
-
+        <activity android:name=".databind.ActDataBind" />
+        <activity android:name=".databind.ActDoubleDataBind" />
+        <activity android:name=".mvvmbind.ActivityMVVMDemo" />
 
 
         <receiver android:name=".Notification.ReceiverNotification" />
-
 
 
         <service android:name=".Bluetooth.BleService" />

@@ -21,7 +21,7 @@ import frame.zzt.com.appframe.R;
  * Date 19/4/15.
  */
 
-public class MySeekBar extends android.support.v7.widget.AppCompatSeekBar {
+public class MySeekBar extends androidx.appcompat.widget.AppCompatSeekBar {
 
     private static final String TAG = MySeekBar.class.getSimpleName() ;
 
