@@ -24,6 +24,7 @@ import frame.zzt.com.appframe.R;
 import frame.zzt.com.appframe.anim.AnimActivity;
 import frame.zzt.com.appframe.databind.ActDataBind;
 import frame.zzt.com.appframe.databind.ActDoubleDataBind;
+import frame.zzt.com.appframe.mtoast.ActivityToastCompat;
 import frame.zzt.com.appframe.mvvmbind.ActivityMVVMDemo;
 import frame.zzt.com.appframe.networkopt.ActivityNetwork;
 import frame.zzt.com.appframe.seekbar.ActivitySeekBar;
@@ -90,6 +91,7 @@ public class ThirdFragment extends Fragment {
     }
 
     private DemoInfo[] DEMOS = {
+            new DemoInfo(R.string.show_item_toast, R.string.show_item_toast, ActivityToastCompat.class),
             new DemoInfo(R.string.show_item_databingding_mvvm, R.string.show_item_databingding_mvvm, ActivityMVVMDemo.class),
             new DemoInfo(R.string.show_item_databingding, R.string.show_item_databingding, ActDataBind.class),
             new DemoInfo(R.string.show_item_databingding_double, R.string.show_item_databingding_double, ActDoubleDataBind.class),
@@ -103,7 +105,6 @@ public class ThirdFragment extends Fragment {
             new DemoInfo(R.string.show_item_drag, R.string.show_item_drag, DragLayoutActivity.class),
             new DemoInfo(R.string.show_item_drag, R.string.show_item_drag, DragLayoutActivity.class),
             new DemoInfo(R.string.show_item_signlist, R.string.show_item_signlist, ActivitySingleList.class),
-
     };
 
     public class DemoListAdapter extends BaseAdapter {

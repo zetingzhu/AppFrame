@@ -115,5 +115,6 @@
     <string name="show_item_databingding_double">databingind double 使用</string>
     <string name="show_item_databingding_mvvm">databingind MVVM 使用</string>
 
+    <string name="show_item_toast">自定义toast</string>
 
 </resources>

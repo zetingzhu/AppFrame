@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.Observable;
 import androidx.lifecycle.Observer;
@@ -34,6 +35,7 @@ public class ActivityMVVMDemo extends AppCompatActivity {
     MvRecyclerAdapter adapter;
 
     public class MyHandlers {
+
         /**
          * 第二个按钮点击事件
          */
@@ -42,6 +44,14 @@ public class ActivityMVVMDemo extends AppCompatActivity {
             int count = mvvmData.getClickCount().get() + 1;
             mvvmData.getClickCount().set(count);
             mvvmData.setText2("T2" + +count);
+
+
+            AlertDialog alertDialog;
+            new AlertDialog.Builder(ActivityMVVMDemo.this).setTitle("")
+                    .setTitle("1111")
+                    .create();
+
+
         }
     }
 

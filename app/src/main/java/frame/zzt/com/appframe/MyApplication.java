@@ -8,7 +8,9 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
 import android.provider.Settings;
+
 import androidx.multidex.MultiDex;
+
 import android.util.Log;
 
 import frame.zzt.com.appframe.Notification.NotificationReceiver18;
@@ -24,7 +26,7 @@ public class MyApplication extends Application {
     private static final String TAG = "MyApplication";
 
     private static MyApplication mInstance;
-    MyGreenUtil mMyGreenUtil ;
+    MyGreenUtil mMyGreenUtil;
     Handler mWorkHandler = null; // 用于向工作线程发送执行代码
     HandlerThread mWorkThread = null; // 工作线程处理耗时操作,防止在主线程中执行界面卡
 
@@ -42,7 +44,7 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         mInstance = this;
-        mMyGreenUtil = new MyGreenUtil() ;
+        mMyGreenUtil = new MyGreenUtil();
 
         /**
          被杀后再次启动
@@ -58,8 +60,10 @@ public class MyApplication extends Application {
                 .contains("com.mediatek.swp/com.mediatek.app.notification.NotificationReceiver18")) {
             ComponentName localComponentName = new ComponentName(this, NotificationReceiver18.class);
             PackageManager localPackageManager = this.getPackageManager();
-            localPackageManager.setComponentEnabledSetting(localComponentName, 2, 1);
-            localPackageManager.setComponentEnabledSetting(localComponentName, 1, 1);
+//            localPackageManager.setComponentEnabledSetting(localComponentName, 2, 1);
+            localPackageManager.setComponentEnabledSetting(localComponentName, PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
+//            localPackageManager.setComponentEnabledSetting(localComponentName, 1, 1);
+            localPackageManager.setComponentEnabledSetting(localComponentName, PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP);
             Log.i(TAG, "setComponentEnabledSetting");
         }
 
