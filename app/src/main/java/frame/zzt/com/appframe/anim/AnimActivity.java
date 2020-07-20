@@ -16,7 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.util.Pair;
-import androidx.core.view.ViewCompat;
+
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -35,7 +35,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import frame.zzt.com.appframe.R;
-import frame.zzt.com.appframe.UI.BaseAppCompatActivity;
+import frame.zzt.com.appframe.ui.BaseAppCompatActivity;
 
 /**
  * Created by zeting

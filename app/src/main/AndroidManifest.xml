@@ -49,10 +49,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".UI.login.LoginActivity"
+            android:name=".ui.login.LoginActivity"
             android:label="@string/app_name" />
         <activity
-            android:name=".UI.login.LoginActivity3"
+            android:name=".ui.login.LoginActivity3"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -62,41 +62,41 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".UI.home.HomeActivity"
+            android:name=".ui.home.HomeActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".UI.Activity.ActivityFirst" />
-        <activity android:name=".Bluetooth.ActivityBluetooth" />
-        <activity android:name=".Bluetooth.ActivityBluetooth2" />
-        <activity android:name=".Bluetooth.ActivityBluetooth3" />
-        <activity android:name=".Bluetooth.ActivityBluetooth4" />
-        <activity android:name=".Bluetooth.ActivityBluetooth5" />
-        <activity android:name=".Bluetooth.ActivityBluetooth6" />
-        <activity android:name=".Bluetooth.ActivityBluetooth7" />
-        <activity android:name=".Notification.ActivityNotification" />
-        <activity android:name=".UI.Activity.ActivitySurfaceView" />
-        <activity android:name=".touchAnim.ActivityTouchAnim" />
+        <activity android:name=".ui.Activity.ActivityFirst" />
+        <activity android:name=".bluetooth.ActivityBluetooth" />
+        <activity android:name=".bluetooth.ActivityBluetooth2" />
+        <activity android:name=".bluetooth.ActivityBluetooth3" />
+        <activity android:name=".bluetooth.ActivityBluetooth4" />
+        <activity android:name=".bluetooth.ActivityBluetooth5" />
+        <activity android:name=".bluetooth.ActivityBluetooth6" />
+        <activity android:name=".bluetooth.ActivityBluetooth7" />
+        <activity android:name=".notification.ActivityNotification" />
+        <activity android:name=".ui.Activity.ActivitySurfaceView" />
+        <activity android:name=".touchanim.ActivityTouchAnim" />
         <activity
-            android:name=".ReadCode.ActivityReadCodeClass"
+            android:name=".readcode.ActivityReadCodeClass"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Notification.ActivityIntentShow"
-            android:parentActivityName=".UI.home.HomeActivity">
+            android:name=".notification.ActivityIntentShow"
+            android:parentActivityName=".ui.home.HomeActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".UI.home.HomeActivity" />
+                android:value=".ui.home.HomeActivity" />
         </activity>
-        <activity android:name=".Notification.ActivityIntentShow2" />
+        <activity android:name=".notification.ActivityIntentShow2" />
         <activity android:name=".doodleview.DoodleViewActivity" />
         <activity android:name=".rxjava.ActivityRxJava" />
         <activity android:name=".rxjava.ActivityRxJavaUse" />
-        <activity android:name=".UI.Activity.ActivityProgress2" />
+        <activity android:name=".ui.Activity.ActivityProgress2" />
         <activity android:name=".observable.ActivityObservable" />
         <activity android:name=".kotlin.ActivityKotlin" />
         <activity android:name=".eventbus.ActivityEventBus" />
         <activity android:name=".eventbus.ActivityEventBusOpt" />
         <activity android:name=".slidelock.ActivitySlideLock" />
-        <activity android:name=".WebView.AcvitityWebview" />
-        <activity android:name=".UI.Activity.ActivitySystemUi" />
+        <activity android:name=".webview.AcvitityWebview" />
+        <activity android:name=".ui.Activity.ActivitySystemUi" />
         <activity android:name=".anim.AnimActivity" />
         <activity android:name=".anim.AnimShowActivity" />
         <activity android:name=".slidelock.ActivityHorizontalSlideLock" />
@@ -105,25 +105,25 @@
         <activity android:name=".signed.ActivitySigned" />
         <activity android:name=".networkopt.ActivityNetwork" />
         <activity android:name=".tablayout.ActivityTablayout" />
-        <activity android:name=".DragView.DragLayoutActivity" />
-        <activity android:name=".singleList.ActivitySingleList" />
+        <activity android:name=".dragview.DragLayoutActivity" />
+        <activity android:name=".singlelist.ActivitySingleList" />
         <activity android:name=".databind.ActDataBind" />
         <activity android:name=".databind.ActDoubleDataBind" />
         <activity android:name=".mvvmbind.ActivityMVVMDemo" />
         <activity android:name=".mtoast.ActivityToastCompat" />
 
 
-        <receiver android:name=".Notification.ReceiverNotification" />
+        <receiver android:name=".notification.ReceiverNotification" />
 
 
-        <service android:name=".Bluetooth.BleService" />
-        <service android:name=".Bluetooth.BleService19" />
+        <service android:name=".bluetooth.BleService" />
+        <service android:name=".bluetooth.BleService19" />
         <service android:name="com.inuker.bluetooth.library.BluetoothService" />
-        <service android:name=".Notification.ServiceNotification" />
+        <service android:name=".notification.ServiceNotification" />
 
         <!-- 和蓝牙设备连接进行电话交互 -->
         <service
-            android:name=".Notification.NotificationReceiver18"
+            android:name=".notification.NotificationReceiver18"
             android:label="@string/app_name"
             android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
             <intent-filter>

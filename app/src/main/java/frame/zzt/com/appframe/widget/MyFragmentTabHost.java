@@ -21,9 +21,11 @@ import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,14 +43,14 @@ import java.util.ArrayList;
  * to complete the initialization of the tab host.
  *
  * <p>Here is a simple example of using a FragmentTabHost in an Activity:
- *
+ * <p>
  * {@sample development/samples/Support4Demos/src/com/example/android/supportv4/app/FragmentTabs.java
- *      complete}
+ * complete}
  *
  * <p>This can also be used inside of a fragment through fragment nesting:
- *
+ * <p>
  * {@sample development/samples/Support4Demos/src/com/example/android/supportv4/app/FragmentTabsFragmentSupport.java
- *      complete}
+ * complete}
  */
 public class MyFragmentTabHost extends TabHost
         implements TabHost.OnTabChangeListener {
@@ -145,35 +147,37 @@ public class MyFragmentTabHost extends TabHost
 
     /**
      * 设置需要保存状态的的Tab标签
+     *
      * @param tags 需要保存状态的Tab标签，保存状态的Tab在切换时只显示或隐藏。
      */
     public void setSaveStateTabByTags(String[] tags) {
-    	mSaveStateTabTags = tags;
+        mSaveStateTabTags = tags;
     }
 
     /**
      * 判断是否需要保存Tab的状态。
+     *
      * @param tag Tab对应的标签。
      * @return 如果需要保存返回true，否则返回false。
      */
     public boolean shouldSaveTabState(String tag) {
-    	if(mSaveStateTabTags == null || mSaveStateTabTags.length == 0) {
-    		return false;
-    	}
-    	if(tag == null || tag.trim().length() == 0) {
-    		return false;
-    	}
-    	for(String t : mSaveStateTabTags) {
-    		if(t.trim().equals(tag.trim())) {
-    			return true;
-    		}
-    	}
-    	return false;
+        if (mSaveStateTabTags == null || mSaveStateTabTags.length == 0) {
+            return false;
+        }
+        if (tag == null || tag.trim().length() == 0) {
+            return false;
+        }
+        for (String t : mSaveStateTabTags) {
+            if (t.trim().equals(tag.trim())) {
+                return true;
+            }
+        }
+        return false;
     }//end shouldSaveTabState
 
     private void initFragmentTabHost(Context context, AttributeSet attrs) {
         TypedArray a = context.obtainStyledAttributes(attrs,
-                new int[] { android.R.attr.inflatedId }, 0, 0);
+                new int[]{android.R.attr.inflatedId}, 0, 0);
         mContainerId = a.getResourceId(0, 0);
         a.recycle();
 
@@ -246,7 +250,7 @@ public class MyFragmentTabHost extends TabHost
 
     private void ensureContent() {
         if (mRealTabContent == null) {
-            mRealTabContent = (FrameLayout)findViewById(mContainerId);
+            mRealTabContent = (FrameLayout) findViewById(mContainerId);
             if (mRealTabContent == null) {
                 throw new IllegalStateException(
                         "No tab content FrameLayout found for id " + mContainerId);
@@ -274,14 +278,14 @@ public class MyFragmentTabHost extends TabHost
                 FragmentTransaction ft = mFragmentManager.beginTransaction();
                 //ft.detach(info.fragment);
                 //需要保存状态的hide，否则detach
-                if(shouldSaveTabState(info.tag)) {
-                	//System.out.println("hide tab=" + info.tag);
-                	ft.hide(info.fragment);
+                if (shouldSaveTabState(info.tag)) {
+                    //System.out.println("hide tab=" + info.tag);
+                    ft.hide(info.fragment);
                 } else {
-                	//System.out.println("detach tab=" + info.tag);
-                	ft.detach(info.fragment);
+                    //System.out.println("detach tab=" + info.tag);
+                    ft.detach(info.fragment);
                 }
-                
+
                 ft.commit();
             }
         }
@@ -299,7 +303,7 @@ public class MyFragmentTabHost extends TabHost
         // Go through all tabs and make sure their fragments match
         // the correct state.
         FragmentTransaction ft = null;
-        for (int i=0; i<mTabs.size(); i++) {
+        for (int i = 0; i < mTabs.size(); i++) {
             TabInfo tab = mTabs.get(i);
             tab.fragment = mFragmentManager.findFragmentByTag(tab.tag);
             if (tab.fragment != null && !tab.fragment.isDetached()) {
@@ -316,12 +320,12 @@ public class MyFragmentTabHost extends TabHost
                     }
                     //ft.detach(tab.fragment);
                     //需要保存状态的hide，否则detach
-                    if(shouldSaveTabState(tab.tag)) {
-                    	//System.out.println("hide tab=" + tab.tag);
-                    	ft.hide(tab.fragment);
+                    if (shouldSaveTabState(tab.tag)) {
+                        //System.out.println("hide tab=" + tab.tag);
+                        ft.hide(tab.fragment);
                     } else {
-                    	//System.out.println("detach tab=" + tab.tag);
-                    	ft.detach(tab.fragment);
+                        //System.out.println("detach tab=" + tab.tag);
+                        ft.detach(tab.fragment);
                     }
                 }
             }
@@ -353,7 +357,7 @@ public class MyFragmentTabHost extends TabHost
 
     @Override
     protected void onRestoreInstanceState(Parcelable state) {
-        SavedState ss = (SavedState)state;
+        SavedState ss = (SavedState) state;
         super.onRestoreInstanceState(ss.getSuperState());
         setCurrentTabByTag(ss.curTab);
     }
@@ -373,11 +377,14 @@ public class MyFragmentTabHost extends TabHost
 
     private FragmentTransaction doTabChanged(String tabId, FragmentTransaction ft) {
         TabInfo newTab = null;
-        for (int i=0; i<mTabs.size(); i++) {
+        for (int i = 0; i < mTabs.size(); i++) {
             TabInfo tab = mTabs.get(i);
             if (tab.tag.equals(tabId)) {
                 newTab = tab;
             }
+        }
+        if (newTab == null) {
+            return null;
         }
         if (newTab == null) {
             throw new IllegalStateException("No tab known for tag " + tabId);
@@ -390,12 +397,12 @@ public class MyFragmentTabHost extends TabHost
                 if (mLastTab.fragment != null) {
                     //ft.detach(mLastTab.fragment);
                     //需要保存状态的hide，否则detach
-                    if(shouldSaveTabState(mLastTab.tag)) {
-                    	//System.out.println("hide tab=" + mLastTab.tag);
-                    	ft.hide(mLastTab.fragment);
+                    if (shouldSaveTabState(mLastTab.tag)) {
+                        //System.out.println("hide tab=" + mLastTab.tag);
+                        ft.hide(mLastTab.fragment);
                     } else {
-                    	//System.out.println("detach tab=" + mLastTab.tag);
-                    	ft.detach(mLastTab.fragment);
+                        //System.out.println("detach tab=" + mLastTab.tag);
+                        ft.detach(mLastTab.fragment);
                     }
                 }
             }
@@ -406,13 +413,13 @@ public class MyFragmentTabHost extends TabHost
                     ft.add(mContainerId, newTab.fragment, newTab.tag);
                 } else {
                     //ft.attach(newTab.fragment);
-                	//需要保存状态的show，否则attach
-                    if(shouldSaveTabState(newTab.tag)) {
-                    	//System.out.println("show tab=" + newTab.tag);
-                    	ft.show(newTab.fragment);
+                    //需要保存状态的show，否则attach
+                    if (shouldSaveTabState(newTab.tag)) {
+                        //System.out.println("show tab=" + newTab.tag);
+                        ft.show(newTab.fragment);
                     } else {
-                    	//System.out.println("attach tab=" + newTab.tag);
-                    	ft.attach(newTab.fragment);
+                        //System.out.println("attach tab=" + newTab.tag);
+                        ft.attach(newTab.fragment);
                     }
 
                 }

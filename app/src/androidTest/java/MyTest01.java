@@ -1,5 +1,3 @@
-import androidx.test.espresso.ViewAction;
-import androidx.test.espresso.ViewInteraction;
 import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.matcher.BoundedMatcher;
 import androidx.test.rule.ActivityTestRule;
@@ -12,16 +10,12 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import frame.zzt.com.appframe.R;
-import frame.zzt.com.appframe.UI.Fragment.DemoInfo;
-import frame.zzt.com.appframe.UI.login.LoginActivity3;
+import frame.zzt.com.appframe.ui.Fragment.DemoInfo;
+import frame.zzt.com.appframe.ui.login.LoginActivity3;
 
-import static androidx.test.espresso.Espresso.getIdlingResources;
 import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
-import static androidx.test.espresso.action.ViewActions.typeText;
-import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.collection.IsMapContaining.hasEntry;

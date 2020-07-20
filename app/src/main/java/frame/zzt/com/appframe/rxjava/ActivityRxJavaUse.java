@@ -2,8 +2,7 @@ package frame.zzt.com.appframe.rxjava;
 
 import android.Manifest;
 import android.os.Bundle;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
+
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,7 +23,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import frame.zzt.com.appframe.R;
-import frame.zzt.com.appframe.UI.BaseAppCompatActivity;
+import frame.zzt.com.appframe.ui.BaseAppCompatActivity;
 
 /**
  * Created by allen on 18/8/29.

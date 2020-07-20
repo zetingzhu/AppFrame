@@ -15,7 +15,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import frame.zzt.com.appframe.R;
-import frame.zzt.com.appframe.UI.BaseAppCompatActivity;
+import frame.zzt.com.appframe.ui.BaseAppCompatActivity;
 
 /**
  *  EventBus 接收消息的界面

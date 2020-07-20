@@ -19,8 +19,8 @@ import android.widget.LinearLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import frame.zzt.com.appframe.R;
-import frame.zzt.com.appframe.Util.DisplayUtils;
-import frame.zzt.com.appframe.Util.SystemUtil;
+import frame.zzt.com.appframe.util.DisplayUtils;
+import frame.zzt.com.appframe.util.SystemUtil;
 import frame.zzt.com.appframe.widget.MyScrollView;
 
 /**

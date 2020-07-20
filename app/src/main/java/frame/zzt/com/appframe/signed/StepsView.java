@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import frame.zzt.com.appframe.R;
-import frame.zzt.com.appframe.Util.DisplayUtils;
+import frame.zzt.com.appframe.util.DisplayUtils;
 
 /**
  * description: 自定义签到View.

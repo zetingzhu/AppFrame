@@ -31,13 +31,13 @@ class MyRecyclerViewKotlin : androidx.recyclerview.widget.RecyclerView {
      * 次构造函数, 类也可以有二级构造函数，需要加前缀 constructor:
      * context: Context? 后面加？ 表示可为空
      * */
-    constructor(context: Context?) : super(context){
+    constructor(context: Context?) : super(context!!){
         initView(context)
     }
-    constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs){
+    constructor(context: Context?, attrs: AttributeSet?) : super(context!!, attrs){
         initView(context)
     }
-    constructor(context: Context?, attrs: AttributeSet?, defStyle: Int) : super(context, attrs, defStyle){
+    constructor(context: Context?, attrs: AttributeSet?, defStyle: Int) : super(context!!, attrs, defStyle){
         initView(context)
     }
 
@@ -62,14 +62,14 @@ class MyRecyclerViewKotlin : androidx.recyclerview.widget.RecyclerView {
      */
     /**内部类 内部类使用 inner 关键字来表示。 */
     inner class AdapterRecycle : androidx.recyclerview.widget.RecyclerView.Adapter<DateHolder>() {
-        override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): DateHolder {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DateHolder {
 
             var view = LayoutInflater.from(parent!!.context).inflate(R.layout.item_recycle , parent , false)
             var viewHolder = DateHolder(view)
             return viewHolder
         }
 
-        override fun onBindViewHolder(holder: DateHolder?, position: Int) {
+        override fun onBindViewHolder(holder: DateHolder, position: Int) {
             holder!!.mTextview!!.text =  mList!![position].itemId.toString() + " : " + mList!![position].itemValue.toString()
             holder.mTextview!!.setOnClickListener(object :View.OnClickListener {
                 override fun onClick(v: View?) {

@@ -25,6 +25,7 @@ import com.mykotiln.activity.ActivityKotlinClass
 import com.mykotiln.activity.ActivityKotlinUse
 import kotlinx.android.synthetic.main.content_main.*
 
+/**
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -181,3 +182,4 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return true
     }
 }
+*/

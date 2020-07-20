@@ -6,7 +6,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.ScrollView;
 
-import frame.zzt.com.appframe.Bluetooth.ActivityBluetooth7;
+import frame.zzt.com.appframe.bluetooth.ActivityBluetooth7;
 
 /**
  * 自定义的 ScrollView

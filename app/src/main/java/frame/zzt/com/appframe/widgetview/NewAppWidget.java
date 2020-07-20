@@ -5,17 +5,15 @@ import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
-import android.nfc.Tag;
 import android.util.Log;
 import android.widget.RemoteViews;
-import android.widget.Toast;
 
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
 import frame.zzt.com.appframe.R;
-import frame.zzt.com.appframe.UI.home.HomeActivity;
+import frame.zzt.com.appframe.ui.home.HomeActivity;
 
 /**
  *

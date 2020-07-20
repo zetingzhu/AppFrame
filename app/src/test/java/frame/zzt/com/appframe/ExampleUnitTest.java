@@ -1,7 +1,5 @@
 package frame.zzt.com.appframe;
 
-import android.util.Log;
-
 import org.junit.Test;
 
 import java.math.BigDecimal;
@@ -9,8 +7,8 @@ import java.text.DecimalFormat;
 import java.util.Random;
 
 
-import frame.zzt.com.appframe.Bluetooth.MD5Util;
-import frame.zzt.com.appframe.Util.ByteUtil;
+import frame.zzt.com.appframe.bluetooth.MD5Util;
+import frame.zzt.com.appframe.util.ByteUtil;
 
 import static org.junit.Assert.*;
 

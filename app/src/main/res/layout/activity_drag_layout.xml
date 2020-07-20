@@ -5,7 +5,7 @@
     android:orientation="vertical">
 
 
-    <frame.zzt.com.appframe.DragView.DragLayout
+    <frame.zzt.com.appframe.dragview.DragLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -20,5 +20,5 @@
                 android:gravity="center"
                 android:text="11111111" />
         </RelativeLayout>
-    </frame.zzt.com.appframe.DragView.DragLayout>
+    </frame.zzt.com.appframe.dragview.DragLayout>
 </LinearLayout>

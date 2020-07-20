@@ -13,8 +13,8 @@ import androidx.multidex.MultiDex;
 
 import android.util.Log;
 
-import frame.zzt.com.appframe.Notification.NotificationReceiver18;
-import frame.zzt.com.appframe.greenUtil.MyGreenUtil;
+import frame.zzt.com.appframe.notification.NotificationReceiver18;
+import frame.zzt.com.appframe.greenutil.MyGreenUtil;
 import frame.zzt.com.appframe.greendao.DaoSession;
 
 /**

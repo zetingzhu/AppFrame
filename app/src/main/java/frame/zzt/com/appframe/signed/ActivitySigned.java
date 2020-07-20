@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import frame.zzt.com.appframe.R;
-import frame.zzt.com.appframe.UI.BaseAppCompatActivity;
+import frame.zzt.com.appframe.ui.BaseAppCompatActivity;
 
 /**
  * 自定义签到功能

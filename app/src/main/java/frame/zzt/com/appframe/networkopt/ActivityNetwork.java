@@ -5,7 +5,7 @@ import androidx.annotation.Nullable;
 import android.util.Log;
 
 import frame.zzt.com.appframe.R;
-import frame.zzt.com.appframe.UI.BaseAppCompatActivity;
+import frame.zzt.com.appframe.ui.BaseAppCompatActivity;
 
 /**
  * Created by zeting
