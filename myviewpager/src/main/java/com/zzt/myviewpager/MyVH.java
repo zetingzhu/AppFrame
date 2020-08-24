@@ -7,6 +7,7 @@ import android.widget.LinearLayout;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.zzt.viewpager2.R;
 
 /**
  * @author: zeting

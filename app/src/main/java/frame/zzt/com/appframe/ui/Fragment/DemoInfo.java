@@ -8,9 +8,16 @@ import android.app.Activity;
  */
 
 public class DemoInfo {
-    public  int title;
-    public  int desc;
-    public  Class<? extends Activity> demoClass;
+    public int title;
+    public int desc;
+    public Class<? extends Activity> demoClass;
+    public String arouter;// 路由地址
+
+    public DemoInfo(int title, int desc, String arouter) {
+        this.title = title;
+        this.desc = desc;
+        this.arouter = arouter;
+    }
 
     public DemoInfo(int title, int desc,
                     Class<? extends Activity> demoClass) {

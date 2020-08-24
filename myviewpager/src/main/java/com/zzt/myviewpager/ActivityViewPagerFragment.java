@@ -21,6 +21,7 @@ import com.zzt.myviewpager.anim.ZoomOutPageTransformer;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.zzt.viewpager2.R;
 
 /**
  * @author: zeting
@@ -175,22 +176,17 @@ public class ActivityViewPagerFragment extends BaseActivityViewPager implements 
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_horizontal:
-                viewPager2.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
-                break;
-            case R.id.btn_vertical:
-                viewPager2.setOrientation(ViewPager2.ORIENTATION_VERTICAL);
-                break;
-            case R.id.btn_depath:
-                viewPager2.setPageTransformer(new DepthPageTransformer());
-                break;
-            case R.id.btn_zoom:
-                viewPager2.setPageTransformer(new ZoomOutPageTransformer());
-                break;
-            case R.id.btn_rotation:
-                viewPager2.setPageTransformer(new RotationPageTransformer());
-                break;
+        int id = v.getId();
+        if (id == R.id.btn_horizontal) {
+            viewPager2.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
+        } else if (id == R.id.btn_vertical) {
+            viewPager2.setOrientation(ViewPager2.ORIENTATION_VERTICAL);
+        } else if (id == R.id.btn_depath) {
+            viewPager2.setPageTransformer(new DepthPageTransformer());
+        } else if (id == R.id.btn_zoom) {
+            viewPager2.setPageTransformer(new ZoomOutPageTransformer());
+        } else if (id == R.id.btn_rotation) {
+            viewPager2.setPageTransformer(new RotationPageTransformer());
         }
     }
 

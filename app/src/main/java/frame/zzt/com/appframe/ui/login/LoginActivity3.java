@@ -20,6 +20,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.zzt.commonmodule.utils.ConfigARouter;
+
 import java.util.List;
 
 import butterknife.BindString;
@@ -37,6 +40,7 @@ import frame.zzt.com.appframe.mvp.mvpbase.BasePresenter;
  * Created by allen on 18/8/13.
  */
 
+@Route(path = ConfigARouter.ACTIVITY_APP_LOGIN)
 public class LoginActivity3<P extends BasePresenter> extends BaseAppCompatActivity implements LoginView {
 
     public Context context;

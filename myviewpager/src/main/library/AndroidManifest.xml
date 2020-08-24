@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.zzt.viewpager2">
+
+    <application android:theme="@style/AppTheme">
+        <activity
+            android:name="com.zzt.myviewpager.ActivityViewPager"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name="com.zzt.myviewpager.ActivityViewPagerFragment"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name="com.zzt.myviewpager.ActivityViewPagerAdd"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name="com.zzt.myviewpager.ActivityViewPagerViewAdd"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+    </application>
+
+</manifest>

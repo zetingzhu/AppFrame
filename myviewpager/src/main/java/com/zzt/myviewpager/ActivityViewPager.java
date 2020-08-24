@@ -17,14 +17,19 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.zzt.commonmodule.utils.ConfigARouter;
+import com.zzt.viewpager2.R;
 
 
 /**
  * @author: zeting
  * @date: 2020/1/7
  */
+@Route(path = ConfigARouter.ACTIVITY_VIEWPAGER_MAIN)
 public class ActivityViewPager extends BaseActivityViewPager {
 
     private final static String TAG = ActivityViewPager.class.getSimpleName();
@@ -36,7 +41,6 @@ public class ActivityViewPager extends BaseActivityViewPager {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 
 
         initviewViewpager1();
@@ -81,6 +85,7 @@ public class ActivityViewPager extends BaseActivityViewPager {
             }
         });
 
+        ARouter.getInstance().inject(this);
     }
 
     private void initviewViewpager1() {

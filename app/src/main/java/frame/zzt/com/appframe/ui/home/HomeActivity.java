@@ -10,6 +10,10 @@ import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.zzt.commonmodule.utils.ConfigARouter;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +26,7 @@ import frame.zzt.com.appframe.widget.MyFragmentTabHost;
 /**
  * Created by allen on 18/8/7.
  */
-
+@Route(path = ConfigARouter.ACTIVITY_APP_MAIN)
 public class HomeActivity extends FragmentActivity {
     private static final String TAG = HomeActivity.class.getSimpleName();
     /**
@@ -48,6 +52,8 @@ public class HomeActivity extends FragmentActivity {
         initView();
 
         initFragment(savedInstanceState);
+
+        ARouter.getInstance().inject(this);
     }
 
 

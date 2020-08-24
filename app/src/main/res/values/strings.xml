@@ -121,5 +121,6 @@
     <string name="show_item_navigation">Fragment 导航</string>
 
     <string name="show_item_group_recycleview">分组悬停的recyclevieew</string>
+    <string name="show_item_viewpager2">ViewPager2 的简单使用</string>
 
 </resources>

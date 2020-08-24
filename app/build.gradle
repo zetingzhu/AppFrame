@@ -15,6 +15,13 @@ android {
         versionName "1.0"
         multiDexEnabled true
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+
+        //ARouter添加
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
     }
     buildTypes {
         release {
@@ -33,6 +40,7 @@ android {
         enabled = true
     }
 
+    // java8 支持
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -60,8 +68,11 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'com.google.android.material:material:1.1.0'
-    if (!isModule.toBoolean()) {
+    if (isModule.toBoolean()) {
+        implementation project(path: ':CommonModule')
+    } else {
         implementation project(path: ':headerrecycleview')
+        implementation project(path: ':myviewpager')
     }
     testImplementation 'junit:junit:4.13'
     implementation 'com.google.code.gson:gson:2.8.6'
@@ -148,6 +159,8 @@ dependencies {
     // Dynamic Feature Module Support
     implementation "androidx.navigation:navigation-dynamic-features-fragment:$nav_version"
 
+// ARouter 包
+    annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
 }
 repositories {
     mavenCentral()

@@ -14,10 +14,10 @@ import androidx.viewpager2.widget.ViewPager2;
 
 
 import com.zzt.myviewpager.data.ItemData;
+import com.zzt.viewpager2.R;
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 /**
  * @author: zeting
@@ -119,24 +119,20 @@ public class ActivityViewPagerAdd extends BaseActivityViewPager implements View.
     }
 
 
-
-
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_add:
-                int item = viewPager2.getCurrentItem();
-                addList(item, "添加Item:" + nextValue);
+        int id = v.getId();
+        if (id == R.id.btn_add) {
+            int item = viewPager2.getCurrentItem();
+            addList(item, "添加Item:" + nextValue);
+            viewPager2.getAdapter().notifyDataSetChanged();
+            viewPager2.setCurrentItem(item, false);
+        } else if (id == R.id.btn_del) {
+            int item1 = viewPager2.getCurrentItem();
+            if (itemList.size() > 0) {
+                itemList.remove(item1);
                 viewPager2.getAdapter().notifyDataSetChanged();
-                viewPager2.setCurrentItem(item, false);
-                break;
-            case R.id.btn_del:
-                int item1 = viewPager2.getCurrentItem();
-                if (itemList.size() > 0) {
-                    itemList.remove(item1);
-                    viewPager2.getAdapter().notifyDataSetChanged();
-                }
-                break;
+            }
         }
     }
 

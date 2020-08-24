@@ -15,6 +15,10 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.example.headerrecycleview.MainActivity;
+import com.zzt.commonmodule.utils.ConfigARouter;
+
 import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -89,13 +93,18 @@ public class ThirdFragment extends Fragment {
     }
 
     void onListItemClick(int index) {
-        Intent intent;
-        intent = new Intent(getActivity(), DEMOS[index].demoClass);
-        this.startActivity(intent);
+        if (DEMOS[index].demoClass != null) {
+            Intent intent;
+            intent = new Intent(getActivity(), DEMOS[index].demoClass);
+            this.startActivity(intent);
+        } else if (DEMOS[index].arouter != null && !DEMOS[index].arouter.isEmpty()) {
+            ARouter.getInstance().build(DEMOS[index].arouter).navigation();
+        }
     }
 
     private DemoInfo[] DEMOS = {
-            new DemoInfo(R.string.show_item_group_recycleview, R.string.show_item_group_recycleview, ActivityNavigationFragment.class),
+            new DemoInfo(R.string.show_item_viewpager2, R.string.show_item_viewpager2, ConfigARouter.ACTIVITY_VIEWPAGER_MAIN),
+            new DemoInfo(R.string.show_item_group_recycleview, R.string.show_item_group_recycleview, ConfigARouter.ACTIVITY_RECYCLEVIEW_HEADER),
             new DemoInfo(R.string.show_item_navigation, R.string.show_item_navigation, ActivityNavigationFragment.class),
             new DemoInfo(R.string.show_item_guide, R.string.show_item_guide, ActivityGuide.class),
             new DemoInfo(R.string.show_item_new_fragment, R.string.show_item_new_fragment, ActivityNewFragment.class),

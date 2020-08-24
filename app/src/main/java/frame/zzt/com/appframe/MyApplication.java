@@ -1,6 +1,5 @@
 package frame.zzt.com.appframe;
 
-import android.app.Application;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -13,15 +12,17 @@ import androidx.multidex.MultiDex;
 
 import android.util.Log;
 
+import com.zzt.commonmodule.base.BaseApplication;
+
 import frame.zzt.com.appframe.notification.NotificationReceiver18;
 import frame.zzt.com.appframe.greenutil.MyGreenUtil;
 import frame.zzt.com.appframe.greendao.DaoSession;
 
 /**
- * Created by allen on 18/8/7.
+ * @author: zeting
+ * @date: 2018/8/7.
  */
-
-public class MyApplication extends Application {
+public class MyApplication extends BaseApplication {
 
     private static final String TAG = "MyApplication";
 

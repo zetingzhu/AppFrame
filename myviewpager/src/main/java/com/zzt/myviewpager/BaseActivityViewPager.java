@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.tabs.TabLayout;
 
+import com.zzt.viewpager2.R;
 /**
  * @author: zeting
  * @date: 2020/1/7

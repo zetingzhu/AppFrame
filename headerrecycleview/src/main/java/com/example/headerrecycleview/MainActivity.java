@@ -5,16 +5,24 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.zzt.commonmodule.utils.ConfigARouter;
+
 /**
  * @author: zeting
  * @date: 2020/8/19
  */
+@Route(path = ConfigARouter.ACTIVITY_RECYCLEVIEW_HEADER )
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ARouter.getInstance().inject(this);
     }
 
     public void linearlayout(View view) {

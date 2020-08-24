@@ -1,4 +1,4 @@
-package com.zzt.myviewpager;
+package com.example.commonmodule;
 
 import org.junit.Test;
 

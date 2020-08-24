@@ -14,10 +14,11 @@ import frame.zzt.com.appframe.greendao.DaoSession;
 public class MyGreenUtil {
 
     private DaoMaster mDaoMaster;
-    private String DatabasePath =  "appFrameDb"  ;
+    private String DatabasePath = "appFrameDb";
     private DaoSession mDaoSession;
-//    private DaoMaster.OpenHelper mOpenHelper;
-    private MyOpenHelper myOpenHelper ;
+    //    private DaoMaster.OpenHelper mOpenHelper;
+    private MyOpenHelper myOpenHelper;
+
     /**
      * 取得DaoMaster
      *
@@ -42,7 +43,7 @@ public class MyGreenUtil {
         return mDaoMaster;
     }
 
-    public void setLog(){
+    public void setLog() {
         MigrationHelper.DEBUG = true; //如果你想查看日志信息，请将 DEBUG 设置为 true
         QueryBuilder.LOG_SQL = true;
         QueryBuilder.LOG_VALUES = true;

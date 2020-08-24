@@ -1,2 +1,3 @@
+include ':CommonModule'
 include ':headerrecycleview'
 include ':app', ':mykotiln', ':javalib',':myviewpager'

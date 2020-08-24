@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+import com.zzt.viewpager2.R;
+
 /**
  * @author: zeting
  * @date: 2020/1/7
@@ -115,25 +117,21 @@ public class ActivityViewPagerViewAdd extends BaseActivityViewPager implements V
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_add:
-                int item = viewPager2.getCurrentItem();
-                itemList.add(item, "前面添加：" + itemList.size());
-                viewPager2.getAdapter().notifyItemInserted(item);
-                break;
-            case R.id.btn_del:
-                int item1 = viewPager2.getCurrentItem();
-                itemList.remove(item1);
-                viewPager2.getAdapter().notifyItemRangeRemoved(item1, 1);
-                break;
-            case R.id.btn_test:
-                viewPager2.beginFakeDrag();
-                viewPager2.fakeDragBy(10);
-                break;
-            case R.id.btn_test2:
-                viewPager2.beginFakeDrag();
-                viewPager2.fakeDragBy(-10);
-                break;
+        int id = v.getId();
+        if (id == R.id.btn_add) {
+            int item = viewPager2.getCurrentItem();
+            itemList.add(item, "前面添加：" + itemList.size());
+            viewPager2.getAdapter().notifyItemInserted(item);
+        } else if (id == R.id.btn_del) {
+            int item1 = viewPager2.getCurrentItem();
+            itemList.remove(item1);
+            viewPager2.getAdapter().notifyItemRangeRemoved(item1, 1);
+        } else if (id == R.id.btn_test) {
+            viewPager2.beginFakeDrag();
+            viewPager2.fakeDragBy(10);
+        } else if (id == R.id.btn_test2) {
+            viewPager2.beginFakeDrag();
+            viewPager2.fakeDragBy(-10);
         }
     }
 }
