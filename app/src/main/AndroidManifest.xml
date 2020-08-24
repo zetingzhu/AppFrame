@@ -111,6 +111,10 @@
         <activity android:name=".databind.ActDoubleDataBind" />
         <activity android:name=".mvvmbind.ActivityMVVMDemo" />
         <activity android:name=".mtoast.ActivityToastCompat" />
+        <activity android:name=".fragment2.ActivityNewFragment" />
+        <activity android:name=".fragment2.ActivityNewFragmentJava" />
+        <activity android:name=".guide.ActivityGuide" />
+        <activity android:name=".fragment2.ActivityNavigationFragment" />
 
 
         <receiver android:name=".notification.ReceiverNotification" />

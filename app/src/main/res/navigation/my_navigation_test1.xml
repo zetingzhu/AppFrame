@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/my_navigation_test1"
+    app:startDestination="@id/fragmentNew">
+
+    <fragment
+        android:id="@+id/fragmentNew"
+        android:name="frame.zzt.com.appframe.fragment2.FragmentNew"
+        android:label="FragmentNew">
+        <action
+            android:id="@+id/action_fragmentNew_to_fragmentNew1"
+            app:destination="@id/fragmentNew1" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentNew1"
+        android:name="frame.zzt.com.appframe.fragment2.FragmentNew1"
+        android:label="FragmentNew1">
+        <action
+            android:id="@+id/action_fragmentNew1_to_fragmentNew2"
+            app:destination="@id/fragmentNew2" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentNew2"
+        android:name="frame.zzt.com.appframe.fragment2.FragmentNew2"
+        android:label="FragmentNew2">
+        <action
+            android:id="@+id/action_fragmentNew2_to_fragmentNew3"
+            app:destination="@id/fragmentNew3" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentNew3"
+        android:name="frame.zzt.com.appframe.fragment2.FragmentNew3"
+        android:label="FragmentNew3" />
+
+
+</navigation>

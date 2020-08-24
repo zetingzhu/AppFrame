@@ -24,6 +24,10 @@ import frame.zzt.com.appframe.R;
 import frame.zzt.com.appframe.anim.AnimActivity;
 import frame.zzt.com.appframe.databind.ActDataBind;
 import frame.zzt.com.appframe.databind.ActDoubleDataBind;
+import frame.zzt.com.appframe.fragment2.ActivityNavigationFragment;
+import frame.zzt.com.appframe.fragment2.ActivityNewFragment;
+import frame.zzt.com.appframe.fragment2.ActivityNewFragmentJava;
+import frame.zzt.com.appframe.guide.ActivityGuide;
 import frame.zzt.com.appframe.mtoast.ActivityToastCompat;
 import frame.zzt.com.appframe.mvvmbind.ActivityMVVMDemo;
 import frame.zzt.com.appframe.networkopt.ActivityNetwork;
@@ -91,6 +95,11 @@ public class ThirdFragment extends Fragment {
     }
 
     private DemoInfo[] DEMOS = {
+            new DemoInfo(R.string.show_item_group_recycleview, R.string.show_item_group_recycleview, ActivityNavigationFragment.class),
+            new DemoInfo(R.string.show_item_navigation, R.string.show_item_navigation, ActivityNavigationFragment.class),
+            new DemoInfo(R.string.show_item_guide, R.string.show_item_guide, ActivityGuide.class),
+            new DemoInfo(R.string.show_item_new_fragment, R.string.show_item_new_fragment, ActivityNewFragment.class),
+            new DemoInfo(R.string.show_item_new_fragment, R.string.show_item_new_fragment, ActivityNewFragmentJava.class),
             new DemoInfo(R.string.show_item_toast, R.string.show_item_toast, ActivityToastCompat.class),
             new DemoInfo(R.string.show_item_databingding_mvvm, R.string.show_item_databingding_mvvm, ActivityMVVMDemo.class),
             new DemoInfo(R.string.show_item_databingding, R.string.show_item_databingding, ActDataBind.class),

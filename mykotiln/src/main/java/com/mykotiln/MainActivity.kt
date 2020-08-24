@@ -4,28 +4,23 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
-import android.view.View
-import com.google.android.material.navigation.NavigationView
-import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
-import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.BaseAdapter
 import android.widget.TextView
-import android.widget.Toolbar
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
+import com.google.android.material.navigation.NavigationView
 import com.mykotiln.activity.ActivityJava
 import com.mykotiln.activity.ActivityKotlin
 import com.mykotiln.activity.ActivityKotlinClass
 import com.mykotiln.activity.ActivityKotlinUse
 import kotlinx.android.synthetic.main.content_main.*
 
-/**
+
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,23 +34,23 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     internal fun onListItemClick(index: Int) {
         val intent: Intent
         /** context 使用 this@MainActivity  方式 */
-        intent = Intent( this@MainActivity  , DEMOS[index].demoClass )
+        intent = Intent(this@MainActivity, DEMOS[index].demoClass)
         this.startActivity(intent)
     }
 
 
     /**内部类 内部类使用 inner 关键字来表示。 */
     inner class DemoInfo(
-    var title: Int ,
-    var desc: Int ,
-    var demoClass: Class<out Activity>
+            var title: Int,
+            var desc: Int,
+            var demoClass: Class<out Activity>
     )
 
     private val DEMOS = arrayOf(
-        DemoInfo(R.string.tab_item, R.string.tab_item_desc, ActivityKotlin::class.java ) ,
-        DemoInfo(R.string.tab_item_2, R.string.tab_item_2_desc, ActivityJava::class.java ) ,
-        DemoInfo(R.string.tab_item_3, R.string.tab_item_3_desc, ActivityKotlinClass::class.java ),
-        DemoInfo(R.string.tab_item_4, R.string.tab_item_4_desc, ActivityKotlinUse::class.java )
+            DemoInfo(R.string.tab_item, R.string.tab_item_desc, ActivityKotlin::class.java),
+            DemoInfo(R.string.tab_item_2, R.string.tab_item_2_desc, ActivityJava::class.java),
+            DemoInfo(R.string.tab_item_3, R.string.tab_item_3_desc, ActivityKotlinClass::class.java),
+            DemoInfo(R.string.tab_item_4, R.string.tab_item_4_desc, ActivityKotlinUse::class.java)
     )
 
 
@@ -65,14 +60,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             var convertView = convertView
             val myViewHolder: MyViewHolder
             if (convertView == null) {
-                convertView = View.inflate(this@MainActivity , R.layout.list_info_item, null)
+                convertView = View.inflate(this@MainActivity, R.layout.list_info_item, null)
                 myViewHolder = MyViewHolder(convertView)
                 convertView!!.tag = myViewHolder
             } else {
                 myViewHolder = convertView.tag as MyViewHolder
             }
-            myViewHolder.title!!.setText(DEMOS[index].title )
-            myViewHolder.desc!!.setText(DEMOS[index].desc )
+            myViewHolder.title!!.setText(DEMOS[index].title)
+            myViewHolder.desc!!.setText(DEMOS[index].desc)
             if (index >= 25) {
                 myViewHolder.title!!.setTextColor(Color.YELLOW)
             }
@@ -105,8 +100,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
 
-
-    fun initView(){
+    fun initView() {
         listView_content.setAdapter(DemoListAdapter())
         listView_content.setOnItemClickListener(AdapterView.OnItemClickListener { arg0, v, index, arg3 -> onListItemClick(index) })
 
@@ -182,4 +176,3 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return true
     }
 }
-*/

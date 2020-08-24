@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.headerrecycleview">
+
+    <application android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity" />
+        <activity android:name=".LinearlayoutActivity" />
+        <activity android:name=".GridlayoutActivity" />
+    </application>
+
+</manifest>

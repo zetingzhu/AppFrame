@@ -1,1 +1,2 @@
-include ':app', ':mykotiln', ':javalib'
+include ':headerrecycleview'
+include ':app', ':mykotiln', ':javalib',':myviewpager'

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dialog_layout_bg"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/white_round_8dp"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <!-- 右上角删除按钮-->
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/dilog_img_close"
+        android:layout_width="@dimen/margin_28dp"
+        android:layout_height="@dimen/margin_28dp"
+        android:layout_gravity="right"
+        android:layout_marginLeft="@dimen/margin_12dp"
+        android:layout_marginTop="@dimen/margin_12dp"
+        android:layout_marginRight="@dimen/margin_12dp"
+        android:src="@drawable/img_close"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+    <!--脱离删除按钮，里面内容的容器-->
+    <LinearLayout
+        android:id="@+id/content_layout_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <!--上面的空隙大小， 没有删除按钮时候设置这个高度调节标题位置 -->
+        <Space
+            android:id="@+id/dialog_space_top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:layout_marginTop="@dimen/margin_40dp" />
+
+        <!--中间需要填充的内容布局-->
+        <LinearLayout
+            android:id="@+id/dialog_content_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+        <!--下面的空隙大小  -->
+        <Space
+            android:id="@+id/dialog_space_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!--底部按钮-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/btn_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <View
+                android:id="@+id/space_top"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/app_trade_gray"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_left"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/margin_50dp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                android:text="取消"
+                android:textColor="@color/app_trade_gray"
+                android:textSize="@dimen/text_size_18"
+                android:visibility="gone"
+                app:autoSizeMaxTextSize="@dimen/text_size_18"
+                app:autoSizeTextType="uniform"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/space_middle"
+                app:layout_constraintTop_toBottomOf="@+id/space_top"
+                tools:visibility="visible" />
+
+            <View
+                android:id="@+id/space_middle"
+                android:layout_width="0.5dp"
+                android:layout_height="@dimen/margin_50dp"
+                android:background="@color/app_trade_gray"
+                android:visibility="gone"
+                app:layout_constraintLeft_toRightOf="@+id/btn_left"
+                app:layout_constraintRight_toLeftOf="@+id/btn_right"
+                app:layout_constraintTop_toBottomOf="@+id/space_top"
+                tools:visibility="visible" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_right"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/margin_50dp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                android:text="确定"
+                android:textColor="@color/color_527DFF"
+                android:textSize="@dimen/text_size_18"
+                android:visibility="gone"
+                app:autoSizeMaxTextSize="@dimen/text_size_18"
+                app:autoSizeTextType="uniform"
+                app:layout_constraintLeft_toRightOf="@+id/space_middle"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/space_top"
+                tools:visibility="visible" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+</FrameLayout>

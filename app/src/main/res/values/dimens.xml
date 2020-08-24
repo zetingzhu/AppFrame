@@ -39,11 +39,13 @@
     <dimen name="text_size_7">7sp</dimen>
 
     <dimen name="dimen_7dp">7dp</dimen>
+    <dimen name="dimen_8dp">8dp</dimen>
+    <dimen name="dimen_9dp">9dp</dimen>
+    <dimen name="margin_12dp">12dp</dimen>
+    <dimen name="margin_28dp">28dp</dimen>
+    <dimen name="margin_40dp">40dp</dimen>
+    <dimen name="margin_50dp">50dp</dimen>
 
-    <!--
-Refer to App Widget Documentation for margin information
-http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
-    -->
     <dimen name="widget_margin">8dp</dimen>
 
 </resources>

@@ -116,5 +116,10 @@
     <string name="show_item_databingding_mvvm">databingind MVVM 使用</string>
 
     <string name="show_item_toast">自定义toast</string>
+    <string name="show_item_new_fragment">fragment 新玩法</string>
+    <string name="show_item_guide">新手引导</string>
+    <string name="show_item_navigation">Fragment 导航</string>
+
+    <string name="show_item_group_recycleview">分组悬停的recyclevieew</string>
 
 </resources>

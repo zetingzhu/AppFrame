@@ -23,7 +23,8 @@
     <!--渐变颜色的背景色-->
     <color name="color_bg_gradient">#47484e</color>
 
-
+    <color name="app_trade_gray">#AEB9DB</color>
+    <color name="color_527DFF">#527DFF</color>
     <color name="dark">#803cbcb7</color>
     <color name="light">#800de6e8</color>
 
