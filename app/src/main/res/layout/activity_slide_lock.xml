@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent">
 
     <frame.zzt.com.appframe.slidelock.SlideLockVerticalView
         android:id="@+id/slideLockVerticalView"
         android:layout_width="wrap_content"
         android:layout_height="200dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" >
-
+        android:layout_centerHorizontal="true">
 
 
         <FrameLayout
@@ -27,14 +25,15 @@
                 android:layout_width="42dp"
                 android:layout_height="42dp"
                 android:layout_gravity="center"
-                android:src="@drawable/home_car_no_start_image"/>
+                android:src="@drawable/home_car_no_start_image" />
 
             <frame.zzt.com.appframe.slidelock.CarStartAnimation3
                 android:id="@+id/custom_car_start_status"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
-                android:text=""/>
+                android:text="" />
+
             <TextView
                 android:id="@+id/tv_car_start_status"
                 android:layout_width="wrap_content"
@@ -42,7 +41,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="3dp"
                 android:textColor="@android:color/black"
-                android:textSize="9sp"/>
+                android:textSize="9sp" />
 
 
         </FrameLayout>
@@ -71,6 +70,7 @@
                 android:layout_height="50dp">
 
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/ll_anim_02"
                 android:layout_width="match_parent"
@@ -78,12 +78,13 @@
                 android:orientation="horizontal"
                 android:padding="5dp"
                 android:layout_height="50dp">
+
                 <LinearLayout
                     android:id="@+id/ll_anim_03"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@android:color/holo_green_dark"
-                    android:orientation="horizontal" >
+                    android:orientation="horizontal">
 
                 </LinearLayout>
             </LinearLayout>
@@ -92,11 +93,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:srcCompat="@android:drawable/sym_def_app_icon"
-                android:id="@+id/imageView2"/>
+                android:id="@+id/imageView2" />
+
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="600dp"
-                android:id="@+id/imageView3"/>
+                android:id="@+id/imageView3" />
         </LinearLayout>
     </frame.zzt.com.appframe.widget.MyScrollView>
 
@@ -106,7 +108,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/btn_start"/>
+        android:id="@+id/btn_start" />
 
     <Button
         android:text="结束"
@@ -114,6 +116,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:id="@+id/btn_close"/>
+        android:id="@+id/btn_close" />
 
 </RelativeLayout>

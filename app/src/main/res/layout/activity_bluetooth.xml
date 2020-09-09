@@ -1,72 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <Button
         android:text="扫描连接设备"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btn_scan"/>
+        android:id="@+id/btn_scan" />
 
     <Button
         android:text="停止扫描"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btn_stop_scan"/>
+        android:id="@+id/btn_stop_scan" />
 
 
     <Button
         android:text="开"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btn_open"/>    <Button
+        android:id="@+id/btn_open" />
+
+    <Button
         android:text="关"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btn_close"/>
+        android:id="@+id/btn_close" />
+
     <Button
         android:text="开始获取信号强度"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btn_start_rssi"/>
+        android:id="@+id/btn_start_rssi" />
+
     <Button
         android:text="开关闭获取信号强度"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btn_stop_rssi"/>
+        android:id="@+id/btn_stop_rssi" />
 
     <Button
         android:text="连接蓝牙 服务端"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btn_connect"/>
+        android:id="@+id/btn_connect" />
+
     <Button
         android:text="断开连接 服务端"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btn_dis"/>
+        android:id="@+id/btn_dis" />
+
     <Button
         android:text="向 服务端 写入数据"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btn_wirte"/>
+        android:id="@+id/btn_wirte" />
+
     <Button
         android:text="读取 服务端 的数据"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btn_read"/>
+        android:id="@+id/btn_read" />
 
     <Button
         android:text="蓝牙开锁"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btn_ble_open"/>
+        android:id="@+id/btn_ble_open" />
+
     <Button
         android:text="蓝牙关锁"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btn_ble_close"/>
+        android:id="@+id/btn_ble_close" />
 
 </LinearLayout>

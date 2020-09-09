@@ -1,8 +1,11 @@
 package frame.zzt.com.appframe.tablayout;
 
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
+
 import com.google.android.material.tabs.TabLayout;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import frame.zzt.com.appframe.R;
@@ -19,7 +22,7 @@ public class ActivityTablayout extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_tablayout);
-        tablayout = findViewById(R.id.tablayout) ;
+        tablayout = findViewById(R.id.tablayout);
 
         tablayout.addTab(tablayout.newTab().setText("111"));
         tablayout.addTab(tablayout.newTab().setText("222"));

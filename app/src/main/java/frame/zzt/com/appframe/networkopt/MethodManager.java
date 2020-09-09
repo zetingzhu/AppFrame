@@ -8,9 +8,9 @@ import java.lang.reflect.Method;
  */
 
 public class MethodManager {
-    private Class<?> type ;// 参数类型
-    private NetworkType netType ;//网络类型
-    private Method mMethod ;// 方法名
+    private Class<?> type;// 参数类型
+    private NetworkType netType;//网络类型
+    private Method mMethod;// 方法名
 
 
     public MethodManager(Method method, NetworkType netType, Class<?> type) {

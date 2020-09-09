@@ -207,7 +207,7 @@ class MyLine extends BaseAction {
 class MyPath extends BaseAction {
     private Path path;
     private int size;
-    Paint paint ;
+    Paint paint;
 
     MyPath() {
         path = new Path();

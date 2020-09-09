@@ -377,7 +377,6 @@ public class DialogWrapper extends AppCompatDialog {
             dialog.show();
             return dialog;
         }
-
     }
 
 

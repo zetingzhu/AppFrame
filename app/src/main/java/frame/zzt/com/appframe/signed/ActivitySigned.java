@@ -18,7 +18,7 @@ import frame.zzt.com.appframe.ui.BaseAppCompatActivity;
 
 public class ActivitySigned extends BaseAppCompatActivity {
 
-    private StepsView mStepView ;
+    private StepsView mStepView;
     private Signin signin;
     private MySignedView my_sign_view;
     private List<String> signInData = new ArrayList<>();
@@ -43,7 +43,7 @@ public class ActivitySigned extends BaseAppCompatActivity {
                 mStepBeans.add(new StepBean(StepBean.STEP_UNDO, 0, "0721"));
                 mStepView.setStepNum(mStepBeans);
             }
-        } , 1000);
+        }, 1000);
 
         mStepView.postDelayed(new Runnable() {
             @Override
@@ -58,14 +58,14 @@ public class ActivitySigned extends BaseAppCompatActivity {
                 mStepBeans.add(new StepBean(StepBean.STEP_UNDO, -1, "0721"));
                 mStepView.setStepNum(mStepBeans);
             }
-        } , 2000);
+        }, 2000);
 
         mStepView.postDelayed(new Runnable() {
             @Override
             public void run() {
-                mStepView.startSignAnimation( 3  );
+                mStepView.startSignAnimation(3);
             }
-        } , 3000);
+        }, 3000);
 
 
         signin = (Signin) findViewById(R.id.sigin);
@@ -83,7 +83,7 @@ public class ActivitySigned extends BaseAppCompatActivity {
             public void run() {
                 signin.setCurretn(2);
             }
-        } , 1000 );
+        }, 1000);
 
 
         my_sign_view = (MySignedView) findViewById(R.id.my_sign_view);
@@ -100,8 +100,7 @@ public class ActivitySigned extends BaseAppCompatActivity {
                 mSignBeens.add(new SignBean(StepBean.STEP_UNDO, 0, "0721"));
                 my_sign_view.setStepNum(mSignBeens);
             }
-        } , 2000);
-
+        }, 2000);
 
 
     }

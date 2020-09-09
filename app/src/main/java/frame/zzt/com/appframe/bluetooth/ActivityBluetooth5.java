@@ -21,8 +21,10 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.ParcelUuid;
+
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+
 import android.util.Log;
 import android.widget.Toast;
 
@@ -40,42 +42,41 @@ import frame.zzt.com.appframe.ui.BaseAppCompatActivity;
  */
 public class ActivityBluetooth5 extends BaseAppCompatActivity implements BluetoothView {
 
-    public final static String TAG = ActivityBluetooth5.class.getSimpleName() ;
+    public final static String TAG = ActivityBluetooth5.class.getSimpleName();
 
     private static final int REQUEST_CODE_BLUETOOTH_ON = 1313;
 
 
-    public static String SERV_UUID = "00001834-0000-1000-8000-00805f9b34fb" ;
-    public static String DESC_UUID = "00001835-0000-1000-8000-00805f9b34fb" ;
-    public static String CHAR_READ_UUID = "00001836-0000-1000-8000-00805f9b34fb" ;
-    public static String CHAR_WRITE_UUID = "00001837-0000-1000-8000-00805f9b34fb" ;
+    public static String SERV_UUID = "00001834-0000-1000-8000-00805f9b34fb";
+    public static String DESC_UUID = "00001835-0000-1000-8000-00805f9b34fb";
+    public static String CHAR_READ_UUID = "00001836-0000-1000-8000-00805f9b34fb";
+    public static String CHAR_WRITE_UUID = "00001837-0000-1000-8000-00805f9b34fb";
 
     // 智慧芯服务UUID
-    public static String DEVICE_SERVICE_UUID = "000028af-0000-1000-8000-00805f9b34fb" ;
+    public static String DEVICE_SERVICE_UUID = "000028af-0000-1000-8000-00805f9b34fb";
 
 
-
-    private Context mContext ;
-    BluetoothManager mBluetoothManager ;
+    private Context mContext;
+    BluetoothManager mBluetoothManager;
     BluetoothAdapter mBluetoothAdapter;
 
-    BluetoothGattServer bluetoothGattServer  ; // ble 服务端
-    BluetoothLeAdvertiser bluetoothLeAdvertiser ;// ble 广播
+    BluetoothGattServer bluetoothGattServer; // ble 服务端
+    BluetoothLeAdvertiser bluetoothLeAdvertiser;// ble 广播
 
-    BluetoothGattCharacteristic characteristicRead ; //添加可读+通知characteristic
-    BluetoothGattCharacteristic characteristicWrite ;//添加可写characteristic
+    BluetoothGattCharacteristic characteristicRead; //添加可读+通知characteristic
+    BluetoothGattCharacteristic characteristicWrite;//添加可写characteristic
 
-    UUID UUID_SERVER = UUID.fromString(SERV_UUID) ;
-    UUID UUID_DESCRIPTOR = UUID.fromString(DESC_UUID) ;
-    UUID UUID_CHARREAD = UUID.fromString(CHAR_READ_UUID) ;
-    UUID UUID_CHARWRITE = UUID.fromString(CHAR_WRITE_UUID) ;
+    UUID UUID_SERVER = UUID.fromString(SERV_UUID);
+    UUID UUID_DESCRIPTOR = UUID.fromString(DESC_UUID);
+    UUID UUID_CHARREAD = UUID.fromString(CHAR_READ_UUID);
+    UUID UUID_CHARWRITE = UUID.fromString(CHAR_WRITE_UUID);
 
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.mContext = this ;
+        this.mContext = this;
         setContentView(R.layout.activity_bluetooth5);
         ButterKnife.bind(this);
 
@@ -83,7 +84,7 @@ public class ActivityBluetooth5 extends BaseAppCompatActivity implements Bluetoo
         if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)) {
             Toast.makeText(this, "您的设备不支持蓝牙BLE，将关闭", Toast.LENGTH_SHORT).show();
             finish();
-            return ;
+            return;
         }
 
 
@@ -148,7 +149,8 @@ public class ActivityBluetooth5 extends BaseAppCompatActivity implements Bluetoo
 
 
     /**
-     *  启动蓝牙服务端
+     * 启动蓝牙服务端
+     *
      * @param context
      */
     private void initServices(Context context) {
@@ -169,7 +171,7 @@ public class ActivityBluetooth5 extends BaseAppCompatActivity implements Bluetoo
                 BluetoothGattCharacteristic.PROPERTY_WRITE |
                         BluetoothGattCharacteristic.PROPERTY_READ |
                         BluetoothGattCharacteristic.PROPERTY_NOTIFY,
-                BluetoothGattCharacteristic.PERMISSION_WRITE | BluetoothGattCharacteristic.PERMISSION_READ );
+                BluetoothGattCharacteristic.PERMISSION_WRITE | BluetoothGattCharacteristic.PERMISSION_READ);
         service.addCharacteristic(characteristicWrite);
 
 
@@ -312,9 +314,9 @@ public class ActivityBluetooth5 extends BaseAppCompatActivity implements Bluetoo
 
     };
 
-    BluetoothGattCharacteristic characteristic ;
-    BluetoothDevice device ;
-    int requestId ;
+    BluetoothGattCharacteristic characteristic;
+    BluetoothDevice device;
+    int requestId;
 
     /**
      * 4.处理响应内容
@@ -328,7 +330,7 @@ public class ActivityBluetooth5 extends BaseAppCompatActivity implements Bluetoo
         Log.e(TAG, String.format("4.onResponseToClient：device name = %s, address = %s", device.getName(), device.getAddress()));
         Log.e(TAG, String.format("4.onResponseToClient：requestId = %s", requestId));
 //        String msg = OutputStringUtil.transferForPrint(reqeustBytes);
-        Log.e(TAG, "4.收到：" + new String(reqeustBytes)  );
+        Log.e(TAG, "4.收到：" + new String(reqeustBytes));
         //println("4.收到:" + msg);
         //showText("4.收到:" + msg);
 
@@ -338,23 +340,23 @@ public class ActivityBluetooth5 extends BaseAppCompatActivity implements Bluetoo
 
         Log.i(TAG, "4.响应：" + str + " - 响应状态" + booNotify);
 
-        this.device = device ;
-        this.characteristic = characteristic ;
-        this.requestId = requestId ;
+        this.device = device;
+        this.characteristic = characteristic;
+        this.requestId = requestId;
 
     }
 
 
     @OnClick(R.id.btn_notify1)
     public void OnClickNotify() {
-        if (characteristic != null  && device != null && bluetoothGattServer != null ) {
-            Log.i(TAG, "蓝牙连接 characteristic 可读状态：" + MyBleAQPresenter19.ifCharacteristicReadable(characteristic) );
-            Log.i(TAG, "蓝牙连接 characteristic 可写状态：" + MyBleAQPresenter19.ifCharacteristicWritable(characteristic) );
-            Log.i(TAG, "蓝牙连接 characteristic 通知状态：" + MyBleAQPresenter19.ifCharacteristicNotifiable(characteristic) );
+        if (characteristic != null && device != null && bluetoothGattServer != null) {
+            Log.i(TAG, "蓝牙连接 characteristic 可读状态：" + MyBleAQPresenter19.ifCharacteristicReadable(characteristic));
+            Log.i(TAG, "蓝牙连接 characteristic 可写状态：" + MyBleAQPresenter19.ifCharacteristicWritable(characteristic));
+            Log.i(TAG, "蓝牙连接 characteristic 通知状态：" + MyBleAQPresenter19.ifCharacteristicNotifiable(characteristic));
 
-            String mbyte = "123456789012345678"  ;
+            String mbyte = "123456789012345678";
             characteristic.setValue(mbyte.getBytes());
-            boolean booNotify =  bluetoothGattServer.notifyCharacteristicChanged(device, characteristic, false);
+            boolean booNotify = bluetoothGattServer.notifyCharacteristicChanged(device, characteristic, false);
 
 //            boolean boo = bluetoothGattServer.sendResponse(device, requestId, BluetoothGatt.GATT_SUCCESS, 0, mbyte);
 
@@ -362,9 +364,9 @@ public class ActivityBluetooth5 extends BaseAppCompatActivity implements Bluetoo
 
 //            Log.i(TAG, "发送通知状态:  boo" + boo );
             Log.i(TAG, "发送通知状态:  booNotify:" + booNotify);
-        }else {
+        } else {
             Log.e(TAG, "想发送通知，发现各种数据为空");
-            Toast.makeText(mContext , "想发送通知，发现各种数据为空" , Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "想发送通知，发现各种数据为空", Toast.LENGTH_SHORT).show();
         }
     }
 

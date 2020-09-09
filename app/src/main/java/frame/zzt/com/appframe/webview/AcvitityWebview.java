@@ -3,7 +3,9 @@ package frame.zzt.com.appframe.webview;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
+
 import android.view.View;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebChromeClient;
@@ -24,7 +26,8 @@ import frame.zzt.com.appframe.ui.BaseAppCompatActivity;
 public class AcvitityWebview extends BaseAppCompatActivity {
 
     @BindView(R.id.webview)
-    WebView mWebView ;
+    WebView mWebView;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,13 +81,14 @@ public class AcvitityWebview extends BaseAppCompatActivity {
 
         });
     }
+
     /**
      * 提供js调用android方法
      */
     private class JsCallAndroidMethod {
         /*
-        * 判断SDk是否大于18   蓝牙才能用
-        * */
+         * 判断SDk是否大于18   蓝牙才能用
+         * */
         @JavascriptInterface
         public boolean judgmentVersion() {
             if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN_MR2) { // SDK小于18
@@ -101,8 +105,8 @@ public class AcvitityWebview extends BaseAppCompatActivity {
      */
     private void loadPage() {
 
-        String url = "https://weidian.com/item.html?itemID=2094394648" ;
-        mWebView.loadUrl( url);
+        String url = "https://weidian.com/item.html?itemID=2094394648";
+        mWebView.loadUrl(url);
 
     }// end loadPage
 }

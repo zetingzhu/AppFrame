@@ -41,10 +41,10 @@
     <dimen name="dimen_7dp">7dp</dimen>
     <dimen name="dimen_8dp">8dp</dimen>
     <dimen name="dimen_9dp">9dp</dimen>
-    <dimen name="margin_12dp">12dp</dimen>
-    <dimen name="margin_28dp">28dp</dimen>
-    <dimen name="margin_40dp">40dp</dimen>
-    <dimen name="margin_50dp">50dp</dimen>
+    <dimen name="dimen_12dp">12dp</dimen>
+    <dimen name="dimen_28dp">28dp</dimen>
+    <dimen name="dimen_40dp">40dp</dimen>
+    <dimen name="dimen_50dp">50dp</dimen>
 
     <dimen name="widget_margin">8dp</dimen>
 

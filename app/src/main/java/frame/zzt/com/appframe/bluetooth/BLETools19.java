@@ -77,36 +77,36 @@ public class BLETools19 {
     }
 
 
-
     public void scanDevice(Context context, final DeviceCallback callback) {
         if (judgmentVersion()) {
-            if (bluetoothAdapter.isEnabled()  ) {
+            if (bluetoothAdapter.isEnabled()) {
                 mBleStartStatus = true;
-                bluetoothAdapter.startLeScan(mLeScanCallback= new BluetoothAdapter.LeScanCallback(){
-                    @Override
-                    public void onLeScan(BluetoothDevice device, int rssi, byte[] scanRecord) {
+                bluetoothAdapter.startLeScan(mLeScanCallback = new BluetoothAdapter.LeScanCallback() {
+                            @Override
+                            public void onLeScan(BluetoothDevice device, int rssi, byte[] scanRecord) {
 //            mDevices.add(bluetoothDevice);
-                        //成功扫描到设备后，在这里获得bluetoothDevice。可以放进设备列表成员变量当中方便后续操作。
-                        //也可以发广播通知activity发现了新设备，更新活动设备列表的显示等。
-                        //这里需要注意一点，在onLeScan当中不能执行耗时操作，不宜执行复杂运算操作，切记，
-                        //下面即将提到的onScanResult，onBatchScanResults同理。
-                        Log.i(TAG, "扫描蓝牙扫描结果");
-                        callback.onScanDevice( device );
-                    }
-                }
+                                //成功扫描到设备后，在这里获得bluetoothDevice。可以放进设备列表成员变量当中方便后续操作。
+                                //也可以发广播通知activity发现了新设备，更新活动设备列表的显示等。
+                                //这里需要注意一点，在onLeScan当中不能执行耗时操作，不宜执行复杂运算操作，切记，
+                                //下面即将提到的onScanResult，onBatchScanResults同理。
+                                Log.i(TAG, "扫描蓝牙扫描结果");
+                                callback.onScanDevice(device);
+                            }
+                        }
                 );
             }
         }
     }
 
     /**
-     *  5.0 以上蓝牙扫描
+     * 5.0 以上蓝牙扫描
+     *
      * @param sign
      * @param context
      * @param callback
      */
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public void scanDevice( int sign ,Context context, final BLETools19.DeviceCallback callback) {
+    public void scanDevice(int sign, Context context, final BLETools19.DeviceCallback callback) {
         if (judgmentVersion()) {
             if (bluetoothAdapter.isEnabled() && scanner != null) {
                 mBleStartStatus = true;
@@ -125,15 +125,15 @@ public class BLETools19 {
         }
     }
 
-    public void scanDevice(){
-        bluetoothAdapter.startDiscovery() ;
+    public void scanDevice() {
+        bluetoothAdapter.startDiscovery();
     }
 
 
     public void stopScan() {
         Log.i(TAG, "stopScans1: ");
         if (judgmentVersion()) {
-            if (bluetoothAdapter != null && bluetoothAdapter.isEnabled() ) {
+            if (bluetoothAdapter != null && bluetoothAdapter.isEnabled()) {
                 Log.i(TAG, "stopScans: ");
                 bluetoothAdapter.stopLeScan(mLeScanCallback);
             }
@@ -141,17 +141,16 @@ public class BLETools19 {
     }
 
 
-
     public boolean scanCallbackIsNull() {
         return mScanCallback == null ? true : false;
     }
 
     /*
-    * 判断SDk是否大于21   蓝牙才能用
-    * */
+     * 判断SDk是否大于21   蓝牙才能用
+     * */
     public boolean judgmentVersion() {
         if (Build.VERSION.SDK_INT <= 18) { // SDK小于19
-            Log.i(TAG , "不能使用蓝牙");
+            Log.i(TAG, "不能使用蓝牙");
             return false;
         }
         return true;
@@ -160,9 +159,10 @@ public class BLETools19 {
 
     public interface DeviceCallback {
         /*
-        * 扫描
-        * */
+         * 扫描
+         * */
         void onScanResult(ScanResult result);
+
         void onScanDevice(BluetoothDevice result);
     }
 }

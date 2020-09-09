@@ -3,8 +3,10 @@ package frame.zzt.com.appframe.anim;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
+
 import android.transition.Explode;
 import android.transition.Fade;
 import android.transition.Slide;
@@ -25,10 +27,10 @@ public class AnimShowActivity extends BaseAppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent mIntent = getIntent() ;
-        int startIndex = mIntent.getIntExtra( "index" , 0) ;
-        if (startIndex == 5 ){
-            setupWindowAnimations() ;
+        Intent mIntent = getIntent();
+        int startIndex = mIntent.getIntExtra("index", 0);
+        if (startIndex == 5) {
+            setupWindowAnimations();
         }
 
         setContentView(R.layout.activity_anim_show);

@@ -16,14 +16,11 @@ import frame.zzt.com.appframe.R;
 import frame.zzt.com.appframe.ui.home.HomeActivity;
 
 /**
- *
- *
- 1.先声明 Widget 的一些属性。在 res 新建 xml 文件夹，创建 appwidget-provider 标签的 xml 文件。
- 2.创建桌面要显示的布局。 在 layout 创建 app_widget.xml。
- 3.然后来管理 Widget 状态。实现一个继承 AppWidgetProvider 的类。
- 4.最后在 AndroidManifest.xml 里，将 AppWidgetProvider类 和 xml属性 注册到一块。
- 5.通常我们会加一个 Service 来控制 Widget 的更新时间，后面再讲为什么。
- *
+ * 1.先声明 Widget 的一些属性。在 res 新建 xml 文件夹，创建 appwidget-provider 标签的 xml 文件。
+ * 2.创建桌面要显示的布局。 在 layout 创建 app_widget.xml。
+ * 3.然后来管理 Widget 状态。实现一个继承 AppWidgetProvider 的类。
+ * 4.最后在 AndroidManifest.xml 里，将 AppWidgetProvider类 和 xml属性 注册到一块。
+ * 5.通常我们会加一个 Service 来控制 Widget 的更新时间，后面再讲为什么。
  */
 public class NewAppWidget extends AppWidgetProvider {
 
@@ -132,7 +129,7 @@ public class NewAppWidget extends AppWidgetProvider {
         // 在第一个 widget 被创建时，开启服务
 //        Intent intent = new Intent(context, WidgetService.class);
 //        context.startService(intent);
-        Log.d(TAG ,  "开始添加 Widget" ) ;
+        Log.d(TAG, "开始添加 Widget");
 //        Toast.makeText(context, "开始计数", Toast.LENGTH_SHORT).show();
     }
 

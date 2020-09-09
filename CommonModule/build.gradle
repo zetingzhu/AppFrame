@@ -38,11 +38,42 @@ android {
 }
 
 dependencies {
-    api fileTree(dir: "libs", include: ["*.jar"])
-    api 'androidx.appcompat:appcompat:1.2.0'
 
+    def okhttpLoggingInterceptorVersion = '4.0.0'
+    def okhttpVersion = "3.14.9"
+    def retrofit2Version = "2.9.0"
+
+    // 资源文件jar包
+    api fileTree(dir: "libs", include: ["*.jar"])
+    // 引用自己的lib
+    api project(path: ':zztToolsLibrary')
+
+    // 约束布局
+    api 'androidx.constraintlayout:constraintlayout:2.0.1'
+
+    // android x
+    api 'androidx.appcompat:appcompat:1.2.0'
+    // kotlin
+    api "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    // Kotlin 代码的扩展库
+    api 'androidx.core:core-ktx:1.3.1'
+    // kotlin 协程
+    api 'org.jetbrains.kotlinx:kotlinx-coroutines:0.19.2'
 
     // ARouter 包
     api 'com.alibaba:arouter-api:1.5.0'
     annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
+
+    // okhttp 网络请求
+    api "com.squareup.okhttp3:okhttp:$okhttpVersion"
+//    api "com.squareup.okhttp3:logging-interceptor:$okhttpLoggingInterceptorVersion"
+    // retrofit 网络请求
+    api "com.squareup.retrofit2:retrofit:$retrofit2Version"
+    //ConverterFactory的String依赖包
+    api 'com.squareup.retrofit2:converter-scalars:2.3.0'
+    //ConverterFactory的Gson依赖包
+    api "com.squareup.retrofit2:converter-gson:$retrofit2Version"
+    //CallAdapterFactory的Rx依赖包
+    api 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
+
 }

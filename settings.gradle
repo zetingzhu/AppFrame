@@ -1,3 +1,6 @@
+include ':mypagingsamples'
 include ':CommonModule'
 include ':headerrecycleview'
+include ':zztToolsLibrary'
+include ':groupedadapter'
 include ':app', ':mykotiln', ':javalib',':myviewpager'

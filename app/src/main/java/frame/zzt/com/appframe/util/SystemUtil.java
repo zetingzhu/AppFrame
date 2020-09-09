@@ -12,12 +12,10 @@ import android.view.View;
 public class SystemUtil {
 
 
-
-
     /**
      * 隐藏虚拟按键，并且全屏
      */
-    public static void hideBottomUIMenu(Activity mContext ) {
+    public static void hideBottomUIMenu(Activity mContext) {
         //隐藏虚拟按键，并且全屏
         if (Build.VERSION.SDK_INT > 11 && Build.VERSION.SDK_INT < 19) { // lower api
             View v = mContext.getWindow().getDecorView();
@@ -51,7 +49,7 @@ public class SystemUtil {
         }
     }
 
-    public static void hideUiMenu(Activity mContext){
+    public static void hideUiMenu(Activity mContext) {
         mContext.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE
                 | View.SYSTEM_UI_FLAG_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
@@ -60,7 +58,7 @@ public class SystemUtil {
                 | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
     }
 
-    public static void showUiMenu(Activity mContext){
+    public static void showUiMenu(Activity mContext) {
         mContext.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
     }

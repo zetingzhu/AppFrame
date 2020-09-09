@@ -30,19 +30,18 @@ public class HttpRequest {
     }
 
 
-    public void getLogin2(  Callback<LoginResponse> callback) {
+    public void getLogin2(Callback<LoginResponse> callback) {
         frame.zzt.com.appframe.retrofit.RetrofitManager manager = frame.zzt.com.appframe.retrofit.RetrofitManager.getInstance();
         Call<LoginResponse> call = manager.create().getLogin2();
         manager.enqueue(call, callback);
     }
 
 
-    public void getLogin3(  String type, String phone, String password , Callback<LoginResponse> callback) {
+    public void getLogin3(String type, String phone, String password, Callback<LoginResponse> callback) {
         frame.zzt.com.appframe.retrofit.RetrofitManager manager = frame.zzt.com.appframe.retrofit.RetrofitManager.getInstance();
-        Call<LoginResponse> call = manager.create().getLogin3(type , phone , password);
+        Call<LoginResponse> call = manager.create().getLogin3(type, phone, password);
         manager.enqueue(call, callback);
     }
-
 
 
 }

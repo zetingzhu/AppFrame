@@ -106,10 +106,8 @@ public class SoundHelper {
      * 播放本地或网络音频
      *
      * @param urlPath
-     * @param isEarpiece
-     *            是否用耳麦播放
-     * @param seek
-     *            初始进度
+     * @param isEarpiece 是否用耳麦播放
+     * @param seek       初始进度
      */
     public void playMedia(String urlPath, boolean isEarpiece, int seek) {
 

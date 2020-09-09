@@ -9,7 +9,9 @@ import android.content.pm.ProviderInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
+
 import androidx.core.content.FileProvider;
+
 import android.util.Log;
 
 import java.io.File;
@@ -46,32 +48,33 @@ public class RxUsePersenter extends BasePresenter<RxView> {
     }
 
     /**
-     *  RX 下载文件
-
+     * RX 下载文件
+     *
      * @return
      */
-    public Observable<File> downloadApkFile( ) {
+    public Observable<File> downloadApkFile() {
         final FileDownLoadObserver<File> fileDownLoadObserver = new FileDownLoadObserver<File>() {
             @Override
             public void onDownLoadSuccess(File file) {
-                Log.d(TAG , "onDownLoadSuccess：" + file.getName()) ;
-            }
-            @Override
-            public void onDownLoadFail(Throwable throwable) {
-                Log.d(TAG , "onDownLoadFail：" + throwable ) ;
+                Log.d(TAG, "onDownLoadSuccess：" + file.getName());
             }
 
             @Override
-            public void onProgress(int progress,long total) {
-                Log.d(TAG , "onProgress - total:" + progress +" - total:"+ total) ;
+            public void onDownLoadFail(Throwable throwable) {
+                Log.d(TAG, "onDownLoadFail：" + throwable);
+            }
+
+            @Override
+            public void onProgress(int progress, long total) {
+                Log.d(TAG, "onProgress - total:" + progress + " - total:" + total);
             }
         };
 
         final String destDir = Environment.getExternalStorageDirectory().getAbsolutePath()
                 + "/fileDownload/";
-        final String fileName = "file.apk" ;
+        final String fileName = "file.apk";
 
-        String url = "http://imtt.dd.qq.com/16891/533A07A5D7AA3015AD606FE4B901926A.apk?fsname=com.vipcare.niu_3.5.01_3050001.apk&csr=1bbd" ;
+        String url = "http://imtt.dd.qq.com/16891/533A07A5D7AA3015AD606FE4B901926A.apk?fsname=com.vipcare.niu_3.5.01_3050001.apk&csr=1bbd";
         ApiRetrofitWeather.getInstance().getApiService().download(url)
                 .subscribeOn(Schedulers.io())//subscribeOn和ObserOn必须在io线程，如果在主线程会出错
                 .observeOn(Schedulers.io())
@@ -79,7 +82,7 @@ public class RxUsePersenter extends BasePresenter<RxView> {
                 .map(new Function<ResponseBody, File>() {
                     @Override
                     public File apply(@NonNull ResponseBody responseBody) throws Exception {
-                        Log.d(TAG , "apply - responseBody:" + responseBody.toString() ) ;
+                        Log.d(TAG, "apply - responseBody:" + responseBody.toString());
                         return fileDownLoadObserver.saveFile(responseBody, destDir, fileName);
                     }
                 })
@@ -146,16 +149,16 @@ public class RxUsePersenter extends BasePresenter<RxView> {
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
             return true;
-        } catch(ActivityNotFoundException e) {
+        } catch (ActivityNotFoundException e) {
             try {
                 Intent intent = new Intent();
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                ComponentName cn = new ComponentName("com.android.settings","com.android.settings.Settings$NotificationAccessSettingsActivity");
+                ComponentName cn = new ComponentName("com.android.settings", "com.android.settings.Settings$NotificationAccessSettingsActivity");
                 intent.setComponent(cn);
                 intent.putExtra(":settings:show_fragment", "NotificationAccessSettings");
                 context.startActivity(intent);
                 return true;
-            } catch(Exception ex) {
+            } catch (Exception ex) {
                 ex.printStackTrace();
             }
             return false;

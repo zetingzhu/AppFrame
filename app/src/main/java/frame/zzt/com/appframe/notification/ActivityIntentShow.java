@@ -2,7 +2,9 @@ package frame.zzt.com.appframe.notification;
 
 import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
+
 import android.text.TextUtils;
 import android.widget.TextView;
 
@@ -16,12 +18,12 @@ import frame.zzt.com.appframe.ui.BaseAppCompatActivity;
  */
 
 public class ActivityIntentShow extends BaseAppCompatActivity {
-    private final static String TAG = ActivityNotification.class.getSimpleName() ;
+    private final static String TAG = ActivityNotification.class.getSimpleName();
 
     @BindView(R.id.tv_msg)
-    public TextView tv_msg ;
+    public TextView tv_msg;
 
-    private String showMsg ;
+    private String showMsg;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

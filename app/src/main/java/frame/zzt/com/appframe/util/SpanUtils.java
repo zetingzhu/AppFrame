@@ -15,6 +15,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.FloatRange;
@@ -23,6 +24,7 @@ import androidx.annotation.IntRange;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+
 import android.text.Layout;
 import android.text.Layout.Alignment;
 import android.text.SpannableStringBuilder;
@@ -61,7 +63,6 @@ import java.lang.ref.WeakReference;
 import static android.graphics.BlurMaskFilter.Blur;
 
 /**
- *
  * with              : 设置控件
  * setFlag           : 设置标识
  * setForegroundColor: 设置前景色
@@ -94,16 +95,15 @@ import static android.graphics.BlurMaskFilter.Blur;
  * appendImage       : 追加图片
  * appendSpace       : 追加空白
  * create            : 创建样式字符串
- *
  */
 public class SpanUtils {
 
     private static final int COLOR_DEFAULT = 0xFEFFFFFF;
 
-    public static final int ALIGN_BOTTOM   = 0;
+    public static final int ALIGN_BOTTOM = 0;
     public static final int ALIGN_BASELINE = 1;
-    public static final int ALIGN_CENTER   = 2;
-    public static final int ALIGN_TOP      = 3;
+    public static final int ALIGN_CENTER = 2;
+    public static final int ALIGN_TOP = 3;
 
     @IntDef({ALIGN_BOTTOM, ALIGN_BASELINE, ALIGN_CENTER, ALIGN_TOP})
     @Retention(RetentionPolicy.SOURCE)
@@ -114,61 +114,61 @@ public class SpanUtils {
 
     private TextView mTextView;
     private CharSequence mText;
-    private int           flag;
-    private int           foregroundColor;
-    private int           backgroundColor;
-    private int           lineHeight;
-    private int           alignLine;
-    private int           quoteColor;
-    private int           stripeWidth;
-    private int           quoteGapWidth;
-    private int           first;
-    private int           rest;
-    private int           bulletColor;
-    private int           bulletRadius;
-    private int           bulletGapWidth;
-    private int           fontSize;
-    private boolean       fontSizeIsDp;
-    private float         proportion;
-    private float         xProportion;
-    private boolean       isStrikethrough;
-    private boolean       isUnderline;
-    private boolean       isSuperscript;
-    private boolean       isSubscript;
-    private boolean       isBold;
-    private boolean       isItalic;
-    private boolean       isBoldItalic;
+    private int flag;
+    private int foregroundColor;
+    private int backgroundColor;
+    private int lineHeight;
+    private int alignLine;
+    private int quoteColor;
+    private int stripeWidth;
+    private int quoteGapWidth;
+    private int first;
+    private int rest;
+    private int bulletColor;
+    private int bulletRadius;
+    private int bulletGapWidth;
+    private int fontSize;
+    private boolean fontSizeIsDp;
+    private float proportion;
+    private float xProportion;
+    private boolean isStrikethrough;
+    private boolean isUnderline;
+    private boolean isSuperscript;
+    private boolean isSubscript;
+    private boolean isBold;
+    private boolean isItalic;
+    private boolean isBoldItalic;
     private String fontFamily;
     private Typeface typeface;
     private Alignment alignment;
-    private int           verticalAlign;
+    private int verticalAlign;
     private ClickableSpan clickSpan;
     private String url;
-    private float         blurRadius;
+    private float blurRadius;
     private Blur style;
     private Shader shader;
-    private float         shadowRadius;
-    private float         shadowDx;
-    private float         shadowDy;
-    private int           shadowColor;
-    private Object[]      spans;
+    private float shadowRadius;
+    private float shadowDx;
+    private float shadowDy;
+    private int shadowColor;
+    private Object[] spans;
 
     private Bitmap imageBitmap;
     private Drawable imageDrawable;
     private Uri imageUri;
-    private int      imageResourceId;
-    private int      alignImage;
+    private int imageResourceId;
+    private int alignImage;
 
     private int spaceSize;
     private int spaceColor;
 
     private SerializableSpannableStringBuilder mBuilder;
 
-    private       int mType;
+    private int mType;
     private final int mTypeCharSequence = 0;// 文本
-    private final int mTypeImage        = 1;// 图片
-    private final int mTypeSpace        = 2;// 空格
-    private Context mContext ;
+    private final int mTypeImage = 1;// 图片
+    private final int mTypeSpace = 2;// 空格
+    private Context mContext;
 
     private SpanUtils(TextView textView) {
         this();
@@ -421,7 +421,7 @@ public class SpanUtils {
     }
 
     public SpanUtils setUnderlineDel() {
-        this.isUnderline = false ;
+        this.isUnderline = false;
         return this;
     }
 
@@ -659,7 +659,7 @@ public class SpanUtils {
      * @return the single {@link SpanUtils} instance
      */
     public SpanUtils appendLine(@NonNull final CharSequence text) {
-        apply( mTypeCharSequence);
+        apply(mTypeCharSequence);
         mText = text + LINE_SEPARATOR;
         return this;
     }
@@ -670,8 +670,8 @@ public class SpanUtils {
      * @param bitmap The bitmap of image.
      * @return the single {@link SpanUtils} instance
      */
-    public SpanUtils appendImage(Context mcontext , @NonNull final Bitmap bitmap) {
-        return appendImage(mcontext , bitmap, ALIGN_BOTTOM);
+    public SpanUtils appendImage(Context mcontext, @NonNull final Bitmap bitmap) {
+        return appendImage(mcontext, bitmap, ALIGN_BOTTOM);
     }
 
     /**
@@ -687,7 +687,7 @@ public class SpanUtils {
      *               </ul>
      * @return the single {@link SpanUtils} instance
      */
-    public SpanUtils appendImage(Context mcontext , @NonNull final Bitmap bitmap, @Align final int align) {
+    public SpanUtils appendImage(Context mcontext, @NonNull final Bitmap bitmap, @Align final int align) {
         apply(mTypeImage);
         this.imageBitmap = bitmap;
         this.alignImage = align;
@@ -700,8 +700,8 @@ public class SpanUtils {
      * @param drawable The drawable of image.
      * @return the single {@link SpanUtils} instance
      */
-    public SpanUtils appendImage(Context mcontext , @NonNull final Drawable drawable) {
-        return appendImage(mcontext , drawable, ALIGN_BOTTOM);
+    public SpanUtils appendImage(Context mcontext, @NonNull final Drawable drawable) {
+        return appendImage(mcontext, drawable, ALIGN_BOTTOM);
     }
 
     /**
@@ -717,7 +717,7 @@ public class SpanUtils {
      *                 </ul>
      * @return the single {@link SpanUtils} instance
      */
-    public SpanUtils appendImage(Context mcontext , @NonNull final Drawable drawable, @Align final int align) {
+    public SpanUtils appendImage(Context mcontext, @NonNull final Drawable drawable, @Align final int align) {
         apply(mTypeImage);
         this.imageDrawable = drawable;
         this.alignImage = align;
@@ -730,8 +730,8 @@ public class SpanUtils {
      * @param uri The uri of image.
      * @return the single {@link SpanUtils} instance
      */
-    public SpanUtils appendImage(Context mcontext , @NonNull final Uri uri) {
-        return appendImage(mcontext , uri, ALIGN_BOTTOM);
+    public SpanUtils appendImage(Context mcontext, @NonNull final Uri uri) {
+        return appendImage(mcontext, uri, ALIGN_BOTTOM);
     }
 
     /**
@@ -747,7 +747,7 @@ public class SpanUtils {
      *              </ul>
      * @return the single {@link SpanUtils} instance
      */
-    public SpanUtils appendImage(Context mcontext , @NonNull final Uri uri, @Align final int align) {
+    public SpanUtils appendImage(Context mcontext, @NonNull final Uri uri, @Align final int align) {
         apply(mTypeImage);
         this.imageUri = uri;
         this.alignImage = align;
@@ -760,8 +760,8 @@ public class SpanUtils {
      * @param resourceId The resource id of image.
      * @return the single {@link SpanUtils} instance
      */
-    public SpanUtils appendImage(Context mcontext , @DrawableRes final int resourceId) {
-        return appendImage(mcontext , resourceId, ALIGN_BOTTOM);
+    public SpanUtils appendImage(Context mcontext, @DrawableRes final int resourceId) {
+        return appendImage(mcontext, resourceId, ALIGN_BOTTOM);
     }
 
     /**
@@ -777,8 +777,8 @@ public class SpanUtils {
      *                   </ul>
      * @return the single {@link SpanUtils} instance
      */
-    public SpanUtils appendImage(Context mcontext , @DrawableRes final int resourceId, @Align final int align) {
-        this.mContext = mcontext ;
+    public SpanUtils appendImage(Context mcontext, @DrawableRes final int resourceId, @Align final int align) {
+        this.mContext = mcontext;
         apply(mTypeImage);
         this.imageResourceId = resourceId;
         this.alignImage = align;
@@ -803,13 +803,13 @@ public class SpanUtils {
      * @return the single {@link SpanUtils} instance
      */
     public SpanUtils appendSpace(@IntRange(from = 0) final int size, @ColorInt final int color) {
-        apply( mTypeSpace);
+        apply(mTypeSpace);
         spaceSize = size;
         spaceColor = color;
         return this;
     }
 
-    private void apply(  final int type) {
+    private void apply(final int type) {
         applyLast();
         mType = type;
     }
@@ -831,11 +831,11 @@ public class SpanUtils {
         return mBuilder;
     }
 
-    private void applyLast( ) {
+    private void applyLast() {
         if (mType == mTypeCharSequence) {
             updateCharCharSequence();
         } else if (mType == mTypeImage) {
-            if ( mContext != null ) {
+            if (mContext != null) {
                 updateImage(mContext);
             }
         } else if (mType == mTypeSpace) {
@@ -957,19 +957,19 @@ public class SpanUtils {
         }
     }
 
-    private void updateImage(Context mContext ) {
+    private void updateImage(Context mContext) {
         int start = mBuilder.length();
         mText = "<img>";
         updateCharCharSequence();
         int end = mBuilder.length();
         if (imageBitmap != null) {
-            mBuilder.setSpan(new CustomImageSpan(mContext , imageBitmap, alignImage), start, end, flag);
+            mBuilder.setSpan(new CustomImageSpan(mContext, imageBitmap, alignImage), start, end, flag);
         } else if (imageDrawable != null) {
-            mBuilder.setSpan(new CustomImageSpan(mContext , imageDrawable, alignImage), start, end, flag);
+            mBuilder.setSpan(new CustomImageSpan(mContext, imageDrawable, alignImage), start, end, flag);
         } else if (imageUri != null) {
-            mBuilder.setSpan(new CustomImageSpan(mContext , imageUri, alignImage), start, end, flag);
+            mBuilder.setSpan(new CustomImageSpan(mContext, imageUri, alignImage), start, end, flag);
         } else if (imageResourceId != -1) {
-            mBuilder.setSpan(new CustomImageSpan(mContext , imageResourceId, alignImage), start, end, flag);
+            mBuilder.setSpan(new CustomImageSpan(mContext, imageResourceId, alignImage), start, end, flag);
         }
     }
 
@@ -984,7 +984,7 @@ public class SpanUtils {
     static class VerticalAlignSpan extends ReplacementSpan {
 
         static final int ALIGN_CENTER = 2;
-        static final int ALIGN_TOP    = 3;
+        static final int ALIGN_TOP = 3;
 
         final int mVerticalAlignment;
 
@@ -1034,9 +1034,9 @@ public class SpanUtils {
         private final int height;
 
         static final int ALIGN_CENTER = 2;
-        static final int ALIGN_TOP    = 3;
+        static final int ALIGN_TOP = 3;
 
-        final  int                  mVerticalAlignment;
+        final int mVerticalAlignment;
         static Paint.FontMetricsInt sfm;
 
         CustomLineHeightSpan(int height, int verticalAlignment) {
@@ -1093,7 +1093,7 @@ public class SpanUtils {
 
     static class SpaceSpan extends ReplacementSpan {
 
-        private final int   width;
+        private final int width;
         private final Paint paint = new Paint();
 
         private SpaceSpan(final int width) {
@@ -1253,36 +1253,36 @@ public class SpanUtils {
     static class CustomImageSpan extends CustomDynamicDrawableSpan {
         private Drawable mDrawable;
         private Uri mContentUri;
-        private int      mResourceId;
-        private Context mcontext ;
+        private int mResourceId;
+        private Context mcontext;
 
-        private CustomImageSpan(Context context , final Bitmap b, final int verticalAlignment) {
+        private CustomImageSpan(Context context, final Bitmap b, final int verticalAlignment) {
             super(verticalAlignment);
-            mcontext = context ;
-            mDrawable = new BitmapDrawable( context.getResources(), b);
+            mcontext = context;
+            mDrawable = new BitmapDrawable(context.getResources(), b);
             mDrawable.setBounds(
                     0, 0, mDrawable.getIntrinsicWidth(), mDrawable.getIntrinsicHeight()
             );
         }
 
-        private CustomImageSpan(Context context , final Drawable d, final int verticalAlignment) {
+        private CustomImageSpan(Context context, final Drawable d, final int verticalAlignment) {
             super(verticalAlignment);
-            mcontext = context ;
+            mcontext = context;
             mDrawable = d;
             mDrawable.setBounds(
                     0, 0, mDrawable.getIntrinsicWidth(), mDrawable.getIntrinsicHeight()
             );
         }
 
-        private CustomImageSpan(Context context , final Uri uri, final int verticalAlignment) {
+        private CustomImageSpan(Context context, final Uri uri, final int verticalAlignment) {
             super(verticalAlignment);
-            mcontext = context ;
+            mcontext = context;
             mContentUri = uri;
         }
 
-        private CustomImageSpan(Context context , @DrawableRes final int resourceId, final int verticalAlignment) {
+        private CustomImageSpan(Context context, @DrawableRes final int resourceId, final int verticalAlignment) {
             super(verticalAlignment);
-            mcontext = context ;
+            mcontext = context;
             mResourceId = resourceId;
         }
 
@@ -1296,7 +1296,7 @@ public class SpanUtils {
                 try {
                     InputStream is = mcontext.getContentResolver().openInputStream(mContentUri);
                     bitmap = BitmapFactory.decodeStream(is);
-                    drawable = new BitmapDrawable( mcontext.getResources(), bitmap);
+                    drawable = new BitmapDrawable(mcontext.getResources(), bitmap);
                     drawable.setBounds(
                             0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight()
                     );
@@ -1308,7 +1308,7 @@ public class SpanUtils {
                 }
             } else {
                 try {
-                    drawable = ContextCompat.getDrawable(mcontext , mResourceId);
+                    drawable = ContextCompat.getDrawable(mcontext, mResourceId);
                     drawable.setBounds(
                             0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight()
                     );

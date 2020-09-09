@@ -5,7 +5,9 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
+
 import androidx.customview.widget.ViewDragHelper;
+
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.Property;
@@ -22,7 +24,7 @@ import android.view.animation.AccelerateInterpolator;
  */
 
 public class SlideLockView extends ViewGroup {
-    private static final String TAG = "SlideLock" ;
+    private static final String TAG = "SlideLock";
 
     private ViewDragHelper viewDragHelper;
 
@@ -86,7 +88,7 @@ public class SlideLockView extends ViewGroup {
         viewDragHelper = ViewDragHelper.create(this, 1.0f, new ViewDragHelper.Callback() {
             @Override
             public boolean tryCaptureView(View child, int pointerId) {
-                Log.i(TAG , "-----tryCaptureView 这个 - 是不是一直在画-----");
+                Log.i(TAG, "-----tryCaptureView 这个 - 是不是一直在画-----");
                 int minX = 0;
                 int maxX = getWidth() - mLockView.getWidth();
                 return isEnabled() && (child.getLeft() > minX || child.getRight() < maxX) && child == mLockView;
@@ -94,15 +96,13 @@ public class SlideLockView extends ViewGroup {
 
             @Override
             public void onViewReleased(View releasedChild, float xvel, float yvel) {
-                Log.i(TAG , "-----onViewReleased 这个 - 是不是一直在画-----");
+                Log.i(TAG, "-----onViewReleased 这个 - 是不是一直在画-----");
                 super.onViewReleased(releasedChild, xvel, yvel);
                 int movedDistance = releasedChild.getRight() - releasedChild.getWidth();
-                if (movedDistance >= getWidth() * unlockTriggerValue)
-                {
+                if (movedDistance >= getWidth() * unlockTriggerValue) {
                     //到终点
                     animToXToPosition(releasedChild, getWidth() - mLockView.getWidth(), animationTimeDuration);
-                } else
-                {
+                } else {
                     //回到起点
                     animToXToPosition(releasedChild, 0, animationTimeDuration);
                 }
@@ -111,12 +111,11 @@ public class SlideLockView extends ViewGroup {
 
             @Override
             public int clampViewPositionHorizontal(View child, int left, int dx) {
-                Log.i(TAG , "-----clampViewPositionHorizontal 这个 - 是不是一直在画-----");
+                Log.i(TAG, "-----clampViewPositionHorizontal 这个 - 是不是一直在画-----");
                 final int oldLeft = child.getLeft();
                 int minX = 0;
                 int maxX = getWidth() - mLockView.getWidth();
-                if (left > minX && left < maxX)
-                {
+                if (left > minX && left < maxX) {
                     child.layout(left, (getHeight() - child.getHeight()) / 2, left + child.getWidth(), (getHeight() - child.getHeight()) / 2 + child.getHeight());
                 }
                 return oldLeft;
@@ -146,8 +145,7 @@ public class SlideLockView extends ViewGroup {
         int height = lockHeight;
         int width;
 
-        switch (MeasureSpec.getMode(widthMeasureSpec))
-        {
+        switch (MeasureSpec.getMode(widthMeasureSpec)) {
             case MeasureSpec.EXACTLY:
                 width = MeasureSpec.getSize(widthMeasureSpec);
                 break;
@@ -181,8 +179,7 @@ public class SlideLockView extends ViewGroup {
 
         //原来的动画正在执行
         //取消掉，防止多重动画冲突
-        if (oa != null && oa.isRunning())
-        {
+        if (oa != null && oa.isRunning()) {
             oa.cancel();
         }
         oa = ObjectAnimator.ofInt(view, layoutProperty, view.getLeft(), toX);
@@ -225,12 +222,12 @@ public class SlideLockView extends ViewGroup {
 
 //        int lockViewWidth = mLockView.getMeasuredWidth();
         int lockViewHeight = mLockView.getMeasuredHeight();
-        int lockViewWidth = lockViewHeight ;
+        int lockViewWidth = lockViewHeight;
 
-        Log.i(TAG , "-----是不是一直在画-----lockViewWidth:"+ lockViewWidth +" - lockViewHeight:"+ lockViewHeight);
-        Log.i(TAG , "-----mLockView-----l:" +0+ "-t:"  +(viewHeight - lockViewHeight) / 2+ "-t:"  +lockViewWidth+ "-t:" + (viewHeight - lockViewHeight) / 2 + lockViewHeight);
+        Log.i(TAG, "-----是不是一直在画-----lockViewWidth:" + lockViewWidth + " - lockViewHeight:" + lockViewHeight);
+        Log.i(TAG, "-----mLockView-----l:" + 0 + "-t:" + (viewHeight - lockViewHeight) / 2 + "-t:" + lockViewWidth + "-t:" + (viewHeight - lockViewHeight) / 2 + lockViewHeight);
         mLockView.layout(0, (viewHeight - lockViewHeight) / 2, lockViewWidth, (viewHeight - lockViewHeight) / 2 + lockViewHeight);
-        mTextView.layout( 0, 0, getWidth() , getHeight() );
+        mTextView.layout(0, 0, getWidth(), getHeight());
     }
 
 }

@@ -12,7 +12,9 @@ import android.os.IBinder;
 import android.os.Message;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
+
 import androidx.core.app.NotificationCompat;
+
 import android.util.Log;
 
 import java.util.HashMap;
@@ -26,7 +28,7 @@ import io.reactivex.functions.Consumer;
 /**
  * This class will receive and process all notifications.
  */
-public class NotificationReceiver18 extends NotificationListenerService 
+public class NotificationReceiver18 extends NotificationListenerService
         implements Handler.Callback {
 
     private static final String TAG = "NotificationReceiver18";
@@ -36,19 +38,19 @@ public class NotificationReceiver18 extends NotificationListenerService
     private static final int MSG_NOTIFICATION_REMOVED = 2;
 
     private final Context mContext = MyApplication.getInstance()
-                                    .getApplicationContext();
+            .getApplicationContext();
 
     // Notification
     private HashMap<String, StatusBarNotification> mNotificationMap;
 
     private Handler mHandler;
 
-    StatusBarNotification mySbn ;
+    StatusBarNotification mySbn;
 
 //    private MyBinder mBinder = new MyBinder();
 
-    MyBroadcast mBroadcast ;
-    public static final String BROADCAST_ACTION = "frame.zzt.com.appframe.MyApplication.NotificationReceiver18" ;
+    MyBroadcast mBroadcast;
+    public static final String BROADCAST_ACTION = "frame.zzt.com.appframe.MyApplication.NotificationReceiver18";
 
     public NotificationReceiver18() {
         Log.d(TAG, "NotificationReceiver18 created!");
@@ -64,8 +66,6 @@ public class NotificationReceiver18 extends NotificationListenerService
         mBroadcast = new MyBroadcast();
 
 
-
-
     }
 
     @Override
@@ -74,27 +74,27 @@ public class NotificationReceiver18 extends NotificationListenerService
 
         IntentFilter mIntentFilter = new IntentFilter();
         mIntentFilter.addAction(BROADCAST_ACTION);
-        registerReceiver(mBroadcast,mIntentFilter);
+        registerReceiver(mBroadcast, mIntentFilter);
 
-        Disposable register = RxBusTwo.getInstance().register( EventMsg.class , new Consumer<EventMsg>() {
+        Disposable register = RxBusTwo.getInstance().register(EventMsg.class, new Consumer<EventMsg>() {
             @Override
             public void accept(EventMsg eventMsg) throws Exception {
                 /**这个地方获取到数据。并执行相应的操作*/
                 if (eventMsg != null) {
-                    Log.i(TAG, "通过 RxBus 获取到的数据：" + eventMsg.toString() );
-                    int index = eventMsg.getIndex() ;
+                    Log.i(TAG, "通过 RxBus 获取到的数据：" + eventMsg.toString());
+                    int index = eventMsg.getIndex();
                     getActionIndex(index);
                 }
             }
         });
         //TODO 这个地方必须添加注册
-        RxBusTwo.getInstance().addSubscription(mContext,register);
+        RxBusTwo.getInstance().addSubscription(mContext, register);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        RxBusTwo.getInstance().unSubscribe( mContext );
+        RxBusTwo.getInstance().unSubscribe(mContext);
     }
 
     // IBinder是远程对象的基本接口，是为高性能而设计的轻量级远程调用机制的核心部分。但它不仅用于远程
@@ -155,21 +155,22 @@ public class NotificationReceiver18 extends NotificationListenerService
     }
 
     /**
-     *  添加广播
+     * 添加广播
+     *
      * @param sbn
      */
     private void handleNotificationPosted(StatusBarNotification sbn) {
         CharSequence pkgName = sbn.getPackageName();
-        Log.w(TAG, "handleNotificationPosted  pkgName:" + pkgName );
-        if ( pkgName.equals("frame.zzt.com.appframe")  ){
-            this.mySbn = sbn ;
+        Log.w(TAG, "handleNotificationPosted  pkgName:" + pkgName);
+        if (pkgName.equals("frame.zzt.com.appframe")) {
+            this.mySbn = sbn;
         }
     }
 
 
-
     /**
-     *  移除广播
+     * 移除广播
+     *
      * @param sbn
      */
     private void handleNotificationRemoved(StatusBarNotification sbn) {
@@ -179,21 +180,21 @@ public class NotificationReceiver18 extends NotificationListenerService
     @Override
     public boolean handleMessage(Message msg) {
         switch (msg.what) {
-        case MSG_NOTIFICATION_POSTED:
-            handleNotificationPosted((StatusBarNotification) msg.obj);
-            break;
-        case MSG_NOTIFICATION_REMOVED:
-            handleNotificationRemoved((StatusBarNotification) msg.obj);
-            break;
-        default:
-            return false;
+            case MSG_NOTIFICATION_POSTED:
+                handleNotificationPosted((StatusBarNotification) msg.obj);
+                break;
+            case MSG_NOTIFICATION_REMOVED:
+                handleNotificationRemoved((StatusBarNotification) msg.obj);
+                break;
+            default:
+                return false;
         }
 
         return true;
     }
 
 
-    public ServiceInterface getServiceInterface(){
+    public ServiceInterface getServiceInterface() {
         return new ServiceInterface() {
             @Override
             public void skipAction(int index) {
@@ -204,12 +205,13 @@ public class NotificationReceiver18 extends NotificationListenerService
 
     /**
      * 跳转对应的action
+     *
      * @param index
      */
     public void getActionIndex(int index) {
         if (mySbn != null) {
-           int count =  NotificationCompat.getActionCount(mySbn.getNotification());
-            if (count >0){
+            int count = NotificationCompat.getActionCount(mySbn.getNotification());
+            if (count > 0) {
                 try {
                     NotificationCompat.Action action = NotificationCompat.getAction(mySbn.getNotification(), index);
                     if (action != null) {
@@ -218,26 +220,26 @@ public class NotificationReceiver18 extends NotificationListenerService
                 } catch (PendingIntent.CanceledException e) {
                     e.printStackTrace();
                 }
-            }else {
-                Log.i(TAG , "在广播中没有action 按钮");
+            } else {
+                Log.i(TAG, "在广播中没有action 按钮");
             }
-        }else {
-            Log.i(TAG , "应用没有广播");
+        } else {
+            Log.i(TAG, "应用没有广播");
         }
     }
 
     public interface ServiceInterface {
-        void skipAction(int index );
+        void skipAction(int index);
     }
 
 
-    class MyBroadcast extends BroadcastReceiver{
+    class MyBroadcast extends BroadcastReceiver {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            Log.i(TAG , "接收到的广播信息：" + intent.getAction() );
-            if (BROADCAST_ACTION.equals(intent.getAction())){
-                int index = intent.getIntExtra("index" , 0);
+            Log.i(TAG, "接收到的广播信息：" + intent.getAction());
+            if (BROADCAST_ACTION.equals(intent.getAction())) {
+                int index = intent.getIntExtra("index", 0);
                 getActionIndex(index);
             }
         }

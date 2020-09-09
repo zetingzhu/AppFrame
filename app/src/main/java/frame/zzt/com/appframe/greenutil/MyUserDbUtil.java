@@ -26,7 +26,7 @@ public class MyUserDbUtil {
     }
 
     public UserDao getUserDao() {
-        if (userDao == null){
+        if (userDao == null) {
 
         }
         return userDao;

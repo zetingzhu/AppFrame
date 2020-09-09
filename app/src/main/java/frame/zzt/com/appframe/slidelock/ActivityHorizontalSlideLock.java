@@ -15,8 +15,8 @@ import frame.zzt.com.appframe.R;
 public class ActivityHorizontalSlideLock extends Activity {
 
 
-    @BindView( R.id.slideLockHorizontal )
-    public SlideLockHorizontalView slideLockHorizontal ;
+    @BindView(R.id.slideLockHorizontal)
+    public SlideLockHorizontalView slideLockHorizontal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +28,7 @@ public class ActivityHorizontalSlideLock extends Activity {
 
     private void initView() {
 
-        slideLockHorizontal.setIsMove( true );
+        slideLockHorizontal.setIsMove(true);
 
     }
 

@@ -22,25 +22,31 @@ public abstract class FileDownLoadObserver<T> extends DefaultObserver<T> {
     public void onNext(T t) {
         onDownLoadSuccess(t);
     }
+
     @Override
     public void onError(Throwable e) {
         onDownLoadFail(e);
     }
+
     //可以重写，具体可由子类实现
     @Override
     public void onComplete() {
     }
+
     //下载成功的回调
     public abstract void onDownLoadSuccess(T t);
+
     //下载失败回调
     public abstract void onDownLoadFail(Throwable throwable);
+
     //下载进度监听
-    public abstract void onProgress(int progress,long total);
+    public abstract void onProgress(int progress, long total);
 
     /**
      * 将文件写入本地
+     *
      * @param responseBody 请求结果全体
-     * @param destFileDir 目标文件夹
+     * @param destFileDir  目标文件夹
      * @param destFileName 目标文件名
      * @return 写入完成的文件
      * @throws IOException IO异常
@@ -57,8 +63,8 @@ public abstract class FileDownLoadObserver<T> extends DefaultObserver<T> {
 
             File dir = new File(destFileDir);
             if (!dir.exists()) {
-                boolean boo =  dir.mkdirs();
-                Log.i(TAG , "创建文件是否成功" + boo);
+                boolean boo = dir.mkdirs();
+                Log.i(TAG, "创建文件是否成功" + boo);
             }
             File file = new File(dir, destFileName);
 
@@ -68,15 +74,15 @@ public abstract class FileDownLoadObserver<T> extends DefaultObserver<T> {
                 fos.write(buf, 0, len);
                 final long finalSum = sum;
                 //这里就是对进度的监听回调
-                onProgress((int) (finalSum * 100 / total),total);
+                onProgress((int) (finalSum * 100 / total), total);
             }
             fos.flush();
 
             return file;
 
-        } catch (Exception e){
-          e.printStackTrace();
-            return null ;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         } finally {
             try {
                 if (is != null) is.close();

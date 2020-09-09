@@ -1,0 +1,47 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion getRootProject().compileSdkVersion
+    buildToolsVersion getRootProject().buildToolsVersion
+
+    defaultConfig {
+        applicationId "com.example.mypagingsamples"
+        minSdkVersion getRootProject().minSdkVersion
+        targetSdkVersion getRootProject().targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    // java8 支持
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation project(path: ':CommonModule')
+
+    // 生命周期库
+    def lifecycleVersion = '2.2.0'
+    // 生命周期库协程优化库
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
+    //  生命周期扩展包
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
+
+    // paging 分页
+    def paging_version = "3.0.0-alpha03"
+    //noinspection GradleDependency
+    implementation "androidx.paging:paging-runtime:$paging_version"
+
+}

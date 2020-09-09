@@ -18,7 +18,9 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
+
 import androidx.annotation.Nullable;
+
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
@@ -34,7 +36,7 @@ import frame.zzt.com.appframe.util.ByteUtil;
  */
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
 public class BleService19 extends Service {
-    private static final String TAG = "ActivityBluetooth serv" ;
+    private static final String TAG = "ActivityBluetooth serv";
     private IBinder iBinder = new BleService19.LocalBinder();
 
     public final static String ACTION_GATT_CONNECTED =
@@ -51,7 +53,7 @@ public class BleService19 extends Service {
             "com.example.ble.service.ACTION_GATT_SERVICE_RED";
 
     public final static String ACTION_GET_RSSI = "ACTION_GET_RSSI"; //获取蓝牙信号
-    public final static String ACTION_START_GETRSSI = "ACTION_START_GETRSSI" ;//
+    public final static String ACTION_START_GETRSSI = "ACTION_START_GETRSSI";//
 
     /////////////额外添加
     public final static String ACTION_STOP_BLE = "ACTION_STOP_BLE";  //停止连接和扫描
@@ -85,8 +87,8 @@ public class BleService19 extends Service {
     }
 
 
-    MyInterfaceCallback myInterfaceCallback ;
-    MyInterfaceRssi myInterfaceRssi ;
+    MyInterfaceCallback myInterfaceCallback;
+    MyInterfaceRssi myInterfaceRssi;
 
     @Override
     public void onCreate() {
@@ -126,7 +128,7 @@ public class BleService19 extends Service {
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
-    public boolean connect(final String address  , MyInterfaceCallback myInterfaceCallback ) {
+    public boolean connect(final String address, MyInterfaceCallback myInterfaceCallback) {
         if (mBluetoothAdapter == null || address == null) {
             Log.w(TAG, "BluetoothAdapter not initialized or unspecified address.");
             return false;
@@ -148,14 +150,13 @@ public class BleService19 extends Service {
             return false;
         }
 
-        this.myInterfaceCallback = myInterfaceCallback ;
+        this.myInterfaceCallback = myInterfaceCallback;
         mBluetoothGatt = device.connectGatt(this, false, mGattCallback);
         Log.i(TAG, "Trying to create a new connection.");
         mBluetoothDeviceAddress = address;
         mConnectionState = STATE_CONNECTING;
         return true;
     }
-
 
 
     public List<BluetoothGattService> getSupportedGattServices() {
@@ -193,11 +194,11 @@ public class BleService19 extends Service {
         public void onReadRemoteRssi(BluetoothGatt gatt, int rssi, int status) {
             super.onReadRemoteRssi(gatt, rssi, status);
             final Intent intent = new Intent(ACTION_GET_RSSI);
-            intent.putExtra("get_assi",rssi);
+            intent.putExtra("get_assi", rssi);
             sendBroadcast(intent);
             Log.i(TAG, "onReadRemoteRssi:rssi = " + rssi + "  status=" + status);
 
-            myInterfaceRssi.getRssi( rssi , status);
+            myInterfaceRssi.getRssi(rssi, status);
         }
 
         @Override
@@ -216,7 +217,7 @@ public class BleService19 extends Service {
 //                    }
 
                     if (serviceList.get(i).getUuid().toString().equals(SampleGattAttributes.DEVICE_SERVICE_UUID)) {
-                        myInterfaceCallback.bleServicesDiscoveredCharacteristic(gatt , ACTION_GATT_SERVICES_DISCOVERED , serviceList.get(i).getCharacteristics() );
+                        myInterfaceCallback.bleServicesDiscoveredCharacteristic(gatt, ACTION_GATT_SERVICES_DISCOVERED, serviceList.get(i).getCharacteristics());
                     }
 
                     if (serviceList.get(i).getUuid().toString().equals(SampleGattAttributes.DEVICE_SERVICE_UUID)) {
@@ -255,7 +256,7 @@ public class BleService19 extends Service {
                                 + new String(characteristic.getValue())
                                 + " -> "
                                 + byte2HexStr(characteristic.getValue())
-            );
+                );
 
 
             if (characteristic.getUuid().toString().equals(SampleGattAttributes.DEVICE_KEY_UUID)) {
@@ -263,7 +264,7 @@ public class BleService19 extends Service {
                 byte[] mKeyByte = new byte[2];
                 System.arraycopy(characteristic.getValue(), 5, mKeyByte, 0, 2);
                 int snStr1 = ByteUtil.byteHexToInt(mKeyByte);
-                myInterfaceCallback.getCmdSn(snStr1 ,characteristic.getValue() );
+                myInterfaceCallback.getCmdSn(snStr1, characteristic.getValue());
             }
 
             if (TextUtils.isEmpty(byte2HexStr(characteristic.getValue()))) {
@@ -274,7 +275,7 @@ public class BleService19 extends Service {
                             Thread.sleep(1000);
                             accessReadFrequency++;
                             if (accessReadFrequency >= 6) { // 最多访问5次 如果拿不到数据则终止
-                                myInterfaceCallback.bleServiceReadError(ACTION_GATT_SERVICE_READ_ERROR );
+                                myInterfaceCallback.bleServiceReadError(ACTION_GATT_SERVICE_READ_ERROR);
                                 return;
                             }
                             readCharacteristic(mCharacteristic);
@@ -291,7 +292,7 @@ public class BleService19 extends Service {
         @Override
         public void onCharacteristicWrite(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, int status) {
             Log.i(TAG, String.format("onCharacteristicWrite：device name = %s, address = %s", gatt.getDevice().getName(), gatt.getDevice().getAddress()));
-            Log.i(TAG, String.format("onCharacteristicWrite：requestId = %s", new String (characteristic.getValue()) ));
+            Log.i(TAG, String.format("onCharacteristicWrite：requestId = %s", new String(characteristic.getValue())));
             Log.i(TAG, "onCharacteristicWrite: status = " + status);
 
 
@@ -340,12 +341,12 @@ public class BleService19 extends Service {
         @Override
         public void onCharacteristicChanged(BluetoothGatt gatt, final BluetoothGattCharacteristic characteristic) {
             Log.i(TAG, String.format("onCharacteristicChanged：device name = %s, address = %s", gatt.getDevice().getName(), gatt.getDevice().getAddress()));
-            Log.i(TAG, String.format("onCharacteristicChanged：requestId = %s", new String (characteristic.getValue()) ));
-            Log.i(TAG, "onCharacteristicChanged: " +  new String(characteristic.getValue()) );
-            Handler handler=new Handler(Looper.getMainLooper());
-            handler.post(new Runnable(){
-                public void run(){
-                    Toast.makeText(BleService19.this , new String(characteristic.getValue())  , Toast.LENGTH_SHORT).show();
+            Log.i(TAG, String.format("onCharacteristicChanged：requestId = %s", new String(characteristic.getValue())));
+            Log.i(TAG, "onCharacteristicChanged: " + new String(characteristic.getValue()));
+            Handler handler = new Handler(Looper.getMainLooper());
+            handler.post(new Runnable() {
+                public void run() {
+                    Toast.makeText(BleService19.this, new String(characteristic.getValue()), Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -362,7 +363,6 @@ public class BleService19 extends Service {
             super.onMtuChanged(gatt, mtu, status);
             Log.i(TAG, "onMtuChanged: ");
         }
-
 
 
         @Override
@@ -391,11 +391,12 @@ public class BleService19 extends Service {
         characteristic.setWriteType(BluetoothGattCharacteristic.WRITE_TYPE_DEFAULT);
         characteristic.setValue(bufferToHex(md5Text));
         boolean booWrite = mBluetoothGatt.writeCharacteristic(characteristic);
-        Log.i("VehiclePresenter" , "执行蓝牙写数据操作是否成功：" + booWrite);
+        Log.i("VehiclePresenter", "执行蓝牙写数据操作是否成功：" + booWrite);
     }
 
     /**
      * 通过蓝牙执行某些命令
+     *
      * @param characteristic
      * @param md5Text
      * @return
@@ -410,15 +411,15 @@ public class BleService19 extends Service {
         characteristic.setWriteType(BluetoothGattCharacteristic.WRITE_TYPE_NO_RESPONSE);
         characteristic.setValue(bufferToHex(md5Text));
         boolean booWrite = mBluetoothGatt.writeCharacteristic(characteristic);
-        Log.i("VehiclePresenter" , "执行蓝牙写数据操作是否成功：" + booWrite);
+        Log.i("VehiclePresenter", "执行蓝牙写数据操作是否成功：" + booWrite);
 
 
-
-        return true ;
+        return true;
     }
 
     /**
-     *  写入字节数据
+     * 写入字节数据
+     *
      * @param characteristic
      * @param md5Text
      * @return
@@ -432,8 +433,8 @@ public class BleService19 extends Service {
         characteristic.setWriteType(BluetoothGattCharacteristic.WRITE_TYPE_NO_RESPONSE);
         characteristic.setValue(md5Text.getBytes());
         boolean booWrite = mBluetoothGatt.writeCharacteristic(characteristic);
-        Log.i("VehiclePresenter" , "执行蓝牙写数据操作是否成功：" + booWrite);
-        return true ;
+        Log.i("VehiclePresenter", "执行蓝牙写数据操作是否成功：" + booWrite);
+        return true;
     }
 
     public boolean wirteCharacteristic3(BluetoothGattCharacteristic characteristic, byte[] md5byte) {
@@ -445,12 +446,12 @@ public class BleService19 extends Service {
         characteristic.setWriteType(BluetoothGattCharacteristic.WRITE_TYPE_NO_RESPONSE);
         characteristic.setValue(md5byte);
         boolean booWrite = mBluetoothGatt.writeCharacteristic(characteristic);
-        Log.i("VehiclePresenter" , "执行蓝牙写数据操作是否成功：" + booWrite);
-        return true ;
+        Log.i("VehiclePresenter", "执行蓝牙写数据操作是否成功：" + booWrite);
+        return true;
     }
 
     public boolean readRssi(MyInterfaceRssi myInterfaceRssi) {
-        this.myInterfaceRssi = myInterfaceRssi ;
+        this.myInterfaceRssi = myInterfaceRssi;
         if (mBluetoothGatt != null) {
             Log.i(TAG, "1readRssi: ");
             return mBluetoothGatt.readRemoteRssi();
@@ -459,7 +460,7 @@ public class BleService19 extends Service {
     }
 
     public void closeDevice() {
-        Log.i(TAG , "mBluetoothGatt.close()");
+        Log.i(TAG, "mBluetoothGatt.close()");
         if (mBluetoothGatt != null) {
             mBluetoothGatt.close();
         }
@@ -471,11 +472,11 @@ public class BleService19 extends Service {
         }
     }
 
-    public BluetoothGatt getBluetoothGatt () {
+    public BluetoothGatt getBluetoothGatt() {
         if (mBluetoothGatt != null) {
-            return  mBluetoothGatt ;
+            return mBluetoothGatt;
         }
-        return null ;
+        return null;
     }
 
     public static String bytesToHexString(byte[] src) {

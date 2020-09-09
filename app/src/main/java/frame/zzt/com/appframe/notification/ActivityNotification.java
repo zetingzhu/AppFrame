@@ -7,8 +7,10 @@ import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -24,7 +26,7 @@ import frame.zzt.com.appframe.widget.MyRecyclerView;
 /**
  * 通知栏状态信息
  */
-public class ActivityNotification extends BaseAppCompatActivity implements MyNotificationView{
+public class ActivityNotification extends BaseAppCompatActivity implements MyNotificationView {
 
     private final static String TAG = ActivityNotification.class.getSimpleName();
 
@@ -34,7 +36,7 @@ public class ActivityNotification extends BaseAppCompatActivity implements MyNot
     private List<MyRecyclerView.MyRecycleListItem> mList;
 
 
-    private MyNotificationPersenter mNoti ;
+    private MyNotificationPersenter mNoti;
 
 
     @Override
@@ -44,7 +46,7 @@ public class ActivityNotification extends BaseAppCompatActivity implements MyNot
         setContentView(R.layout.activity_notification);
         ButterKnife.bind(this);
 
-        mNoti = new MyNotificationPersenter(this , this );
+        mNoti = new MyNotificationPersenter(this, this);
         initData();
 
         // 授权监听电话通知栏
@@ -197,7 +199,7 @@ public class ActivityNotification extends BaseAppCompatActivity implements MyNot
     public boolean isNotificationListenerActived() {
         String strListener = Settings.Secure.getString(this.getContentResolver(),
                 "enabled_notification_listeners");
-        Log.w(TAG , "获取的所有通知：" + strListener);
+        Log.w(TAG, "获取的所有通知：" + strListener);
         return strListener != null
                 && strListener
                 .contains("frame.zzt.com.appframe/frame.zzt.com.appframe.Notification.NotificationReceiver18");
@@ -242,7 +244,7 @@ public class ActivityNotification extends BaseAppCompatActivity implements MyNot
         mRn.setNotifyUi(new NotifyListener() {
             @Override
             public void notifyUi() {
-                Log.d(TAG , "更新界面 -- " );
+                Log.d(TAG, "更新界面 -- ");
                 mNoti.notifyCustomViewNotification();
             }
         });

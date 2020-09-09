@@ -48,8 +48,8 @@ public class ImplBluetoothController implements IBluetoothControl {
         }
     }
 
-    public void cancelEvent(){
-        if(this.gatt != null){
+    public void cancelEvent() {
+        if (this.gatt != null) {
             gatt.disconnect();
         }
     }

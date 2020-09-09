@@ -8,6 +8,8 @@ import android.bluetooth.BluetoothGatt;
 
 public interface IBluetoothEventHandler {
     void startEvent(BluetoothGatt gatt);
+
     <T> void onHandlerEvent(BluetoothGatt gatt, T t);
+
     boolean getResult();
 }

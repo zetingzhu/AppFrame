@@ -2,6 +2,7 @@ package frame.zzt.com.appframe.observable;
 
 import android.os.Bundle;
 import android.os.PersistableBundle;
+
 import androidx.annotation.Nullable;
 
 import android.util.Log;
@@ -24,12 +25,12 @@ public class ActivityObservable extends BaseAppCompatActivity implements MyObser
     private final static String TAG = ActivityObservable.class.getSimpleName();
 
     @BindView(R.id.rv_observable)
-    MyRecyclerView rv_observable ;
+    MyRecyclerView rv_observable;
 
 
     private List<MyRecyclerView.MyRecycleListItem> mList;
-    NewsProvider provider ;
-    NewsProvider2 provider2 ;
+    NewsProvider provider;
+    NewsProvider2 provider2;
     User user;
     User2 user2;
 
@@ -37,7 +38,7 @@ public class ActivityObservable extends BaseAppCompatActivity implements MyObser
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView( R.layout.activity_observable );
+        setContentView(R.layout.activity_observable);
         ButterKnife.bind(this);
 
         initView();
@@ -61,9 +62,9 @@ public class ActivityObservable extends BaseAppCompatActivity implements MyObser
                 Log.i(TAG, "点击数据：" + position);
                 switch (position) {
                     case 0:
-                        provider= new NewsProvider();
+                        provider = new NewsProvider();
                         for (int i = 0; i < 10; i++) {
-                            user = new User("user:"+i);
+                            user = new User("user:" + i);
                             provider.register(user);
                         }
                         break;
@@ -75,13 +76,13 @@ public class ActivityObservable extends BaseAppCompatActivity implements MyObser
                     case 2:
                         provider2 = new NewsProvider2();
                         for (int i = 0; i < 10; i++) {
-                            user2 = new User2("user:"+i);
+                            user2 = new User2("user:" + i);
                             provider2.addObserver(user2);
                         }
                         break;
                     case 3:
                         if (provider2 != null) {
-                                provider2.deleteObservers();
+                            provider2.deleteObservers();
                         }
                         break;
                 }

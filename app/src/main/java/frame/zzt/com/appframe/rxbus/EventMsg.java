@@ -5,7 +5,7 @@ package frame.zzt.com.appframe.rxbus;
  */
 
 public class EventMsg {
-    private int index ;
+    private int index;
     private String msg;
 
     public int getIndex() {

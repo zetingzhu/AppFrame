@@ -1,7 +1,9 @@
 package frame.zzt.com.appframe.networkopt;
 
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
+
 import android.util.Log;
 
 import frame.zzt.com.appframe.R;
@@ -13,7 +15,7 @@ import frame.zzt.com.appframe.ui.BaseAppCompatActivity;
  */
 
 public class ActivityNetwork extends BaseAppCompatActivity {
-    private static final String TAG = ActivityNetwork.class.getSimpleName() ;
+    private static final String TAG = ActivityNetwork.class.getSimpleName();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -27,20 +29,20 @@ public class ActivityNetwork extends BaseAppCompatActivity {
     }
 
     @Network(netType = NetworkType.WIFI)
-    public void network(NetworkType networkType){
-        switch (networkType){
-            case WIFI :
-                Log.i(TAG , "当前网络为 -- wifi " ) ;
-            break;
+    public void network(NetworkType networkType) {
+        switch (networkType) {
+            case WIFI:
+                Log.i(TAG, "当前网络为 -- wifi ");
+                break;
             case GPRS:
-                Log.i(TAG , "当前网络为 -- GPRS " ) ;
-            break;
+                Log.i(TAG, "当前网络为 -- GPRS ");
+                break;
             case NONE:
-                Log.i(TAG , "当前网络为 -- 没有网络 " ) ;
-            break;
+                Log.i(TAG, "当前网络为 -- 没有网络 ");
+                break;
             case AUTO:
-                Log.i(TAG , "当前网络为 -- 自动 " ) ;
-            break;
+                Log.i(TAG, "当前网络为 -- 自动 ");
+                break;
         }
     }
 

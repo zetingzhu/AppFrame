@@ -27,9 +27,10 @@ public class SysUtils {
 
     /**
      * 是否允许了通知的打开，只适用4.4及以上系统，对于4.4以下的系统一律返回false。
+     *
      * @return
      */
-    public static boolean isNotificationEnabled( Application appContext) {
+    public static boolean isNotificationEnabled(Application appContext) {
 
         //NotificationManagerCompat.areNotificationsEnabled();
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {

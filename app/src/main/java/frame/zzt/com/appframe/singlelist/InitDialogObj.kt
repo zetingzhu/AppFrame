@@ -29,6 +29,7 @@ data class InitTypDataList(var itemType: Int) {
 
         // 通用奖励金(奖励金金额)
         val ITEM_TYPE_CREDIT_GENERAL = 11
+
         // 产品卷(奖励金金额 , 奖励金名称)
         val ITEM_TYPE_CREDIT_FOR_PRODUCT = 12
 

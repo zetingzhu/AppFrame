@@ -5,7 +5,9 @@ import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
+
 import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
@@ -23,21 +25,21 @@ import frame.zzt.com.appframe.ui.BaseAppCompatActivity;
  */
 public class ActivityBluetooth4 extends BaseAppCompatActivity implements BluetoothView {
 
-    public final static String TAG = ActivityBluetooth4.class.getSimpleName() ;
+    public final static String TAG = ActivityBluetooth4.class.getSimpleName();
 
     private static final int REQUEST_CODE_BLUETOOTH_ON = 1313;
 
     @BindView(R.id.btn_scan)
-    Button btn_scan ;
+    Button btn_scan;
     @BindView(R.id.btn_stop_scan)
-    Button btn_stop_scan ;
+    Button btn_stop_scan;
 
     @BindView(R.id.btn_wirte)
-    Button btn_wirte ;
+    Button btn_wirte;
     @BindView(R.id.btn_read)
-    Button btn_read ;
+    Button btn_read;
 
-    private MyBleAQPresenter19 mAQPresenter ;
+    private MyBleAQPresenter19 mAQPresenter;
     private String bleManufacturers; //厂商ID   扫描～
 
     @Override
@@ -81,20 +83,20 @@ public class ActivityBluetooth4 extends BaseAppCompatActivity implements Bluetoo
 
 
     /**
-     *  连接 服务端
+     * 连接 服务端
      */
     @OnClick(R.id.btn_connect)
     public void OnClickConnect() {
         // 三星手机的蓝牙地址
-        String address = "68:05:71:19:F1:DF" ;
+        String address = "68:05:71:19:F1:DF";
 
         // 测试设备的连接地址
-        String addressCS = "E6:F8:DB:40:C0:BF" ;
+        String addressCS = "E6:F8:DB:40:C0:BF";
         mAQPresenter.connectBletooth(addressCS);
     }
 
     /**
-     *  断开连接服务端
+     * 断开连接服务端
      */
     @OnClick(R.id.btn_dis)
     public void OnClickDisconnect() {
@@ -102,12 +104,12 @@ public class ActivityBluetooth4 extends BaseAppCompatActivity implements Bluetoo
     }
 
     @OnClick(R.id.btn_open)
-    public void onClickOpen(){
+    public void onClickOpen() {
         mAQPresenter.openBle();
     }
 
     @OnClick(R.id.btn_close)
-    public void onClickClose(){
+    public void onClickClose() {
         mAQPresenter.closeBle();
     }
 
@@ -117,7 +119,7 @@ public class ActivityBluetooth4 extends BaseAppCompatActivity implements Bluetoo
         mAQPresenter.readRssi();
     }
 
-    @OnClick(R.id.btn_stop_rssi )
+    @OnClick(R.id.btn_stop_rssi)
     public void OnClickCloseReadRssi() {
         mAQPresenter.closeReadRssi();
     }
@@ -126,36 +128,36 @@ public class ActivityBluetooth4 extends BaseAppCompatActivity implements Bluetoo
      * 向 服务端 写入数据
      */
     @OnClick(R.id.btn_wirte)
-    public void OnClickWirteData(){
-        mAQPresenter.writeData("wirte" + + (int) (Math.random() * 100));
+    public void OnClickWirteData() {
+        mAQPresenter.writeData("wirte" + +(int) (Math.random() * 100));
     }
 
     /**
      * 读 服务端 返回的数据
      */
     @OnClick(R.id.btn_read)
-    public void OnClickReadData(){
+    public void OnClickReadData() {
 
         mAQPresenter.readData();
     }
 
-    /** 蓝牙开锁*/
+    /**
+     * 蓝牙开锁
+     */
     @OnClick(R.id.btn_ble_open)
-    public void OnClickBleOpen(){
+    public void OnClickBleOpen() {
         byte open = (byte) 0xC2;
-        mAQPresenter.writeDataOpenCloseLock(open) ;
+        mAQPresenter.writeDataOpenCloseLock(open);
     }
 
-    /** 蓝牙关锁*/
+    /**
+     * 蓝牙关锁
+     */
     @OnClick(R.id.btn_ble_close)
-    public void OnClickBleClose(){
-            byte close = (byte) 0xC1;
-        mAQPresenter.writeDataOpenCloseLock(close) ;
+    public void OnClickBleClose() {
+        byte close = (byte) 0xC1;
+        mAQPresenter.writeDataOpenCloseLock(close);
     }
-
-
-
-
 
 
     public void openBluetooth() {

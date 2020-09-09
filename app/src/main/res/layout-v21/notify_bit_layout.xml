@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="horizontal"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content">
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <ImageView
         android:layout_width="110dp"
         android:layout_height="110dp"
-        android:src="@mipmap/icon_06"/>
+        android:src="@mipmap/icon_06" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,7 +23,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:text="名称"
-            android:textSize="15sp"/>
+            android:textSize="15sp" />
 
 
         <LinearLayout
@@ -40,7 +40,7 @@
                 android:layout_height="38dp"
                 android:background="@drawable/button_selector"
                 android:scaleType="fitCenter"
-                android:src="@mipmap/icon_01"/>
+                android:src="@mipmap/icon_01" />
 
             <ImageView
                 android:id="@+id/ib_big_02"
@@ -49,7 +49,7 @@
                 android:layout_marginLeft="20dp"
                 android:background="@drawable/button_anim_list"
                 android:scaleType="fitCenter"
-                android:src="@mipmap/icon_02"/>
+                android:src="@mipmap/icon_02" />
 
             <ImageView
                 android:id="@+id/ib_big_03"
@@ -57,7 +57,8 @@
                 android:layout_height="38dp"
                 android:background="?android:attr/selectableItemBackgroundBorderless"
                 android:layout_marginLeft="20dp"
-                android:src="@mipmap/icon_03"/>
+                android:src="@mipmap/icon_03" />
+
             <ImageButton
                 android:id="@+id/ib_big_04"
                 android:layout_width="38dp"
@@ -65,7 +66,7 @@
                 android:background="?android:attr/selectableItemBackground"
                 android:layout_marginLeft="20dp"
                 android:scaleType="fitCenter"
-                android:src="@mipmap/icon_04"/>
+                android:src="@mipmap/icon_04" />
 
         </LinearLayout>
     </LinearLayout>

@@ -13,10 +13,12 @@ import androidx.multidex.MultiDex;
 import android.util.Log;
 
 import com.zzt.commonmodule.base.BaseApplication;
+import com.zzt.logutil.CustomPrinterForGetBlockInfo;
 
 import frame.zzt.com.appframe.notification.NotificationReceiver18;
 import frame.zzt.com.appframe.greenutil.MyGreenUtil;
 import frame.zzt.com.appframe.greendao.DaoSession;
+
 
 /**
  * @author: zeting
@@ -46,6 +48,9 @@ public class MyApplication extends BaseApplication {
         super.onCreate();
         mInstance = this;
         mMyGreenUtil = new MyGreenUtil();
+
+        // 启动监听页面卡顿日志 ，日志没法输入，打印不出来
+//        CustomPrinterForGetBlockInfo.start();
 
         /**
          被杀后再次启动

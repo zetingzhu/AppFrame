@@ -24,11 +24,10 @@ import java.util.Map;
 /**
  * Created by allen on 18/5/14.
  * 程序崩溃信息
- *
- *         // 绑定程序崩溃写日志信息
- CrashHandler.getInstance().init(this);
- *
- * */
+ * <p>
+ * // 绑定程序崩溃写日志信息
+ * CrashHandler.getInstance().init(this);
+ */
 
 public class CrashHandler implements Thread.UncaughtExceptionHandler {
 
@@ -44,12 +43,17 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
     private Map<String, String> infos = new HashMap<String, String>();
 
 
-    /** 保证只有一个CrashHandler实例 */
-    private CrashHandler() {}
+    /**
+     * 保证只有一个CrashHandler实例
+     */
+    private CrashHandler() {
+    }
 
-    /** 获取CrashHandler实例 ,单例模式 */
+    /**
+     * 获取CrashHandler实例 ,单例模式
+     */
     public static CrashHandler getInstance() {
-        if(instance == null)
+        if (instance == null)
             instance = new CrashHandler();
         return instance;
     }
@@ -114,6 +118,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
 
     /**
      * 收集设备参数信息
+     *
      * @param ctx
      */
     public void collectDeviceInfo(Context ctx) {
@@ -145,7 +150,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
      * 保存错误信息到文件中
      *
      * @param ex
-     * @return  返回文件名称,便于将文件传送到服务器
+     * @return 返回文件名称, 便于将文件传送到服务器
      */
     private String saveCatchInfo2File(Throwable ex) {
 
@@ -180,11 +185,11 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
 
     /**
      * 将捕获的导致崩溃的错误信息发送给开发人员
-     *
+     * <p>
      * 目前只将log日志保存在sdcard 和输出到LogCat中，并未发送给后台。
      */
-    private void sendCrashLog2PM(String fileName){
-        if(!new File(fileName).exists()){
+    private void sendCrashLog2PM(String fileName) {
+        if (!new File(fileName).exists()) {
             Toast.makeText(mContext, "日志文件不存在！", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -194,9 +199,9 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
         try {
             fis = new FileInputStream(fileName);
             reader = new BufferedReader(new InputStreamReader(fis, "GBK"));
-            while(true){
+            while (true) {
                 s = reader.readLine();
-                if(s == null) break;
+                if (s == null) break;
                 //由于目前尚未确定以何种方式发送，所以先打出log日志。
                 Log.i("info", s.toString());
             }
@@ -204,7 +209,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }finally{   // 关闭流
+        } finally {   // 关闭流
             try {
                 reader.close();
                 fis.close();

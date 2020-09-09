@@ -6,9 +6,9 @@ import java.util.List;
  * 返回城市天气
  */
 
-public class MyWeather{
+public class MyWeather {
 
-    private List<HeWeather6> HeWeather6 ;
+    private List<HeWeather6> HeWeather6;
 
     public List<MyWeather.HeWeather6> getHeWeather6() {
         return HeWeather6;
@@ -18,9 +18,9 @@ public class MyWeather{
         HeWeather6 = heWeather6;
     }
 
-    public class HeWeather6{
-        private List<Basic> basic ;
-        private String status ;
+    public class HeWeather6 {
+        private List<Basic> basic;
+        private String status;
 
         public List<Basic> getBasic() {
             return basic;
@@ -48,15 +48,15 @@ public class MyWeather{
     }
 
     public class Basic {
-        private String cid ;// ":"CN101010100",
-        private String location ;// ":"北京",
-        private String parent_city ;// ":"北京",
-        private String admin_area ;// ":"北京",
-        private String cnty ;// ":"中国",
-        private String lat ;// ":"39.90498734",
-        private String lon ;// ":"116.4052887",
-        private String tz ;// ":"+8.00",
-        private String type ;// ":"city"
+        private String cid;// ":"CN101010100",
+        private String location;// ":"北京",
+        private String parent_city;// ":"北京",
+        private String admin_area;// ":"北京",
+        private String cnty;// ":"中国",
+        private String lat;// ":"39.90498734",
+        private String lon;// ":"116.4052887",
+        private String tz;// ":"+8.00",
+        private String type;// ":"city"
 
         public String getAdmin_area() {
             return admin_area;

@@ -23,25 +23,25 @@ public final class IgnoreList {
     // EXCLUSION_LIST, will be processed specially.
     // Filter out useless/unimportant notification to save BT bandwidth
     private static final String[] EXCLUSION_LIST = {
-        // MTK
-        "com.mediatek.mtklogger",
-        "com.mediatek.bluetooth",
-        "com.mediatek.security",
+            // MTK
+            "com.mediatek.mtklogger",
+            "com.mediatek.bluetooth",
+            "com.mediatek.security",
 
-        // Google
-        "android",
-        "com.android.providers.downloads",
-        "com.android.bluetooth",
-        "com.android.music",
-        "com.google.android.music",
-        "com.google.android.gms",
+            // Google
+            "android",
+            "com.android.providers.downloads",
+            "com.android.bluetooth",
+            "com.android.music",
+            "com.google.android.music",
+            "com.google.android.gms",
 
-        // 3rd party apps
-        "com.htc.music",
-        "com.lge.music",
-        "com.sec.android.app.music",
-        "com.sonyericsson.music",
-        "com.ijinshan.mguard"
+            // 3rd party apps
+            "com.htc.music",
+            "com.lge.music",
+            "com.sec.android.app.music",
+            "com.sonyericsson.music",
+            "com.ijinshan.mguard"
     };
 
     // The file to save IgnoreList
@@ -105,6 +105,7 @@ public final class IgnoreList {
 
     /**
      * Add a package name from ignore list.
+     *
      * @param name The package name to be added from ignore list.
      */
     public void addIgnoreItem(String name) {
@@ -118,6 +119,7 @@ public final class IgnoreList {
 
     /**
      * Remove a package name from ignore list.
+     *
      * @param name The package name to be removed from ignore list.
      */
     public void removeIgnoreItem(String name) {

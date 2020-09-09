@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:orientation="horizontal">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
 
     <ImageView
         android:layout_width="64dp"
         android:layout_height="64dp"
-        android:src="@mipmap/icon_06"/>
+        android:src="@mipmap/icon_06" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,7 +21,7 @@
             android:layout_marginEnd="10dp"
             android:layout_marginStart="10dp"
             android:text="名称"
-            android:textSize="15sp"/>
+            android:textSize="15sp" />
 
 
         <LinearLayout
@@ -37,7 +37,7 @@
                 android:layout_height="38dp"
                 android:background="@null"
                 android:scaleType="fitCenter"
-                android:src="@mipmap/icon_01"/>
+                android:src="@mipmap/icon_01" />
 
             <ImageButton
                 android:id="@+id/ib_small_02"
@@ -46,7 +46,7 @@
                 android:layout_marginLeft="20dp"
                 android:background="@null"
                 android:scaleType="fitCenter"
-                android:src="@mipmap/icon_02"/>
+                android:src="@mipmap/icon_02" />
 
         </LinearLayout>
     </LinearLayout>

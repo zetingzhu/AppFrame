@@ -14,9 +14,13 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+
 import androidx.annotation.NonNull;
+
 import com.google.android.material.snackbar.Snackbar;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.text.Html;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -61,13 +65,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     @BindView(R.id.login_progress)
     public View mLoginFormView;
     @BindView(R.id.email_sign_in_button)
-    public Button mEmailSignInButton ;
+    public Button mEmailSignInButton;
     @BindView(R.id.tv_html)
-    public TextView tv_html ;
+    public TextView tv_html;
     @BindString(R.string.insurance_tarms_text12)
-    public String htmlText ;
-    @BindViews({R.id.button1 , R.id.button2})
-    public List<Button> btnList ;
+    public String htmlText;
+    @BindViews({R.id.button1, R.id.button2})
+    public List<Button> btnList;
     @BindView(R.id.button3)
     Button button3;
 
@@ -101,9 +105,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     }
 
-    public void showToast(String msg){
-        Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
-    };
+    public void showToast(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    }
+
+    ;
 
 //    @OnClick(R2.id.button4)
 //    public void onViewClicked1(View view) {
@@ -153,7 +159,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         }
     }
-
 
 
     @OnClick(R.id.email_sign_in_button)
@@ -207,7 +212,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
 //        return email.contains("@");
-        return true ;
+        return true;
     }
 
     private boolean isPasswordValid(String password) {
@@ -341,7 +346,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 //                mPasswordView.setError("登录成功");
 //                mPasswordView.requestFocus();
                 Intent mIntent = new Intent();
-                mIntent.setClass(LoginActivity.this , HomeActivity.class);
+                mIntent.setClass(LoginActivity.this, HomeActivity.class);
                 startActivity(mIntent);
                 finish();
             } else {

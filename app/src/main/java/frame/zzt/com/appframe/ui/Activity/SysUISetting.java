@@ -18,7 +18,7 @@ public class SysUISetting {
     /**
      * 设置系统栏状态
      */
-    public static void showBarStatBack( Activity mActivity ) {
+    public static void showBarStatBack(Activity mActivity) {
         Window window = mActivity.getWindow();
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
             // 4.0 添加
@@ -42,8 +42,8 @@ public class SysUISetting {
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-			window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-            window.setStatusBarColor( Color.TRANSPARENT );
+            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+            window.setStatusBarColor(Color.TRANSPARENT);
         }
     }
 

@@ -47,6 +47,7 @@
             android:layout_height="wrap_content"
             android:onClick="btnNotify1"
             android:text="数据通知1" />
+
         <Button
             android:id="@+id/btn_notify_2"
             android:layout_width="match_parent"

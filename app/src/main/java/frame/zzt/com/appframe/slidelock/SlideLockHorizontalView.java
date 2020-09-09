@@ -11,7 +11,9 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
+
 import androidx.customview.widget.ViewDragHelper;
+
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.Property;
@@ -31,7 +33,7 @@ import frame.zzt.com.appframe.R;
  */
 
 public class SlideLockHorizontalView extends ViewGroup {
-    private static final String TAG = "SlideLock/Slh" ;
+    private static final String TAG = "SlideLock/Slh";
 
     private ViewDragHelper viewDragHelper;
 
@@ -40,23 +42,23 @@ public class SlideLockHorizontalView extends ViewGroup {
     private Paint mPaintText1;// 绘制 字体
     private Paint mPaintText2;// 绘制 字体
     private Paint mPaintText3;// 绘制 字体
-    private Paint mPaintArrow ;// 绘制 字体
-    private Paint mPaintMoveBg ;// 移动下发的遮罩成
+    private Paint mPaintArrow;// 绘制 字体
+    private Paint mPaintMoveBg;// 移动下发的遮罩成
 
     private String drawMsg = "拖动按钮至左端";
     private String drawMsg1 = "拖动";
     private String drawMsg2 = "按钮至";
     private String drawMsg3 = "左端";
-    private Rect bounds  ;// 文字的大小
-    private Rect bounds1 ;// 文字的大小
-    private Rect bounds2 ;// 文字的大小
-    private Rect bounds3 ;// 文字的大小
-    private Paint.FontMetricsInt fontMetrics ;// 文字测量
+    private Rect bounds;// 文字的大小
+    private Rect bounds1;// 文字的大小
+    private Rect bounds2;// 文字的大小
+    private Rect bounds3;// 文字的大小
+    private Paint.FontMetricsInt fontMetrics;// 文字测量
 
-    private float textSize = getResources().getDimension(R.dimen.text_size_12) ;
-    private int textColor  = Color.parseColor("#a8aef6") ;
+    private float textSize = getResources().getDimension(R.dimen.text_size_12);
+    private int textColor = Color.parseColor("#a8aef6");
 
-    private Bitmap  arrowBitmap ; //箭头图片
+    private Bitmap arrowBitmap; //箭头图片
 
     /**
      * 解锁触发阀值
@@ -67,14 +69,20 @@ public class SlideLockHorizontalView extends ViewGroup {
      */
     private float unlockTriggerValue = 0.99f;
 
-    /**  动画时长 */
+    /**
+     * 动画时长
+     */
     private int animationTimeDuration = 300;
 
 
-    /**  回弹动画实现 */
+    /**
+     * 回弹动画实现
+     */
     private ObjectAnimator oa;
 
-    /** 锁视图  */
+    /**
+     * 锁视图
+     */
     private View mLockView;
 
     /**
@@ -83,34 +91,52 @@ public class SlideLockHorizontalView extends ViewGroup {
     private RectF mRoundRect = new RectF();
 
 
-    /**上下文对象*/
-    private Context mContext ;
+    /**
+     * 上下文对象
+     */
+    private Context mContext;
 
-    /** 触摸事件时间 */
-    private long downTime = 0L ;
-    private long upTime = 0L ;
-    private long leadTime = 0L ;
-    /**是否显示滑动操作提醒*/
-    private boolean isShowBg = false ;
-    /** 是否可以滑动*/
-    private boolean isMove = false ;
-    /** 监听事件*/
-    private OnTouchBring mTouchBring ;
-    private SlideOnClickListener mClickListener ;
-    /** 滑动的中心位置 */
-    private float moveWidth  = 0f ;
-    /** 是否属于点击事件 */
-    private boolean isOnClick = false ;
-    /**是否正在执行 这个状态没用了 */
-    private boolean isRun = false ;
-    /**是否已经结束了这次动画*/
-    private boolean isMoveBotton = false ;
+    /**
+     * 触摸事件时间
+     */
+    private long downTime = 0L;
+    private long upTime = 0L;
+    private long leadTime = 0L;
+    /**
+     * 是否显示滑动操作提醒
+     */
+    private boolean isShowBg = false;
+    /**
+     * 是否可以滑动
+     */
+    private boolean isMove = false;
+    /**
+     * 监听事件
+     */
+    private OnTouchBring mTouchBring;
+    private SlideOnClickListener mClickListener;
+    /**
+     * 滑动的中心位置
+     */
+    private float moveWidth = 0f;
+    /**
+     * 是否属于点击事件
+     */
+    private boolean isOnClick = false;
+    /**
+     * 是否正在执行 这个状态没用了
+     */
+    private boolean isRun = false;
+    /**
+     * 是否已经结束了这次动画
+     */
+    private boolean isMoveBotton = false;
     // 动画
     private SlideLockProgress progressbar; // 蓝牙车辆启动动画
     private ImageView startStatusBg; // 蓝牙车辆启动动画
     private TextView startStatusText; // 蓝牙车辆启动动画
 
-    private long blueTimeout = 10 * 1000 ;// 执行蓝牙超时时间
+    private long blueTimeout = 10 * 1000;// 执行蓝牙超时时间
 
 
     public SlideLockHorizontalView(Context context) {
@@ -123,41 +149,46 @@ public class SlideLockHorizontalView extends ViewGroup {
 
     public SlideLockHorizontalView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        this.mContext = context ;
+        this.mContext = context;
         initView();
     }
-
 
 
     public boolean isRun() {
         return isRun;
     }
 
-    /** 设置是否正在执行动画 */
+    /**
+     * 设置是否正在执行动画
+     */
     public void setRun(boolean run) {
         isRun = run;
 //        Log.d(TAG , "--- isRun:" + isRun ) ;
     }
 
-    /**设置是否可以滑动*/
-    public void setIsMove( boolean move ){
-        this.isMove = move ;
+    /**
+     * 设置是否可以滑动
+     */
+    public void setIsMove(boolean move) {
+        this.isMove = move;
     }
 
     /**
-     *  设置接触监听
+     * 设置接触监听
+     *
      * @param mTouchBring
      */
-    public void setOnTouchBring( OnTouchBring mTouchBring){
-        this.mTouchBring = mTouchBring ;
+    public void setOnTouchBring(OnTouchBring mTouchBring) {
+        this.mTouchBring = mTouchBring;
     }
 
     /**
      * 设置点击监听
+     *
      * @param mSlideClick
      */
-    public void setOnClickListener( SlideOnClickListener mSlideClick ){
-        this.mClickListener = mSlideClick ;
+    public void setOnClickListener(SlideOnClickListener mSlideClick) {
+        this.mClickListener = mSlideClick;
     }
 
     @Override
@@ -173,16 +204,16 @@ public class SlideLockHorizontalView extends ViewGroup {
         viewDragHelper = ViewDragHelper.create(this, 1.0f, new ViewDragHelper.Callback() {
             @Override
             public boolean tryCaptureView(View child, int pointerId) {
-                Log.i(TAG , "-----tryCaptureView 开始 ----- child == mLockView:" + (child == mLockView) );
+                Log.i(TAG, "-----tryCaptureView 开始 ----- child == mLockView:" + (child == mLockView));
                 // 当 child 是 mHomeView 时，才允许捕获。
-                downTime = System.currentTimeMillis() ;
+                downTime = System.currentTimeMillis();
                 if (isMove && !isRun) {
                     isShowBg = true;
-                }else {
+                } else {
                     isShowBg = false;
                 }
-                moveWidth = child.getRight() - (child.getWidth()/2 ) ;
-                isMoveBotton = false ;
+                moveWidth = child.getRight() - (child.getWidth() / 2);
+                isMoveBotton = false;
                 postInvalidate();
 
                 return child == mLockView;
@@ -190,23 +221,23 @@ public class SlideLockHorizontalView extends ViewGroup {
 
             @Override
             public void onViewReleased(View releasedChild, float xvel, float yvel) {
-                Log.i(TAG , "-----onViewReleased 结束 -----");
+                Log.i(TAG, "-----onViewReleased 结束 -----");
                 super.onViewReleased(releasedChild, xvel, yvel);
                 progressbar.setGaoLiang(false);
-                moveWidth = releasedChild.getRight() - (releasedChild.getWidth()/2 ) ;
+                moveWidth = releasedChild.getRight() - (releasedChild.getWidth() / 2);
                 upTime = System.currentTimeMillis();
-                leadTime =  upTime - downTime ;
+                leadTime = upTime - downTime;
 //                Log.i(TAG, "----- 时间差：" + leadTime );
-                if ((upTime - downTime ) <= 1000){
-                    isOnClick = true ;
-                    if (mClickListener != null ){
+                if ((upTime - downTime) <= 1000) {
+                    isOnClick = true;
+                    if (mClickListener != null) {
                         if (!isMove && !isRun) {
 //                            Log.i(TAG, "----- 我的按钮被点击了 -----");
                             mClickListener.onClick();
                         }
                     }
-                }else {
-                    isOnClick = false ;
+                } else {
+                    isOnClick = false;
                 }
 
                 if (!isMoveBotton) {
@@ -215,7 +246,7 @@ public class SlideLockHorizontalView extends ViewGroup {
                         setMoveBotttomClick();
 
                     } else {
-                        animToYToPosition(releasedChild, 0, animationTimeDuration , isOnClick);
+                        animToYToPosition(releasedChild, 0, animationTimeDuration, isOnClick);
                     }
                     isMoveBotton = true;
                 } else {
@@ -227,15 +258,15 @@ public class SlideLockHorizontalView extends ViewGroup {
             @Override
             public int clampViewPositionHorizontal(View child, int left, int dx) {
 
-                int oldLeft = child.getLeft() ;
+                int oldLeft = child.getLeft();
                 int minX = 0;
-                int maxX = getWidth() - mLockView.getWidth() ;
+                int maxX = getWidth() - mLockView.getWidth();
                 if (left > minX && left < maxX) {
-                    Log.i(TAG , "-----clampViewPositionVertical 滑动 -----  left:" + left + "-dx:" +dx + "- oldLeft:" + oldLeft );
-                    child.layout( left  , child.getTop() , left + child.getWidth() , child.getBottom());
-                    moveWidth = left + ( child.getWidth()/2 ) ;
+                    Log.i(TAG, "-----clampViewPositionVertical 滑动 -----  left:" + left + "-dx:" + dx + "- oldLeft:" + oldLeft);
+                    child.layout(left, child.getTop(), left + child.getWidth(), child.getBottom());
+                    moveWidth = left + (child.getWidth() / 2);
                 }
-                return oldLeft ;
+                return oldLeft;
             }
 
             @Override
@@ -247,30 +278,29 @@ public class SlideLockHorizontalView extends ViewGroup {
         // 背景
         mPaint = new Paint();
         mPaint.setStyle(Paint.Style.FILL);
-        mPaint.setColor( Color.parseColor("#d81c1e2d" ) );//透明背景色
-
+        mPaint.setColor(Color.parseColor("#d81c1e2d"));//透明背景色
 
 
 //        mPaintText.getTextBounds(drawMsg , 0, drawMsg .length(), bounds ); // 获得绘制文字的边界矩形
 
 
         // 字体
-        mPaintText1 = new Paint( );
+        mPaintText1 = new Paint();
 
         mPaintText1.setAntiAlias(true);
         mPaintText1.setStyle(Paint.Style.FILL);
-        mPaintText1.setColor( textColor );
+        mPaintText1.setColor(textColor);
         mPaintText1.setTextSize(textSize);
         // 文字水平居中
         mPaintText1.setTextAlign(Paint.Align.CENTER);
         bounds1 = new Rect(); // 文字边框
         mPaintText1.getTextBounds(drawMsg1, 0, drawMsg1.length(), bounds1); // 获得绘制文字的边界矩形
 
-        mPaintText2 = new Paint( );
+        mPaintText2 = new Paint();
         // 设置画笔是否抗锯齿
         mPaintText2.setAntiAlias(true);
         mPaintText2.setStyle(Paint.Style.FILL);
-        mPaintText2.setColor( textColor );
+        mPaintText2.setColor(textColor);
         mPaintText2.setTextSize(textSize);
         // 文字水平居中
         mPaintText2.setTextAlign(Paint.Align.CENTER);
@@ -278,49 +308,48 @@ public class SlideLockHorizontalView extends ViewGroup {
         mPaintText2.getTextBounds(drawMsg2, 0, drawMsg2.length(), bounds2); // 获得绘制文字的边界矩形
 
 
-        mPaintText3 = new Paint( );
+        mPaintText3 = new Paint();
         mPaintText3.setStyle(Paint.Style.FILL);
         mPaintText3.setAntiAlias(true);
         mPaintText3.setColor(textColor);
-        mPaintText3.setTextSize( textSize);
+        mPaintText3.setTextSize(textSize);
         // 文字水平居中
         mPaintText3.setTextAlign(Paint.Align.CENTER);
         bounds3 = new Rect(); // 文字边框
         mPaintText3.getTextBounds(drawMsg3, 0, drawMsg3.length(), bounds3); // 获得绘制文字的边界矩形
 
         // 绘制所有字体
-        mPaintText = new Paint( );
+        mPaintText = new Paint();
         mPaintText.setStyle(Paint.Style.FILL);
-        mPaintText.setColor( textColor );
+        mPaintText.setColor(textColor);
         mPaintText.setTextSize(textSize);
         mPaintText.setTextAlign(Paint.Align.CENTER);
-        bounds = new Rect() ;
+        bounds = new Rect();
         mPaintText.getTextBounds(drawMsg, 0, drawMsg.length(), bounds); // 获得绘制文字的边界矩形
         fontMetrics = mPaintText.getFontMetricsInt(); // 获取绘制Text时的四条线
 
 
-
         // 箭头
-        mPaintArrow = new Paint( );
+        mPaintArrow = new Paint();
         mPaintArrow.setStyle(Paint.Style.FILL);
 
         if (arrowBitmap == null) {
-            arrowBitmap = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.bluetoothbtn_arrow );
+            arrowBitmap = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.bluetoothbtn_arrow);
         }
 
         // 移动遮罩成
-        mPaintMoveBg = new Paint( );
+        mPaintMoveBg = new Paint();
         mPaintMoveBg.setStyle(Paint.Style.FILL);
-        mPaintMoveBg.setColor( Color.parseColor("#d81c1e2d") );
+        mPaintMoveBg.setColor(Color.parseColor("#d81c1e2d"));
 
     }
 
     /**
      * 设置滑动到底部监听
      */
-    public void setMoveBotttomClick(){
+    public void setMoveBotttomClick() {
         stopTouch(false);
-        if (mClickListener != null ){
+        if (mClickListener != null) {
             if (isMove) {
                 mClickListener.onMoveClick();
             }
@@ -336,7 +365,7 @@ public class SlideLockHorizontalView extends ViewGroup {
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
 //        Logger.debug(TAG , "onInterceptTouchEvent 触摸");
-        if (mTouchBring != null){
+        if (mTouchBring != null) {
             mTouchBring.bringToFront();
         }
         return viewDragHelper.shouldInterceptTouchEvent(ev);
@@ -354,7 +383,7 @@ public class SlideLockHorizontalView extends ViewGroup {
         int lockHeight = mLockView.getMeasuredHeight();
         int lockWidth = mLockView.getMeasuredWidth();
 
-        setMeasuredDimension( childWidthMeasureSpec , lockHeight );
+        setMeasuredDimension(childWidthMeasureSpec, lockHeight);
     }
 
     @Override
@@ -363,102 +392,102 @@ public class SlideLockHorizontalView extends ViewGroup {
 
         // 中间段
         mRoundRect.left = 0;
-        mRoundRect.top = 0 ;
-        mRoundRect.bottom = getHeight() ;
+        mRoundRect.top = 0;
+        mRoundRect.bottom = getHeight();
         mRoundRect.right = getWidth();
 
         if (isShowBg) {
 
-            Log.w(TAG , "拖动中间信息：" + moveWidth );
+            Log.w(TAG, "拖动中间信息：" + moveWidth);
 
             // 绘制背景
-            canvas.drawRoundRect( mRoundRect , getResources().getDimension(R.dimen.dimen_7dp)  , getResources().getDimension(R.dimen.dimen_7dp) , mPaint);
+            canvas.drawRoundRect(mRoundRect, getResources().getDimension(R.dimen.dimen_7dp), getResources().getDimension(R.dimen.dimen_7dp), mPaint);
 
             // 画拖动字体
-            float textX = ( mRoundRect.right - mLockView.getWidth() ) * 0.5f ;
+            float textX = (mRoundRect.right - mLockView.getWidth()) * 0.5f;
             float baseline = mRoundRect.top + (mRoundRect.bottom - mRoundRect.top - fontMetrics.bottom + fontMetrics.top) / 2 - fontMetrics.top;
             // 中间
-            if (moveWidth > textX ) {
+            if (moveWidth > textX) {
                 canvas.drawText(drawMsg2, textX, baseline, mPaintText2); // 绘制表示进度的文字
             }
             // 左边
-            float textXLeft = textX - bounds2.width()*0.5f - bounds1.width()*0.5f - 4 ;
-            if (moveWidth > textXLeft ) {
-                canvas.drawText(drawMsg1, textXLeft , baseline, mPaintText1); // 绘制表示进度的文字
+            float textXLeft = textX - bounds2.width() * 0.5f - bounds1.width() * 0.5f - 4;
+            if (moveWidth > textXLeft) {
+                canvas.drawText(drawMsg1, textXLeft, baseline, mPaintText1); // 绘制表示进度的文字
             }
             // 右边
             float textXRight = textX + bounds2.width() * 0.5f + bounds3.width() * 0.5f + 4;
-            if (moveWidth > textXRight ) {
-                canvas.drawText(drawMsg3, textXRight , baseline, mPaintText3); // 绘制表示进度的文字
+            if (moveWidth > textXRight) {
+                canvas.drawText(drawMsg3, textXRight, baseline, mPaintText3); // 绘制表示进度的文字
             }
 
 //            canvas.drawText(drawMsg , textX  , baseline - 80, mPaintText ); // 绘制表示进度的文字
 
 
             // 获取字符串的宽度
-            float textWidth = bounds.width() ;
-            float textY =   mLockView.getWidth()   * 0.5f ;
+            float textWidth = bounds.width();
+            float textY = mLockView.getWidth() * 0.5f;
             // 获取文件左边，右边距离
-            float textPaddingLeft = textX - textWidth * 0.5f ;
-            float textPaddingRight = textX + textWidth * 0.5f ;
-            float textHeight = bounds2.height() ;
-            float bitmapWidth = textHeight/2 ;// 图片宽
-            float bitmapPadding = 5 ;// 箭头间距
-            float textPadding = 35 ;// 文字离箭头间距
+            float textPaddingLeft = textX - textWidth * 0.5f;
+            float textPaddingRight = textX + textWidth * 0.5f;
+            float textHeight = bounds2.height();
+            float bitmapWidth = textHeight / 2;// 图片宽
+            float bitmapPadding = 5;// 箭头间距
+            float textPadding = 35;// 文字离箭头间距
 
             // 绘制图片
             // 背景图片显示区域
-            RectF mRectArrowLeft1 = new RectF(textPaddingLeft - textPadding- bitmapWidth                          , textY -  textHeight * 0.5f, textPaddingLeft - textPadding                                       , textY + textHeight * 0.5f );
-            RectF mRectArrowLeft2 = new RectF(textPaddingLeft - textPadding- bitmapWidth * 2  - bitmapPadding     , textY -  textHeight * 0.5f, textPaddingLeft - textPadding - bitmapWidth - bitmapPadding         , textY + textHeight * 0.5f );
-            RectF mRectArrowLeft3 = new RectF(textPaddingLeft - textPadding- bitmapWidth * 3  - bitmapPadding * 2 , textY -  textHeight * 0.5f, textPaddingLeft - textPadding- bitmapWidth * 2  - bitmapPadding * 2 , textY + textHeight * 0.5f );
-            RectF mRectArrowLeft4 = new RectF(textPaddingLeft - textPadding- bitmapWidth * 4  - bitmapPadding * 3 , textY -  textHeight * 0.5f, textPaddingLeft - textPadding- bitmapWidth * 3  - bitmapPadding * 3 , textY + textHeight * 0.5f );
-            RectF mRectArrowLeft5 = new RectF(textPaddingLeft - textPadding- bitmapWidth * 5  - bitmapPadding * 4 , textY -  textHeight * 0.5f, textPaddingLeft - textPadding- bitmapWidth * 4  - bitmapPadding * 4 , textY + textHeight * 0.5f );
-            RectF mRectArrowLeft6 = new RectF(textPaddingLeft - textPadding- bitmapWidth * 6  - bitmapPadding * 5 , textY -  textHeight * 0.5f, textPaddingLeft - textPadding- bitmapWidth * 5  - bitmapPadding * 5 , textY + textHeight * 0.5f );
+            RectF mRectArrowLeft1 = new RectF(textPaddingLeft - textPadding - bitmapWidth, textY - textHeight * 0.5f, textPaddingLeft - textPadding, textY + textHeight * 0.5f);
+            RectF mRectArrowLeft2 = new RectF(textPaddingLeft - textPadding - bitmapWidth * 2 - bitmapPadding, textY - textHeight * 0.5f, textPaddingLeft - textPadding - bitmapWidth - bitmapPadding, textY + textHeight * 0.5f);
+            RectF mRectArrowLeft3 = new RectF(textPaddingLeft - textPadding - bitmapWidth * 3 - bitmapPadding * 2, textY - textHeight * 0.5f, textPaddingLeft - textPadding - bitmapWidth * 2 - bitmapPadding * 2, textY + textHeight * 0.5f);
+            RectF mRectArrowLeft4 = new RectF(textPaddingLeft - textPadding - bitmapWidth * 4 - bitmapPadding * 3, textY - textHeight * 0.5f, textPaddingLeft - textPadding - bitmapWidth * 3 - bitmapPadding * 3, textY + textHeight * 0.5f);
+            RectF mRectArrowLeft5 = new RectF(textPaddingLeft - textPadding - bitmapWidth * 5 - bitmapPadding * 4, textY - textHeight * 0.5f, textPaddingLeft - textPadding - bitmapWidth * 4 - bitmapPadding * 4, textY + textHeight * 0.5f);
+            RectF mRectArrowLeft6 = new RectF(textPaddingLeft - textPadding - bitmapWidth * 6 - bitmapPadding * 5, textY - textHeight * 0.5f, textPaddingLeft - textPadding - bitmapWidth * 5 - bitmapPadding * 5, textY + textHeight * 0.5f);
 
-            RectF mRectArrowRight1 = new RectF(textPaddingRight + textPadding                                         , textY -  textHeight * 0.5f, textPaddingRight + textPadding + bitmapWidth * 1                     , textY + textHeight * 0.5f );
-            RectF mRectArrowRight2 = new RectF(textPaddingRight + textPadding + bitmapWidth * 1 + bitmapPadding       , textY -  textHeight * 0.5f, textPaddingRight + textPadding + bitmapWidth * 2 + bitmapPadding     , textY + textHeight * 0.5f );
-            RectF mRectArrowRight3 = new RectF(textPaddingRight + textPadding + bitmapWidth * 2 + bitmapPadding * 2   , textY -  textHeight * 0.5f, textPaddingRight + textPadding + bitmapWidth * 3 + bitmapPadding * 2 , textY + textHeight * 0.5f );
-            RectF mRectArrowRight4 = new RectF(textPaddingRight + textPadding + bitmapWidth * 3 + bitmapPadding * 3   , textY -  textHeight * 0.5f, textPaddingRight + textPadding + bitmapWidth * 4 + bitmapPadding * 3 , textY + textHeight * 0.5f );
-            RectF mRectArrowRight5 = new RectF(textPaddingRight + textPadding + bitmapWidth * 4 + bitmapPadding * 4   , textY -  textHeight * 0.5f, textPaddingRight + textPadding + bitmapWidth * 5 + bitmapPadding * 4 , textY + textHeight * 0.5f );
-            RectF mRectArrowRight6 = new RectF(textPaddingRight + textPadding + bitmapWidth * 5 + bitmapPadding * 5   , textY -  textHeight * 0.5f, textPaddingRight + textPadding + bitmapWidth * 6 + bitmapPadding * 5 , textY + textHeight * 0.5f );
+            RectF mRectArrowRight1 = new RectF(textPaddingRight + textPadding, textY - textHeight * 0.5f, textPaddingRight + textPadding + bitmapWidth * 1, textY + textHeight * 0.5f);
+            RectF mRectArrowRight2 = new RectF(textPaddingRight + textPadding + bitmapWidth * 1 + bitmapPadding, textY - textHeight * 0.5f, textPaddingRight + textPadding + bitmapWidth * 2 + bitmapPadding, textY + textHeight * 0.5f);
+            RectF mRectArrowRight3 = new RectF(textPaddingRight + textPadding + bitmapWidth * 2 + bitmapPadding * 2, textY - textHeight * 0.5f, textPaddingRight + textPadding + bitmapWidth * 3 + bitmapPadding * 2, textY + textHeight * 0.5f);
+            RectF mRectArrowRight4 = new RectF(textPaddingRight + textPadding + bitmapWidth * 3 + bitmapPadding * 3, textY - textHeight * 0.5f, textPaddingRight + textPadding + bitmapWidth * 4 + bitmapPadding * 3, textY + textHeight * 0.5f);
+            RectF mRectArrowRight5 = new RectF(textPaddingRight + textPadding + bitmapWidth * 4 + bitmapPadding * 4, textY - textHeight * 0.5f, textPaddingRight + textPadding + bitmapWidth * 5 + bitmapPadding * 4, textY + textHeight * 0.5f);
+            RectF mRectArrowRight6 = new RectF(textPaddingRight + textPadding + bitmapWidth * 5 + bitmapPadding * 5, textY - textHeight * 0.5f, textPaddingRight + textPadding + bitmapWidth * 6 + bitmapPadding * 5, textY + textHeight * 0.5f);
 
 
-            Rect mRectBitmap = new Rect( 0 , 0 , arrowBitmap.getWidth() , arrowBitmap.getHeight() );
-            if (moveWidth > (textPaddingLeft - textPadding- bitmapWidth) ) {
+            Rect mRectBitmap = new Rect(0, 0, arrowBitmap.getWidth(), arrowBitmap.getHeight());
+            if (moveWidth > (textPaddingLeft - textPadding - bitmapWidth)) {
                 canvas.drawBitmap(arrowBitmap, mRectBitmap, mRectArrowLeft1, mPaintArrow);
             }
-            if (moveWidth > textPaddingLeft - textPadding- bitmapWidth * 2  - bitmapPadding  ) {
+            if (moveWidth > textPaddingLeft - textPadding - bitmapWidth * 2 - bitmapPadding) {
                 canvas.drawBitmap(arrowBitmap, mRectBitmap, mRectArrowLeft2, mPaintArrow);
             }
-            if (moveWidth > textPaddingLeft - textPadding- bitmapWidth * 3  - bitmapPadding * 2) {
+            if (moveWidth > textPaddingLeft - textPadding - bitmapWidth * 3 - bitmapPadding * 2) {
                 canvas.drawBitmap(arrowBitmap, mRectBitmap, mRectArrowLeft3, mPaintArrow);
             }
-            if (moveWidth > textPaddingLeft - textPadding- bitmapWidth * 4  - bitmapPadding * 3) {
+            if (moveWidth > textPaddingLeft - textPadding - bitmapWidth * 4 - bitmapPadding * 3) {
                 canvas.drawBitmap(arrowBitmap, mRectBitmap, mRectArrowLeft4, mPaintArrow);
             }
-            if (moveWidth > textPaddingLeft - textPadding- bitmapWidth * 5  - bitmapPadding * 4) {
+            if (moveWidth > textPaddingLeft - textPadding - bitmapWidth * 5 - bitmapPadding * 4) {
                 canvas.drawBitmap(arrowBitmap, mRectBitmap, mRectArrowLeft5, mPaintArrow);
             }
-            if (moveWidth >  textPaddingLeft - textPadding- bitmapWidth * 6  - bitmapPadding * 5) {
+            if (moveWidth > textPaddingLeft - textPadding - bitmapWidth * 6 - bitmapPadding * 5) {
                 canvas.drawBitmap(arrowBitmap, mRectBitmap, mRectArrowLeft6, mPaintArrow);
             }
 
-            if (moveWidth > textPaddingRight + textPadding){
+            if (moveWidth > textPaddingRight + textPadding) {
                 canvas.drawBitmap(arrowBitmap, mRectBitmap, mRectArrowRight1, mPaintArrow);
             }
-            if (moveWidth > textPaddingRight + textPadding + bitmapWidth * 1 + bitmapPadding){
+            if (moveWidth > textPaddingRight + textPadding + bitmapWidth * 1 + bitmapPadding) {
                 canvas.drawBitmap(arrowBitmap, mRectBitmap, mRectArrowRight2, mPaintArrow);
             }
-            if (moveWidth > textPaddingRight + textPadding + bitmapWidth * 2 + bitmapPadding * 2){
+            if (moveWidth > textPaddingRight + textPadding + bitmapWidth * 2 + bitmapPadding * 2) {
                 canvas.drawBitmap(arrowBitmap, mRectBitmap, mRectArrowRight3, mPaintArrow);
             }
-            if (moveWidth > textPaddingRight + textPadding + bitmapWidth * 3 + bitmapPadding * 3){
+            if (moveWidth > textPaddingRight + textPadding + bitmapWidth * 3 + bitmapPadding * 3) {
                 canvas.drawBitmap(arrowBitmap, mRectBitmap, mRectArrowRight4, mPaintArrow);
             }
-            if (moveWidth > textPaddingRight + textPadding + bitmapWidth * 4 + bitmapPadding * 4){
+            if (moveWidth > textPaddingRight + textPadding + bitmapWidth * 4 + bitmapPadding * 4) {
                 canvas.drawBitmap(arrowBitmap, mRectBitmap, mRectArrowRight5, mPaintArrow);
             }
-            if (moveWidth >  textPaddingRight + textPadding + bitmapWidth * 5 + bitmapPadding * 5){
+            if (moveWidth > textPaddingRight + textPadding + bitmapWidth * 5 + bitmapPadding * 5) {
                 canvas.drawBitmap(arrowBitmap, mRectBitmap, mRectArrowRight6, mPaintArrow);
             }
 
@@ -494,45 +523,45 @@ public class SlideLockHorizontalView extends ViewGroup {
         int viewWidth = r - l;
 
         int lockViewWidth = mLockView.getMeasuredWidth();
-        int lockViewHeight = lockViewWidth ;
+        int lockViewHeight = lockViewWidth;
 
-        Log.d(TAG , "-  int l:"+ l + " , int  t:"+ t + ", int  r:"+ r + ", int  b:"+ b );
-        Log.i(TAG , "----- onLayout mLockView -----isShowBg:" + isShowBg);
+        Log.d(TAG, "-  int l:" + l + " , int  t:" + t + ", int  r:" + r + ", int  b:" + b);
+        Log.i(TAG, "----- onLayout mLockView -----isShowBg:" + isShowBg);
         if (!isShowBg) {
-            mLockView.layout( viewWidth - lockViewWidth , 0 , viewWidth , lockViewHeight);
+            mLockView.layout(viewWidth - lockViewWidth, 0, viewWidth, lockViewHeight);
         }
     }
+
     /**
      * 使用动画转到指定的位置
      *
      * @param view 需要作用动画的视图
      * @param toY  需要转到的位置
      */
-    public void animToYToPosition(final View view, int toY, long animationTime , final boolean onClick) {
+    public void animToYToPosition(final View view, int toY, long animationTime, final boolean onClick) {
         Property<View, Integer> layoutProperty = new Property<View, Integer>(Integer.class, "layout") {
 
             @Override
             public void set(View object, Integer value) {
 //                Log.i(TAG , "----- animToYToPosition mLockView -----");
-                object.layout((getWidth() - mLockView.getWidth() ) / 2              , value,
-                        (getWidth() - mLockView.getWidth()) / 2 + object.getWidth() , value + object.getHeight() );
+                object.layout((getWidth() - mLockView.getWidth()) / 2, value,
+                        (getWidth() - mLockView.getWidth()) / 2 + object.getWidth(), value + object.getHeight());
 
-                moveWidth  =  value + object.getHeight() - object.getWidth()/2 ;
+                moveWidth = value + object.getHeight() - object.getWidth() / 2;
             }
 
             @Override
             public Integer get(View object) {
-                return view.getTop() ;
+                return view.getTop();
             }
         };
 
         //原来的动画正在执行
         //取消掉，防止多重动画冲突
-        if (oa != null && oa.isRunning())
-        {
+        if (oa != null && oa.isRunning()) {
             oa.cancel();
         }
-        oa = ObjectAnimator.ofInt(view, layoutProperty, view.getTop() , toY);
+        oa = ObjectAnimator.ofInt(view, layoutProperty, view.getTop(), toY);
         oa.setInterpolator(new AccelerateInterpolator());
         oa.setDuration(animationTime);
         oa.start();
@@ -558,14 +587,14 @@ public class SlideLockHorizontalView extends ViewGroup {
      * 结束各种动画操作
      */
     public void stopTouch(boolean onClick) {
-        if (onClick){
+        if (onClick) {
             mLockView.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    stopTouch(false) ;
+                    stopTouch(false);
                 }
-            } , 1000) ;
-        }else {
+            }, 1000);
+        } else {
             isShowBg = false;
             // 结束触摸的时候换到底层
             if (mTouchBring != null) {
@@ -575,36 +604,55 @@ public class SlideLockHorizontalView extends ViewGroup {
             int lockViewWidth = mLockView.getMeasuredWidth();
             int lockViewHeight = lockViewWidth;
 
-            mLockView.layout( getWidth() - lockViewWidth , 0 , getWidth() , lockViewHeight);
+            mLockView.layout(getWidth() - lockViewWidth, 0, getWidth(), lockViewHeight);
 
             postInvalidate();
         }
     }
 
-    public interface SlideOnClickListener{
-        /**点击事件*/
+    public interface SlideOnClickListener {
+        /**
+         * 点击事件
+         */
         void onClick();
-        /**滑动到底部的事件*/
+
+        /**
+         * 滑动到底部的事件
+         */
         void onMoveClick();
     }
-    public interface OnTouchBring{
-        /** 将布局移动到最上层 */
-        void bringToFront() ;
-        /** 将布局移动到下层 */
-        void bringToBack() ;
+
+    public interface OnTouchBring {
+        /**
+         * 将布局移动到最上层
+         */
+        void bringToFront();
+
+        /**
+         * 将布局移动到下层
+         */
+        void bringToBack();
     }
 
 
     /***************** 下方这一块为CarStartAnimation5 操作部分 *******************/
-    /** 获取背景图片 */
+    /**
+     * 获取背景图片
+     */
     public ImageView getStartStatusBg() {
         return startStatusBg;
     }
-    /** 获取动画按钮 */
+
+    /**
+     * 获取动画按钮
+     */
     public SlideLockProgress getProgressbar() {
         return progressbar;
     }
-    /** 获取文字 */
+
+    /**
+     * 获取文字
+     */
     public TextView getStartStatusText() {
         return startStatusText;
     }
@@ -612,8 +660,8 @@ public class SlideLockHorizontalView extends ViewGroup {
     /**
      * 初始化电门动画进度条
      */
-    public void initProgressbar(SlideLockProgress.OnCountdownProgressListener mCountdownProgressListener){
-        progressbar = getProgressbar() ;
+    public void initProgressbar(SlideLockProgress.OnCountdownProgressListener mCountdownProgressListener) {
+        progressbar = getProgressbar();
 
         progressbar.setProgressLineWidth(15);
         progressbar.setTimeMillis(1000);
@@ -622,15 +670,17 @@ public class SlideLockHorizontalView extends ViewGroup {
         progressbar.isSetTimeout(true);
         progressbar.setTimeout(blueTimeout);
 
-        progressbar.setCountdownProgressListener(1,mCountdownProgressListener );
+        progressbar.setCountdownProgressListener(1, mCountdownProgressListener);
     }
 
-    /** 设置已启动状态 */
+    /**
+     * 设置已启动状态
+     */
     public void setOpenStatus() {
         progressbar.setProgress(0);
         progressbar.stop();
-        progressbar.setProgressBgColor( getResources().getColor(R.color.color_end_gradient));
-        progressbar.setProgressColor( getResources().getColor(R.color.color_768392));
+        progressbar.setProgressBgColor(getResources().getColor(R.color.color_end_gradient));
+        progressbar.setProgressColor(getResources().getColor(R.color.color_768392));
         startStatusBg.setImageResource(R.drawable.home_car_no_start_image);
         startStatusText.setText("已启动");
         setIsMove(true);
@@ -640,12 +690,14 @@ public class SlideLockHorizontalView extends ViewGroup {
         }
     }
 
-    /** 设置未启动状态 */
-    public  void setCloseStatus(){
+    /**
+     * 设置未启动状态
+     */
+    public void setCloseStatus() {
         progressbar.setProgress(0);
         progressbar.stop();
-        progressbar.setProgressBgColor( getResources().getColor(R.color.color_768392));
-        progressbar.setProgressColor( getResources().getColor(R.color.color_end_gradient));
+        progressbar.setProgressBgColor(getResources().getColor(R.color.color_768392));
+        progressbar.setProgressColor(getResources().getColor(R.color.color_end_gradient));
         startStatusBg.setImageResource(R.drawable.home_car_no_end_image);
         startStatusText.setText("未启动");
         setIsMove(false);
@@ -656,16 +708,16 @@ public class SlideLockHorizontalView extends ViewGroup {
     }
 
     /**
-     *  立即结束动画
+     * 立即结束动画
      */
-    public void stopAnimTime(){
-        progressbar.setTimeoutCount( true ,  3 );
+    public void stopAnimTime() {
+        progressbar.setTimeoutCount(true, 3);
     }
 
     /**
      * 启动动画
      */
-    public void startAnimStatus(){
+    public void startAnimStatus() {
         progressbar.setProgressType(SlideLockProgress.ProgressType.COUNT);
         progressbar.reStart();
         startStatusText.setText("启动中");
@@ -675,7 +727,7 @@ public class SlideLockHorizontalView extends ViewGroup {
     /**
      * 关闭动画
      */
-    public void stopAnimStatus(){
+    public void stopAnimStatus() {
         progressbar.setProgressType(SlideLockProgress.ProgressType.COUNT);
         progressbar.reStart();
         startStatusText.setText("关闭中");
@@ -683,16 +735,16 @@ public class SlideLockHorizontalView extends ViewGroup {
     }
 
     /**
-     *  暂停动画
+     * 暂停动画
      */
-    public void pauseAnimStatus(){
+    public void pauseAnimStatus() {
         progressbar.stopProgress(SlideLockProgress.ProgressType.PROGRESS_STOP);
     }
 
     /**
-     *  恢复动画
+     * 恢复动画
      */
-    public void resumeAnimStatus(){
+    public void resumeAnimStatus() {
         progressbar.stopProgress(SlideLockProgress.ProgressType.COUNT);
     }
 

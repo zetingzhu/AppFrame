@@ -12,6 +12,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
@@ -315,12 +316,13 @@ public class AnimActivity extends BaseAppCompatActivity {
 
     /**
      * 设置平移动画
+     *
      * @param view
      * @param duration
      * @param distance
      * @return
      */
-    public ObjectAnimator createAnim(View view , Long duration ,  int distance) {
+    public ObjectAnimator createAnim(View view, Long duration, int distance) {
         PropertyValuesHolder pvhTranslateX = PropertyValuesHolder.ofKeyframe(View.TRANSLATION_X,
                 Keyframe.ofFloat(0f, 0),
                 Keyframe.ofFloat(0.125f, -distance),
@@ -344,7 +346,7 @@ public class AnimActivity extends BaseAppCompatActivity {
      */
     public void startAnim(View view) {
         if (nopeAnimator == null) {
-            nopeAnimator = createAnim(view , 1000L , 10);
+            nopeAnimator = createAnim(view, 1000L, 10);
         }
         nopeAnimator.setInterpolator(new LinearInterpolator());
         nopeAnimator.start();

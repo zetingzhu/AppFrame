@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
@@ -19,6 +20,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.zzt.commonmodule.utils.ConfigARouter;
@@ -178,6 +180,7 @@ public class LoginActivity3<P extends BasePresenter> extends BaseAppCompatActivi
     @OnClick(R.id.button4)
     public void testBtn() {
         onLoginSucc();
+        Toast.makeText(LoginActivity3.this , "登录。。。。。" , Toast.LENGTH_SHORT).show();
     }
 
 

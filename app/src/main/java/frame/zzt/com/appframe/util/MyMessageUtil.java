@@ -11,11 +11,12 @@ import android.widget.Toast;
  */
 
 public class MyMessageUtil {
-    Context mContext  ;
+    Context mContext;
 
     private MyMessageUtil(Context context) {
         mContext = context;
     }
+
     private static MyMessageUtil instance = null;
 
     public static synchronized MyMessageUtil getInstance(Context mContext) {
@@ -25,17 +26,17 @@ public class MyMessageUtil {
         return instance;
     }
 
-    Toast toast ;
-    Handler mHandler = new Handler(){
+    Toast toast;
+    Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            switch (msg.what){
-                case 0 :
+            switch (msg.what) {
+                case 0:
                     if (toast == null) {
-                        toast = Toast.makeText(mContext,msg.obj+"",  Toast.LENGTH_SHORT);
+                        toast = Toast.makeText(mContext, msg.obj + "", Toast.LENGTH_SHORT);
                     } else {
-                        toast.setText(msg.obj+"");
+                        toast.setText(msg.obj + "");
                     }
                     toast.show();
                     break;
@@ -43,10 +44,10 @@ public class MyMessageUtil {
         }
     };
 
-    public void setMessage(String strMessage){
+    public void setMessage(String strMessage) {
         Message msg = new Message();
-        msg.what = 0 ;
-        msg.obj = strMessage ;
+        msg.what = 0;
+        msg.obj = strMessage;
         mHandler.sendMessage(msg);
     }
 }

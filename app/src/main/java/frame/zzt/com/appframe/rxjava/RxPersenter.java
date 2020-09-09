@@ -288,12 +288,12 @@ public class RxPersenter extends BasePresenter<RxView> {
 //        }).
         Observable.fromIterable(list)
                 .switchMap(new Function<Integer, ObservableSource<String>>() {
-            @Override
-            public ObservableSource<String> apply(Integer integer) throws Exception {
-                Log.i(TAG, "发送的数据："+ integer);
-                return Observable.just("I am value " + integer);//.subscribeOn(Schedulers.io()) ;
-            }
-        }).subscribe(new Consumer<String>() {
+                    @Override
+                    public ObservableSource<String> apply(Integer integer) throws Exception {
+                        Log.i(TAG, "发送的数据：" + integer);
+                        return Observable.just("I am value " + integer);//.subscribeOn(Schedulers.io()) ;
+                    }
+                }).subscribe(new Consumer<String>() {
             @Override
             public void accept(String s) throws Exception {
                 Log.d(TAG, s);
@@ -312,7 +312,7 @@ public class RxPersenter extends BasePresenter<RxView> {
 
                     @Override
                     public ObservableSource<String> apply(Integer integer) throws Exception {
-                        Log.i(TAG, "发送的数据："+ integer);
+                        Log.i(TAG, "发送的数据：" + integer);
                         return Observable.just("integer=" + integer).subscribeOn(Schedulers.newThread());
                     }
                 }).subscribe(new Consumer<String>() {
@@ -428,7 +428,7 @@ public class RxPersenter extends BasePresenter<RxView> {
                 Log.d(TAG, "emit complete1");
                 emitter.onComplete();
             }
-        }).subscribeOn(Schedulers.newThread() );
+        }).subscribeOn(Schedulers.newThread());
 
         Observable<String> observable2 = Observable.create(new ObservableOnSubscribe<String>() {
             @Override
@@ -635,7 +635,7 @@ public class RxPersenter extends BasePresenter<RxView> {
                 Log.d(TAG, "emit complete");
                 emitter.onComplete();
             }
-        }, BackpressureStrategy.ERROR ) ; //增加了一个参数
+        }, BackpressureStrategy.ERROR); //增加了一个参数
 
         Subscriber<Integer> downstream = new Subscriber<Integer>() {
 
@@ -1103,11 +1103,10 @@ public class RxPersenter extends BasePresenter<RxView> {
      * Maybe
      * <p>
      * 可发射一条单一的数据，以及发射一条完成通知，或者一条异常通知，其中完成通知和异常通知只能发射一个，发射数据只能在发射完成通知或者异常通知之前，否则发射数据无效。
-     *
+     * <p>
      * 1、onSuccess 方法可以多次调用，下游只会执行第一次
      * 2、onSuccess onComplete onErroe 只能执行一种，其他不能执行 执行多个将不显示
-     *      若先执行 onSuccess 或者 onCompleate 在执行 onError 会抛出异常
-     *
+     * 若先执行 onSuccess 或者 onCompleate 在执行 onError 会抛出异常
      */
     public void rxjavaMaybe() {
         Maybe.create(new MaybeOnSubscribe<Integer>() {
@@ -1128,12 +1127,12 @@ public class RxPersenter extends BasePresenter<RxView> {
 
                     @Override
                     public void onSuccess(@NonNull Integer integer) {
-                        Log.d(TAG, "onSuccess: " + integer );
+                        Log.d(TAG, "onSuccess: " + integer);
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        Log.w(TAG, "onError: " ,  e);
+                        Log.w(TAG, "onError: ", e);
                     }
 
                     @Override
@@ -1144,19 +1143,17 @@ public class RxPersenter extends BasePresenter<RxView> {
     }
 
     /**
-     Operators操作符
-
-     create:基础创建操作符
-     just:创建一个Observable，可接受一个或多个参数，将每个参数逐一发送
-     fromArray:创建一个Observable，接受一个数组，并将数组中的数据逐一发送
-     fromIterable：</b>创建一个Observable，接受一个可迭代对象，并将可迭代对象中的数据逐一发送
-     range：</b>创建一个Observable，发送一个范围内的整数序列
-
-
+     * Operators操作符
+     * <p>
+     * create:基础创建操作符
+     * just:创建一个Observable，可接受一个或多个参数，将每个参数逐一发送
+     * fromArray:创建一个Observable，接受一个数组，并将数组中的数据逐一发送
+     * fromIterable：</b>创建一个Observable，接受一个可迭代对象，并将可迭代对象中的数据逐一发送
+     * range：</b>创建一个Observable，发送一个范围内的整数序列
      */
 
-    public void rxjavaJust(){
-        Observable.just(1 ,  2 , 3).subscribe(new Observer<Integer>() {
+    public void rxjavaJust() {
+        Observable.just(1, 2, 3).subscribe(new Observer<Integer>() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {
                 Log.d(TAG, "onSubscribe: ");
@@ -1164,7 +1161,7 @@ public class RxPersenter extends BasePresenter<RxView> {
 
             @Override
             public void onNext(@NonNull Integer integer) {
-                Log.d(TAG, "onNext: " + integer );
+                Log.d(TAG, "onNext: " + integer);
             }
 
             @Override
@@ -1179,33 +1176,33 @@ public class RxPersenter extends BasePresenter<RxView> {
         });
     }
 
-    public void rxjavaFromArray(){
-        Integer [] str = new Integer[]{1 ,  2 , 3};
+    public void rxjavaFromArray() {
+        Integer[] str = new Integer[]{1, 2, 3};
         Observable.fromArray(str)
                 .subscribe(new Observer<Integer>() {
-            @Override
-            public void onSubscribe(@NonNull Disposable d) {
-                Log.d(TAG, "onSubscribe: ");
-            }
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        Log.d(TAG, "onSubscribe: ");
+                    }
 
-            @Override
-            public void onNext(@NonNull Integer integer) {
-                Log.d(TAG, "onNext: " + integer );
-            }
+                    @Override
+                    public void onNext(@NonNull Integer integer) {
+                        Log.d(TAG, "onNext: " + integer);
+                    }
 
-            @Override
-            public void onError(@NonNull Throwable e) {
-                Log.d(TAG, "onError: " + e);
-            }
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Log.d(TAG, "onError: " + e);
+                    }
 
-            @Override
-            public void onComplete() {
-                Log.d(TAG, "onComplete: ");
-            }
-        });
+                    @Override
+                    public void onComplete() {
+                        Log.d(TAG, "onComplete: ");
+                    }
+                });
     }
 
-    public void rxjavaFromIterable(){
+    public void rxjavaFromIterable() {
         List<Integer> mList = new ArrayList<>();
         mList.add(1);
         mList.add(2);
@@ -1213,30 +1210,30 @@ public class RxPersenter extends BasePresenter<RxView> {
         mList.add(4);
         Observable.fromIterable(mList)
                 .subscribe(new Observer<Integer>() {
-            @Override
-            public void onSubscribe(@NonNull Disposable d) {
-                Log.d(TAG, "onSubscribe: ");
-            }
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        Log.d(TAG, "onSubscribe: ");
+                    }
 
-            @Override
-            public void onNext(@NonNull Integer integer) {
-                Log.d(TAG, "onNext: " + integer );
-            }
+                    @Override
+                    public void onNext(@NonNull Integer integer) {
+                        Log.d(TAG, "onNext: " + integer);
+                    }
 
-            @Override
-            public void onError(@NonNull Throwable e) {
-                Log.d(TAG, "onError: " + e);
-            }
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Log.d(TAG, "onError: " + e);
+                    }
 
-            @Override
-            public void onComplete() {
-                Log.d(TAG, "onComplete: ");
-            }
-        });
+                    @Override
+                    public void onComplete() {
+                        Log.d(TAG, "onComplete: ");
+                    }
+                });
     }
 
-   public void rxjavaRange(){
-        Observable.range(1 ,  20).subscribe(new Observer<Integer>() {
+    public void rxjavaRange() {
+        Observable.range(1, 20).subscribe(new Observer<Integer>() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {
                 Log.d(TAG, "onSubscribe: ");
@@ -1244,7 +1241,7 @@ public class RxPersenter extends BasePresenter<RxView> {
 
             @Override
             public void onNext(@NonNull Integer integer) {
-                Log.d(TAG, "onNext: " + integer );
+                Log.d(TAG, "onNext: " + integer);
             }
 
             @Override
@@ -1260,14 +1257,14 @@ public class RxPersenter extends BasePresenter<RxView> {
     }
 
     /**
-     过滤操作（filter与distinct）：
-     filter：filter使用Predicate 函数接口传入条件值，来判断Observable发射的每一个值是否满足这个条件，如果满足，则继续向下传递，如果不满足，则过滤掉。
-     distinct:过滤掉重复的数据项，过滤规则为：只允许还没有发射过的数据项通过。
+     * 过滤操作（filter与distinct）：
+     * filter：filter使用Predicate 函数接口传入条件值，来判断Observable发射的每一个值是否满足这个条件，如果满足，则继续向下传递，如果不满足，则过滤掉。
+     * distinct:过滤掉重复的数据项，过滤规则为：只允许还没有发射过的数据项通过。
      */
 
-    public void rxjavaFilterDistinct(){
+    public void rxjavaFilterDistinct() {
         Observable
-                .fromArray(1 , 1 , 2, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 9 )
+                .fromArray(1, 1, 2, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 9)
 //                .distinct()
                 .filter(new Predicate<Integer>() {
                     @Override
@@ -1276,33 +1273,33 @@ public class RxPersenter extends BasePresenter<RxView> {
                     }
                 })
                 .subscribe(new Observer<Integer>() {
-            @Override
-            public void onSubscribe(@NonNull Disposable d) {
-                Log.d(TAG, "onSubscribe: ");
-            }
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        Log.d(TAG, "onSubscribe: ");
+                    }
 
-            @Override
-            public void onNext(@NonNull Integer integer) {
-                Log.d(TAG, "onNext: " + integer );
-            }
+                    @Override
+                    public void onNext(@NonNull Integer integer) {
+                        Log.d(TAG, "onNext: " + integer);
+                    }
 
-            @Override
-            public void onError(@NonNull Throwable e) {
-                Log.d(TAG, "onError: " + e);
-            }
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Log.d(TAG, "onError: " + e);
+                    }
 
-            @Override
-            public void onComplete() {
-                Log.d(TAG, "onComplete: ");
-            }
-        });
+                    @Override
+                    public void onComplete() {
+                        Log.d(TAG, "onComplete: ");
+                    }
+                });
     }
 
 
     /**
      * Observer只接收PublishSubject被订阅之后发送的数据。
      */
-    public void rxjavaPublishSubject(){
+    public void rxjavaPublishSubject() {
         PublishSubject<String> subject = PublishSubject.create();
         subject.onNext("publicSubject1");
         subject.onNext("publicSubject2");
@@ -1310,7 +1307,7 @@ public class RxPersenter extends BasePresenter<RxView> {
         subject.subscribe(new Consumer<String>() {
             @Override
             public void accept(@NonNull String s) throws Exception {
-                System.out.println("publicSubject:"+s);
+                System.out.println("publicSubject:" + s);
             }
         }, new Consumer<Throwable>() {
             @Override
@@ -1332,14 +1329,14 @@ public class RxPersenter extends BasePresenter<RxView> {
     /**
      * 该subject只有在被观察者（subject）结束的时候（即执行了onCompleted）后观察者才能够接收到事件，并且也只有能接收到最后一个事件。
      */
-    public void rxjavaAsyncSubject(){
+    public void rxjavaAsyncSubject() {
         AsyncSubject<String> subject = AsyncSubject.create();
         subject.onNext("asyncSubject1");
         subject.onNext("asyncSubject2");
         subject.subscribe(new Consumer<String>() {
             @Override
             public void accept(@NonNull String s) throws Exception {
-                System.out.println("asyncSubject:"+s);
+                System.out.println("asyncSubject:" + s);
             }
         }, new Consumer<Throwable>() {
             @Override
@@ -1361,7 +1358,7 @@ public class RxPersenter extends BasePresenter<RxView> {
     /**
      * Observer会接收到BehaviorSubject被订阅之前的最后一个数据，再接收订阅之后发射过来的数据。如果BehaviorSubject被订阅之前没有发送任何数据，则会发送一个默认数据。
      */
-    public void rxjavaBehaviorSubject(){
+    public void rxjavaBehaviorSubject() {
         BehaviorSubject<String> subject = BehaviorSubject.createDefault("behaviorSubject0");
         subject.onNext("behaviorSubject1");
         subject.onNext("behaviorSubject2");
@@ -1369,7 +1366,7 @@ public class RxPersenter extends BasePresenter<RxView> {
         subject.subscribe(new Consumer<String>() {
             @Override
             public void accept(@NonNull String s) throws Exception {
-                System.out.println("behaviorSubject:"+s);  //输出asyncSubject:asyncSubject3
+                System.out.println("behaviorSubject:" + s);  //输出asyncSubject:asyncSubject3
             }
         }, new Consumer<Throwable>() {
             @Override
@@ -1383,14 +1380,14 @@ public class RxPersenter extends BasePresenter<RxView> {
             }
         });
         subject.onNext("behaviorSubject3");
-        subject.onNext("behaviorSubject4") ;
+        subject.onNext("behaviorSubject4");
     }
 
     /**
      * ReplaySubject会发射所有来自原始Observable的数据给观察者，无论它们是何时订阅的。
      * 事件不会直接被消化。下个观察者订阅的时候可以再次接收到事件。
      */
-    public void rxjavaReplaySubject(){
+    public void rxjavaReplaySubject() {
         ReplaySubject<String> subject = ReplaySubject.create();
         subject.onNext("replaySubject1");
         subject.onNext("replaySubject2");
@@ -1398,7 +1395,7 @@ public class RxPersenter extends BasePresenter<RxView> {
         subject.subscribe(new Consumer<String>() {
             @Override
             public void accept(@NonNull String s) throws Exception {
-                System.out.println("replaySubject:"+s);
+                System.out.println("replaySubject:" + s);
             }
         }, new Consumer<Throwable>() {
             @Override
@@ -1416,7 +1413,7 @@ public class RxPersenter extends BasePresenter<RxView> {
         subject.onNext("replaySubject4");
     }
 
-    public void rxjavaReplaySubject1(){
+    public void rxjavaReplaySubject1() {
         ReplaySubject<String> subject = ReplaySubject.createWithSize(2);
         subject.onNext("replaySubject1");
         subject.onNext("replaySubject2");
@@ -1426,7 +1423,7 @@ public class RxPersenter extends BasePresenter<RxView> {
         subject.subscribe(new Consumer<String>() {
             @Override
             public void accept(@NonNull String s) throws Exception {
-                System.out.println("replaySubject:"+s);
+                System.out.println("replaySubject:" + s);
             }
         }, new Consumer<Throwable>() {
             @Override
@@ -1502,7 +1499,7 @@ public class RxPersenter extends BasePresenter<RxView> {
     }
 
     public void rxjavaConcat() {
-        Observable<String> observable1 = Observable.create(new ObservableOnSubscribe<String>(){
+        Observable<String> observable1 = Observable.create(new ObservableOnSubscribe<String>() {
             @Override
             public void subscribe(@NonNull ObservableEmitter<String> e) throws Exception {
                 e.onNext("1");
@@ -1512,7 +1509,7 @@ public class RxPersenter extends BasePresenter<RxView> {
                 e.onNext("4");
             }
         });
-        Observable<String> observable2 = Observable.create(new ObservableOnSubscribe<String>(){
+        Observable<String> observable2 = Observable.create(new ObservableOnSubscribe<String>() {
             @Override
             public void subscribe(@NonNull ObservableEmitter<String> e) throws Exception {
                 e.onNext("5");
@@ -1525,7 +1522,7 @@ public class RxPersenter extends BasePresenter<RxView> {
                 .subscribe(new Observer<String>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
-                        Log.i(TAG, "onSubscribe ：" + d.isDisposed() );
+                        Log.i(TAG, "onSubscribe ：" + d.isDisposed());
                     }
 
                     @Override
@@ -1540,7 +1537,7 @@ public class RxPersenter extends BasePresenter<RxView> {
 
                     @Override
                     public void onComplete() {
-                        Log.i(TAG, "onComplete ：" );
+                        Log.i(TAG, "onComplete ：");
                     }
                 });
     }
@@ -1552,6 +1549,7 @@ public class RxPersenter extends BasePresenter<RxView> {
 
         public Student() {
         }
+
         public Student(String name, int id, List<Source> sources) {
             this.name = name;
             this.id = id;
@@ -1571,63 +1569,63 @@ public class RxPersenter extends BasePresenter<RxView> {
         }
     }
 
-    public List<Student> getStudentData(){
+    public List<Student> getStudentData() {
         List<Student> mStList = new ArrayList<>();
         List<Source> mSoList0 = new ArrayList<>();
-        Source mSou0 = new Source( 1 , "语文" , 100 );
-        Source mSou1 = new Source( 2 , "数学" , 99 );
-        Source mSou2 = new Source( 2 , "英语" , 90 );
+        Source mSou0 = new Source(1, "语文", 100);
+        Source mSou1 = new Source(2, "数学", 99);
+        Source mSou2 = new Source(2, "英语", 90);
         mSoList0.add(mSou0);
         mSoList0.add(mSou1);
         mSoList0.add(mSou2);
-        Student mStu0 = new Student("张一"  , 1  , mSoList0);
+        Student mStu0 = new Student("张一", 1, mSoList0);
         mStList.add(mStu0);
 
         List<Source> mSoList1 = new ArrayList<>();
-        Source mSou3 = new Source( 1 , "语文" , 90 );
-        Source mSou4 = new Source( 2 , "数学" , 89 );
-        Source mSou5 = new Source( 2 , "英语" , 88 );
+        Source mSou3 = new Source(1, "语文", 90);
+        Source mSou4 = new Source(2, "数学", 89);
+        Source mSou5 = new Source(2, "英语", 88);
         mSoList1.add(mSou3);
         mSoList1.add(mSou4);
         mSoList1.add(mSou5);
-        Student mStu1 = new Student("张二"  , 2  , mSoList1);
+        Student mStu1 = new Student("张二", 2, mSoList1);
         mStList.add(mStu1);
 
-        return mStList ;
+        return mStList;
     }
 
     /**
-     *  举例flatmap 使用，传统方法
+     * 举例flatmap 使用，传统方法
      */
-    public void rxjavaFlatMapEG1(){
+    public void rxjavaFlatMapEG1() {
         //开启一个线程
         new Thread(new Runnable() {
             @Override
             public void run() {
                 // 从服务器获取班级所有同学信息
                 List<Student> students = getStudentData();
-                for(int i=0;i<students.size();i++){
+                for (int i = 0; i < students.size(); i++) {
                     List<Source> sources = students.get(i).mSources;
-                    String stu = "student Name:"+students.get(i).name;
-                    Log.i(TAG,stu);
-                    for (int index=0;index<sources.size();index++){
+                    String stu = "student Name:" + students.get(i).name;
+                    Log.i(TAG, stu);
+                    for (int index = 0; index < sources.size(); index++) {
                         final Source source = sources.get(index);
                         //主线程更改UI
-                        String content = "sourceName:"+source.name +" source score:"+source.score;
-                        Log.i(TAG,content);
+                        String content = "sourceName:" + source.name + " source score:" + source.score;
+                        Log.i(TAG, content);
                     }
                 }
             }
         }).start();
     }
 
-    public void rxjavaFlatMapEG2(){
+    public void rxjavaFlatMapEG2() {
         Observable.fromIterable(getStudentData())
                 .flatMap(new Function<Student, ObservableSource<Source>>() {
                     @Override
                     public ObservableSource<Source> apply(@NonNull Student student) throws Exception {
-                        String stu = "student Name:"+student.name ;
-                        Log.i(TAG,stu);
+                        String stu = "student Name:" + student.name;
+                        Log.i(TAG, stu);
                         return Observable.fromIterable(student.mSources);
                     }
                 })
@@ -1636,59 +1634,59 @@ public class RxPersenter extends BasePresenter<RxView> {
                 .subscribe(new Consumer<Source>() {
                     @Override
                     public void accept(@NonNull Source source) throws Exception {
-                        String content = "sourceName:"+source.name +" source score:"+source.score;
-                        Log.i(TAG,content);
+                        String content = "sourceName:" + source.name + " source score:" + source.score;
+                        Log.i(TAG, content);
 
                     }
                 });
     }
 
-    public void rxjavaBuffer(){
+    public void rxjavaBuffer() {
         Observable.just(1, 2, 3, 4, 5, 6).repeat(2)
                 .buffer(3).subscribe(new Consumer<List<Integer>>() {
             @Override
             public void accept(List<Integer> integers) throws Exception {
-                Log.i(TAG, "integers:" + integers );
+                Log.i(TAG, "integers:" + integers);
             }
         });
     }
 
-    public void rxjavaGroupBy(){
-        Observable.range(7 , 7).groupBy(new Function<Integer, Object>() {
+    public void rxjavaGroupBy() {
+        Observable.range(7, 7).groupBy(new Function<Integer, Object>() {
             @Override
             public Object apply(@NonNull Integer integer) throws Exception {
-                return integer > 10 ? "1组" : "2组" ;
+                return integer > 10 ? "1组" : "2组";
             }
         }).subscribe(new Consumer<GroupedObservable<Object, Integer>>() {
             @Override
             public void accept(final GroupedObservable<Object, Integer> objectIntegerGroupedObservable) throws Exception {
-                Log.i(TAG, "onNext  - 1 :" + objectIntegerGroupedObservable.getKey() );
+                Log.i(TAG, "onNext  - 1 :" + objectIntegerGroupedObservable.getKey());
                 objectIntegerGroupedObservable.subscribe(new Observer<Integer>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
-                        Log.i(TAG, "onSubscribe:" + d.isDisposed() );
+                        Log.i(TAG, "onSubscribe:" + d.isDisposed());
                     }
 
                     @Override
                     public void onNext(@NonNull Integer integer) {
-                        System.out.println(  objectIntegerGroupedObservable.getKey() + ":" + String.valueOf(integer));
+                        System.out.println(objectIntegerGroupedObservable.getKey() + ":" + String.valueOf(integer));
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        Log.i(TAG, "onError:" + e.getMessage() );
+                        Log.i(TAG, "onError:" + e.getMessage());
                     }
 
                     @Override
                     public void onComplete() {
-                        Log.i(TAG, "onComplete" );
+                        Log.i(TAG, "onComplete");
                     }
                 });
             }
         });
     }
 
-    public void rxjavaflatMapIterable () {
+    public void rxjavaflatMapIterable() {
         Observable.range(1, 7).flatMapIterable(new Function<Integer, Iterable<?>>() {
             @Override
             public Iterable<String> apply(@NonNull Integer integer) throws Exception {
@@ -1704,17 +1702,17 @@ public class RxPersenter extends BasePresenter<RxView> {
 
             @Override
             public void onNext(@NonNull Object o) {
-                Log.i(TAG, "onNext" + o.toString() );
+                Log.i(TAG, "onNext" + o.toString());
             }
 
             @Override
             public void onError(@NonNull Throwable e) {
-                Log.i(TAG, "onError" );
+                Log.i(TAG, "onError");
             }
 
             @Override
             public void onComplete() {
-                Log.i(TAG, "onComplete" );
+                Log.i(TAG, "onComplete");
             }
         });
     }
@@ -1781,14 +1779,14 @@ public class RxPersenter extends BasePresenter<RxView> {
 
     public void rxjavamerge() {
         //merge操作符，会将多个Observable对象合并到一个Observable对象中进行发送
-        Observable<Integer> firstObservable = Observable.just(0, 1, 2 ).subscribeOn(Schedulers.io()).delay(500,TimeUnit.MILLISECONDS);
-        Observable<Integer> secondObservable = Observable.just(3 , 4, 5)
-                .delay(100,TimeUnit.MILLISECONDS);
+        Observable<Integer> firstObservable = Observable.just(0, 1, 2).subscribeOn(Schedulers.io()).delay(500, TimeUnit.MILLISECONDS);
+        Observable<Integer> secondObservable = Observable.just(3, 4, 5)
+                .delay(100, TimeUnit.MILLISECONDS);
         Observable
                 .merge(firstObservable, secondObservable).subscribe(new Consumer<Integer>() {
             @Override
             public void accept(Integer integer) throws Exception {
-                Log.i(TAG, "onNext" + integer );
+                Log.i(TAG, "onNext" + integer);
             }
         }, new Consumer<Throwable>() {
             @Override
@@ -1811,7 +1809,7 @@ public class RxPersenter extends BasePresenter<RxView> {
                     e.onNext(i);
                 }
             }
-        } ).retry(2).subscribe(new Observer<Object>() {
+        }).retry(2).subscribe(new Observer<Object>() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {
                 Log.i(TAG, "onSubscribe" + d.isDisposed());
@@ -1838,22 +1836,22 @@ public class RxPersenter extends BasePresenter<RxView> {
         Consumer<Long> subscriber1 = new Consumer<Long>() {
             @Override
             public void accept(@NonNull Long aLong) throws Exception {
-                System.out.println("subscriber1: "+aLong);
+                System.out.println("subscriber1: " + aLong);
             }
         };
         Consumer<Long> subscriber2 = new Consumer<Long>() {
             @Override
             public void accept(@NonNull Long aLong) throws Exception {
-                System.out.println("   subscriber2: "+aLong);
+                System.out.println("   subscriber2: " + aLong);
             }
         };
         Consumer<Long> subscriber3 = new Consumer<Long>() {
             @Override
             public void accept(@NonNull Long aLong) throws Exception {
-                System.out.println("      subscriber3: "+aLong);
+                System.out.println("      subscriber3: " + aLong);
             }
         };
-        Observable<Long> observable = Observable.interval(500, TimeUnit.MILLISECONDS , Schedulers.io())
+        Observable<Long> observable = Observable.interval(500, TimeUnit.MILLISECONDS, Schedulers.io())
                 .take(10)
                 .observeOn(Schedulers.newThread());
         observable.subscribe(subscriber1);
@@ -1872,22 +1870,22 @@ public class RxPersenter extends BasePresenter<RxView> {
         Consumer<Long> subscriber1 = new Consumer<Long>() {
             @Override
             public void accept(@NonNull Long aLong) throws Exception {
-                System.out.println("subscriber1: "+aLong);
+                System.out.println("subscriber1: " + aLong);
             }
         };
         Consumer<Long> subscriber2 = new Consumer<Long>() {
             @Override
             public void accept(@NonNull Long aLong) throws Exception {
-                System.out.println("   subscriber2: "+aLong);
+                System.out.println("   subscriber2: " + aLong);
             }
         };
         Consumer<Long> subscriber3 = new Consumer<Long>() {
             @Override
             public void accept(@NonNull Long aLong) throws Exception {
-                System.out.println("      subscriber3: "+aLong);
+                System.out.println("      subscriber3: " + aLong);
             }
         };
-        ConnectableObservable<Long> observable = Observable.interval(500, TimeUnit.MILLISECONDS , Schedulers.newThread())
+        ConnectableObservable<Long> observable = Observable.interval(500, TimeUnit.MILLISECONDS, Schedulers.newThread())
                 .take(10)
                 .observeOn(Schedulers.newThread()).publish();
         observable.connect();
@@ -1908,24 +1906,24 @@ public class RxPersenter extends BasePresenter<RxView> {
         Consumer<Long> subscriber1 = new Consumer<Long>() {
             @Override
             public void accept(@NonNull Long aLong) throws Exception {
-                System.out.println("subscriber1: "+aLong);
+                System.out.println("subscriber1: " + aLong);
             }
         };
         Consumer<Long> subscriber2 = new Consumer<Long>() {
             @Override
             public void accept(@NonNull Long aLong) throws Exception {
-                System.out.println("   subscriber2: "+aLong);
+                System.out.println("   subscriber2: " + aLong);
             }
         };
         Consumer<Long> subscriber3 = new Consumer<Long>() {
             @Override
             public void accept(@NonNull Long aLong) throws Exception {
-                System.out.println("      subscriber3: "+aLong);
+                System.out.println("      subscriber3: " + aLong);
             }
         };
-        Observable<Long> observable = Observable.interval(500, TimeUnit.MILLISECONDS , Schedulers.newThread())
+        Observable<Long> observable = Observable.interval(500, TimeUnit.MILLISECONDS, Schedulers.newThread())
                 .take(6)
-                .observeOn(Schedulers.newThread()) ;
+                .observeOn(Schedulers.newThread());
         PublishSubject<Long> subject = PublishSubject.create();
         observable.subscribe(subject);
 
@@ -1949,7 +1947,7 @@ public class RxPersenter extends BasePresenter<RxView> {
                 System.out.println("   subscriber2: " + aLong);
             }
         };
-        ConnectableObservable<Long> connectableObservable = Observable.interval(500, TimeUnit.MILLISECONDS , Schedulers.newThread())
+        ConnectableObservable<Long> connectableObservable = Observable.interval(500, TimeUnit.MILLISECONDS, Schedulers.newThread())
                 .take(6)
                 .observeOn(Schedulers.newThread()).publish();
         connectableObservable.connect();
@@ -1967,6 +1965,7 @@ public class RxPersenter extends BasePresenter<RxView> {
         disposable1 = observable.subscribe(subscriber1);
         disposable2 = observable.subscribe(subscriber2);
     }
+
     public void rxjavaClodObservble2() {
         Consumer<Long> subscriber1 = new Consumer<Long>() {
             @Override
@@ -1983,10 +1982,10 @@ public class RxPersenter extends BasePresenter<RxView> {
         Consumer<Long> subscriber3 = new Consumer<Long>() {
             @Override
             public void accept(@NonNull Long aLong) throws Exception {
-                System.out.println("      subscriber3: "+aLong);
+                System.out.println("      subscriber3: " + aLong);
             }
         };
-        ConnectableObservable<Long> connectableObservable = Observable.interval(500, TimeUnit.MILLISECONDS , Schedulers.newThread())
+        ConnectableObservable<Long> connectableObservable = Observable.interval(500, TimeUnit.MILLISECONDS, Schedulers.newThread())
                 .take(6)
                 .observeOn(Schedulers.newThread()).publish();
         connectableObservable.connect();
@@ -2007,7 +2006,7 @@ public class RxPersenter extends BasePresenter<RxView> {
     }
 
 
-    public void rxJavaSigle(){
+    public void rxJavaSigle() {
         Disposable d = Single.just("Hello World")
                 .delay(1, TimeUnit.SECONDS, Schedulers.io())
                 .subscribeWith(new DisposableSingleObserver<String>() {
@@ -2087,12 +2086,12 @@ public class RxPersenter extends BasePresenter<RxView> {
 
                     @Override
                     public void onNext(@NonNull Integer integer) {
-                        Log.d(TAG, "onNext: " + integer );
+                        Log.d(TAG, "onNext: " + integer);
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        Log.d(TAG, "onError: " + e );
+                        Log.d(TAG, "onError: " + e);
                     }
 
                     @Override

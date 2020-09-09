@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.util.Log;
 import android.widget.SeekBar;
 
@@ -18,9 +19,9 @@ import frame.zzt.com.appframe.R;
 
 public class ActivitySeekBar extends AppCompatActivity {
 
-    private static final String TAG = ActivitySeekBar.class.getSimpleName() ;
+    private static final String TAG = ActivitySeekBar.class.getSimpleName();
     @BindView(R.id.sb_myseekbar)
-    public MySeekBar sb_myseekbar ;
+    public MySeekBar sb_myseekbar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -30,7 +31,7 @@ public class ActivitySeekBar extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        initView() ;
+        initView();
     }
 
     private void initView() {
@@ -47,12 +48,12 @@ public class ActivitySeekBar extends AppCompatActivity {
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
                 // 切换时候停止动画.并且设置状态为暂停状态
-                Log.d(TAG, "滑动改变：onStartTrackingTouch "  );
+                Log.d(TAG, "滑动改变：onStartTrackingTouch ");
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                Log.d(TAG, "滑动改变：onStopTrackingTouch "  );
+                Log.d(TAG, "滑动改变：onStopTrackingTouch ");
             }
         });
     }

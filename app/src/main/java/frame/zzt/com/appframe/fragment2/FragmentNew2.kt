@@ -16,7 +16,7 @@ class FragmentNew2 : Fragment() {
 
     private lateinit var mRootView: View
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        mRootView = inflater.inflate(R.layout.fragment_new_view_2 , container, false)
+        mRootView = inflater.inflate(R.layout.fragment_new_view_2, container, false)
         return mRootView
     }
 

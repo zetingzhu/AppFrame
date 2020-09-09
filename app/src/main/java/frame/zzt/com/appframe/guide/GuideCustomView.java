@@ -1,9 +1,5 @@
 package frame.zzt.com.appframe.guide;
 
-/**
- * Created by allen on 16/12/15.
- */
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -23,6 +19,11 @@ import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
+/**
+ * @author: zeting
+ * @date: 2016/12/15.
+ * 页面弹框引导
+ */
 public class GuideCustomView extends RelativeLayout implements ViewTreeObserver.OnGlobalLayoutListener {
     private final String TAG = getClass().getSimpleName();
     private Context mContent;

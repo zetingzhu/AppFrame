@@ -17,8 +17,10 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.os.Build;
 import android.os.Handler;
+
 import androidx.annotation.ColorInt;
 import androidx.core.content.ContextCompat;
+
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -29,14 +31,15 @@ import frame.zzt.com.appframe.R;
 
 /**
  * Created on 2016/7/12.
- *
+ * <p>
  * 备份一下 CarStartAnimation 类的3.7完成的功能
+ *
  * @author Yan Zhenjie.
  */
 public class CarStartAnimation3 extends TextView {
 
     private static final String TAG = "VehiclePresenter";
-    private Context mContext ;
+    private Context mContext;
     /**
      * 外部轮廓的颜色。
      */
@@ -84,7 +87,7 @@ public class CarStartAnimation3 extends TextView {
     private RectF mArcRect = new RectF();
     private RectF mRectYY = new RectF();
     /**
-     *  换底部圆环的画笔
+     * 换底部圆环的画笔
      */
     private Paint mPaintFirst = new Paint();
     /**
@@ -116,25 +119,24 @@ public class CarStartAnimation3 extends TextView {
     /**
      * 超时时间
      */
-    private long timeOut = 0 ;
-    private Handler mHandler ; // 蓝牙超时
-    private Runnable mRunnable ;// 蓝牙超时线程
-    private Runnable mRunnableRead ;// 蓝牙超时读取数据的线程
-    private boolean isSetTimeout = false ;// 是否设置超时
+    private long timeOut = 0;
+    private Handler mHandler; // 蓝牙超时
+    private Runnable mRunnable;// 蓝牙超时线程
+    private Runnable mRunnableRead;// 蓝牙超时读取数据的线程
+    private boolean isSetTimeout = false;// 是否设置超时
 
     // 是否停止
-    private boolean ifStop = false ;
+    private boolean ifStop = false;
 
     // 设置是否高亮显示
     private boolean isgaoliang = false;
 
     // 是否已经成功
-    private boolean isSucced  = false;
+    private boolean isSucced = false;
     // 是否超时, 停止了继续执行完动画
-    private boolean isTimeout  = false;
+    private boolean isTimeout = false;
     // 设置执行步数，值越大，执行时间越短 ，最大不要超过 8
-    private int isStep  = 2 ;
-
+    private int isStep = 2;
 
 
     public CarStartAnimation3(Context context) {
@@ -163,7 +165,7 @@ public class CarStartAnimation3 extends TextView {
      * @param attributeSet 属性。
      */
     private void initialize(Context context, AttributeSet attributeSet) {
-        this.mContext = context ;
+        this.mContext = context;
         mPaint.setAntiAlias(true);
         mPaintFirst.setAntiAlias(true); // 抗锯齿
         mPaintFirst.setDither(true); // 防抖动
@@ -176,8 +178,8 @@ public class CarStartAnimation3 extends TextView {
         circleColor = inCircleColors.getColorForState(getDrawableState(), Color.TRANSPARENT);
         typedArray.recycle();
 
-        firstColor =  ContextCompat.getColor(context ,R.color.color_bg_gradient ) ;
-        progressLineColor =  ContextCompat.getColor(context ,R.color.color_end_gradient ) ;
+        firstColor = ContextCompat.getColor(context, R.color.color_bg_gradient);
+        progressLineColor = ContextCompat.getColor(context, R.color.color_end_gradient);
     }
 
     /**
@@ -223,6 +225,7 @@ public class CarStartAnimation3 extends TextView {
 
     /**
      * 设置底部圆环值
+     *
      * @param firstColor
      */
     public void setProgressBgColor(@ColorInt int firstColor) {
@@ -316,7 +319,7 @@ public class CarStartAnimation3 extends TextView {
     /**
      * 暂停进度条
      */
-    public void stopProgress(CarStartAnimation3.ProgressType progressType){
+    public void stopProgress(CarStartAnimation3.ProgressType progressType) {
         this.mProgressType = progressType;
     }
 
@@ -358,9 +361,9 @@ public class CarStartAnimation3 extends TextView {
      */
     public void start() {
         stop();
-        ifStop = false ;
-        isSucced = false ;
-        isTimeout = false ;
+        ifStop = false;
+        isSucced = false;
+        isTimeout = false;
         post(progressChangeTask);
         setTimeoutStart();
     }
@@ -374,36 +377,39 @@ public class CarStartAnimation3 extends TextView {
     }
 
     /**
-     *  设置超时后还可以继续执行
+     * 设置超时后还可以继续执行
+     *
      * @param boo
      */
-    public void setTimeoutCount( boolean boo , int step){
-        this.isTimeout = boo ;
-        this.isStep = step ;
+    public void setTimeoutCount(boolean boo, int step) {
+        this.isTimeout = boo;
+        this.isStep = step;
         invalidate();
     }
 
     /**
      * 是否设置超时
+     *
      * @param boo
      */
-    public void isSetTimeout( boolean boo){
-        isSetTimeout = boo ;
+    public void isSetTimeout(boolean boo) {
+        isSetTimeout = boo;
     }
 
     /**
-     *  设置超时时间
+     * 设置超时时间
      */
     public void setTimeout(long tim) {
         this.timeOut = tim;
     }
+
     /**
-     *  设置超时时间
+     * 设置超时时间
      */
-    private void setTimeoutStart( ) {
+    private void setTimeoutStart() {
         if (isSetTimeout) {
-            Log.d(TAG , "设置超时时间") ;
-            isStep = 2 ;
+            Log.d(TAG, "设置超时时间");
+            isStep = 2;
             mHandler = new Handler();
             mRunnable = new Runnable() {
                 @Override
@@ -413,21 +419,22 @@ public class CarStartAnimation3 extends TextView {
 //                    postDelayed(progressChangeTask, timeMillis / 100);
 //                    isTimeout = true ;
                     mCountdownProgressListener.onProgressTimeout();
-                    setTimeoutCount(true , 2 ) ;
-                    Log.d(TAG , " 已经超时了") ;
+                    setTimeoutCount(true, 2);
+                    Log.d(TAG, " 已经超时了");
                 }
             };
             mHandler.postDelayed(mRunnable, timeOut);
         }
     }
 
-    private void removeTimeOut(){
+    private void removeTimeOut() {
         if (mHandler != null && mRunnable != null) {
             mHandler.removeCallbacks(mRunnable);
-            mHandler = null ;
-            mRunnable = null ;
+            mHandler = null;
+            mRunnable = null;
         }
     }
+
     /**
      * 按钮打开状态
      */
@@ -437,7 +444,7 @@ public class CarStartAnimation3 extends TextView {
     }
 
     /**
-     *  按钮关闭状态
+     * 按钮关闭状态
      */
     public void setShowClose() {
         this.progress = validateProgress(progress);
@@ -448,14 +455,14 @@ public class CarStartAnimation3 extends TextView {
      * 停止。
      */
     public void stop() {
-        ifStop = true ;
+        ifStop = true;
         removeCallbacks(progressChangeTask);
         removeTimeOut();
     }
 
 
-    public void setGaoLiang( boolean gl){
-        this.isgaoliang = gl ;
+    public void setGaoLiang(boolean gl) {
+        this.isgaoliang = gl;
         invalidate();
     }
 
@@ -466,7 +473,7 @@ public class CarStartAnimation3 extends TextView {
         getDrawingRect(bounds);
 
         //关闭硬件加速才能显示阴影
-        setLayerType(View.LAYER_TYPE_SOFTWARE,null);
+        setLayerType(View.LAYER_TYPE_SOFTWARE, null);
 
         int size = bounds.height() > bounds.width() ? bounds.width() : bounds.height();
         float outerRadius = size / 2;
@@ -492,10 +499,10 @@ public class CarStartAnimation3 extends TextView {
         canvas.drawArc(mArcRect, -90, 360 * progress / 100, false, mPaint);
 
         // 给盖一个阴影图片
-        int padd = 0 ;
-        mRectYY.set(bounds.left + padd , bounds.top + padd  , bounds.right - padd   , bounds.bottom - padd  );
-        Bitmap mBottom = BitmapFactory.decodeResource(mContext.getResources() , R.drawable.anim_yinying);
-        canvas.drawBitmap(mBottom , null , mRectYY , mPaintMask );
+        int padd = 0;
+        mRectYY.set(bounds.left + padd, bounds.top + padd, bounds.right - padd, bounds.bottom - padd);
+        Bitmap mBottom = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.anim_yinying);
+        canvas.drawBitmap(mBottom, null, mRectYY, mPaintMask);
 
 //        if (isgaoliang) {
 //            // 覆盖层
@@ -533,30 +540,30 @@ public class CarStartAnimation3 extends TextView {
         @Override
         public void run() {
             removeCallbacks(this);
-            if (ifStop){
-                return ;
+            if (ifStop) {
+                return;
             }
             switch (mProgressType) {
                 case COUNT:
-                    progress += 1 * isStep ;
+                    progress += 1 * isStep;
                     break;
                 case COUNT_BACK:
-                    progress -= 1 * isStep ;
+                    progress -= 1 * isStep;
                     break;
                 case PROGRESS_STOP:
                     postDelayed(progressChangeTask, timeMillis / 100);
-                    break ;
+                    break;
             }
 //            Log.w(TAG , " -----progress: " + progress ) ;
             if (progress >= 0 && progress <= 100) {
                 if (mCountdownProgressListener != null)
                     mCountdownProgressListener.onProgress(listenerWhat, progress);
-                if(progress >= 92 && !isTimeout ){
+                if (progress >= 92 && !isTimeout) {
                     // 当如果进度条到达了92 默认已经成功了
-                    if (!isSucced ) {
+                    if (!isSucced) {
                         removeTimeOut();
                         mCountdownProgressListener.onProgressSucced(timeMillis * 8 / 100);
-                        isSucced = true ;
+                        isSucced = true;
                     }
                 }
                 invalidate();
@@ -585,9 +592,9 @@ public class CarStartAnimation3 extends TextView {
         PROGRESS_STOP,
 
         /*
-        * 进度条到达70%
-        * */
-        PROGRESS_70 ;
+         * 进度条到达70%
+         * */
+        PROGRESS_70;
     }
 
     /**
@@ -603,7 +610,8 @@ public class CarStartAnimation3 extends TextView {
         void onProgress(int what, int progress);
 
         /**
-         *  当进度到达了95以上说明执行成功了，执行后面的操作，变换图片什么的
+         * 当进度到达了95以上说明执行成功了，执行后面的操作，变换图片什么的
+         *
          * @param time 剩余时间，用来执行后面操作动画时间
          */
         void onProgressSucced(long time);

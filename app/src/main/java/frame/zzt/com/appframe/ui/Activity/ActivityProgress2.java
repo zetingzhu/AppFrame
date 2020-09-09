@@ -30,44 +30,41 @@ public class ActivityProgress2 extends Activity {
 
 
     /**
-
-
-     <frame.zzt.com.appframe.widget.progress.DialProgress
-     android:id="@+id/dial_progress_bar"
-     android:layout_width="300dp"
-     android:layout_height="300dp"
-     android:layout_gravity="center_horizontal"
-     android:padding="@dimen/medium"
-     app:animTime="1000"
-     app:arcColors="@array/gradient_arc_color"
-     app:arcWidth="@dimen/large"
-     app:dialIntervalDegree="3"
-     app:dialWidth="2dp"
-     app:hint="当前时速"
-     app:hintSize="@dimen/text_size_25"
-     app:maxValue="300"
-     app:startAngle="135"
-     app:sweepAngle="270"
-     app:unit="km/h"
-     app:unitSize="@dimen/text_size_25"
-     app:value="300"
-     app:valueSize="@dimen/text_size_35" />
-
-     <frame.zzt.com.appframe.widget.progress.WaveProgress
-     android:id="@+id/wave_progress_bar"
-     android:layout_width="300dp"
-     android:layout_height="300dp"
-     android:layout_gravity="center_horizontal"
-     app:darkWaveAnimTime="1000"
-     app:darkWaveColor="@color/dark"
-     app:lightWaveAnimTime="2000"
-     app:lightWaveColor="@color/light"
-     app:lightWaveDirect="R2L"
-     app:lockWave="false"
-     app:valueSize="@dimen/text_size_35"
-     app:waveHeight1="30dp"
-     app:waveNum="1" />
-
+     * <frame.zzt.com.appframe.widget.progress.DialProgress
+     * android:id="@+id/dial_progress_bar"
+     * android:layout_width="300dp"
+     * android:layout_height="300dp"
+     * android:layout_gravity="center_horizontal"
+     * android:padding="@dimen/medium"
+     * app:animTime="1000"
+     * app:arcColors="@array/gradient_arc_color"
+     * app:arcWidth="@dimen/large"
+     * app:dialIntervalDegree="3"
+     * app:dialWidth="2dp"
+     * app:hint="当前时速"
+     * app:hintSize="@dimen/text_size_25"
+     * app:maxValue="300"
+     * app:startAngle="135"
+     * app:sweepAngle="270"
+     * app:unit="km/h"
+     * app:unitSize="@dimen/text_size_25"
+     * app:value="300"
+     * app:valueSize="@dimen/text_size_35" />
+     * <p>
+     * <frame.zzt.com.appframe.widget.progress.WaveProgress
+     * android:id="@+id/wave_progress_bar"
+     * android:layout_width="300dp"
+     * android:layout_height="300dp"
+     * android:layout_gravity="center_horizontal"
+     * app:darkWaveAnimTime="1000"
+     * app:darkWaveColor="@color/dark"
+     * app:lightWaveAnimTime="2000"
+     * app:lightWaveColor="@color/light"
+     * app:lightWaveDirect="R2L"
+     * app:lockWave="false"
+     * app:valueSize="@dimen/text_size_35"
+     * app:waveHeight1="30dp"
+     * app:waveNum="1" />
      */
     @BindView(R.id.dial_progress_bar)
     public DialProgress mDialProgress;
@@ -76,6 +73,7 @@ public class ActivityProgress2 extends Activity {
 
 
     private Random mRandom;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -142,7 +140,7 @@ public class ActivityProgress2 extends Activity {
         mWaveProgress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mWaveProgress .setValue(mRandom.nextFloat() * mDialProgress.getMaxValue());
+                mWaveProgress.setValue(mRandom.nextFloat() * mDialProgress.getMaxValue());
             }
         });
 

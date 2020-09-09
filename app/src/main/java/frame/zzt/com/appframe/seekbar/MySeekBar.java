@@ -23,7 +23,7 @@ import frame.zzt.com.appframe.R;
 
 public class MySeekBar extends androidx.appcompat.widget.AppCompatSeekBar {
 
-    private static final String TAG = MySeekBar.class.getSimpleName() ;
+    private static final String TAG = MySeekBar.class.getSimpleName();
 
     /**
      * 文本的颜色
@@ -38,11 +38,11 @@ public class MySeekBar extends androidx.appcompat.widget.AppCompatSeekBar {
     /**
      * 背景图片
      */
-    private int img  ;
+    private int img;
     private Bitmap map;
-    private Bitmap start , end ;
+    private Bitmap start, end;
     //bitmap对应的宽高
-    private float img_width, img_height , imgStartWidth;
+    private float img_width, img_height, imgStartWidth;
     Paint paint;
 
     private float numTextWidth;
@@ -90,21 +90,21 @@ public class MySeekBar extends androidx.appcompat.widget.AppCompatSeekBar {
 
     }
 
-    public void initView(Context mContext ){
+    public void initView(Context mContext) {
 
 //        img_width =  DensityUtil.px2dip( mContext , 15f ) ;
 //        img_height = DensityUtil.px2dip( mContext , 23f ) ;
 
-        mTitleTextSize = 30 ;
-        mTitleTextColor= Color.RED ;
-        img = R.drawable.location_vehicle_annotation ;
+        mTitleTextSize = 30;
+        mTitleTextColor = Color.RED;
+        img = R.drawable.location_vehicle_annotation;
         getImgWH();
         paint = new Paint();
         paint.setAntiAlias(true);//设置抗锯齿
         paint.setTextSize(mTitleTextSize);//设置文字大小
         paint.setColor(mTitleTextColor);//设置文字颜色
         //设置控件的padding 给提示文字留出位置
-        setPadding((int) Math.ceil(img_width) / 2, (int) Math.ceil(img_height)-2   , (int) Math.ceil(img_height) / 2, (int) (Math.ceil(imgStartWidth)/2 + 3));
+        setPadding((int) Math.ceil(img_width) / 2, (int) Math.ceil(img_height) - 2, (int) Math.ceil(img_height) / 2, (int) (Math.ceil(imgStartWidth) / 2 + 3));
         textAlign = TEXT_ALIGN_CENTER_HORIZONTAL | TEXT_ALIGN_CENTER_VERTICAL;
     }
 
@@ -113,15 +113,15 @@ public class MySeekBar extends androidx.appcompat.widget.AppCompatSeekBar {
      */
     private void getImgWH() {
         map = BitmapFactory.decodeResource(getResources(), img);
-        start = BitmapFactory.decodeResource(getResources(), R.drawable.mytrip_start_point );
-        end = BitmapFactory.decodeResource(getResources(), R.drawable.mytrip_end_point );
+        start = BitmapFactory.decodeResource(getResources(), R.drawable.mytrip_start_point);
+        end = BitmapFactory.decodeResource(getResources(), R.drawable.mytrip_end_point);
 //        img_width = map.getWidth();
 //        img_height = map.getHeight();
-        img_width = 45 ;
-        img_height = 69 ;
-        imgStartWidth = 24 ;
+        img_width = 45;
+        img_height = 69;
+        imgStartWidth = 24;
 
-        Log.d( TAG , "img_width:" + img_width  + " - img_height:" + img_height);
+        Log.d(TAG, "img_width:" + img_width + " - img_height:" + img_height);
     }
 
     @Override
@@ -131,25 +131,25 @@ public class MySeekBar extends androidx.appcompat.widget.AppCompatSeekBar {
 
         rect_seek = this.getProgressDrawable().getBounds();
 
-        Log.d(TAG , "getProgressFloat():" + getProgressFloat());
+        Log.d(TAG, "getProgressFloat():" + getProgressFloat());
 
         //定位文字背景图片的位置
         float bm_x = rect_seek.width() * getProgressFloat() / getMax();
-        float bm_y = rect_seek.height() ;
+        float bm_y = rect_seek.height();
 //    //计算文字的中心位置在bitmap
         float text_x = rect_seek.width() * getProgressFloat() / getMax() + (img_width - numTextWidth) / 2;
 
-        Rect  rectStart = new Rect( (int)(img_width/2 - imgStartWidth/2 ) ,(int)(img_height - imgStartWidth/2 )   ,  (int)(img_width/2 + imgStartWidth/2 )    ,  (int)(img_height + imgStartWidth/2 )  );
-        Rect  rectEnd = new Rect( (int)(rect_seek.width() +  imgStartWidth/2 ) ,(int)(img_height - imgStartWidth/2 )   ,  (int)( rect_seek.width() + imgStartWidth/2 + imgStartWidth )    ,  (int)(img_height + imgStartWidth/2 )  );
-        canvas.drawBitmap(start , null , rectStart , paint);
-        canvas.drawBitmap(end , null , rectEnd , paint);
+        Rect rectStart = new Rect((int) (img_width / 2 - imgStartWidth / 2), (int) (img_height - imgStartWidth / 2), (int) (img_width / 2 + imgStartWidth / 2), (int) (img_height + imgStartWidth / 2));
+        Rect rectEnd = new Rect((int) (rect_seek.width() + imgStartWidth / 2), (int) (img_height - imgStartWidth / 2), (int) (rect_seek.width() + imgStartWidth / 2 + imgStartWidth), (int) (img_height + imgStartWidth / 2));
+        canvas.drawBitmap(start, null, rectStart, paint);
+        canvas.drawBitmap(end, null, rectEnd, paint);
 
-        Rect  rectSrc = new Rect((int)(bm_x ) , 0  ,  (int) (bm_x + img_width  )   , (int) img_height  );
+        Rect rectSrc = new Rect((int) (bm_x), 0, (int) (bm_x + img_width), (int) img_height);
 //        canvas.drawBitmap(map, bm_x, bm_y, paint);//画背景图
-        canvas.drawBitmap(map , null , rectSrc , paint);
+        canvas.drawBitmap(map, null, rectSrc, paint);
 
         paint.setTextAlign(Paint.Align.CENTER);
-        canvas.drawText( mTitleText , bm_x + textCenterX , textBaselineY , paint);
+        canvas.drawText(mTitleText, bm_x + textCenterX, textBaselineY, paint);
     }
 
     @Override
@@ -159,13 +159,14 @@ public class MySeekBar extends androidx.appcompat.widget.AppCompatSeekBar {
     }
 
     public synchronized void setProgressFloat(Float progress) {
-        this.mProgressFloat = progress ;
+        this.mProgressFloat = progress;
         super.setProgress((int) mProgressFloat);
         postInvalidate();
     }
 
     /**
      * 获取进度
+     *
      * @return
      */
     public float getProgressFloat() {
@@ -174,7 +175,7 @@ public class MySeekBar extends androidx.appcompat.widget.AppCompatSeekBar {
 
     @Override
     public synchronized void setProgress(int progress) {
-        this.mProgressFloat = progress ;
+        this.mProgressFloat = progress;
         super.setProgress(progress);
     }
 
@@ -186,7 +187,7 @@ public class MySeekBar extends androidx.appcompat.widget.AppCompatSeekBar {
 
         fm = paint.getFontMetrics();
         //文本的宽度
-        mTitleText = getProgress()   + "";
+        mTitleText = getProgress() + "";
 
         numTextWidth = paint.measureText(mTitleText);
 

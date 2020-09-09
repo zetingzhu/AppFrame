@@ -7,7 +7,7 @@ package frame.zzt.com.appframe.networkopt;
 
 public enum NetworkType {
     // 自动
-    AUTO ,
+    AUTO,
     // wifi
     WIFI,
     // 移动网络

@@ -25,6 +25,7 @@ public class MiscUtil {
     public static final int DEFAULT_ARC_WIDTH = 15;
 
     public static final int DEFAULT_WAVE_HEIGHT = 40;
+
     /**
      * 测量 View
      *
@@ -88,6 +89,7 @@ public class MiscUtil {
 
     /**
      * 测量文字高度
+     *
      * @param paint
      * @return
      */

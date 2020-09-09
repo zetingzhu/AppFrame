@@ -15,27 +15,26 @@ import io.reactivex.subjects.Subject;
 
 
 /**
-
-    RxJava 实现 RxBus 功能的实现
-
-    // 发送绑定数据
-    RxBusTwo.getInstance().post(eventMsg);
-
-    // 注册
-    protected void onCreate() {
-         Disposable register = RxBusTwo.getInstance().register( EventMsg.class , new Consumer<EventMsg>() {
-             @Override
-             public void accept(EventMsg eventMsg) throws Exception {
-            }
-        });
-    // 添加绑定
-        RxBusTwo.getInstance().addSubscription(mContext,register);
-    }
-
-    // 销毁绑定
-    protected void onDestroy() {
-        RxBusTwo.getInstance().unSubscribe( mContext );
-    }
+ * RxJava 实现 RxBus 功能的实现
+ * <p>
+ * // 发送绑定数据
+ * RxBusTwo.getInstance().post(eventMsg);
+ * <p>
+ * // 注册
+ * protected void onCreate() {
+ * Disposable register = RxBusTwo.getInstance().register( EventMsg.class , new Consumer<EventMsg>() {
+ *
+ * @Override public void accept(EventMsg eventMsg) throws Exception {
+ * }
+ * });
+ * // 添加绑定
+ * RxBusTwo.getInstance().addSubscription(mContext,register);
+ * }
+ * <p>
+ * // 销毁绑定
+ * protected void onDestroy() {
+ * RxBusTwo.getInstance().unSubscribe( mContext );
+ * }
  */
 
 public class RxBusTwo {
@@ -46,7 +45,6 @@ public class RxBusTwo {
     /**
      * 默认私有化构造函数
      * 当前这个地方没有进行背压
-     *
      */
     private RxBusTwo() {
         mBus = PublishSubject.create().toSerialized();

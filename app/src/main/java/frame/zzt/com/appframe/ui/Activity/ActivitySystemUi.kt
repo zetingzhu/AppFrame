@@ -16,7 +16,7 @@ import frame.zzt.com.appframe.R
  */
 class ActivitySystemUi : AppCompatActivity() {
 
-    private lateinit var button1 : Button
+    private lateinit var button1: Button
     private val button2 by bindView<Button>(R.id.button2)
     private val button3: Button by bindView(R.id.button3)
     private val button4: Button by bindView(R.id.button4)
@@ -32,7 +32,7 @@ class ActivitySystemUi : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 //        requestWindowFeature(Window.FEATURE_NO_TITLE);// 隐藏标题
 //        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);// 设置全屏
-        setContentView(R.layout.activity_system_ui )
+        setContentView(R.layout.activity_system_ui)
 
 //        val actionBar = supportActionBar
 //        actionBar!!.hide()
@@ -41,19 +41,19 @@ class ActivitySystemUi : AppCompatActivity() {
 
     }
 
-    fun initView(){
+    fun initView() {
         textView.text = "ActivitySystemUi"
 
         button1 = findViewById<Button>(R.id.button1)
         button1.text = "隐藏状态栏和虚拟按键"
         button1.setOnClickListener {
-                              hideUiMenu( this@ActivitySystemUi )
+            hideUiMenu(this@ActivitySystemUi)
         }
 
         button2.setText("显示状态栏和虚拟按键")
-        button2.setOnClickListener(object : View.OnClickListener{
+        button2.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
-                showUiMenu( this@ActivitySystemUi )
+                showUiMenu(this@ActivitySystemUi)
             }
         })
 
@@ -83,7 +83,7 @@ class ActivitySystemUi : AppCompatActivity() {
             /**
              * View.SYSTEM_UI_FLAG_FULLSCREEN 隐藏状态栏，点击屏幕区域不会出现，需要从状态栏位置下拉才会出现。
              */
-            this@ActivitySystemUi.window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN  or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+            this@ActivitySystemUi.window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
 
 //            this@ActivitySystemUi.window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_IMMERSIVE
         }

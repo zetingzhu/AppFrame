@@ -9,8 +9,11 @@ import android.content.Context;
 
 public interface IBluetoothControl {
     void setAdapter(BluetoothAdapter adapter);
+
     void setDeviceMacAddress(String address);
+
     void doSomething(Callback callback);
+
     void unlock(Context context, Callback callback);
 
 }

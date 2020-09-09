@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:cpb="http://schemas.android.com/apk/res-auto"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+    xmlns:cpb="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <frame.zzt.com.appframe.widget.CircleProgressBar
         android:id="@+id/circleProgressBar"
@@ -13,7 +13,7 @@
         android:layout_marginTop="20dp"
         cpb:circleWidth="6dp"
         cpb:firstColor="#d3d3d3"
-        cpb:secondColor="#3B95C8"/>
+        cpb:secondColor="#3B95C8" />
 
     <SeekBar
         android:id="@+id/seekbar"
@@ -22,5 +22,5 @@
         android:layout_marginBottom="40dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:background="#778899"/>
+        android:background="#778899" />
 </LinearLayout>

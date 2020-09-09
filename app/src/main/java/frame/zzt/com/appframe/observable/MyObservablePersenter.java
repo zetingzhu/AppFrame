@@ -1,7 +1,6 @@
 package frame.zzt.com.appframe.observable;
 
 
-
-public class MyObservablePersenter  {
+public class MyObservablePersenter {
 
 }

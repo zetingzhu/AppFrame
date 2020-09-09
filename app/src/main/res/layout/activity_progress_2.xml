@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -22,7 +22,7 @@
                 android:layout_marginTop="20dp"
                 app:circleWidth="6dp"
                 app:firstColor="#d3d3d3"
-                app:secondColor="#3B95C8"/>
+                app:secondColor="#3B95C8" />
 
             <SeekBar
                 android:id="@+id/seekbar"
@@ -31,7 +31,7 @@
                 android:layout_marginBottom="20dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:background="#778899"/>
+                android:background="#778899" />
 
             <FrameLayout
                 android:layout_width="wrap_content"
@@ -51,7 +51,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="5dp"
                     android:textColor="@android:color/white"
-                    android:textSize="11sp"/>
+                    android:textSize="11sp" />
 
                 <frame.zzt.com.appframe.widget.CarStartAnimation
                     android:id="@+id/custom_car_start_status1"
@@ -59,7 +59,7 @@
                     android:layout_height="48dp"
                     android:layout_gravity="center"
                     android:onClick="onClick"
-                    android:text=""/>
+                    android:text="" />
 
             </FrameLayout>
 
@@ -99,7 +99,7 @@
                 app:valueSize="@dimen/text_size_35"
                 app:waveHeight="30dp"
                 app:waveNum="1" />
-            </LinearLayout>
+        </LinearLayout>
     </ScrollView>
 
 

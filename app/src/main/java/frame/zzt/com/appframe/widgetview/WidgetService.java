@@ -3,7 +3,9 @@ package frame.zzt.com.appframe.widgetview;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
+
 import androidx.annotation.Nullable;
+
 import android.util.Log;
 
 import java.util.Timer;
@@ -36,7 +38,7 @@ public class WidgetService extends Service {
         mTimerTask = new TimerTask() {
             @Override
             public void run() {
-                Log.d( TAG ,  "不停的发送广播信息" ) ;
+                Log.d(TAG, "不停的发送广播信息");
                 Intent updateIntent = new Intent(ACTION_UPDATE_ALL);
                 sendBroadcast(updateIntent);
             }

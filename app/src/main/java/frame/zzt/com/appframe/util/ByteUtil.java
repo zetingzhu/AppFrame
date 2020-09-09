@@ -9,20 +9,22 @@ public class ByteUtil {
 
     /**
      * 将int类型的数据转换为byte数组
+     *
      * @param n int数据
      * @return 生成的byte数组
      */
-    public static byte[] intToBytes(int n){
+    public static byte[] intToBytes(int n) {
         String s = String.valueOf(n);
         return s.getBytes();
     }
 
     /**
      * 将byte数组转换为int数据
+     *
      * @param b 字节数组
      * @return 生成的int数据
      */
-    public static int bytesToInt(byte[] b){
+    public static int bytesToInt(byte[] b) {
         String s = new String(b);
         return Integer.parseInt(s);
     }
@@ -30,41 +32,41 @@ public class ByteUtil {
     /**
      * 将int类型的数据转换为byte数组
      * 原理:将int数据中的四个byte取出,分别存储
+     *
      * @param n int数据
      * @return 生成的byte数组
      */
-    public static byte[] intToBytes2(int n){
+    public static byte[] intToBytes2(int n) {
         byte[] b = new byte[4];
-        for(int i = 0;i < 4;i++){
-            b[i] = (byte)(n >> (24 - i * 8));
+        for (int i = 0; i < 4; i++) {
+            b[i] = (byte) (n >> (24 - i * 8));
         }
         return b;
     }
 
     /**
      * 将byte数组转换为int数据
+     *
      * @param b 字节数组
      * @return 生成的int数据
      */
-    public static int byteToInt2(byte[] b){
-        return (((int)b[0]) << 24) + (((int)b[1]) << 16) + (((int)b[2]) << 8) + b[3];
+    public static int byteToInt2(byte[] b) {
+        return (((int) b[0]) << 24) + (((int) b[1]) << 16) + (((int) b[2]) << 8) + b[3];
     }
 
     /**
      * byte数组中取int数值，本方法适用于(低位在前，高位在后)的顺序，和和intToBytes（）配套使用
      *
-     * @param src
-     *            byte数组
-     * @param offset
-     *            从数组的第offset位开始
+     * @param src    byte数组
+     * @param offset 从数组的第offset位开始
      * @return int数值
      */
     public static int bytesToInt(byte[] src, int offset) {
         int value;
         value = (int) ((src[offset] & 0xFF)
-                | ((src[offset+1] & 0xFF)<<8)
-                | ((src[offset+2] & 0xFF)<<16)
-                | ((src[offset+3] & 0xFF)<<24));
+                | ((src[offset + 1] & 0xFF) << 8)
+                | ((src[offset + 2] & 0xFF) << 16)
+                | ((src[offset + 3] & 0xFF) << 24));
         return value;
     }
 
@@ -73,10 +75,10 @@ public class ByteUtil {
      */
     public static int bytesToInt2(byte[] src, int offset) {
         int value;
-        value = (int) ( ((src[offset] & 0xFF)<<24)
-                |((src[offset+1] & 0xFF)<<16)
-                |((src[offset+2] & 0xFF)<<8)
-                |(src[offset+3] & 0xFF));
+        value = (int) (((src[offset] & 0xFF) << 24)
+                | ((src[offset + 1] & 0xFF) << 16)
+                | ((src[offset + 2] & 0xFF) << 8)
+                | (src[offset + 3] & 0xFF));
         return value;
     }
 
@@ -125,6 +127,7 @@ public class ByteUtil {
 
     /**
      * 字符串转换成为16进制(无需Unicode编码)
+     *
      * @param str
      * @return
      */
@@ -145,6 +148,7 @@ public class ByteUtil {
 
     /**
      * 16进制直接转换成为字符串(无需Unicode解码)
+     *
      * @param hexStr
      * @return
      */
@@ -194,40 +198,43 @@ public class ByteUtil {
 
     /**
      * 数组转换成十六进制，在转换成int
+     *
      * @return
      */
-    public static Integer byteHexToInt(byte[] bb){
+    public static Integer byteHexToInt(byte[] bb) {
 
-        String sssss =  ByteUtil.bytesToHex2(bb);
+        String sssss = ByteUtil.bytesToHex2(bb);
 
         //将十六进制转化成十进制
-        int valueTen = Integer.parseInt(sssss,16);
-        return valueTen ;
+        int valueTen = Integer.parseInt(sssss, 16);
+        return valueTen;
     }
 
     /**
-     *  将int 数据装换成byte 转成4位的是需求要的数组
+     * 将int 数据装换成byte 转成4位的是需求要的数组
+     *
      * @return
      */
-    public static byte[] intToByteHex(int in){
+    public static byte[] intToByteHex(int in) {
 
-        String strHex2 = String.format("%04x",in);
+        String strHex2 = String.format("%04x", in);
 
         // 十六进制转数组
         byte[] intByte = ByteUtil.hexToByteArray(strHex2);
 
-        return intByte ;
+        return intByte;
     }
 
 
     /**
      * int 转 十六进制 这个不能能够转成4个字节的
+     *
      * @param var
      * @return
      */
-    public static String intToHex(int var){
+    public static String intToHex(int var) {
         String hex = Integer.toHexString(var);
-        return hex ;
+        return hex;
     }
 
 
@@ -235,10 +242,12 @@ public class ByteUtil {
     public static String numToHex8(int b) {
         return String.format("%02x", b);//2表示需要两个16进行数
     }
+
     //需要使用2字节表示b
     public static String numToHex16(int b) {
         return String.format("%04x", b);
     }
+
     //需要使用4字节表示b
     public static String numToHex32(int b) {
         return String.format("%08x", b);
@@ -250,27 +259,28 @@ public class ByteUtil {
      */
     public static byte[] getBooleanArray(byte b) {
         byte[] array = new byte[8];
-        for (int i = 7; i >= 0 ; i--) {
-            array[i] = (byte)(b & 1);
+        for (int i = 7; i >= 0; i--) {
+            array[i] = (byte) (b & 1);
             b = (byte) (b >> 1);
         }
         return array;
     }
-    public static String getBit(byte by){
+
+    public static String getBit(byte by) {
         StringBuffer sb = new StringBuffer();
-        sb.append((by>>7)&0x1)
-                .append((by>>6)&0x1)
-                .append((by>>5)&0x1)
-                .append((by>>4)&0x1)
-                .append((by>>3)&0x1)
-                .append((by>>2)&0x1)
-                .append((by>>1)&0x1)
-                .append((by>>0)&0x1);
+        sb.append((by >> 7) & 0x1)
+                .append((by >> 6) & 0x1)
+                .append((by >> 5) & 0x1)
+                .append((by >> 4) & 0x1)
+                .append((by >> 3) & 0x1)
+                .append((by >> 2) & 0x1)
+                .append((by >> 1) & 0x1)
+                .append((by >> 0) & 0x1);
         return sb.toString();
     }
 
     /**
-     *   bite 转byte
+     * bite 转byte
      */
     public static byte bitToByte(String bit) {
         int re, len;
@@ -297,7 +307,6 @@ public class ByteUtil {
     }
 
 
-
     //int转换byte
     public static byte intToByte(int x) {
         return (byte) x;
@@ -307,6 +316,7 @@ public class ByteUtil {
     public static int byteToInt(byte b) {
         return b & 0xFF;
     }
+
     /**
      * 把十六进制表示的字节数组字符串，转换成十六进制字节数组
      *

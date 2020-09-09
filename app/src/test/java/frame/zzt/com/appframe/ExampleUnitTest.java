@@ -24,70 +24,68 @@ public class ExampleUnitTest {
 
         byte[] byte0 = "1".getBytes();
 
-        Integer i01 = 20180717 ;
-        byte by02 = i01.byteValue() ;
-        byte[] by03 = ByteUtil.intToByteArrayBig(i01) ;
+        Integer i01 = 20180717;
+        byte by02 = i01.byteValue();
+        byte[] by03 = ByteUtil.intToByteArrayBig(i01);
 
         byte by01 = ByteUtil.intToByte(22222);
-        byte by04 =  0x14 ;
-        byte by05 =  20 ;
+        byte by04 = 0x14;
+        byte by05 = 20;
 
         int int01 = ByteUtil.byteToInt(by01);
 
         byte byte1 = ByteUtil.bitToByte("00010010");
 
-        String byStr = ByteUtil.getBit(by02) ;
-        String byStr01 = ByteUtil.getBit(by03[0]) ;
-        String byStr02 = ByteUtil.getBit(by03[1]) ;
-        String byStr03 = ByteUtil.getBit(by03[2]) ;
-        String byStr04 = ByteUtil.getBit(by03[3]) ;
+        String byStr = ByteUtil.getBit(by02);
+        String byStr01 = ByteUtil.getBit(by03[0]);
+        String byStr02 = ByteUtil.getBit(by03[1]);
+        String byStr03 = ByteUtil.getBit(by03[2]);
+        String byStr04 = ByteUtil.getBit(by03[3]);
 
-        System.out.println("---- byStr：" + byStr );
+        System.out.println("---- byStr：" + byStr);
 
 
-        System.out.println("----获取信号值：" + getProgressRssi(-70) );
+        System.out.println("----获取信号值：" + getProgressRssi(-70));
 
         int max = 85;
         int min = 70;
 
         Random random = new Random();
-        int result2 = random.nextInt(max)  ;
-        System.out.println("----随机数：" + result2 );
-        int result3 =  (max - min + 1) ;
-        System.out.println("----随机数：" + result3 );
-        int result1 = random.nextInt(max) % (max - min + 1) ;
-        System.out.println("----随机数：" + result1 );
+        int result2 = random.nextInt(max);
+        System.out.println("----随机数：" + result2);
+        int result3 = (max - min + 1);
+        System.out.println("----随机数：" + result3);
+        int result1 = random.nextInt(max) % (max - min + 1);
+        System.out.println("----随机数：" + result1);
         int result = random.nextInt(max) % (max - min + 1) + min;
 
-        System.out.println("----随机数：" + result );
+        System.out.println("----随机数：" + result);
 
 
-        int iii = 21 ;
-        byte[] bb = ByteUtil.intToBytes(iii) ;
-        byte[] bb1 = ByteUtil.intToByteArrayBig(iii) ;
-        byte[] bb2 = ByteUtil.intToBytes2(iii) ;
-        byte[] bb3 = ByteUtil.intToByteHex(iii) ;
+        int iii = 21;
+        byte[] bb = ByteUtil.intToBytes(iii);
+        byte[] bb1 = ByteUtil.intToByteArrayBig(iii);
+        byte[] bb2 = ByteUtil.intToBytes2(iii);
+        byte[] bb3 = ByteUtil.intToByteHex(iii);
         System.out.println("----是什么 ：" + ByteUtil.intToBytes(iii));
-
-
 
 
         //定义一个十进制值
         // 357550110481790
 //        int valueTen = 110481790;
-        int valueTen =  102100002 ;
+        int valueTen = 102100002;
         //将其转换为十六进制并输出
         String strHex = Integer.toHexString(valueTen);
         System.out.println(valueTen + " [十进制]---->[十六进制] " + strHex);
         //将十六进制格式化输出
-        String strHex2 = String.format("%04x",valueTen);
+        String strHex2 = String.format("%04x", valueTen);
         System.out.println(valueTen + " [十进制]---->[十六进制] " + strHex2);
 
 
         //定义一个十六进制值
         String strHex3 = "0015";
         //将十六进制转化成十进制
-        int valueTen2 = Integer.parseInt(strHex3,16);
+        int valueTen2 = Integer.parseInt(strHex3, 16);
         System.out.println(strHex3 + " [十六进制]---->[十进制] " + valueTen2);
 
         //可以在声明十进制时，自动完成十六进制到十进制的转换
@@ -98,7 +96,7 @@ public class ExampleUnitTest {
         // 十六进制转数组
         byte[] bbbbb = ByteUtil.hexToByteArray(strHex3);
 
-        String sssss =  ByteUtil.bytesToHex2(bbbbb);
+        String sssss = ByteUtil.bytesToHex2(bbbbb);
 
         byte[] bbbbb1 = ByteUtil.intToByteArrayBig(21);
 
@@ -111,17 +109,17 @@ public class ExampleUnitTest {
         String strHex6 = ByteUtil.numToHex32(valueTen);
         System.out.println(valueTen + " [十进制]---->[十六进制] " + strHex6);
 
-        System.out.println(valueTen + " [十进制]---->[十六进制] " + Integer.toBinaryString(valueTen)) ;
+        System.out.println(valueTen + " [十进制]---->[十六进制] " + Integer.toBinaryString(valueTen));
 
 
-        byte[] keyId = ByteUtil.intToByteArrayBig(valueTen)  ;
-        String strHex7 =  ByteUtil.bytesToHex2(keyId) ;
+        byte[] keyId = ByteUtil.intToByteArrayBig(valueTen);
+        String strHex7 = ByteUtil.bytesToHex2(keyId);
         System.out.println(valueTen + " [十进制]---->[十六进制] " + strHex7);
 
         System.out.println("--结束线--");
 
 
-        int val =  getGpsGsm(30) ;
+        int val = getGpsGsm(30);
 
         System.out.println("--val:" + val);
 
@@ -129,12 +127,12 @@ public class ExampleUnitTest {
 //        System.out.println("补充后的code : " + autoCode );
 
 
-        String str = "a141b40301028000000000000615EC21585f4b66786a6f4136772a41716e2850502478487451547a" ;
-        byte[] byteMd5L = ByteUtil.hexStr2bytes(str) ;
+        String str = "a141b40301028000000000000615EC21585f4b66786a6f4136772a41716e2850502478487451547a";
+        byte[] byteMd5L = ByteUtil.hexStr2bytes(str);
 //        byte[] byteMd5L = ByteUtil.hexToByteArray(str);
         // md5 加密后的byte
         byte[] md5DataDigest = MD5Util.getMD5Byte(byteMd5L);
-        System.out.println("没有验证md5的时候 - 加密后：" + ByteUtil.bytesToHex2(  md5DataDigest ) );
+        System.out.println("没有验证md5的时候 - 加密后：" + ByteUtil.bytesToHex2(md5DataDigest));
 
         System.out.println("--结束线--");
     }
@@ -145,16 +143,16 @@ public class ExampleUnitTest {
         // 0 代表前面补充0
         // num 代表长度为4
         // d 代表参数为正数型
-        result = String.format("%0" + num + "s", code );
+        result = String.format("%0" + num + "s", code);
         return result;
     }
 
 
-    public int getGpsGsm(int val){
+    public int getGpsGsm(int val) {
         BigDecimal b1 = new BigDecimal(val);
         BigDecimal b2 = new BigDecimal(24);
-        BigDecimal res = b1.divide(b2, 0, BigDecimal.ROUND_HALF_UP) ;
-        Double resDb = res.doubleValue() ;
+        BigDecimal res = b1.divide(b2, 0, BigDecimal.ROUND_HALF_UP);
+        Double resDb = res.doubleValue();
         System.out.println("--res:" + res);
         System.out.println("--resDb:" + resDb);
         int ii = (int) Math.ceil(resDb);
@@ -165,16 +163,16 @@ public class ExampleUnitTest {
 
         System.out.println("--df:" + df.format(resDb));
         System.out.println("--df1:" + df1.format(resDb));
-        BigDecimal bd=new BigDecimal(resDb).setScale(0, BigDecimal.ROUND_HALF_UP);
-        return resDb.intValue() ; // 四舍五入，保留2位小数
+        BigDecimal bd = new BigDecimal(resDb).setScale(0, BigDecimal.ROUND_HALF_UP);
+        return resDb.intValue(); // 四舍五入，保留2位小数
     }
 
-    public int getProgressRssi( int rssi){
-        return Math.round( Math.abs(  div(rssi , 120).floatValue() ) * 100)  ;
+    public int getProgressRssi(int rssi) {
+        return Math.round(Math.abs(div(rssi, 120).floatValue()) * 100);
     }
 
     // 除法。
-    public BigDecimal div(int v1, int v2){
+    public BigDecimal div(int v1, int v2) {
         BigDecimal b1 = new BigDecimal(Integer.toString(v1));
         BigDecimal b2 = new BigDecimal(Integer.toString(v2));
         return b1.divide(b2, 2, BigDecimal.ROUND_HALF_UP); // 四舍五入，保留2位小数

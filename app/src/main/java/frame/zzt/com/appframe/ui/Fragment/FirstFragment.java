@@ -3,8 +3,10 @@ package frame.zzt.com.appframe.ui.Fragment;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -104,20 +106,20 @@ public class FirstFragment extends Fragment {
             new DemoInfo(R.string.tab_item_bluetooth5, R.string.tab_item_bluetooth_desc, ActivityBluetooth5.class),
             new DemoInfo(R.string.tab_item_bluetooth6, R.string.tab_item_bluetooth6_desc, ActivityBluetooth6.class),
             new DemoInfo(R.string.tab_item_bluetooth7, R.string.tab_item_bluetooth6_desc, ActivityBluetooth7.class),
-            new DemoInfo(R.string.tab_item_surfaceView, R.string.tab_item_surfaceView_desc , ActivitySurfaceView.class),
-            new DemoInfo(R.string.tab_item_doodleview  , R.string.tab_item_doodleview_desc   , DoodleViewActivity.class),
-            new DemoInfo(R.string.tab_item_rxjava  , R.string.tab_item_rxjava_desc   , ActivityRxJava.class),
-            new DemoInfo(R.string.tab_item_rxjava_use  , R.string.tab_item_rxjava_use_desc  , ActivityRxJavaUse.class),
+            new DemoInfo(R.string.tab_item_surfaceView, R.string.tab_item_surfaceView_desc, ActivitySurfaceView.class),
+            new DemoInfo(R.string.tab_item_doodleview, R.string.tab_item_doodleview_desc, DoodleViewActivity.class),
+            new DemoInfo(R.string.tab_item_rxjava, R.string.tab_item_rxjava_desc, ActivityRxJava.class),
+            new DemoInfo(R.string.tab_item_rxjava_use, R.string.tab_item_rxjava_use_desc, ActivityRxJavaUse.class),
             new DemoInfo(R.string.tab_item_pro, R.string.tab_item_pro_desc, ActivityProgress2.class),
-            new DemoInfo(R.string.tab_item_Kotlin , R.string.tab_item_Kotlin_desc, ActivityKotlin.class),
-            new DemoInfo(R.string.tab_item_Notification , R.string.tab_item_Notification_desc , ActivityNotification.class),
-            new DemoInfo(R.string.tab_item_observable  , R.string.tab_item_observable_desc , ActivityObservable.class),
-            new DemoInfo(R.string.tab_item_eventbus  , R.string.tab_item_eventbus_desc , ActivityEventBus.class),
-            new DemoInfo(R.string.tab_item_read_clazz  , R.string.tab_item_read_clazz_desc , ActivityReadCodeClass.class),
-            new DemoInfo(R.string.tab_item_anim  , R.string.tab_item_anim_desc , ActivitySlideLock.class),
-            new DemoInfo(R.string.tab_item_anim  , R.string.tab_item_anim_desc , ActivitySlideLock.class),
-            new DemoInfo(R.string.tab_item_sys_ui  , R.string.tab_item_sys_ui_desc , ActivitySystemUi.class),
-    } ;
+            new DemoInfo(R.string.tab_item_Kotlin, R.string.tab_item_Kotlin_desc, ActivityKotlin.class),
+            new DemoInfo(R.string.tab_item_Notification, R.string.tab_item_Notification_desc, ActivityNotification.class),
+            new DemoInfo(R.string.tab_item_observable, R.string.tab_item_observable_desc, ActivityObservable.class),
+            new DemoInfo(R.string.tab_item_eventbus, R.string.tab_item_eventbus_desc, ActivityEventBus.class),
+            new DemoInfo(R.string.tab_item_read_clazz, R.string.tab_item_read_clazz_desc, ActivityReadCodeClass.class),
+            new DemoInfo(R.string.tab_item_anim, R.string.tab_item_anim_desc, ActivitySlideLock.class),
+            new DemoInfo(R.string.tab_item_anim, R.string.tab_item_anim_desc, ActivitySlideLock.class),
+            new DemoInfo(R.string.tab_item_sys_ui, R.string.tab_item_sys_ui_desc, ActivitySystemUi.class),
+    };
 
     public class DemoListAdapter extends BaseAdapter {
         public DemoListAdapter() {

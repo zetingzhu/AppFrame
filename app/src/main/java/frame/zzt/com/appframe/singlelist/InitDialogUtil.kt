@@ -20,10 +20,13 @@ class InitDialogUtil private constructor() {
     companion object {
         // vip 运营操作弹窗
         val TYPE_REQUEST_VIP_OPERATIONS = 0
+
         // vip召回
         val TYPE_REQUEST_VIP_RECALL = 1
+
         // 10 天老用户召回
         val TYPE_REQUEST_OLD_USER_RECALL_15 = 2
+
         // 15 天老用户召回
         val TYPE_REQUEST_OLD_USER_RECALL_10 = 3
 

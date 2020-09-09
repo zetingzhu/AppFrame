@@ -5,10 +5,12 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,7 +21,6 @@ import frame.zzt.com.appframe.R;
 
 /**
  * 用于展示 自定义涂鸦 功能的 Activity
- *
  */
 
 public class DoodleViewActivity extends AppCompatActivity {
@@ -53,7 +54,7 @@ public class DoodleViewActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.main_color:
                 showColorDialog();
                 break;
@@ -72,51 +73,53 @@ public class DoodleViewActivity extends AppCompatActivity {
                     // 没有权限，申请权限。
                     if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                         // 用户拒绝过这个权限了，应该提示用户，为什么需要这个权限。
-                        Log.i(TAG, "用户拒绝过这个权限了，应该提示用户，为什么需要这个权限。" );
+                        Log.i(TAG, "用户拒绝过这个权限了，应该提示用户，为什么需要这个权限。");
                     } else {
-                        Log.i(TAG, "申请权限" );
+                        Log.i(TAG, "申请权限");
                         //  申请读取系统磁盘权限
-                        ActivityCompat.requestPermissions(this ,new String[]{Manifest.permission_group.STORAGE} , 1101 );
+                        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission_group.STORAGE}, 1101);
                     }
                 } else {
                     // 有权限了，去放肆吧。
 
                     String path = mDoodleView.saveBitmap(mDoodleView);
                     Log.d(TAG, "onOptionsItemSelected: " + path);
-                    Toast.makeText(this, "保存图片的路径为：" + path,  Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "保存图片的路径为：" + path, Toast.LENGTH_SHORT).show();
                 }
 
                 break;
         }
         return true;
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         switch (requestCode) {
             case 1101: {
-                if (grantResults.length > 0  && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     // 权限被用户同意，可以去放肆了。
-                    Log.i(TAG, "申请权限 成功" );
+                    Log.i(TAG, "申请权限 成功");
                 } else {
                     // 权限被用户拒绝了，洗洗睡吧。
-                    Log.i(TAG, "申请权限 失败" );
+                    Log.i(TAG, "申请权限 失败");
                 }
                 return;
             }
         }
     }
+
     /**
      * 显示选择画笔颜色的对话框
      */
     private void showColorDialog() {
-        if(mColorDialog == null){
+        if (mColorDialog == null) {
             mColorDialog = new AlertDialog.Builder(this)
                     .setTitle("选择颜色")
                     .setSingleChoiceItems(new String[]{"蓝色", "红色", "黑色"}, 0,
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    switch (which){
+                                    switch (which) {
                                         case 0:
                                             mDoodleView.setColor("#0000ff");
                                             break;
@@ -126,7 +129,8 @@ public class DoodleViewActivity extends AppCompatActivity {
                                         case 2:
                                             mDoodleView.setColor("#272822");
                                             break;
-                                        default:break;
+                                        default:
+                                            break;
                                     }
                                     dialog.dismiss();
                                 }
@@ -138,15 +142,15 @@ public class DoodleViewActivity extends AppCompatActivity {
     /**
      * 显示选择画笔粗细的对话框
      */
-    private void showSizeDialog(){
-        if(mPaintDialog == null){
+    private void showSizeDialog() {
+        if (mPaintDialog == null) {
             mPaintDialog = new AlertDialog.Builder(this)
                     .setTitle("选择画笔粗细")
                     .setSingleChoiceItems(new String[]{"细", "中", "粗"}, 0,
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    switch (which){
+                                    switch (which) {
                                         case 0:
                                             mDoodleView.setSize(dip2px(5));
                                             break;
@@ -169,15 +173,15 @@ public class DoodleViewActivity extends AppCompatActivity {
     /**
      * 显示选择画笔形状的对话框
      */
-    private void showShapeDialog(){
-        if(mShapeDialog == null){
+    private void showShapeDialog() {
+        if (mShapeDialog == null) {
             mShapeDialog = new AlertDialog.Builder(this)
                     .setTitle("选择形状")
-                    .setSingleChoiceItems(new String[]{"路径", "直线", "矩形", "圆形","实心矩形", "实心圆" }, 0,
+                    .setSingleChoiceItems(new String[]{"路径", "直线", "矩形", "圆形", "实心矩形", "实心圆"}, 0,
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    switch (which){
+                                    switch (which) {
                                         case 0:
                                             mDoodleView.setType(DoodleView.ActionType.Path);
                                             break;
@@ -206,8 +210,8 @@ public class DoodleViewActivity extends AppCompatActivity {
         mShapeDialog.show();
     }
 
-    private int dip2px(float dpValue){
+    private int dip2px(float dpValue) {
         final float scale = getResources().getDisplayMetrics().density;
-        return (int)(dpValue * scale + 0.5f);
+        return (int) (dpValue * scale + 0.5f);
     }
 }

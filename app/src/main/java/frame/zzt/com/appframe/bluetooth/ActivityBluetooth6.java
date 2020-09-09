@@ -5,7 +5,9 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothServerSocket;
 import android.bluetooth.BluetoothSocket;
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
+
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -49,7 +51,7 @@ public class ActivityBluetooth6 extends BaseAppCompatActivity {
     @OnClick(R.id.button1)
     public void connectDevice() {
         // 三星手机的蓝牙地址
-        String address = "68:05:71:19:F1:DF" ;
+        String address = "68:05:71:19:F1:DF";
         mDevice = mBluetoothAdapter.getRemoteDevice(address);
         if (mDevice != null) {
             ClientThread mClientThread = new ClientThread();
@@ -67,13 +69,13 @@ public class ActivityBluetooth6 extends BaseAppCompatActivity {
         public void run() {
             try {
                 //创建一个socket尝试连接，UUID用正确格式的String来转换而成*
-                socket = mDevice.createRfcommSocketToServiceRecord( ActivityBluetooth7.MY_UUID );
+                socket = mDevice.createRfcommSocketToServiceRecord(ActivityBluetooth7.MY_UUID);
                 Log.i(TAG, "正在连接，请稍后......");
                 //该方法阻塞，一直尝试连接*
                 socket.connect();
                 Log.i(TAG, "连接成功");
                 //进行接收线程
-                new BlutSocketReadMsg(ActivityBluetooth6.this , socket , tv_msg).start();
+                new BlutSocketReadMsg(ActivityBluetooth6.this, socket, tv_msg).start();
             } catch (IOException e) {
                 Log.i(TAG, "连接失败");
                 e.printStackTrace();
@@ -83,11 +85,10 @@ public class ActivityBluetooth6 extends BaseAppCompatActivity {
 
     /**
      * 发送消息
-     *
      */
     @OnClick(R.id.button2)
     public void sendMessage() {
-        String msg = "客户端 发送消息：" + System.currentTimeMillis() ;
+        String msg = "客户端 发送消息：" + System.currentTimeMillis();
         if (socket == null) {
             Toast.makeText(getApplicationContext(), "未建立连接", Toast.LENGTH_SHORT).show();
             return;

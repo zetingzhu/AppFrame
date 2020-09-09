@@ -1,7 +1,6 @@
 package frame.zzt.com.appframe;
 
 
-
 /**
  * Instrumentation test, which will execute on an Android device.
  *

@@ -14,7 +14,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class MD5Util {
 
-    protected static char hexDigits[] = { '0', '1', '2', '3', '4', '5', '6',  '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
+    protected static char hexDigits[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
     protected static MessageDigest messagedigest = null;
 
     /**
@@ -89,7 +89,7 @@ public class MD5Util {
         return stringbuffer.toString();
     }
 
-    public static String bufferToHex(String text){
+    public static String bufferToHex(String text) {
         byte[] arr = new byte[text.length() / 2];
         for (int i = 0; i < text.length() / 2; i++) {
             String subStr = text.substring(i * 2, i * 2 + 2);
@@ -103,6 +103,7 @@ public class MD5Util {
 
     //scanRecords的格式转换
     static final char[] hexArray = "0123456789ABCDEF".toCharArray();
+
     public static String bytesToHex(byte[] bytes) {
         if (bytes != null && bytes.length > 0) {
             char[] hexChars = new char[bytes.length * 2];

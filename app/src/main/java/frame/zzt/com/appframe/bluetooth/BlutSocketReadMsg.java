@@ -14,15 +14,16 @@ import java.io.InputStream;
  */
 
 public class BlutSocketReadMsg extends Thread {
-    public final static String TAG = "ActivityBluetoothSocket" ;
+    public final static String TAG = "ActivityBluetoothSocket";
 
     BluetoothSocket socket = null;
     TextView mMsg;
-    Context mContext ;
-    public BlutSocketReadMsg(Context mContext , BluetoothSocket socket , TextView textView) {
-        this.socket = socket ;
-        this.mMsg = textView ;
-        this.mContext = mContext ;
+    Context mContext;
+
+    public BlutSocketReadMsg(Context mContext, BluetoothSocket socket, TextView textView) {
+        this.socket = socket;
+        this.mMsg = textView;
+        this.mContext = mContext;
     }
 
     @Override
@@ -41,8 +42,8 @@ public class BlutSocketReadMsg extends Thread {
                         buf_data[i] = buffer[i];
                     }
                     final String msg = new String(buf_data);//最后得到String类型消息
-                    Log.i(TAG ,msg);
-                    ((Activity)mContext).runOnUiThread(new Runnable() {
+                    Log.i(TAG, msg);
+                    ((Activity) mContext).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             mMsg.setText(msg);
@@ -54,7 +55,7 @@ public class BlutSocketReadMsg extends Thread {
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-            Log.i(TAG ,"连接已断开");
+            Log.i(TAG, "连接已断开");
         } finally {
             try {
                 if (in != null) {

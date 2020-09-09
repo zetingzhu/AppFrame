@@ -13,8 +13,10 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.IBinder;
+
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
+
 import android.util.Log;
 import android.widget.RemoteViews;
 
@@ -37,20 +39,20 @@ public class MyNotificationPersenter {
     public Context mContext;
 
     private NotificationManager mNotifyManager;
-    private NotificationCompat.Builder mBuilder ;
-    private Notification mNotification ;
-    private MyNotificationView myNotificationView ;
+    private NotificationCompat.Builder mBuilder;
+    private Notification mNotification;
+    private MyNotificationView myNotificationView;
 
-    public MyNotificationPersenter(Context mContext , MyNotificationView myNotificationView) {
+    public MyNotificationPersenter(Context mContext, MyNotificationView myNotificationView) {
         this.mContext = mContext;
-        this.myNotificationView = myNotificationView ;
+        this.myNotificationView = myNotificationView;
         //获取NotificationManager实例
         mNotifyManager = (NotificationManager) mContext.getSystemService(NOTIFICATION_SERVICE);
 
     }
 
     /**
-     *  一个简单的通知栏
+     * 一个简单的通知栏
      */
     public void showNotify1() {
         Bitmap mLargeIcon = getBitmapFromResource(mContext.getResources(), R.mipmap.ic_launcher_round);
@@ -75,17 +77,16 @@ public class MyNotificationPersenter {
 
     /**
      * 发送一个点击跳转到MainActivity的消息
-
-     PendingIntent 具有以下几种 flag：
-
-     FLAG_CANCEL_CURRENT:如果当前系统中已经存在一个相同的 PendingIntent 对象，那么就将先将已有的 PendingIntent 取消，然后重新生成一个 PendingIntent 对象。
-
-     FLAG_NO_CREATE:如果当前系统中不存在相同的 PendingIntent 对象，系统将不会创建该 PendingIntent 对象而是直接返回 null 。
-
-     FLAG_ONE_SHOT:该 PendingIntent 只作用一次。
-
-     FLAG_UPDATE_CURRENT:如果系统中已存在该 PendingIntent 对象，那么系统将保留该 PendingIntent 对象，但是会使用新的 Intent 来更新之前 PendingIntent 中的 Intent 对象数据，例如更新 Intent 中的 Extras 。
-
+     * <p>
+     * PendingIntent 具有以下几种 flag：
+     * <p>
+     * FLAG_CANCEL_CURRENT:如果当前系统中已经存在一个相同的 PendingIntent 对象，那么就将先将已有的 PendingIntent 取消，然后重新生成一个 PendingIntent 对象。
+     * <p>
+     * FLAG_NO_CREATE:如果当前系统中不存在相同的 PendingIntent 对象，系统将不会创建该 PendingIntent 对象而是直接返回 null 。
+     * <p>
+     * FLAG_ONE_SHOT:该 PendingIntent 只作用一次。
+     * <p>
+     * FLAG_UPDATE_CURRENT:如果系统中已存在该 PendingIntent 对象，那么系统将保留该 PendingIntent 对象，但是会使用新的 Intent 来更新之前 PendingIntent 中的 Intent 对象数据，例如更新 Intent 中的 Extras 。
      */
     public void sendSimplestNotificationWithAction() {
         //获取PendingIntent
@@ -93,7 +94,7 @@ public class MyNotificationPersenter {
         // Sets the Activity to start in a new, empty task
         mainIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
                 | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        mainIntent.putExtra("msg" , "第一次发生的消息");
+        mainIntent.putExtra("msg", "第一次发生的消息");
         PendingIntent mainPendingIntent = PendingIntent.getActivity(mContext, 0, mainIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         //创建 Notification.Builder 对象
         NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext)
@@ -106,16 +107,16 @@ public class MyNotificationPersenter {
                 // 设置为false 点击不会取消
                 .setAutoCancel(false);
         //发送通知
-        mNotifyManager.notify( TAG ,2, builder.build());
+        mNotifyManager.notify(TAG, 2, builder.build());
     }
 
     /**
-     *  第二次更新消息 只需要再次发送相同 ID 的通知即可
+     * 第二次更新消息 只需要再次发送相同 ID 的通知即可
      */
     public void sendUpdateNotification() {
         //获取PendingIntent
         Intent mainIntent = new Intent(mContext, ActivityIntentShow.class);
-        mainIntent.putExtra("msg" , "第二次更新的消息");
+        mainIntent.putExtra("msg", "第二次更新的消息");
         PendingIntent mainPendingIntent = PendingIntent.getActivity(mContext, 0, mainIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         //创建 Notification.Builder 对象
         NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext)
@@ -126,42 +127,40 @@ public class MyNotificationPersenter {
                 .setContentText("点我会打开 LoginActivity ")
                 .setContentIntent(mainPendingIntent);
         //发送通知
-        mNotifyManager.notify( TAG ,2, builder.build());
+        mNotifyManager.notify(TAG, 2, builder.build());
     }
 
 
     /**
-     *
-     通过 NotificationManager 调用 cancel(int id) 方法清除指定 ID 的通知
-     通过 NotificationManager 调用 cancel(String tag, int id) 方法清除指定 TAG 和 ID 的通知
-     通过 NotificationManager 调用 cancelAll() 方法清除所有该应用之前发送的通知
-     如果你是通过 NotificationManager.notify(String tag, int id, Notification notify) 方法创建的通知，
-     那么只能通过 NotificationManager.cancel(String tag, int id) 方法才能清除对应的通知，调用NotificationManager.cancel(int id) 无效。
+     * 通过 NotificationManager 调用 cancel(int id) 方法清除指定 ID 的通知
+     * 通过 NotificationManager 调用 cancel(String tag, int id) 方法清除指定 TAG 和 ID 的通知
+     * 通过 NotificationManager 调用 cancelAll() 方法清除所有该应用之前发送的通知
+     * 如果你是通过 NotificationManager.notify(String tag, int id, Notification notify) 方法创建的通知，
+     * 那么只能通过 NotificationManager.cancel(String tag, int id) 方法才能清除对应的通知，调用NotificationManager.cancel(int id) 无效。
      */
 
-    public void cancleNotify(){
+    public void cancleNotify() {
         mNotifyManager.cancel(1);
     }
 
 
-    public void cancleNotifyAsTag(){
-        mNotifyManager.cancel(TAG , 2);
+    public void cancleNotifyAsTag() {
+        mNotifyManager.cancel(TAG, 2);
     }
 
 
     /**
-
-         设置FLAG_NO_CLEAR
-         该 flag 表示该通知不能被状态栏的清除按钮给清除掉,也不能被手动清除,但能通过 cancel() 方法清除
-         Notification.flags属性可以通过 |= 运算叠加效果
-
-        设置 Notification 的 flags = FLAG_NO_CLEAR
-        FLAG_AUTO_CANCEL 表示该通知能被状态栏的清除按钮给清除掉
-        等价于 builder.setAutoCancel(true);
-
-        设置 Notification 的 flags = FLAG_NO_CLEAR
-        FLAG_ONGOING_EVENT 表示该通知通知放置在正在运行,不能被手动清除,但能通过 cancel() 方法清除
-        等价于 builder.setOngoing(true);
+     * 设置FLAG_NO_CLEAR
+     * 该 flag 表示该通知不能被状态栏的清除按钮给清除掉,也不能被手动清除,但能通过 cancel() 方法清除
+     * Notification.flags属性可以通过 |= 运算叠加效果
+     * <p>
+     * 设置 Notification 的 flags = FLAG_NO_CLEAR
+     * FLAG_AUTO_CANCEL 表示该通知能被状态栏的清除按钮给清除掉
+     * 等价于 builder.setAutoCancel(true);
+     * <p>
+     * 设置 Notification 的 flags = FLAG_NO_CLEAR
+     * FLAG_ONGOING_EVENT 表示该通知通知放置在正在运行,不能被手动清除,但能通过 cancel() 方法清除
+     * 等价于 builder.setOngoing(true);
      */
     public void sendFlagNoClearNotification() {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext)
@@ -173,10 +172,10 @@ public class MyNotificationPersenter {
         //FLAG_NO_CLEAR 表示该通知不能被状态栏的清除按钮给清除掉,也不能被手动清除,但能通过 cancel() 方法清除
         //flags 可以通过 |= 运算叠加效果
         notification.flags |= Notification.FLAG_NO_CLEAR;
-        mNotifyManager.notify( 3 , notification);
+        mNotifyManager.notify(3, notification);
     }
 
-    public void cancleNotifyFlag(){
+    public void cancleNotifyFlag() {
         mNotifyManager.cancel(3);
     }
 
@@ -321,7 +320,7 @@ public class MyNotificationPersenter {
     }
 
     /**
-     *  设置进度通知消息
+     * 设置进度通知消息
      */
     public void setProgressNotify() {
         mBuilder = new NotificationCompat.Builder(mContext);
@@ -363,33 +362,33 @@ public class MyNotificationPersenter {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public void setNotifyAction(){
+    public void setNotifyAction() {
         Intent intentPrevious = new Intent(mContext, ActivityIntentShow.class);
-        intentPrevious.putExtra("msg" , "Previous");
+        intentPrevious.putExtra("msg", "Previous");
         PendingIntent prevPendingIntent = PendingIntent.getActivity(mContext, 0, intentPrevious, PendingIntent.FLAG_UPDATE_CURRENT);
         Intent intentPause = new Intent(mContext, ActivityIntentShow.class);
-        intentPause.putExtra("msg" , "Pause");
+        intentPause.putExtra("msg", "Pause");
         PendingIntent pausePendingIntent = PendingIntent.getActivity(mContext, 1, intentPause, PendingIntent.FLAG_UPDATE_CURRENT);
         Intent intentNext = new Intent(mContext, ActivityIntentShow.class);
-        intentNext.putExtra("msg" , "Next");
+        intentNext.putExtra("msg", "Next");
         PendingIntent nextPendingIntent = PendingIntent.getActivity(mContext, 2, intentNext, PendingIntent.FLAG_UPDATE_CURRENT);
 
         mBuilder = new NotificationCompat.Builder(mContext)
-            // Show controls on lock screen even when user hides sensitive content.
-            .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-            .setSmallIcon(R.mipmap.ic_launcher)
-            // Add media control buttons that invoke intents in your media service
-            .addAction(android.R.drawable.ic_media_previous , "Previous", prevPendingIntent) // #0
-            .addAction(android.R.drawable.ic_media_pause , "Pause", pausePendingIntent)  // #1
-            .addAction(android.R.drawable.ic_media_next , "Next", nextPendingIntent)     // #2
-            .setContentTitle("带有Action的消息")
-            .setContentText("带有 action 按钮的")
+                // Show controls on lock screen even when user hides sensitive content.
+                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                .setSmallIcon(R.mipmap.ic_launcher)
+                // Add media control buttons that invoke intents in your media service
+                .addAction(android.R.drawable.ic_media_previous, "Previous", prevPendingIntent) // #0
+                .addAction(android.R.drawable.ic_media_pause, "Pause", pausePendingIntent)  // #1
+                .addAction(android.R.drawable.ic_media_next, "Next", nextPendingIntent)     // #2
+                .setContentTitle("带有Action的消息")
+                .setContentText("带有 action 按钮的")
         ;
 
         // 在展开时使用 BigTextStyle （一个扩展样式）
         NotificationCompat.BigTextStyle textStyle = new NotificationCompat.BigTextStyle(mBuilder);
         textStyle.bigText("Here is some additional text to be displayed when " +
-                "the notification is "+"in expanded mode. I can fit so much content " +
+                "the notification is " + "in expanded mode. I can fit so much content " +
                 "into this giant view!");
         textStyle.build();
 
@@ -403,8 +402,8 @@ public class MyNotificationPersenter {
 
 
         NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
-        for (int i=0; i < 6; i++) {
-            inboxStyle.addLine( "new message " + i );
+        for (int i = 0; i < 6; i++) {
+            inboxStyle.addLine("new message " + i);
         }
         inboxStyle.setBigContentTitle("6 new message");
         inboxStyle.setSummaryText("mtwain@android.com");
@@ -412,7 +411,7 @@ public class MyNotificationPersenter {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
 //            mBuilder.setCustomBigContentView()
-        }else {
+        } else {
 //            mBuilder.setCustomBigContentView()
         }
 
@@ -421,29 +420,30 @@ public class MyNotificationPersenter {
 
     boolean isBind = false;
     NotificationReceiver18 myBindService;
-    NotificationReceiver18.ServiceInterface msi ;
+    NotificationReceiver18.ServiceInterface msi;
     private ServiceConnection mConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName className, IBinder service) {
 //            NotificationReceiver18.MyBinder binder = (NotificationReceiver18.MyBinder) service;
 //            myBindService = binder.getService();
 //            msi = myBindService.getServiceInterface();
-            myNotificationView.showMsg( "服务 绑定 成功" );
+            myNotificationView.showMsg("服务 绑定 成功");
         }
 
         @Override
         public void onServiceDisconnected(ComponentName arg0) {
-            myNotificationView.showMsg( "服务 绑定 失败" );
+            myNotificationView.showMsg("服务 绑定 失败");
         }
     };
+
     //绑定服务
-    public void bindService(int index ){
+    public void bindService(int index) {
 //        Intent intent = new Intent(mContext, NotificationReceiver18.class);
 //        isBind = mContext.bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
     }
 
     //解绑服务
-    public void unBindService(int index ){
+    public void unBindService(int index) {
 //        if (isBind) {
 //            mContext.unbindService(mConnection);
 //            isBind = false ;
@@ -452,7 +452,7 @@ public class MyNotificationPersenter {
 //        }
     }
 
-    public void skipAction(int index ){
+    public void skipAction(int index) {
 //        if(msi!= null) {
 //            msi.skipAction(index);
 //        } else {
@@ -498,105 +498,107 @@ public class MyNotificationPersenter {
     /**
      * 显示自定义通知栏
      */
-    NotificationCompat.Builder notificationBuilder ;
-    RemoteViews bigView ;
-    public void showCustomViewNotification(){
+    NotificationCompat.Builder notificationBuilder;
+    RemoteViews bigView;
+
+    public void showCustomViewNotification() {
         Intent mIntent1 = new Intent(mContext, ActivityIntentShow.class);
-        mIntent1.putExtra("msg" , "自定义消息通知 1");
+        mIntent1.putExtra("msg", "自定义消息通知 1");
         PendingIntent CustomViewIntent = PendingIntent.getActivity(mContext, 0, mIntent1, PendingIntent.FLAG_UPDATE_CURRENT);
 
         Intent mIntent2 = new Intent(mContext, ActivityIntentShow2.class);
-        mIntent2.putExtra("msg" , "自定义消息通知 2");
+        mIntent2.putExtra("msg", "自定义消息通知 2");
         PendingIntent CustomViewIntent2 = PendingIntent.getActivity(mContext, 0, mIntent2, PendingIntent.FLAG_UPDATE_CURRENT);
 
         Intent mIntent3 = new Intent(mContext, ServiceNotification.class);
-        mIntent3.putExtra("msg" , "自定义消息通知 3");
+        mIntent3.putExtra("msg", "自定义消息通知 3");
         PendingIntent CustomViewIntent3 = PendingIntent.getService(mContext, 0, mIntent3, PendingIntent.FLAG_UPDATE_CURRENT);
 
         Intent mIntent4 = new Intent();
-        mIntent4.putExtra("msg" , "自定义消息通知 4");
-        mIntent4.setAction(ReceiverNotification.BECEIVER_CHECK) ;
+        mIntent4.putExtra("msg", "自定义消息通知 4");
+        mIntent4.setAction(ReceiverNotification.BECEIVER_CHECK);
         PendingIntent CustomViewIntent4 = PendingIntent.getBroadcast(mContext, 0, mIntent4, PendingIntent.FLAG_UPDATE_CURRENT);
 
 
         /** * 双指上下滑动切换大小视图 * */
         //普通notification用到的视图
-        RemoteViews normalView = new RemoteViews( mContext.getPackageName(), R.layout.notify_small_layout );
+        RemoteViews normalView = new RemoteViews(mContext.getPackageName(), R.layout.notify_small_layout);
         //显示bigView的notification用到的视图
-        bigView = new RemoteViews( mContext.getPackageName(), R.layout.notify_bit_layout);
+        bigView = new RemoteViews(mContext.getPackageName(), R.layout.notify_bit_layout);
         //给一个控件设置内容
-        bigView.setTextViewText(R.id.tv_big_name , "大图标标题" );
+        bigView.setTextViewText(R.id.tv_big_name, "大图标标题");
         //给一个控件添加单击事件
-        bigView.setOnClickPendingIntent(R.id.ib_big_01, CustomViewIntent );
-        bigView.setOnClickPendingIntent(R.id.ib_big_02, CustomViewIntent2 );
-        bigView.setOnClickPendingIntent(R.id.ib_big_03, CustomViewIntent3 );
-        bigView.setOnClickPendingIntent(R.id.ib_big_04, CustomViewIntent4 );
+        bigView.setOnClickPendingIntent(R.id.ib_big_01, CustomViewIntent);
+        bigView.setOnClickPendingIntent(R.id.ib_big_02, CustomViewIntent2);
+        bigView.setOnClickPendingIntent(R.id.ib_big_03, CustomViewIntent3);
+        bigView.setOnClickPendingIntent(R.id.ib_big_04, CustomViewIntent4);
 
-        notificationBuilder = new NotificationCompat.Builder( mContext )
+        notificationBuilder = new NotificationCompat.Builder(mContext)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setTicker("开始啦~~")
                 .setOngoing(true)
 //                .setContent(normalView)//设置普通notification视图
                 .setCustomBigContentView(bigView)//设置显示bigView的notification视图
                 .setPriority(NotificationCompat.PRIORITY_MAX)//设置最大优先级
-                // 绑定到按钮上后，去掉这个
+        // 绑定到按钮上后，去掉这个
 //                .setContentIntent(CustomViewIntent)
-                // 悬挂式通知栏
+        // 悬挂式通知栏
 //                .setFullScreenIntent(CustomViewIntent3 , false)
-                ;
+        ;
 
-        mNotifyManager.notify(12, notificationBuilder.build() );
+        mNotifyManager.notify(12, notificationBuilder.build());
     }
 
     boolean isBindService;
-    ServiceNotification myService ;
-    public void startService(){
+    ServiceNotification myService;
+
+    public void startService() {
         ServiceConnection conn = new ServiceConnection() {
             @Override
             public void onServiceConnected(ComponentName name, IBinder service) {
                 ServiceNotification.MyNorifyBinder binder = (ServiceNotification.MyNorifyBinder) service;
-                myService = binder.getService() ;
-                Log.d(TAG , "启动服务成功");
+                myService = binder.getService();
+                Log.d(TAG, "启动服务成功");
             }
 
             @Override
             public void onServiceDisconnected(ComponentName name) {
-                myService = null ;
-                Log.d(TAG , "启动服务失败");
+                myService = null;
+                Log.d(TAG, "启动服务失败");
             }
-        } ;
+        };
 
-        Intent intent = new Intent(mContext , ServiceNotification.class);
+        Intent intent = new Intent(mContext, ServiceNotification.class);
         isBindService = mContext.bindService(intent, conn, BIND_AUTO_CREATE); //绑定服务即开始下载 调用onBind()
-        Log.d(TAG , "启动服务状态：" + isBindService );
+        Log.d(TAG, "启动服务状态：" + isBindService);
     }
 
-    public void notifyCustomViewNotification(){
-        if (notificationBuilder != null ) {
+    public void notifyCustomViewNotification() {
+        if (notificationBuilder != null) {
             Random random = new Random();
-            int i = random.nextInt(100) ;
-            bigView.setTextViewText(R.id.tv_big_name , "大图标标题 - " + i );
-            notificationBuilder.setCustomBigContentView(bigView) ;
-            mNotifyManager.notify(12, notificationBuilder.build() ) ;
+            int i = random.nextInt(100);
+            bigView.setTextViewText(R.id.tv_big_name, "大图标标题 - " + i);
+            notificationBuilder.setCustomBigContentView(bigView);
+            mNotifyManager.notify(12, notificationBuilder.build());
         }
     }
 
 
-    NotificationUtil mNotificationUtil ;
-    public void showNotify(){
-        if (mNotificationUtil == null){
+    NotificationUtil mNotificationUtil;
+
+    public void showNotify() {
+        if (mNotificationUtil == null) {
             mNotificationUtil = new NotificationUtil(mContext);
         }
         mNotificationUtil.notifyShow();
     }
 
-    public void refreshNotify(){
-        if (mNotificationUtil == null){
+    public void refreshNotify() {
+        if (mNotificationUtil == null) {
             mNotificationUtil = new NotificationUtil(mContext);
         }
         mNotificationUtil.notifyRefresh();
     }
-
 
 
 }

@@ -10,6 +10,7 @@ public interface MyObserverable {
     void register(MyObserver myObserver);
 
     void remove(MyObserver myObserver);
+
     void removes();
 
     void send(NewsModel model);

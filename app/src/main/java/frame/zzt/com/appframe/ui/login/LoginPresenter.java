@@ -24,18 +24,18 @@ import retrofit2.Response;
  */
 
 public class LoginPresenter extends BasePresenter<LoginView> {
-    public final static String TAG = LoginActivity3.class.getSimpleName() ;
+    public final static String TAG = LoginActivity3.class.getSimpleName();
 
-    HttpRequest http ;
+    HttpRequest http;
 
     public LoginPresenter(LoginView baseView) {
         super(baseView);
         http = HttpRequest.getInstance();
     }
 
-    public void login(){
+    public void login() {
         baseView.showLoading();
-        Log.i(TAG ,  "登录获取的用户名：" + baseView.getUserName() + "-密码：" + baseView.getPassword() ) ;
+        Log.i(TAG, "登录获取的用户名：" + baseView.getUserName() + "-密码：" + baseView.getPassword());
 
         Map map = new HashMap();
         map.put("phone", baseView.getUserName());
@@ -44,51 +44,51 @@ public class LoginPresenter extends BasePresenter<LoginView> {
         http.getLogin(map, new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-                Log.i(TAG ,  "获取的成功 login3：" + response.body()   ) ;
+                Log.i(TAG, "获取的成功 login3：" + response.body());
                 baseView.onLoginSucc();
                 baseView.hideLoading();
 
-                DaoSession daoSession = MyApplication.getInstance().getDaoSession() ;
+                DaoSession daoSession = MyApplication.getInstance().getDaoSession();
 
                 UserDao userDao = daoSession.getUserDao();
                 User user = new User();
                 user.setEmail(baseView.getUserName());
                 user.setPassword(baseView.getPassword());
-                user.setTime(System.currentTimeMillis() + "" );
+                user.setTime(System.currentTimeMillis() + "");
                 long lon = userDao.insert(user);
-                Log.i(TAG ,  "登录保存user数据：" + lon  ) ;
+                Log.i(TAG, "登录保存user数据：" + lon);
 
-                LocationDao locationDao = daoSession.getLocationDao() ;
+                LocationDao locationDao = daoSession.getLocationDao();
                 Location loc = new Location();
-                loc.setId(System.currentTimeMillis() );
+                loc.setId(System.currentTimeMillis());
                 loc.setLat("1.1111111");
                 loc.setLng("2.2222222");
-                loc.setTime(System.currentTimeMillis() + "" );
+                loc.setTime(System.currentTimeMillis() + "");
                 long lon1 = locationDao.insertOrReplace(loc);
-                Log.i(TAG ,  "登录保存location数据：" + lon1  ) ;
+                Log.i(TAG, "登录保存location数据：" + lon1);
             }
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                Log.i(TAG ,  "获取的失败 login3："   ) ;
+                Log.i(TAG, "获取的失败 login3：");
                 baseView.showError("向服务端请求数据超时，请稍后重试");
                 baseView.hideLoading();
             }
         });
     }
 
-    public void login1 () {
-        addDisposable(apiServer.Login1(baseView.getUserName() , baseView.getPassword() ), new BaseObserver(baseView) {
+    public void login1() {
+        addDisposable(apiServer.Login1(baseView.getUserName(), baseView.getPassword()), new BaseObserver(baseView) {
             @Override
             public void onSuccess(Object o) {
-                Log.i(TAG ,  "获取的成功login：" + o .toString()) ;
+                Log.i(TAG, "获取的成功login：" + o.toString());
                 baseView.onLoginSucc();
 
             }
 
             @Override
             public void onError(String msg) {
-                Log.i(TAG ,  "获取的失败login：" + msg ) ;
+                Log.i(TAG, "获取的失败login：" + msg);
                 baseView.showError(msg);
 
             }
@@ -134,50 +134,50 @@ public class LoginPresenter extends BasePresenter<LoginView> {
          */
     }
 
-    public void login2(){
+    public void login2() {
         baseView.showLoading();
-        Log.i(TAG ,  "登录获取的用户名：" + baseView.getUserName() + "-密码：" + baseView.getPassword() ) ;
+        Log.i(TAG, "登录获取的用户名：" + baseView.getUserName() + "-密码：" + baseView.getPassword());
 
         Map map = new HashMap();
         map.put("phone", baseView.getUserName());
         map.put("password", baseView.getPassword());
 
-        http.getLogin2( new Callback<LoginResponse>() {
+        http.getLogin2(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                Log.i(TAG ,  "获取的成功 login3：" + response.body()   ) ;
+                Log.i(TAG, "获取的成功 login3：" + response.body());
                 baseView.onLoginSucc();
                 baseView.hideLoading();
             }
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
-                Log.i(TAG ,  "获取的失败 login3："   ) ;
+                Log.i(TAG, "获取的失败 login3：");
                 baseView.showError("向服务端请求数据超时，请稍后重试");
                 baseView.hideLoading();
             }
         });
     }
 
-    public void login3(){
+    public void login3() {
         baseView.showLoading();
-        Log.i(TAG ,  "登录获取的用户名：" + baseView.getUserName() + "-密码：" + baseView.getPassword() ) ;
+        Log.i(TAG, "登录获取的用户名：" + baseView.getUserName() + "-密码：" + baseView.getPassword());
 
         Map map = new HashMap();
         map.put("phone", baseView.getUserName());
         map.put("password", baseView.getPassword());
 
-        http.getLogin3( "login" ,baseView.getUserName() , baseView.getPassword(), new Callback<LoginResponse>() {
+        http.getLogin3("login", baseView.getUserName(), baseView.getPassword(), new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                Log.i(TAG ,  "获取的成功 login3：" + response.body()   ) ;
+                Log.i(TAG, "获取的成功 login3：" + response.body());
                 baseView.onLoginSucc();
                 baseView.hideLoading();
             }
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
-                Log.i(TAG ,  "获取的失败 login3："   ) ;
+                Log.i(TAG, "获取的失败 login3：");
                 baseView.showError("向服务端请求数据超时，请稍后重试");
                 baseView.hideLoading();
             }

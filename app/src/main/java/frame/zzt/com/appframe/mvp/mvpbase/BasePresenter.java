@@ -36,12 +36,13 @@ public class BasePresenter<V extends BaseView> {
     public V getBaseView() {
         return baseView;
     }
+
     /**
      * 是否与View建立连接
      * 每次调用业务请求的时候都要出先调用方法检查是否与View建立连接
      */
-    public boolean isViewAttached(){
-        return baseView!= null;
+    public boolean isViewAttached() {
+        return baseView != null;
     }
 
     public void addDisposable(Observable<?> observable, BaseObserver observer) {

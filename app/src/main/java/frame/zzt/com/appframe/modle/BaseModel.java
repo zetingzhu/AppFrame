@@ -7,8 +7,8 @@ import java.io.Serializable;
  */
 
 public class BaseModel<T> implements Serializable {
-    private String code ;
-    private String msg ;
+    private String code;
+    private String msg;
     private T result;
 
 

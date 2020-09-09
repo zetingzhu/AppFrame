@@ -1,9 +1,11 @@
 package frame.zzt.com.appframe.rxjava;
 
 import android.os.Bundle;
+
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,72 +64,71 @@ public class ActivityRxJava extends BaseAppCompatActivity implements RxView {
         mPresenter = new RxPersenter(this);
 
         mList = new ArrayList<>();
-        mList.add(new MyListItem(0 , "创建Rxjava" ));
-        mList.add(new MyListItem(1 , "Consumer subscribe 订阅不同的observer对象来接收数据"));
-        mList.add(new MyListItem(2 , "创建上下游线程关系"));
-        mList.add(new MyListItem(3 , "Schedulers 线程调度"));
-        mList.add(new MyListItem(4 , "Schedulers 线程调度 observeOn 多次切换"));//4
-        mList.add(new MyListItem(5 , "读写数据库操作"));//5
-        mList.add(new MyListItem(6 , "RxJava Map 变换操作（map与flatMap）操作符的使用"));//6
-        mList.add(new MyListItem(7 , "RxJava FlatMap 变换操作（map与flatMap） 操作符的使用 ， 无序的"));//7
-        mList.add(new MyListItem(15 , "RxJava concatMap 操作符的使用 ， 有序的"));
-        mList.add(new MyListItem(16 , "RxJava switchMap 操作符的使用 , 获取最后一次  "));
-        mList.add(new MyListItem(17 , "RxJava switchMap 2 操作符的使用 , 获取最后一次 "));
-        mList.add(new MyListItem(41 , "RxJava Map 使用获取上海天气天气"));
-        mList.add(new MyListItem(42 , "RxJava Concat 操作符使用"));
-        mList.add(new MyListItem(8 , "获取北京天气"));//8
-        mList.add(new MyListItem(9 , "获取热门城市列表"));//9
-        mList.add(new MyListItem(10 , "两个接口连在一起Flat Map操作符 "));//10
-        mList.add(new MyListItem(11 , "ZIP 聚合操作 , 将两个observable 流事件合在一起"));
-        mList.add(new MyListItem(12 , "ZIP 聚合操作 , 将两个observable 流事件合在一起 查看两个流的执行顺序"));//12
-        mList.add(new MyListItem(13 , "ZIP 聚合操作 , 调用两个接口，合并两个接口数据后显示"));
-        mList.add(new MyListItem(14 , "测试 Observable 上下游不同步的时候，内存处理关系"));
-        mList.add(new MyListItem(18 , "RxJava Flowable 使用"));
-        mList.add(new MyListItem(19 , "RxJava Flowable 2 使用"));
-        mList.add(new MyListItem(20 , "RxJava Flowable Request N个 使用"));
-        mList.add(new MyListItem(21 , "RxJava Flowable 3 使用"));
-        mList.add(new MyListItem(22 , "RxJava Flowable FlowableEmitter.Requested "));
-        mList.add(new MyListItem(23 , "RxJava Flowable FlowableEmitter.Requested 上下游结合使用"));
-        mList.add(new MyListItem(24 , "RxJava Flowable 异步处理"));
-        mList.add(new MyListItem(25 , "RxJava Flowable 1 异步处理"));
-        mList.add(new MyListItem(26 , "RxJava Flowable Request 异步请求 N个 数据"));
-        mList.add(new MyListItem(27 , "RxJava Flowable 读取文件"));
-        mList.add(new MyListItem(28 , "Single  -被观察者  RxJava Maybe、Single、Completable、Observable、Flowable"));
-        mList.add(new MyListItem(29 , "Completable  -被观察者  RxJava Maybe、Single、Completable、Observable、Flowable"));
-        mList.add(new MyListItem(30 , "Maybe  -被观察者  RxJava Maybe、Single、Completable、Observable、Flowable"));
-        mList.add(new MyListItem(31 , "just RxJava 创建操作符使用"));
-        mList.add(new MyListItem(32 , "fromArray RxJava 创建操作符使用"));
-        mList.add(new MyListItem(33 , "fromIterable RxJava 创建操作符使用"));
-        mList.add(new MyListItem(34 , "range RxJava 创建操作符使用"));
-        mList.add(new MyListItem(35 , "filter distinct RxJava 过滤操作符使用"));
+        mList.add(new MyListItem(0, "创建Rxjava"));
+        mList.add(new MyListItem(1, "Consumer subscribe 订阅不同的observer对象来接收数据"));
+        mList.add(new MyListItem(2, "创建上下游线程关系"));
+        mList.add(new MyListItem(3, "Schedulers 线程调度"));
+        mList.add(new MyListItem(4, "Schedulers 线程调度 observeOn 多次切换"));//4
+        mList.add(new MyListItem(5, "读写数据库操作"));//5
+        mList.add(new MyListItem(6, "RxJava Map 变换操作（map与flatMap）操作符的使用"));//6
+        mList.add(new MyListItem(7, "RxJava FlatMap 变换操作（map与flatMap） 操作符的使用 ， 无序的"));//7
+        mList.add(new MyListItem(15, "RxJava concatMap 操作符的使用 ， 有序的"));
+        mList.add(new MyListItem(16, "RxJava switchMap 操作符的使用 , 获取最后一次  "));
+        mList.add(new MyListItem(17, "RxJava switchMap 2 操作符的使用 , 获取最后一次 "));
+        mList.add(new MyListItem(41, "RxJava Map 使用获取上海天气天气"));
+        mList.add(new MyListItem(42, "RxJava Concat 操作符使用"));
+        mList.add(new MyListItem(8, "获取北京天气"));//8
+        mList.add(new MyListItem(9, "获取热门城市列表"));//9
+        mList.add(new MyListItem(10, "两个接口连在一起Flat Map操作符 "));//10
+        mList.add(new MyListItem(11, "ZIP 聚合操作 , 将两个observable 流事件合在一起"));
+        mList.add(new MyListItem(12, "ZIP 聚合操作 , 将两个observable 流事件合在一起 查看两个流的执行顺序"));//12
+        mList.add(new MyListItem(13, "ZIP 聚合操作 , 调用两个接口，合并两个接口数据后显示"));
+        mList.add(new MyListItem(14, "测试 Observable 上下游不同步的时候，内存处理关系"));
+        mList.add(new MyListItem(18, "RxJava Flowable 使用"));
+        mList.add(new MyListItem(19, "RxJava Flowable 2 使用"));
+        mList.add(new MyListItem(20, "RxJava Flowable Request N个 使用"));
+        mList.add(new MyListItem(21, "RxJava Flowable 3 使用"));
+        mList.add(new MyListItem(22, "RxJava Flowable FlowableEmitter.Requested "));
+        mList.add(new MyListItem(23, "RxJava Flowable FlowableEmitter.Requested 上下游结合使用"));
+        mList.add(new MyListItem(24, "RxJava Flowable 异步处理"));
+        mList.add(new MyListItem(25, "RxJava Flowable 1 异步处理"));
+        mList.add(new MyListItem(26, "RxJava Flowable Request 异步请求 N个 数据"));
+        mList.add(new MyListItem(27, "RxJava Flowable 读取文件"));
+        mList.add(new MyListItem(28, "Single  -被观察者  RxJava Maybe、Single、Completable、Observable、Flowable"));
+        mList.add(new MyListItem(29, "Completable  -被观察者  RxJava Maybe、Single、Completable、Observable、Flowable"));
+        mList.add(new MyListItem(30, "Maybe  -被观察者  RxJava Maybe、Single、Completable、Observable、Flowable"));
+        mList.add(new MyListItem(31, "just RxJava 创建操作符使用"));
+        mList.add(new MyListItem(32, "fromArray RxJava 创建操作符使用"));
+        mList.add(new MyListItem(33, "fromIterable RxJava 创建操作符使用"));
+        mList.add(new MyListItem(34, "range RxJava 创建操作符使用"));
+        mList.add(new MyListItem(35, "filter distinct RxJava 过滤操作符使用"));
 
-        mList.add(new MyListItem(36 , "Subject 使用  PublishSubject"));
-        mList.add(new MyListItem(37 , "Subject 使用  AsyncSubject"));
-        mList.add(new MyListItem(38 , "Subject 使用  BehaviorSubject"));
-        mList.add(new MyListItem(39 , "Subject 使用  ReplaySubject"));
-        mList.add(new MyListItem(40 , "Subject 使用  ReplaySubject.createWithSize(2)"));
+        mList.add(new MyListItem(36, "Subject 使用  PublishSubject"));
+        mList.add(new MyListItem(37, "Subject 使用  AsyncSubject"));
+        mList.add(new MyListItem(38, "Subject 使用  BehaviorSubject"));
+        mList.add(new MyListItem(39, "Subject 使用  ReplaySubject"));
+        mList.add(new MyListItem(40, "Subject 使用  ReplaySubject.createWithSize(2)"));
 
 
-        mList.add(new MyListItem(43 , "RxJava FlatMap 没有使用操作符的方法"));
-        mList.add(new MyListItem(44 , "RxJava FlatMap 使用操作符的方法"));
+        mList.add(new MyListItem(43, "RxJava FlatMap 没有使用操作符的方法"));
+        mList.add(new MyListItem(44, "RxJava FlatMap 使用操作符的方法"));
 
-        mList.add(new MyListItem(45 , "RxJava Buffer 操作符的使用"));
-        mList.add(new MyListItem(46 , "RxJava groupby 操作符的使用"));
-        mList.add(new MyListItem(47 , "RxJava flatMapIterable 操作符的使用"));
-        mList.add(new MyListItem(48 , "RxJava throttleWithTimeOut 操作符的使用"));
-        mList.add(new MyListItem(49 , "RxJava merge 操作符的使用"));
-        mList.add(new MyListItem(50 , "RxJava retry 操作符的使用"));
+        mList.add(new MyListItem(45, "RxJava Buffer 操作符的使用"));
+        mList.add(new MyListItem(46, "RxJava groupby 操作符的使用"));
+        mList.add(new MyListItem(47, "RxJava flatMapIterable 操作符的使用"));
+        mList.add(new MyListItem(48, "RxJava throttleWithTimeOut 操作符的使用"));
+        mList.add(new MyListItem(49, "RxJava merge 操作符的使用"));
+        mList.add(new MyListItem(50, "RxJava retry 操作符的使用"));
 
-        mList.add(new MyListItem(51 , "RxJava Cold Observable"));
-        mList.add(new MyListItem(52 , "RxJava Cold Observable 转 Hot Observable "));
-        mList.add(new MyListItem(53 , "RxJava Cold Observable 转 Hot Observable 2 "));
-        mList.add(new MyListItem(54 , "RxJava Hot Observable 转 Cold Observable 1 "));
-        mList.add(new MyListItem(55 , "RxJava Hot Observable 转 Cold Observable 2 "));
+        mList.add(new MyListItem(51, "RxJava Cold Observable"));
+        mList.add(new MyListItem(52, "RxJava Cold Observable 转 Hot Observable "));
+        mList.add(new MyListItem(53, "RxJava Cold Observable 转 Hot Observable 2 "));
+        mList.add(new MyListItem(54, "RxJava Hot Observable 转 Cold Observable 1 "));
+        mList.add(new MyListItem(55, "RxJava Hot Observable 转 Cold Observable 2 "));
 
-        mList.add(new MyListItem(56 , "RxJava Sigle 使用"));
-        mList.add(new MyListItem(57 , "RxJava Complete 使用"));
-        mList.add(new MyListItem(58 , "RxJava Complete 1 使用"));
-
+        mList.add(new MyListItem(56, "RxJava Sigle 使用"));
+        mList.add(new MyListItem(57, "RxJava Complete 使用"));
+        mList.add(new MyListItem(58, "RxJava Complete 1 使用"));
 
 
         mAdapterRecycle = new AdapterRecycle();
@@ -260,7 +261,7 @@ public class ActivityRxJava extends BaseAppCompatActivity implements RxView {
                                         Log.d(TAG, "After observeOn(io), current thread is : " + Thread.currentThread().getName());
                                     }
                                 })
-                                .observeOn(Schedulers.newThread() )
+                                .observeOn(Schedulers.newThread())
                                 .doOnNext(new Consumer<Integer>() {
                                     @Override
                                     public void accept(Integer integer) throws Exception {
@@ -321,137 +322,137 @@ public class ActivityRxJava extends BaseAppCompatActivity implements RxView {
                         mPresenter.rxjavaOOM();
                         break;
                     case 15:
-                        mPresenter.rxjavaConcatMap() ;
+                        mPresenter.rxjavaConcatMap();
                         break;
                     case 16:
-                        mPresenter.rxjavaSwitchMap() ;
+                        mPresenter.rxjavaSwitchMap();
                         break;
                     case 17:
-                        mPresenter.rxjavaSwitchMap2() ;
+                        mPresenter.rxjavaSwitchMap2();
                         break;
-                    case 18 :
+                    case 18:
                         mPresenter.rxjavaFlowable();
                         break;
-                    case 19 :
+                    case 19:
                         mPresenter.rxjavaFlowable2();
                         break;
-                    case 20 :
+                    case 20:
 //                        mPresenter.rxjavaFlowableRequest(2);
 //                        mPresenter.rxjavaFlowableRequest(128);
                         mPresenter.rxjavaFlowableRequest(50);
                         break;
-                    case 21 :
+                    case 21:
                         mPresenter.rxjavaFlowable3();
                         break;
-                    case 22 :
+                    case 22:
                         mPresenter.rxjavaFlowableRequested();
                         break;
-                    case 23 :
+                    case 23:
                         mPresenter.rxjavaFlowableRequested1();
                         break;
-                    case 24 :
+                    case 24:
                         mPresenter.rxjavaFlowableAsyn();
                         break;
-                    case 25 :
+                    case 25:
                         mPresenter.rxjavaFlowableAsyn1();
                         break;
-                    case 26 :
+                    case 26:
                         mPresenter.rxjavaFlowableAsynRequest(100);
                         break;
-                    case 27 :
+                    case 27:
                         mPresenter.rxjavaFlowableAsynReadText(ActivityRxJava.this);
                         break;
-                    case 28 :
-                        mPresenter.rxjavaSingle( );
+                    case 28:
+                        mPresenter.rxjavaSingle();
                         break;
-                    case 29 :
+                    case 29:
                         mPresenter.rxjavaCompletable();
                         break;
-                    case 30 :
+                    case 30:
                         mPresenter.rxjavaMaybe();
                         break;
-                    case 31 :
+                    case 31:
                         mPresenter.rxjavaJust();
                         break;
-                    case 32 :
+                    case 32:
                         mPresenter.rxjavaFromArray();
                         break;
-                    case 33 :
+                    case 33:
                         mPresenter.rxjavaFromIterable();
                         break;
-                    case 34 :
+                    case 34:
                         mPresenter.rxjavaRange();
                         break;
-                    case 35 :
+                    case 35:
                         mPresenter.rxjavaFilterDistinct();
                         break;
-                    case 36 :
+                    case 36:
                         mPresenter.rxjavaPublishSubject();
                         break;
-                    case 37 :
+                    case 37:
                         mPresenter.rxjavaAsyncSubject();
                         break;
-                    case 38 :
+                    case 38:
                         mPresenter.rxjavaBehaviorSubject();
                         break;
-                    case 39 :
+                    case 39:
                         mPresenter.rxjavaReplaySubject();
                         break;
-                    case 40 :
+                    case 40:
                         mPresenter.rxjavaReplaySubject1();
                         break;
-                    case 41 :
+                    case 41:
                         mPresenter.RxJavaMapRequest();
                         break;
-                    case 42 :
+                    case 42:
                         mPresenter.rxjavaConcat();
                         break;
-                    case 43 :
+                    case 43:
                         mPresenter.rxjavaFlatMapEG1();
                         break;
-                    case 44 :
+                    case 44:
                         mPresenter.rxjavaFlatMapEG2();
                         break;
-                    case 45 :
+                    case 45:
                         mPresenter.rxjavaBuffer();
                         break;
-                    case 46 :
+                    case 46:
                         mPresenter.rxjavaGroupBy();
                         break;
-                    case 47 :
+                    case 47:
                         mPresenter.rxjavaflatMapIterable();
                         break;
-                    case 48 :
+                    case 48:
                         mPresenter.rxjavathrottleWithTimeout();
                         break;
-                    case 49 :
+                    case 49:
                         mPresenter.rxjavamerge();
                         break;
-                    case 50 :
+                    case 50:
                         mPresenter.rxjavaretry();
                         break;
-                    case 51 :
+                    case 51:
                         mPresenter.rxjavaClodObservble();
                         break;
-                    case 52 :
+                    case 52:
                         mPresenter.rxjavaHotObservble();
                         break;
-                    case 53 :
+                    case 53:
                         mPresenter.rxjavaHotObservble2();
                         break;
-                    case 54 :
+                    case 54:
                         mPresenter.rxjavaClodObservble1();
                         break;
-                    case 55 :
+                    case 55:
                         mPresenter.rxjavaClodObservble2();
                         break;
-                    case 56 :
+                    case 56:
                         mPresenter.rxJavaSigle();
                         break;
-                    case 57 :
+                    case 57:
                         mPresenter.rxJavaComplete();
                         break;
-                    case 58 :
+                    case 58:
                         mPresenter.rxJavaComplete1();
                         break;
 
@@ -471,7 +472,7 @@ public class ActivityRxJava extends BaseAppCompatActivity implements RxView {
 
         @Override
         public void onBindViewHolder(DateHolder holder, final int position) {
-            holder.mTextview.setText(mList.get(position).getItemId() +" : "+ mList.get(position).getItemValue());
+            holder.mTextview.setText(mList.get(position).getItemId() + " : " + mList.get(position).getItemValue());
             holder.mTextview.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -500,9 +501,9 @@ public class ActivityRxJava extends BaseAppCompatActivity implements RxView {
         void onClickListener(int position);
     }
 
-    public class MyListItem{
-        public int itemId ;
-        public String itemValue ;
+    public class MyListItem {
+        public int itemId;
+        public String itemValue;
 
         public MyListItem(int itemId, String itemValue) {
             this.itemId = itemId;

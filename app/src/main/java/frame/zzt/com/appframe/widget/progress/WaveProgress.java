@@ -331,7 +331,7 @@ public class WaveProgress extends View {
 
     private void drawProgress(Canvas canvas) {
         float y = mCenterPoint.y - (mPercentPaint.descent() + mPercentPaint.ascent()) / 2;
-            Log.d(TAG, "mPercent = " + mPercent + "; mPrePercent = " + mPrePercent);
+        Log.d(TAG, "mPercent = " + mPercent + "; mPrePercent = " + mPrePercent);
         if (mPrePercent == 0.0f || Math.abs(mPercent - mPrePercent) >= 0.01f) {
             mPercentValue = String.format("%.0f%%", mPercent * 100);
             mPrePercent = mPercent;
@@ -390,8 +390,8 @@ public class WaveProgress extends View {
                     startWaveAnimator();
                 }
                 mValue = mPercent * mMaxValue;
-                    Log.d(TAG, "onAnimationUpdate: percent = " + mPercent
-                            + ";value = " + mValue);
+                Log.d(TAG, "onAnimationUpdate: percent = " + mPercent
+                        + ";value = " + mValue);
                 invalidate();
             }
         });

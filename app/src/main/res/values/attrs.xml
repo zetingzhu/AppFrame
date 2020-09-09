@@ -10,10 +10,8 @@
 
 
     <declare-styleable name="CircleTextProgressbar">
-        <attr name="in_circle_color" format="color"/>
+        <attr name="in_circle_color" format="color" />
     </declare-styleable>
-
-
 
 
     <!-- 是否开启抗锯齿 -->

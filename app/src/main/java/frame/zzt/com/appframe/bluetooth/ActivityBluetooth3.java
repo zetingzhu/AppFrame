@@ -37,7 +37,7 @@ public class ActivityBluetooth3 extends BaseAppCompatActivity implements Bluetoo
 
     private String bleManufacturers; //厂商ID   扫描～
 
-    private MyBleAQPresenter mAQPresenter ;
+    private MyBleAQPresenter mAQPresenter;
 
 
     @Override
@@ -47,7 +47,6 @@ public class ActivityBluetooth3 extends BaseAppCompatActivity implements Bluetoo
         mContext = this;
         setContentView(R.layout.activity_bluetooth);
         ButterKnife.bind(this);
-
 
 
 //        bleManufacturers = "41510695d188";
@@ -75,7 +74,7 @@ public class ActivityBluetooth3 extends BaseAppCompatActivity implements Bluetoo
 
     @OnClick(R.id.btn_connect)
     public void OnClickConnect() {
-        String address = "EE:D7:65:55:58:DE" ;
+        String address = "EE:D7:65:55:58:DE";
         mAQPresenter.connectBletooth(address);
     }
 
@@ -85,12 +84,12 @@ public class ActivityBluetooth3 extends BaseAppCompatActivity implements Bluetoo
     }
 
     @OnClick(R.id.btn_open)
-    public void onClickOpen(){
+    public void onClickOpen() {
         mAQPresenter.openBle();
     }
 
     @OnClick(R.id.btn_close)
-    public void onClickClose(){
+    public void onClickClose() {
         mAQPresenter.closeBle();
     }
 
@@ -100,11 +99,10 @@ public class ActivityBluetooth3 extends BaseAppCompatActivity implements Bluetoo
         mAQPresenter.readRssi();
     }
 
-    @OnClick(R.id.btn_stop_rssi )
+    @OnClick(R.id.btn_stop_rssi)
     public void OnClickCloseReadRssi() {
         mAQPresenter.closeReadRssi();
     }
-
 
 
     public void openBluetooth() {

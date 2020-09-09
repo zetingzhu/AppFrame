@@ -25,6 +25,7 @@ public class SurfaceViewHandWriting extends SurfaceView implements SurfaceHolder
     //路径
     private Path mPath;
     private static final String TAG = "pyh";
+
     public SurfaceViewHandWriting(Context context) {
         this(context, null);
     }
@@ -83,7 +84,7 @@ public class SurfaceViewHandWriting extends SurfaceView implements SurfaceHolder
     public boolean onTouchEvent(MotionEvent event) {
         int x = (int) event.getX();
         int y = (int) event.getY();
-        switch (event.getAction()){
+        switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 mPath.moveTo(x, y);
                 break;
@@ -104,7 +105,7 @@ public class SurfaceViewHandWriting extends SurfaceView implements SurfaceHolder
     /**
      * 初始化View
      */
-    private void initView(){
+    private void initView() {
         mSurfaceHolder = getHolder();
         mSurfaceHolder.addCallback(this);
         setFocusable(true);
@@ -120,10 +121,10 @@ public class SurfaceViewHandWriting extends SurfaceView implements SurfaceHolder
             mCanvas.drawColor(Color.WHITE);
             //绘制路径
             mCanvas.drawPath(mPath, mPaint);
-        }catch (Exception e){
+        } catch (Exception e) {
 
-        }finally {
-            if (mCanvas != null){
+        } finally {
+            if (mCanvas != null) {
                 //释放canvas对象并提交画布
                 mSurfaceHolder.unlockCanvasAndPost(mCanvas);
             }

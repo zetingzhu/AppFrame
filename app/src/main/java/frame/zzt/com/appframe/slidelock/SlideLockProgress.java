@@ -15,8 +15,10 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.os.Build;
 import android.os.Handler;
+
 import androidx.annotation.ColorInt;
 import androidx.core.content.ContextCompat;
+
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -27,14 +29,15 @@ import frame.zzt.com.appframe.R;
 
 /**
  * Created on 2016/7/12.
- *
+ * <p>
  * 备份一下 CarStartAnimation 类的3.7完成的功能
+ *
  * @author Yan Zhenjie.
  */
 public class SlideLockProgress extends TextView {
 
     private static final String TAG = "VehiclePresenter";
-    private Context mContext ;
+    private Context mContext;
     /**
      * 外部轮廓的颜色。
      */
@@ -105,49 +108,48 @@ public class SlideLockProgress extends TextView {
      */
     private int listenerWhat = 0;
     /**
-     *  换底部圆环的画笔
+     * 换底部圆环的画笔
      */
-    private Paint mPaintBottom ;
+    private Paint mPaintBottom;
     /**
      * 进度画笔。
      */
-    private Paint mPaintProgress ;
+    private Paint mPaintProgress;
     /**
      * 设置文字
      */
-    private String mText ; ;
+    private String mText;
+    ;
     /**
      * 文字画笔
      */
-    private Paint mPaintText ;
+    private Paint mPaintText;
     /**
      * 文字大小
      */
-    private Rect mRectText ;
+    private Rect mRectText;
 
     /**
      * 超时时间
      */
-    private long timeOut = 0 ;
-    private Handler mHandler ; // 蓝牙超时
-    private Runnable mRunnable ;// 蓝牙超时线程
-    private Runnable mRunnableRead ;// 蓝牙超时读取数据的线程
-    private boolean isSetTimeout = false ;// 是否设置超时
+    private long timeOut = 0;
+    private Handler mHandler; // 蓝牙超时
+    private Runnable mRunnable;// 蓝牙超时线程
+    private Runnable mRunnableRead;// 蓝牙超时读取数据的线程
+    private boolean isSetTimeout = false;// 是否设置超时
 
     // 是否停止
-    private boolean ifStop = false ;
+    private boolean ifStop = false;
 
     // 设置是否高亮显示
     private boolean isgaoliang = false;
 
     // 是否已经成功
-    private boolean isSucced  = false;
+    private boolean isSucced = false;
     // 是否超时, 停止了继续执行完动画
-    private boolean isTimeout  = false;
+    private boolean isTimeout = false;
     // 设置执行步数，值越大，执行时间越短 ，最大不要超过 8
-    private int isStep  = 2 ;
-
-
+    private int isStep = 2;
 
 
     public SlideLockProgress(Context context) {
@@ -176,8 +178,7 @@ public class SlideLockProgress extends TextView {
      * @param attributeSet 属性。
      */
     private void initialize(Context context, AttributeSet attributeSet) {
-        this.mContext = context ;
-
+        this.mContext = context;
 
 
         TypedArray typedArray = context.obtainStyledAttributes(attributeSet, R.styleable.CircleTextProgressbar);
@@ -188,11 +189,11 @@ public class SlideLockProgress extends TextView {
         circleColor = inCircleColors.getColorForState(getDrawableState(), Color.TRANSPARENT);
         typedArray.recycle();
 
-        firstColor =  ContextCompat.getColor(context ,R.color.color_bg_gradient ) ;
-        progressLineColor =  ContextCompat.getColor(context ,R.color.color_end_gradient ) ;
+        firstColor = ContextCompat.getColor(context, R.color.color_bg_gradient);
+        progressLineColor = ContextCompat.getColor(context, R.color.color_end_gradient);
 
         // 设置底部圆画笔
-        mPaintBottom = new Paint() ;
+        mPaintBottom = new Paint();
         mPaintBottom.setAntiAlias(true); // 抗锯齿
         mPaintBottom.setDither(true); // 防抖动
         mPaintBottom.setStyle(Paint.Style.STROKE);
@@ -201,7 +202,7 @@ public class SlideLockProgress extends TextView {
         mPaintBottom.setColor(firstColor); // 设置底部圆环的颜色，这里使用第一种颜色
 
         // 进度画笔
-        mPaintProgress = new Paint() ;
+        mPaintProgress = new Paint();
         // 设置画笔是否抗锯齿
         mPaintProgress.setAntiAlias(true);
         // 描边
@@ -215,7 +216,7 @@ public class SlideLockProgress extends TextView {
         mText = getText().toString();
 
         // 文字画笔
-        mPaintText = new Paint( );
+        mPaintText = new Paint();
         mPaintText.setStyle(Paint.Style.FILL);
         // 设置画笔是否抗锯齿
         mPaintText.setAntiAlias(true);
@@ -224,11 +225,10 @@ public class SlideLockProgress extends TextView {
         // 文字水平居中
         mPaintText.setTextAlign(Paint.Align.CENTER);
         mRectText = new Rect(); // 文字边框
-        mPaintText.getTextBounds(mText, 0, mText.length(), mRectText ); // 获得绘制文字的边界矩形
+        mPaintText.getTextBounds(mText, 0, mText.length(), mRectText); // 获得绘制文字的边界矩形
 
-        Log.e(TAG , "--" + mText );
+        Log.e(TAG, "--" + mText);
     }
-
 
 
     /**
@@ -274,6 +274,7 @@ public class SlideLockProgress extends TextView {
 
     /**
      * 设置底部圆环值
+     *
      * @param firstColor
      */
     public void setProgressBgColor(@ColorInt int firstColor) {
@@ -367,7 +368,7 @@ public class SlideLockProgress extends TextView {
     /**
      * 暂停进度条
      */
-    public void stopProgress(SlideLockProgress.ProgressType progressType){
+    public void stopProgress(SlideLockProgress.ProgressType progressType) {
         this.mProgressType = progressType;
     }
 
@@ -409,9 +410,9 @@ public class SlideLockProgress extends TextView {
      */
     public void start() {
         stop();
-        ifStop = false ;
-        isSucced = false ;
-        isTimeout = false ;
+        ifStop = false;
+        isSucced = false;
+        isTimeout = false;
         post(progressChangeTask);
         setTimeoutStart();
     }
@@ -425,36 +426,39 @@ public class SlideLockProgress extends TextView {
     }
 
     /**
-     *  设置超时后还可以继续执行
+     * 设置超时后还可以继续执行
+     *
      * @param boo
      */
-    public void setTimeoutCount( boolean boo , int step){
-        this.isTimeout = boo ;
-        this.isStep = step ;
+    public void setTimeoutCount(boolean boo, int step) {
+        this.isTimeout = boo;
+        this.isStep = step;
         invalidate();
     }
 
     /**
      * 是否设置超时
+     *
      * @param boo
      */
-    public void isSetTimeout( boolean boo){
-        isSetTimeout = boo ;
+    public void isSetTimeout(boolean boo) {
+        isSetTimeout = boo;
     }
 
     /**
-     *  设置超时时间
+     * 设置超时时间
      */
     public void setTimeout(long tim) {
         this.timeOut = tim;
     }
+
     /**
-     *  设置超时时间
+     * 设置超时时间
      */
-    private void setTimeoutStart( ) {
+    private void setTimeoutStart() {
         if (isSetTimeout) {
-            Log.d(TAG , "设置超时时间") ;
-            isStep = 2 ;
+            Log.d(TAG, "设置超时时间");
+            isStep = 2;
             mHandler = new Handler();
             mRunnable = new Runnable() {
                 @Override
@@ -464,21 +468,22 @@ public class SlideLockProgress extends TextView {
 //                    postDelayed(progressChangeTask, timeMillis / 100);
 //                    isTimeout = true ;
                     mCountdownProgressListener.onProgressTimeout();
-                    setTimeoutCount(true , 2 ) ;
-                    Log.d(TAG , " 已经超时了") ;
+                    setTimeoutCount(true, 2);
+                    Log.d(TAG, " 已经超时了");
                 }
             };
             mHandler.postDelayed(mRunnable, timeOut);
         }
     }
 
-    private void removeTimeOut(){
+    private void removeTimeOut() {
         if (mHandler != null && mRunnable != null) {
             mHandler.removeCallbacks(mRunnable);
-            mHandler = null ;
-            mRunnable = null ;
+            mHandler = null;
+            mRunnable = null;
         }
     }
+
     /**
      * 按钮打开状态
      */
@@ -488,7 +493,7 @@ public class SlideLockProgress extends TextView {
     }
 
     /**
-     *  按钮关闭状态
+     * 按钮关闭状态
      */
     public void setShowClose() {
         this.progress = validateProgress(progress);
@@ -499,18 +504,16 @@ public class SlideLockProgress extends TextView {
      * 停止。
      */
     public void stop() {
-        ifStop = true ;
+        ifStop = true;
         removeCallbacks(progressChangeTask);
         removeTimeOut();
     }
 
 
-    public void setGaoLiang( boolean gl){
-        this.isgaoliang = gl ;
+    public void setGaoLiang(boolean gl) {
+        this.isgaoliang = gl;
         invalidate();
     }
-
-
 
 
     @Override
@@ -518,17 +521,17 @@ public class SlideLockProgress extends TextView {
 
         //计算基线
         Paint.FontMetricsInt fontMetricsInt = mPaintText.getFontMetricsInt();
-        int dy = (fontMetricsInt.bottom - fontMetricsInt.top)/2 - fontMetricsInt.bottom;
-        float baseLine = getHeight()*0.5f + dy;
-        float x = getWidth()* 0.5f ;
+        int dy = (fontMetricsInt.bottom - fontMetricsInt.top) / 2 - fontMetricsInt.bottom;
+        float baseLine = getHeight() * 0.5f + dy;
+        float x = getWidth() * 0.5f;
         // x: 开始的位置  y：基线
-        canvas.drawText(mText , x ,baseLine ,mPaintText);
+        canvas.drawText(mText, x, baseLine, mPaintText);
 
         //获取view的边界
         getDrawingRect(bounds);
 
         //关闭硬件加速才能显示阴影
-        setLayerType(View.LAYER_TYPE_SOFTWARE,null);
+        setLayerType(View.LAYER_TYPE_SOFTWARE, null);
 
         int size = bounds.height() > bounds.width() ? bounds.width() : bounds.height();
         float outerRadius = size / 2;
@@ -536,7 +539,7 @@ public class SlideLockProgress extends TextView {
         int deleteWidth = progressLineWidth + outLineWidth;
         mArcRect.set(bounds.left + deleteWidth / 2, bounds.top + deleteWidth / 2, bounds.right - deleteWidth / 2, bounds.bottom - deleteWidth / 2);
         // 画底部的圆环
-        canvas.drawCircle( bounds.centerX(), bounds.centerY(), outerRadius - deleteWidth / 2, mPaintBottom );
+        canvas.drawCircle(bounds.centerX(), bounds.centerY(), outerRadius - deleteWidth / 2, mPaintBottom);
 
         //画进度条
         canvas.drawArc(mArcRect, -90, 360 * progress / 100, false, mPaintProgress);
@@ -566,30 +569,30 @@ public class SlideLockProgress extends TextView {
         @Override
         public void run() {
             removeCallbacks(this);
-            if (ifStop){
-                return ;
+            if (ifStop) {
+                return;
             }
             switch (mProgressType) {
                 case COUNT:
-                    progress += 1 * isStep ;
+                    progress += 1 * isStep;
                     break;
                 case COUNT_BACK:
-                    progress -= 1 * isStep ;
+                    progress -= 1 * isStep;
                     break;
                 case PROGRESS_STOP:
                     postDelayed(progressChangeTask, timeMillis / 100);
-                    break ;
+                    break;
             }
 //            Log.w(TAG , " -----progress: " + progress ) ;
             if (progress >= 0 && progress <= 100) {
                 if (mCountdownProgressListener != null)
                     mCountdownProgressListener.onProgress(listenerWhat, progress);
-                if(progress >= 92 && !isTimeout ){
+                if (progress >= 92 && !isTimeout) {
                     // 当如果进度条到达了92 默认已经成功了
-                    if (!isSucced ) {
+                    if (!isSucced) {
                         removeTimeOut();
                         mCountdownProgressListener.onProgressSucced(timeMillis * 8 / 100);
-                        isSucced = true ;
+                        isSucced = true;
                     }
                 }
                 invalidate();
@@ -618,9 +621,9 @@ public class SlideLockProgress extends TextView {
         PROGRESS_STOP,
 
         /*
-        * 进度条到达70%
-        * */
-        PROGRESS_70 ;
+         * 进度条到达70%
+         * */
+        PROGRESS_70;
     }
 
     /**
@@ -636,7 +639,8 @@ public class SlideLockProgress extends TextView {
         void onProgress(int what, int progress);
 
         /**
-         *  当进度到达了95以上说明执行成功了，执行后面的操作，变换图片什么的
+         * 当进度到达了95以上说明执行成功了，执行后面的操作，变换图片什么的
+         *
          * @param time 剩余时间，用来执行后面操作动画时间
          */
         void onProgressSucced(long time);

@@ -2,7 +2,9 @@ package frame.zzt.com.appframe.notification;
 
 import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
+
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.TextView;
@@ -17,12 +19,12 @@ import frame.zzt.com.appframe.ui.BaseAppCompatActivity;
  */
 
 public class ActivityIntentShow2 extends BaseAppCompatActivity {
-    private final static String TAG = ActivityNotification.class.getSimpleName() ;
+    private final static String TAG = ActivityNotification.class.getSimpleName();
 
     @BindView(R.id.tv_msg)
-    public TextView tv_msg ;
+    public TextView tv_msg;
 
-    private String showMsg ;
+    private String showMsg;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,7 +35,7 @@ public class ActivityIntentShow2 extends BaseAppCompatActivity {
 
         Intent mIntent = getIntent();
         showMsg = mIntent.getStringExtra("msg");
-        Log.d(TAG , "通知栏跳转 -onCreate- msg:" + showMsg );
+        Log.d(TAG, "通知栏跳转 -onCreate- msg:" + showMsg);
         if (!TextUtils.isEmpty(showMsg)) {
             tv_msg.setText(showMsg);
         }
@@ -43,18 +45,18 @@ public class ActivityIntentShow2 extends BaseAppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        Log.d(TAG , "通知栏跳转 -onStart-  "   );
+        Log.d(TAG, "通知栏跳转 -onStart-  ");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d(TAG , "通知栏跳转 -onResume-  "  );
+        Log.d(TAG, "通知栏跳转 -onResume-  ");
     }
 
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        Log.d(TAG , "通知栏跳转 -onNewIntent-  "  );
+        Log.d(TAG, "通知栏跳转 -onNewIntent-  ");
     }
 }

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,7 +53,7 @@ public class ActivityRxJavaUse extends BaseAppCompatActivity implements RxView {
         // 申请需要使用到的权限
         myRequestPermissions();
 
-        mPresenter = new RxUsePersenter(this , this.getBaseContext() );
+        mPresenter = new RxUsePersenter(this, this.getBaseContext());
 
         mList = new ArrayList<>();
         mList.add(new MyListItem(0, "RxJava 使用，安装应用apk "));
@@ -70,7 +71,7 @@ public class ActivityRxJavaUse extends BaseAppCompatActivity implements RxView {
                 Log.i(TAG, "点击的是：" + position);
                 switch (position) {
                     case 0:
-                        mPresenter.downloadApkFile() ;
+                        mPresenter.downloadApkFile();
                         break;
                     case 1:
                         mPresenter.gotoNotificationAccessSetting(ActivityRxJavaUse.this);
@@ -137,7 +138,7 @@ public class ActivityRxJavaUse extends BaseAppCompatActivity implements RxView {
     /**
      * 申请用户权限
      */
-    public void myRequestPermissions(){
+    public void myRequestPermissions() {
         PermissionListener permission = new PermissionListener() {
             @Override
             public void onSucceed(int requestCode, List<String> grantedPermissions) {
@@ -145,18 +146,18 @@ public class ActivityRxJavaUse extends BaseAppCompatActivity implements RxView {
 
                 // 这里的requestCode就是申请时设置的requestCode。
                 // 和onActivityResult()的requestCode一样，用来区分多个不同的请求。
-                if(requestCode == 200) {
+                if (requestCode == 200) {
                     // TODO ...
-                    Log.i(TAG, "申请权限 成功" );
+                    Log.i(TAG, "申请权限 成功");
                 }
             }
 
             @Override
             public void onFailed(int requestCode, List<String> deniedPermissions) {
                 // 权限申请失败回调。
-                if(requestCode == 200) {
+                if (requestCode == 200) {
                     // TODO ...
-                    Log.i(TAG, "申请权限 失败" );
+                    Log.i(TAG, "申请权限 失败");
                 }
             }
         };
@@ -164,7 +165,7 @@ public class ActivityRxJavaUse extends BaseAppCompatActivity implements RxView {
             @Override
             public void showRequestPermissionRationale(int requestCode, Rationale rationale) {
                 // 此对话框可以自定义，调用rationale.resume()就可以继续申请。
-                Log.i(TAG, "申请被拒绝过 requestCode:" + requestCode );
+                Log.i(TAG, "申请被拒绝过 requestCode:" + requestCode);
 //                AndPermission.rationaleDialog(getApplicationContext() , rationale).show();
             }
         };
@@ -172,7 +173,7 @@ public class ActivityRxJavaUse extends BaseAppCompatActivity implements RxView {
         AndPermission.with(ActivityRxJavaUse.this)
                 .requestCode(200)
                 .permission(
-                        Manifest.permission.READ_EXTERNAL_STORAGE ,
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE
                 )
                 .callback(permission)

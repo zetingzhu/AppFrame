@@ -321,9 +321,9 @@ public class DialProgress extends View {
             public void onAnimationUpdate(ValueAnimator animation) {
                 mPercent = (float) animation.getAnimatedValue();
                 mValue = mPercent * mMaxValue;
-                    Log.d(TAG, "onAnimationUpdate: percent = " + mPercent
-                            + ";currentAngle = " + (mSweepAngle * mPercent)
-                            + ";value = " + mValue);
+                Log.d(TAG, "onAnimationUpdate: percent = " + mPercent
+                        + ";currentAngle = " + (mSweepAngle * mPercent)
+                        + ";value = " + mValue);
                 invalidate();
             }
         });

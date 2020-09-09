@@ -11,7 +11,9 @@ import android.content.ServiceConnection;
 import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
+
 import androidx.annotation.RequiresApi;
+
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.SparseArray;
@@ -34,7 +36,7 @@ public class MyBleAQPresenter {
 
     private BleService mBleService; // 蓝牙服务
     private BLETools mBletools;
-    private Context mContext ;
+    private Context mContext;
 
     private Timer mRssiTimer; //蓝牙信号
     private TimerTask mRiisTimerTask; //蓝牙信号
@@ -43,17 +45,17 @@ public class MyBleAQPresenter {
     private static final long SCAN_PERIOD = 15000;
 
     private String bleManufacturers; //厂商ID   扫描～
-    BluetoothGattCharacteristic mGattCharacteristic ;
+    BluetoothGattCharacteristic mGattCharacteristic;
 
     public MyBleAQPresenter(Context mContext) {
-        this.mContext = mContext ;
+        this.mContext = mContext;
         mHandler = new Handler();
     }
 
     /**
      * 最开始初始化
      */
-    public void init(){
+    public void init() {
         mBletools = BLETools.getInstance();
         mBletools.initBle(mContext);
         initService();
@@ -78,37 +80,39 @@ public class MyBleAQPresenter {
     /**
      * 断开连接
      */
-    public void disCloseDevice(){
+    public void disCloseDevice() {
         mBleService.DisCloseDevice();
     }
 
     /**
      * 打开电门
      */
-    public void openBle(){
+    public void openBle() {
 //        String open = "110046439a4f2a2866d0de2db4727c220cb92500" ;
 //        String stop = "1200478dc081fb5127a9fe1c67952699b8a05d00" ;
-        String open = "1100483ca30ae9dd7607e63e48f5d524a009f500" ;
+        String open = "1100483ca30ae9dd7607e63e48f5d524a009f500";
         boolean booWirte = mBleService.wirteCharacteristic1(mGattCharacteristic, open);
-        Log.i(TAG, "蓝牙连接 写入 开启 数据： booWirte " + booWirte );
+        Log.i(TAG, "蓝牙连接 写入 开启 数据： booWirte " + booWirte);
     }
+
     /**
      * 关闭电门
      */
-    public void closeBle(){
+    public void closeBle() {
 //        String open = "110046439a4f2a2866d0de2db4727c220cb92500" ;
 //        String stop = "1200478dc081fb5127a9fe1c67952699b8a05d00" ;
-        String stop = "1200491acd9ed9e392458dac249acc5a8da8b400" ;
-        boolean booWirte = mBleService.wirteCharacteristic1(mGattCharacteristic , stop);
-        Log.i(TAG, "蓝牙连接 写入 关闭 数据： booWirte " + booWirte );
+        String stop = "1200491acd9ed9e392458dac249acc5a8da8b400";
+        boolean booWirte = mBleService.wirteCharacteristic1(mGattCharacteristic, stop);
+        Log.i(TAG, "蓝牙连接 写入 关闭 数据： booWirte " + booWirte);
     }
 
     /**
      * 开始扫描并连接地址
+     *
      * @param bleManufacturers
      */
-    public void startBleScanDevice( String bleManufacturers) {
-        this.bleManufacturers = bleManufacturers ;
+    public void startBleScanDevice(String bleManufacturers) {
+        this.bleManufacturers = bleManufacturers;
 
         mHandler.postDelayed(new Runnable() {
             @Override
@@ -125,7 +129,7 @@ public class MyBleAQPresenter {
         @Override
         public void onScanResult(ScanResult result) {
 
-            Log.i(TAG, "onScanResult1:  ====" + result.getDevice().getName() + " - " +  result.getDevice().getAddress() );
+            Log.i(TAG, "onScanResult1:  ====" + result.getDevice().getName() + " - " + result.getDevice().getAddress());
             SparseArray<byte[]> dataArray = result.getScanRecord().getManufacturerSpecificData();
             if (dataArray != null) {
                 if (dataArray.size() > 0) {
@@ -142,9 +146,9 @@ public class MyBleAQPresenter {
                                     return;
                                 }
                                 currentBleDevice = result.getDevice();
-                                mBleService.connect(currentBleDevice.getAddress(),myCallback);
+                                mBleService.connect(currentBleDevice.getAddress(), myCallback);
                                 //name:AQ-Ebike - address:EE:D7:65:55:58:DE
-                                Log.i(TAG, "连接上了设备: " + currentBleDevice + " - name:" + currentBleDevice.getName()+ " - address:" + currentBleDevice.getAddress());
+                                Log.i(TAG, "连接上了设备: " + currentBleDevice + " - name:" + currentBleDevice.getName() + " - address:" + currentBleDevice.getAddress());
                             }
                         }
                     } else {
@@ -155,37 +159,37 @@ public class MyBleAQPresenter {
         }
     };
 
-    MyInterfaceCallback myCallback = new MyInterfaceCallback(){
+    MyInterfaceCallback myCallback = new MyInterfaceCallback() {
 
         @Override
         public void bleStateConnected(String action) {
-            Log.i(TAG, "蓝牙连接 bleStateConnected "  );
+            Log.i(TAG, "蓝牙连接 bleStateConnected ");
         }
 
         @Override
         public void bleStateDisconnected(String action) {
-            Log.i(TAG, "蓝牙连接 bleStateDisconnected "  );
+            Log.i(TAG, "蓝牙连接 bleStateDisconnected ");
         }
 
         @Override
         public void bleServicesDiscovered(String action, BluetoothGattCharacteristic characteristic) {
-            Log.i(TAG, "蓝牙连接 bleServicesDiscovered 连接成功"  );
-            mGattCharacteristic = characteristic ;
+            Log.i(TAG, "蓝牙连接 bleServicesDiscovered 连接成功");
+            mGattCharacteristic = characteristic;
         }
 
         @Override
         public void bleServiceReadError(String action) {
-            Log.i(TAG, "蓝牙连接 bleServiceReadError "  );
+            Log.i(TAG, "蓝牙连接 bleServiceReadError ");
         }
 
         @Override
         public void bleServiceRed(String action, BluetoothGattCharacteristic characteristic) {
-            Log.i(TAG, "蓝牙连接 bleServiceRed "  );
+            Log.i(TAG, "蓝牙连接 bleServiceRed ");
             byte[] data = characteristic.getValue();
             String str = BleService.byte2HexStr(data);
             if (!TextUtils.isEmpty(str)) {
                 String bluetoothResult = str.substring(str.length() - 1, str.length());
-                Log.i(TAG, "蓝牙连接 写入数据： bluetoothResult " + bluetoothResult );
+                Log.i(TAG, "蓝牙连接 写入数据： bluetoothResult " + bluetoothResult);
             }
         }
 
@@ -258,10 +262,10 @@ public class MyBleAQPresenter {
             @Override
             public void run() {
                 if (mBleService != null) {
-                    mBleService.readRssi(new MyInterfaceRssi(){
+                    mBleService.readRssi(new MyInterfaceRssi() {
                         @Override
                         public void getRssi(int rssi, int status) {
-                            Log.i(TAG, "获取到的信号强度：" + rssi + " - 状态：" + status  );
+                            Log.i(TAG, "获取到的信号强度：" + rssi + " - 状态：" + status);
                         }
                     });
                 }
@@ -281,8 +285,6 @@ public class MyBleAQPresenter {
             mRssiTimer = null;
         }
     }
-
-
 
 
 }

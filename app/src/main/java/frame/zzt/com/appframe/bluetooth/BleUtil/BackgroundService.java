@@ -5,6 +5,7 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothManager;
 import android.content.Intent;
 import android.os.IBinder;
+
 import androidx.annotation.Nullable;
 
 /**
@@ -34,12 +35,12 @@ public class BackgroundService extends Service {
         if (bluetoothAdapter != null) {
             bluetoothAdapter.enable();
             bluetoothController = new ImplBluetoothController(bluetoothAdapter);
-        }else {
+        } else {
             bluetoothController = new ImplBluetoothController();
         }
     }
 
-    private BluetoothAdapter getBluetoothAdapter(){
+    private BluetoothAdapter getBluetoothAdapter() {
         BluetoothManager bluetoothManager = (BluetoothManager) getSystemService(BLUETOOTH_SERVICE);
         return bluetoothManager != null ? bluetoothManager.getAdapter() : null;
     }

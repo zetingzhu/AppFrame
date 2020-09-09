@@ -15,6 +15,7 @@ public class NewsProvider2 extends Observable {
         timer.schedule(new TimerTask() {
             private int titleCount = 1;
             private int contentCount = 1;
+
             @Override
             public void run() {
                 setChanged(); //调用setChagned方法，将changed域设置为true，这样才能通知到观察者们

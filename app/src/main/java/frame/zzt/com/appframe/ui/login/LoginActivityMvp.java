@@ -27,13 +27,13 @@ public class LoginActivityMvp extends BaseActivity<LoginPresenter> implements Lo
     @BindView(R.id.login_progress)
     public View mLoginFormView;
     @BindView(R.id.email_sign_in_button)
-    public Button mEmailSignInButton ;
+    public Button mEmailSignInButton;
     @BindView(R.id.tv_html)
-    public TextView tv_html ;
+    public TextView tv_html;
     @BindString(R.string.insurance_tarms_text12)
-    public String htmlText ;
-    @BindViews({R.id.button1 , R.id.button2})
-    public List<Button> btnList ;
+    public String htmlText;
+    @BindViews({R.id.button1, R.id.button2})
+    public List<Button> btnList;
     @BindView(R.id.button3)
     Button button3;
 
@@ -77,17 +77,16 @@ public class LoginActivityMvp extends BaseActivity<LoginPresenter> implements Lo
             @Override
             public void onClick(View view) {
                 //示例代码，示例接口
-                presenter.login( );
+                presenter.login();
 
             }
         });
     }
 
 
-
     @OnClick(R.id.email_sign_in_button)
     public void attemptLogin() {
-        presenter.login( );
+        presenter.login();
     }
 
 

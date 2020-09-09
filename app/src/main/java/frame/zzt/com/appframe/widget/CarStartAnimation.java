@@ -17,8 +17,10 @@ import android.graphics.RectF;
 import android.graphics.SweepGradient;
 import android.os.Build;
 import android.os.Handler;
+
 import androidx.annotation.ColorInt;
 import androidx.core.content.ContextCompat;
+
 import android.util.AttributeSet;
 import android.widget.TextView;
 
@@ -74,7 +76,7 @@ public class CarStartAnimation extends TextView {
      */
     private RectF mArcRect = new RectF();
     /**
-     *  换底部圆环的画笔
+     * 换底部圆环的画笔
      */
     private Paint mPaintFirst = new Paint();
     /**
@@ -103,16 +105,16 @@ public class CarStartAnimation extends TextView {
      */
     private int listenerWhat = 0;
     /**
-     *  设置渐变颜色
+     * 设置渐变颜色
      */
-    private int[] mGradientColors ;
+    private int[] mGradientColors;
     /**
      * 超时时间
      */
-    private long timeOut = 0 ;
-    private Handler mHandler ;
-    private Runnable mRunnable ;
-    private boolean isSetTimeout = false ;// 是否设置超时
+    private long timeOut = 0;
+    private Handler mHandler;
+    private Runnable mRunnable;
+    private boolean isSetTimeout = false;// 是否设置超时
 
     public CarStartAnimation(Context context) {
         this(context, null);
@@ -152,9 +154,9 @@ public class CarStartAnimation extends TextView {
         circleColor = inCircleColors.getColorForState(getDrawableState(), Color.TRANSPARENT);
         typedArray.recycle();
 
-        mGradientColors = new int[]{ ContextCompat.getColor(context , R.color.color_start_gradient ),
-                ContextCompat.getColor(context ,R.color.color_end_gradient ) };
-        firstColor =  ContextCompat.getColor(context ,R.color.color_bg_gradient ) ;
+        mGradientColors = new int[]{ContextCompat.getColor(context, R.color.color_start_gradient),
+                ContextCompat.getColor(context, R.color.color_end_gradient)};
+        firstColor = ContextCompat.getColor(context, R.color.color_bg_gradient);
     }
 
     /**
@@ -284,7 +286,7 @@ public class CarStartAnimation extends TextView {
     /**
      * 暂停进度条
      */
-    public void stopProgress(CarStartAnimation.ProgressType progressType){
+    public void stopProgress(CarStartAnimation.ProgressType progressType) {
         this.mProgressType = progressType;
     }
 
@@ -339,14 +341,15 @@ public class CarStartAnimation extends TextView {
 
     /**
      * 是否设置超时
+     *
      * @param boo
      */
-    public void isSetTimeout( boolean boo){
-        isSetTimeout = boo ;
+    public void isSetTimeout(boolean boo) {
+        isSetTimeout = boo;
     }
 
     /**
-     *  设置超时时间
+     * 设置超时时间
      */
     public void setTimeout(long tim) {
         if (isSetTimeout) {
@@ -460,17 +463,17 @@ public class CarStartAnimation extends TextView {
                     break;
                 case PROGRESS_STOP:
                     postDelayed(progressChangeTask, timeMillis / 100);
-                    break ;
+                    break;
             }
             if (progress >= 0 && progress <= 100) {
                 if (mCountdownProgressListener != null)
                     mCountdownProgressListener.onProgress(listenerWhat, progress);
-                if(progress == 92){
+                if (progress == 92) {
                     // 当如果进度条到达了92 默认已经成功了
                     if (mHandler != null && mRunnable != null) {
                         mHandler.removeCallbacks(mRunnable);
                     }
-                    mCountdownProgressListener.onProgressSucced(timeMillis * 8 /100);
+                    mCountdownProgressListener.onProgressSucced(timeMillis * 8 / 100);
                 }
                 invalidate();
                 postDelayed(progressChangeTask, timeMillis / 100);
@@ -498,9 +501,9 @@ public class CarStartAnimation extends TextView {
         PROGRESS_STOP,
 
         /*
-        * 进度条到达70%
-        * */
-        PROGRESS_70 ;
+         * 进度条到达70%
+         * */
+        PROGRESS_70;
     }
 
     /**
@@ -516,7 +519,8 @@ public class CarStartAnimation extends TextView {
         void onProgress(int what, int progress);
 
         /**
-         *  当进度到达了95以上说明执行成功了，执行后面的操作，变换图片什么的
+         * 当进度到达了95以上说明执行成功了，执行后面的操作，变换图片什么的
+         *
          * @param time 剩余时间，用来执行后面操作动画时间
          */
         void onProgressSucced(long time);

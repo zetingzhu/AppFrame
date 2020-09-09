@@ -5,8 +5,8 @@ package frame.zzt.com.appframe.observable;
  */
 
 public class NewsModel {
-    private String title ;
-    private String content ;
+    private String title;
+    private String content;
 
     public NewsModel(String content, String title) {
         this.content = content;

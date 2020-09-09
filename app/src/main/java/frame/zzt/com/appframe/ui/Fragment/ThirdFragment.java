@@ -16,7 +16,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.example.headerrecycleview.MainActivity;
 import com.zzt.commonmodule.utils.ConfigARouter;
 
 import butterknife.BindString;
@@ -94,10 +93,12 @@ public class ThirdFragment extends Fragment {
 
     void onListItemClick(int index) {
         if (DEMOS[index].demoClass != null) {
+            // class 不为空就跳转到class
             Intent intent;
             intent = new Intent(getActivity(), DEMOS[index].demoClass);
             this.startActivity(intent);
         } else if (DEMOS[index].arouter != null && !DEMOS[index].arouter.isEmpty()) {
+            // 路由不为空就跳转到路由
             ARouter.getInstance().build(DEMOS[index].arouter).navigation();
         }
     }

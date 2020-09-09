@@ -21,11 +21,10 @@ import java.util.Locale;
 
 
 /**
- *
  * 将日志信息写入到文件
- *
- *         // 初始化日志写入文件
-            LogToFile.init(this);
+ * <p>
+ * // 初始化日志写入文件
+ * LogToFile.init(this);
  */
 public class LogToFile {
 
@@ -38,7 +37,7 @@ public class LogToFile {
 
     private static Date date = new Date();//因为log日志是使用日期命名的，使用静态成员变量主要是为了在整个程序运行期间只存在一个.log文件中;
 
-    private static Date clearDate ;// 记录上次删除日期
+    private static Date clearDate;// 记录上次删除日期
 
     /**
      * 初始化，须在使用之前设置，最好在Application创建时调用
@@ -93,7 +92,7 @@ public class LogToFile {
         writeToFile(ERROR, tag, msg);
     }
 
-    public static void writeLog(String msg){
+    public static void writeLog(String msg) {
         writeToFile(DEBUG, "ZZT", msg);
     }
 
@@ -111,7 +110,7 @@ public class LogToFile {
             return;
         }
 
-        String fileName = logPath + "/log_" + dateFormatFile.format(date ) + ".log";//log日志名，使用时间命名，保证不重复
+        String fileName = logPath + "/log_" + dateFormatFile.format(date) + ".log";//log日志名，使用时间命名，保证不重复
         String log = dateFormat.format(new Date()) + " " + type + " " + tag + " " + msg + "\n";//log日志内容，可以自行定制
 
         //如果父路径不存在
@@ -137,7 +136,7 @@ public class LogToFile {
                 if (bw != null) {
                     bw.close();//关闭缓冲流
                 }
-                autoClear(new Date() , 10) ;
+                autoClear(new Date(), 10);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -146,16 +145,17 @@ public class LogToFile {
 
     /**
      * 按照天数删除文件
+     *
      * @param autoClearDay
      */
-    public static  void autoClear(Date mClearDate, int autoClearDay) {
+    public static void autoClear(Date mClearDate, int autoClearDay) {
         if (clearDate != null) {
 
-            if (differentDays(clearDate , mClearDate) >10){
+            if (differentDays(clearDate, mClearDate) > 10) {
                 clearDate = mClearDate;
                 deleteFile(autoClearDay);
             }
-        }else {
+        } else {
             clearDate = mClearDate;
             deleteFile(autoClearDay);
         }
@@ -163,9 +163,10 @@ public class LogToFile {
 
     /**
      * 按照天数删除日期
+     *
      * @param autoClearDay
      */
-    public  static void deleteFile( int autoClearDay){
+    public static void deleteFile(int autoClearDay) {
         File file = new File(logPath);
         if (!file.exists()) {
             return;
@@ -180,45 +181,43 @@ public class LogToFile {
 
     /**
      * 比较两个日期相差多少天
+     *
      * @param date1
      * @param date2
      * @return
      */
-    public static int differentDays(Date date1,Date date2)
-    {
+    public static int differentDays(Date date1, Date date2) {
         Calendar cal1 = Calendar.getInstance();
         cal1.setTime(date1);
 
         Calendar cal2 = Calendar.getInstance();
         cal2.setTime(date2);
-        int day1= cal1.get(Calendar.DAY_OF_YEAR);
+        int day1 = cal1.get(Calendar.DAY_OF_YEAR);
         int day2 = cal2.get(Calendar.DAY_OF_YEAR);
 
         int year1 = cal1.get(Calendar.YEAR);
         int year2 = cal2.get(Calendar.YEAR);
-        if(year1 != year2)   //同一年
+        if (year1 != year2)   //同一年
         {
-            int timeDistance = 0 ;
-            for(int i = year1 ; i < year2 ; i ++)
-            {
-                if(i%4==0 && i%100!=0 || i%400==0)    //闰年
+            int timeDistance = 0;
+            for (int i = year1; i < year2; i++) {
+                if (i % 4 == 0 && i % 100 != 0 || i % 400 == 0)    //闰年
                 {
                     timeDistance += 366;
-                }
-                else    //不是闰年
+                } else    //不是闰年
                 {
                     timeDistance += 365;
                 }
             }
 
-            return timeDistance + (day2-day1) ;
-        }
-        else    //不同年
+            return timeDistance + (day2 - day1);
+        } else    //不同年
         {
-            System.out.println("判断day2 - day1 : " + (day2-day1));
-            return day2-day1;
+            System.out.println("判断day2 - day1 : " + (day2 - day1));
+            return day2 - day1;
         }
     }
+
     /**
      * 获取目录下所有文件(按时间排序)
      *
@@ -250,7 +249,6 @@ public class LogToFile {
     }
 
     /**
-     *
      * 获取目录下所有文件
      *
      * @param realpath

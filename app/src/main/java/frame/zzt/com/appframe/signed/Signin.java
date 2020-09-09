@@ -117,6 +117,7 @@ public class Signin extends View {
 
     /**
      * 当View  发小发生改变的时候调用这个方法
+     *
      * @param w
      * @param h
      * @param oldw
@@ -369,6 +370,7 @@ public class Signin extends View {
 
     /**
      * 测量
+     *
      * @param widthMeasureSpec
      * @param heightMeasureSpec
      */

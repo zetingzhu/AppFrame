@@ -12,18 +12,18 @@ import frame.zzt.com.appframe.bluetooth.ActivityBluetooth7;
  * 自定义的 ScrollView
  * Created by zeting
  * Date 18/12/24.
- *
+ * <p>
  * Android设置ScrollView回到顶部的三种方式
- 一、ScrollView.scrollTo(0,0)  直接置顶，瞬间回到顶部，没有滚动过程，其中Y值可以设置为大于0的值，使Scrollview停在指定位置;
-
- 二、ScrollView.fullScroll(View.FOCUS_UP)  类似于手动拖回顶部,有滚动过程;
-
- 三、ScrollView.smoothScrollTo(0, 0) 类似于手动拖回顶部,有滚动过程，其中Y值可以设置为大于0的值，使Scrollview停在指定位置。
+ * 一、ScrollView.scrollTo(0,0)  直接置顶，瞬间回到顶部，没有滚动过程，其中Y值可以设置为大于0的值，使Scrollview停在指定位置;
+ * <p>
+ * 二、ScrollView.fullScroll(View.FOCUS_UP)  类似于手动拖回顶部,有滚动过程;
+ * <p>
+ * 三、ScrollView.smoothScrollTo(0, 0) 类似于手动拖回顶部,有滚动过程，其中Y值可以设置为大于0的值，使Scrollview停在指定位置。
  */
 
 public class MyScrollView extends ScrollView {
 
-    public final static String TAG = ActivityBluetooth7.class.getSimpleName() ;
+    public final static String TAG = ActivityBluetooth7.class.getSimpleName();
 
     private boolean isScrolledToTop = true;// 初始化的时候设置一下值
     private boolean isScrolledToBottom = false;
@@ -48,19 +48,20 @@ public class MyScrollView extends ScrollView {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        switch (event.getAction()){
+        switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                Log.d(TAG , " - ACTION_DOWN "  ) ;
+                Log.d(TAG, " - ACTION_DOWN ");
                 break;
             case MotionEvent.ACTION_MOVE:
-                Log.d(TAG , " - ACTION_MOVE "  ) ;
+                Log.d(TAG, " - ACTION_MOVE ");
                 break;
             case MotionEvent.ACTION_UP:
-                Log.d(TAG , " - ACTION_UP "  ) ;
+                Log.d(TAG, " - ACTION_UP ");
                 break;
         }
         return super.onTouchEvent(event);
     }
+
     @Override
     protected void onOverScrolled(int scrollX, int scrollY, boolean clampedX, boolean clampedY) {
         super.onOverScrolled(scrollX, scrollY, clampedX, clampedY);
@@ -80,12 +81,12 @@ public class MyScrollView extends ScrollView {
     @Override
     protected void onScrollChanged(int l, int t, int oldl, int oldt) {
         super.onScrollChanged(l, t, oldl, oldt);
-        Log.d(TAG , " - l：" + l + " - t:" + t  + " - oldl:" + oldl  + " - oldt:" + oldt ) ;
+        Log.d(TAG, " - l：" + l + " - t:" + t + " - oldl:" + oldl + " - oldt:" + oldt);
         if (android.os.Build.VERSION.SDK_INT < 9) {  // API 9及之后走onOverScrolled方法监听
             if (getScrollY() == 0) {    // 小心踩坑1: 这里不能是getScrollY() <= 0
                 isScrolledToTop = true;
                 isScrolledToBottom = false;
-            } else if (getScrollY() + getHeight() - getPaddingTop()-getPaddingBottom() == getChildAt(0).getHeight()) {
+            } else if (getScrollY() + getHeight() - getPaddingTop() - getPaddingBottom() == getChildAt(0).getHeight()) {
                 // 小心踩坑2: 这里不能是 >=
                 // 小心踩坑3（可能忽视的细节2）：这里最容易忽视的就是ScrollView上下的padding　
                 isScrolledToBottom = true;
@@ -124,7 +125,6 @@ public class MyScrollView extends ScrollView {
 
         void onScrolledToTop();
     }
-
 
 
 }

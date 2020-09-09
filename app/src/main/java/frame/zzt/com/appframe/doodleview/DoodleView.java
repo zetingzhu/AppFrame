@@ -42,24 +42,24 @@ public class DoodleView extends SurfaceView implements SurfaceHolder.Callback {
 
     private ActionType mActionType = ActionType.Path;
 
-    private Context mContext ;
-    Canvas canvas ;
+    private Context mContext;
+    Canvas canvas;
 
     public DoodleView(Context context) {
         super(context);
-        mContext = context ;
+        mContext = context;
         init();
     }
 
     public DoodleView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        mContext = context ;
+        mContext = context;
         init();
     }
 
     public DoodleView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        mContext = context ;
+        mContext = context;
         init();
     }
 
@@ -75,7 +75,7 @@ public class DoodleView extends SurfaceView implements SurfaceHolder.Callback {
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
-        Log.i("TAB" , "  surfaceCreated");
+        Log.i("TAB", "  surfaceCreated");
         canvas = mSurfaceHolder.lockCanvas();
         canvas.drawColor(Color.WHITE);
         mSurfaceHolder.unlockCanvasAndPost(canvas);
@@ -84,12 +84,12 @@ public class DoodleView extends SurfaceView implements SurfaceHolder.Callback {
 
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-        Log.i("TAB" , "  surfaceChanged");
+        Log.i("TAB", "  surfaceChanged");
     }
 
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
-        Log.i("TAB" , "  surfaceDestroyed");
+        Log.i("TAB", "  surfaceDestroyed");
     }
 
     @Override
@@ -211,8 +211,8 @@ public class DoodleView extends SurfaceView implements SurfaceHolder.Callback {
         String path = Environment.getExternalStorageDirectory().getAbsolutePath()
                 + "/doodleview/" + System.currentTimeMillis() + ".png";
         if (!new File(path).exists()) {
-            boolean boo =  new File(path).getParentFile().mkdirs();
-            Log.i("TAB" , "创建文件是否成功" + boo);
+            boolean boo = new File(path).getParentFile().mkdirs();
+            Log.i("TAB", "创建文件是否成功" + boo);
         }
         savePicByPNG(doodleView.getBitmap(), path);
         return path;
@@ -276,8 +276,8 @@ public class DoodleView extends SurfaceView implements SurfaceHolder.Callback {
     /**
      * 重置签名
      */
-    public void reset(){
-        if(mBaseActions != null && mBaseActions.size() > 0){
+    public void reset() {
+        if (mBaseActions != null && mBaseActions.size() > 0) {
             mBaseActions.clear();
             Canvas canvas = mSurfaceHolder.lockCanvas();
             canvas.drawColor(Color.WHITE);

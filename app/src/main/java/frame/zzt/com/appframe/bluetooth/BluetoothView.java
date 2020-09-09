@@ -9,6 +9,4 @@ import frame.zzt.com.appframe.mvp.mvpbase.BaseView;
 public interface BluetoothView extends BaseView {
 
 
-
-
 }

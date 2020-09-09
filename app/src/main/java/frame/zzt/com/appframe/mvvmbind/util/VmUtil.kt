@@ -8,9 +8,9 @@ package frame.zzt.com.appframe.mvvmbind.util
  *  </data>
  *
  *         <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{ VmUtilKt.showClickCount( vmData.clickCount) }" />
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="@{ VmUtilKt.showClickCount( vmData.clickCount) }" />
 
  *
  */

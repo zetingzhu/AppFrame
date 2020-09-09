@@ -6,5 +6,6 @@ package frame.zzt.com.appframe.bluetooth.BleUtil;
 
 public interface Callback {
     void onSuccess(Object o);
+
     void onFailed(Object o);
 }

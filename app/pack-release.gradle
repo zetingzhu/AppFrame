@@ -1,0 +1,105 @@
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+ext {
+    PACKAGE_JAR = "D://ZZTAndroid/Android_Work/AppFrame/dev/walle-cli-all.jar"
+    OUTPUT_PATH = "D://ZZTAndroid/Android_Work/AppFrame/dev/outapk/" //所有apk的保存路径
+    CHANNEL_CONFIG = "D://ZZTAndroid/Android_Work/AppFrame/dev/channel"//保存渠道配置
+    MAIN_MODULE = "D://ZZTAndroid/Android_Work/AppFrame/app"// 项目地址
+    UPLOAD_URL = 'https://www.baidu.com' // 上次指定url
+}
+
+class ApkFile {
+    String channel
+    File file
+}
+
+/**
+ * 查找所有apk
+ * @param buildType release 或者 debug
+ * @return ArrayList <ApkFile>
+ */
+def findApkFiles(String buildType) {
+    List<ApkFile> apkFiles = new ArrayList<>()
+
+    println "findApkFiles buildType: " + buildType
+    File apkDir = new File(MAIN_MODULE + "/build/outputs/apk/" + buildType)
+    ApkFile apkFile = new ApkFile()
+    apkFile.channel = apkDir.name
+
+    println "apkDir file:" + apkDir
+    File[] files = apkDir.listFiles()
+    println "apkDir files:" + files
+    if (files != null && files.length > 0) {
+        File lastFile = null
+        for (File file : files) {
+            if (file.name.endsWith(".apk")) {
+                lastFile = file
+            }
+        }
+        apkFile.file = lastFile
+        apkFiles.add(apkFile)
+    }
+    println "apkList files:" + apkFiles
+    return apkFiles
+}
+
+/**
+ * 多渠道打包
+ * @param apkFiles
+ * @param outputDir
+ * @return
+ */
+def packageApk(List<ApkFile> apkFiles, File outputDir) {
+    println "packageApk apk write out : " + outputDir.absolutePath
+    File apkFile = apkFiles.get(0).file
+    println "packageApk apk read : " + apkFile.absolutePath
+    exec {
+        commandLine "java", "-jar", PACKAGE_JAR, "batch", "-f", CHANNEL_CONFIG, apkFile.absolutePath, outputDir.absolutePath
+    }
+    apkFile.delete()
+}
+
+
+/**
+ * 构建发布到生产环境的所有渠道apk
+ */
+task packageReleaseApk {
+    dependsOn("assembleRelease")
+    doLast {
+        List<ApkFile> apkFiles = findApkFiles("release")
+        if (apkFiles.size() == 0) {
+            throw new RuntimeException("no apk files has found!")
+        }
+        File outputDir = new File(OUTPUT_PATH + apkFiles.get(0).channel)
+        println "outputDir file:" + outputDir.name
+        if (outputDir.exists()) {
+            if (!outputDir.delete()) {
+                throw new RuntimeException("delete outputDir failure!")
+            }
+        }
+        if (!outputDir.mkdirs()) {
+            throw new RuntimeException("make outputDir failure!")
+        }
+        packageApk(apkFiles, outputDir)
+    }
+}
+
+/**
+ * 直接把apk上次到指定的地址上
+ */
+task packageReleaseUploadHtml() {
+    dependsOn("assembleRelease")
+
+    doLast {
+        List<ApkFile> apkFiles = findApkFiles("release")
+        if (apkFiles.size() == 0) {
+            throw new RuntimeException("no apk files has found!")
+        }
+        String apkPath = apkFiles.get(0).file.absolutePath
+        exec {
+            commandLine 'curl'
+            args '-k', UPLOAD_URL, '-F', "file=@${apkPath}"
+        }
+    }
+}

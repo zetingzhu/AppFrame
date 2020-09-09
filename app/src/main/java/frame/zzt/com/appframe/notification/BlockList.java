@@ -81,6 +81,7 @@ public final class BlockList {
 
     /**
      * Remove a package name from blocking list.
+     *
      * @param name The package name to be removed from blocking list.
      */
     public void removeBlockItem(CharSequence name) {
@@ -95,6 +96,7 @@ public final class BlockList {
 
     /**
      * Add a package name from blocking list.
+     *
      * @param name The package name to be added to blocking list.
      */
     public void addBlockItem(CharSequence name) {

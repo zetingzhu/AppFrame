@@ -16,29 +16,29 @@ import kotlinx.android.synthetic.main.activity_kotlin.*
 /**
  * kotlin 创建的类
  */
-class ActivityKotlin : AppCompatActivity() , View.OnClickListener {
-    var TAG:String = "ActivityKotlin"
+class ActivityKotlin : AppCompatActivity(), View.OnClickListener {
+    var TAG: String = "ActivityKotlin"
 
-    var btn01:String = "第一个按钮"
-    var btn02  = "第二个按钮"
+    var btn01: String = "第一个按钮"
+    var btn02 = "第二个按钮"
 
     var otherName: String? = null
 
     override fun onClick(v: View?) {
-        Log.d(TAG , "点击了哪一个按钮：" + v?.id )
-        when(v!!.id){
+        Log.d(TAG, "点击了哪一个按钮：" + v?.id)
+        when (v!!.id) {
             R.id.btn_kotlin_01 -> {
-                Log.d(TAG , "点击了第一个按钮")
+                Log.d(TAG, "点击了第一个按钮")
                 showToast(this, "显示信息")
             }
             R.id.btn_kotlin_02 -> {
-                Log.d(TAG , "点击了第二个按钮")
+                Log.d(TAG, "点击了第二个按钮")
                 btn02 = "点击后改变"
                 btn_kotlin_02.setText(btn02)
                 this.toast("显示第二条信息")
             }
-            R.id.btn_kotlin_03-> {
-                Log.d(TAG , "点击了第二个按钮")
+            R.id.btn_kotlin_03 -> {
+                Log.d(TAG, "点击了第二个按钮")
                 btn02 = "点击后改变"
                 btn_kotlin_02.setText(btn02)
                 this.toast("显示第二条信息")
@@ -65,7 +65,7 @@ class ActivityKotlin : AppCompatActivity() , View.OnClickListener {
     }
 
 
-    fun whenTest(x: Int){
+    fun whenTest(x: Int) {
         when (x) {
             1 -> print("x == 1")
             2 -> print("x == 2")
@@ -87,7 +87,7 @@ class ActivityKotlin : AppCompatActivity() , View.OnClickListener {
     /*
     * show toast in activity
     * */
-    fun Activity.toast(msg: String){
+    fun Activity.toast(msg: String) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }
 

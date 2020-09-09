@@ -37,9 +37,9 @@ public class GattCallback extends BluetoothGattCallback {
                     Log.i("shoppingCar", "gatt disconnected...");
                     //这就是为什么在eventHandler里面一定要设置result的结果并调用gatt.disconnect方法的理由，
                     //这么做也遵循了ble的操作规范，一次链接，一串命令，用完之后就关闭。
-                    if(eventHandler.getResult()){
+                    if (eventHandler.getResult()) {
                         callback.onSuccess("operation success, callback.onSuccess is called...");
-                    }else {
+                    } else {
                         callback.onFailed("operation failed, callback.onFailed is called...");
                     }
                     gatt.close();
@@ -82,7 +82,7 @@ public class GattCallback extends BluetoothGattCallback {
                 Log.i("shoppingCar", "eventHandler is created...");
                 eventHandler.startEvent(gatt);
                 Log.i("shoppingCar", "eventHandler is start to handle...");
-            }else {
+            } else {
                 Log.i("shoppingCar", "commandControl or notifyControl is null...");
                 Log.i("shoppingCar", "eventHandler can not be created...");
                 Log.i("shoppingCar", "gatt is going to disconnect...");

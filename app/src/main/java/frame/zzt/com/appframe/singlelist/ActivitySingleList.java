@@ -3,6 +3,7 @@ package frame.zzt.com.appframe.singlelist;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -72,7 +73,6 @@ public class ActivitySingleList extends AppCompatActivity {
 
                     }
                 });
-
 
 
             }

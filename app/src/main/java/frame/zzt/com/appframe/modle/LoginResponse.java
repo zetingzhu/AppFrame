@@ -139,7 +139,7 @@ public class LoginResponse extends BaseModel {
     @Override
     public String toString() {
         return "LoginResponse{" +
-                "data=" + data  +
+                "data=" + data +
                 "} " + super.toString();
     }
 }

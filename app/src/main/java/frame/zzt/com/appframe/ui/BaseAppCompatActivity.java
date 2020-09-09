@@ -2,6 +2,7 @@ package frame.zzt.com.appframe.ui;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,7 +15,7 @@ import frame.zzt.com.appframe.mvp.mvpbase.BaseView;
  */
 
 public class BaseAppCompatActivity extends AppCompatActivity implements BaseView {
-    public final static String TAG_BASE =  BaseAppCompatActivity.class.getSimpleName() ;
+    public final static String TAG_BASE = BaseAppCompatActivity.class.getSimpleName();
 
     protected ProgressDialog dialog;
 

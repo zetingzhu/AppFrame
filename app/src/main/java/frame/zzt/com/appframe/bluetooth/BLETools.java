@@ -76,8 +76,8 @@ public class BLETools {
 
 
     /*
-    * 扫描设备
-    * */
+     * 扫描设备
+     * */
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public void scanDevice(Context context, final DeviceCallback callback) {
         if (judgmentVersion()) {
@@ -133,8 +133,8 @@ public class BLETools {
     }
 
     /*
-    * 判断SDk是否大于21   蓝牙才能用
-    * */
+     * 判断SDk是否大于21   蓝牙才能用
+     * */
     public boolean judgmentVersion() {
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP) { // SDK小于21
             return false;
@@ -145,8 +145,8 @@ public class BLETools {
 
     public interface DeviceCallback {
         /*
-        * 扫描
-        * */
+         * 扫描
+         * */
         void onScanResult(ScanResult result);
     }
 }
