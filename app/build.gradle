@@ -41,7 +41,7 @@ android {
             def outputFile = output.outputFile
             def fileName
             if (outputFile != null && outputFile.name.endsWith('.apk')) {
-                    fileName = "app_android_${variant.buildType.name}_v${variant.versionName}.apk".toLowerCase()
+                fileName = "app_android_${variant.buildType.name}_v${variant.versionName}.apk".toLowerCase()
                 outputFileName = fileName
             }
         }
@@ -102,11 +102,14 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'com.google.android.material:material:1.1.0'
+
     if (isModule.toBoolean()) {
         implementation project(path: ':CommonModule')
     } else {
         implementation project(path: ':headerrecycleview')
         implementation project(path: ':myviewpager')
+        implementation project(path: ':mypagingsamples')
+        implementation project(path: ':groupedadapter')
     }
     testImplementation 'junit:junit:4.13'
     implementation 'com.google.code.gson:gson:2.8.6'

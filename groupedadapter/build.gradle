@@ -58,7 +58,7 @@ android {
 }
 
 dependencies {
-    api fileTree(dir: 'libs', include: ['*.jar'])
+
     api project(path: ':CommonModule')
     api 'androidx.recyclerview:recyclerview:1.1.0'
     api 'androidx.appcompat:appcompat:1.3.0-alpha02'

@@ -104,7 +104,9 @@ public class ThirdFragment extends Fragment {
     }
 
     private DemoInfo[] DEMOS = {
+            new DemoInfo(R.string.show_item_paging3, R.string.show_item_paging3, ConfigARouter.ACTIVITY_PAGING3_MAIN),
             new DemoInfo(R.string.show_item_viewpager2, R.string.show_item_viewpager2, ConfigARouter.ACTIVITY_VIEWPAGER_MAIN),
+            new DemoInfo(R.string.show_item_group_recycleview1, R.string.show_item_group_recycleview1, ConfigARouter.ACTIVITY_RECYCLEVIEW_GROUP),
             new DemoInfo(R.string.show_item_group_recycleview, R.string.show_item_group_recycleview, ConfigARouter.ACTIVITY_RECYCLEVIEW_HEADER),
             new DemoInfo(R.string.show_item_navigation, R.string.show_item_navigation, ActivityNavigationFragment.class),
             new DemoInfo(R.string.show_item_guide, R.string.show_item_guide, ActivityGuide.class),

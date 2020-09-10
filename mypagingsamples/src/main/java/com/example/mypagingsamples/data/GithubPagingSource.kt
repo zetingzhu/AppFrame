@@ -2,7 +2,7 @@ package com.example.mypagingsamples.data
 
 import android.util.Log
 import androidx.paging.PagingSource
-import com.example.mypagingsamples.MainActivity
+import com.example.mypagingsamples.Paging3Activity
 import com.example.mypagingsamples.api.GitHubService
 import com.example.mypagingsamples.api.GitHubService.Companion.IN_QUALIFIER
 import com.example.mypagingsamples.model.GithubData
@@ -17,7 +17,7 @@ class GithubPagingSource(private val service: GitHubService, private val query: 
         val position = params.key ?: GITHUB_STARTING_PAGE_INDEX
         // 查询条件
         val apiQuery = query + IN_QUALIFIER
-        Log.d(MainActivity.TAG, "这个地方的查询条件：position:$position -query:$apiQuery")
+        Log.d(Paging3Activity.TAG, "这个地方的查询条件：position:$position -query:$apiQuery")
         var loadResult: PagingSource.LoadResult.Page<Int, GithubData>? = null
         try {
             /**

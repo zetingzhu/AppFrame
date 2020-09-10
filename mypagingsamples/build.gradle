@@ -1,19 +1,32 @@
-apply plugin: 'com.android.application'
+if (isModule.toBoolean()) {//如果是组件模式---可以单独运行
+    apply plugin: 'com.android.application'
+} else {//集成模式，不能单独运行
+    apply plugin: 'com.android.library'
+}
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion getRootProject().compileSdkVersion
     buildToolsVersion getRootProject().buildToolsVersion
 
     defaultConfig {
-        applicationId "com.example.mypagingsamples"
+        if (isModule.toBoolean()) {
+            applicationId "com.example.mypagingsamples"
+        }
         minSdkVersion getRootProject().minSdkVersion
         targetSdkVersion getRootProject().targetSdkVersion
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        //ARouter添加
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
     }
     // java8 支持
     compileOptions {
@@ -27,21 +40,41 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    // 多渠道资源文件修改
+    sourceSets {
+        main {
+            if (isModule.toBoolean()) {//组件模式下
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+            } else {//集成模式下
+                manifest.srcFile 'src/main/library/AndroidManifest.xml'
+                //集成开发模式下排除debug文件夹中的所有Java文件
+                java {
+                    exclude 'debug/**'
+                }
+            }
+        }
+    }
 }
-
+kapt {
+    arguments {
+        arg("moduleName", project.getName())
+    }
+}
 dependencies {
     implementation project(path: ':CommonModule')
 
     // 生命周期库
     def lifecycleVersion = '2.2.0'
     // 生命周期库协程优化库
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
+    api "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
     //  生命周期扩展包
-    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
+    api "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
 
     // paging 分页
     def paging_version = "3.0.0-alpha03"
     //noinspection GradleDependency
-    implementation "androidx.paging:paging-runtime:$paging_version"
+    api "androidx.paging:paging-runtime:$paging_version"
 
+    //ARouter添加
+    kapt 'com.alibaba:arouter-compiler:1.2.2'
 }

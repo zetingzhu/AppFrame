@@ -3,7 +3,7 @@
     package="com.zzt.viewpager2">
 
     <application
-        android:name="dubug.MyApp"
+        android:name="debug.MyApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
