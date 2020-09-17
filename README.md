@@ -1,3 +1,10 @@
+include ':mypagingsamples'
+paging 分页
+
+include ':groupedadapter'
+头部分组悬停recycleview
+
+
 1. 嘿嘿
 把自己平时使用的功能整理起来
 

@@ -12,6 +12,8 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/CommonModule" />
+            <option value="$PROJECT_DIR$/RoomSample" />
+            <option value="$PROJECT_DIR$/SignatureView" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/groupedadapter" />
             <option value="$PROJECT_DIR$/headerrecycleview" />

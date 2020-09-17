@@ -1,3 +1,5 @@
+include ':SignatureView'
+include ':RoomSample'
 include ':mypagingsamples'
 include ':CommonModule'
 include ':headerrecycleview'

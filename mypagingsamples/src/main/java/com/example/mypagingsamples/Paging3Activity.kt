@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.ExperimentalPagingApi
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.example.mypagingsamples.adapter.GitHubAdapter
@@ -75,6 +76,7 @@ class Paging3Activity : AppCompatActivity() {
         initSearch(query)
 
         ARouter.getInstance().inject(this)
+
     }
 
     private fun search(query: String) {

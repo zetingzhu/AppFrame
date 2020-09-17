@@ -54,12 +54,14 @@ android {
             }
         }
     }
+
 }
 kapt {
     arguments {
         arg("moduleName", project.getName())
     }
 }
+
 dependencies {
     implementation project(path: ':CommonModule')
 

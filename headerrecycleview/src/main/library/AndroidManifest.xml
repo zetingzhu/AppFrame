@@ -3,7 +3,7 @@
     package="com.example.headerrecycleview">
 
     <application android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity" />
+        <activity android:name=".HeaderMainActivity" />
         <activity android:name=".LinearlayoutActivity" />
         <activity android:name=".GridlayoutActivity" />
     </application>

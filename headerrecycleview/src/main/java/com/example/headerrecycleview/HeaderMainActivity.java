@@ -15,12 +15,12 @@ import com.zzt.commonmodule.utils.ConfigARouter;
  * @date: 2020/8/19
  */
 @Route(path = ConfigARouter.ACTIVITY_RECYCLEVIEW_HEADER )
-public class MainActivity extends AppCompatActivity {
+public class HeaderMainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.header_activity_main);
 
         ARouter.getInstance().inject(this);
     }

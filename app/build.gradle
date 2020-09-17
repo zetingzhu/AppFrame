@@ -110,6 +110,7 @@ dependencies {
         implementation project(path: ':myviewpager')
         implementation project(path: ':mypagingsamples')
         implementation project(path: ':groupedadapter')
+        implementation project(path: ':SignatureView')
     }
     testImplementation 'junit:junit:4.13'
     implementation 'com.google.code.gson:gson:2.8.6'

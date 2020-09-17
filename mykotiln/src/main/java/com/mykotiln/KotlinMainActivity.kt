@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -22,11 +21,11 @@ import com.mykotiln.activity.ActivityKotlinUse
 import kotlinx.android.synthetic.main.content_main.*
 
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class KotlinMainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.kotlin_activity_main)
 
         initView()
 
@@ -35,7 +34,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     internal fun onListItemClick(index: Int) {
         val intent: Intent
         /** context 使用 this@MainActivity  方式 */
-        intent = Intent(this@MainActivity, DEMOS[index].demoClass)
+        intent = Intent(this@KotlinMainActivity, DEMOS[index].demoClass)
         this.startActivity(intent)
     }
 
@@ -61,7 +60,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             var convertView = convertView
             val myViewHolder: MyViewHolder
             if (convertView == null) {
-                convertView = View.inflate(this@MainActivity, R.layout.list_info_item, null)
+                convertView = View.inflate(this@KotlinMainActivity, R.layout.list_info_item, null)
                 myViewHolder = MyViewHolder(convertView)
                 convertView!!.tag = myViewHolder
             } else {

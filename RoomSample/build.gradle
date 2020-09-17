@@ -1,0 +1,70 @@
+if (isModule.toBoolean()) {//如果是组件模式---可以单独运行
+    apply plugin: 'com.android.application'
+} else {//集成模式，不能单独运行
+    apply plugin: 'com.android.library'
+}
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion getRootProject().compileSdkVersion
+    buildToolsVersion getRootProject().buildToolsVersion
+
+    defaultConfig {
+        if (isModule.toBoolean()) {
+            applicationId "com.example.roomsample"
+        }
+        minSdkVersion getRootProject().minSdkVersion
+        targetSdkVersion getRootProject().targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        //ARouter添加
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
+    }
+
+    // java8 支持
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+kapt {
+    arguments {
+        arg("moduleName", project.getName())
+    }
+}
+
+dependencies {
+
+    implementation project(path: ':CommonModule')
+
+    def room_version = "2.2.5"
+
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+    // For Kotlin use kapt instead of annotationProcessor
+
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation "androidx.room:room-ktx:$room_version"
+
+    // optional - Guava support for Room, including Optional and ListenableFuture
+    implementation "androidx.room:room-guava:$room_version"
+
+    //ARouter添加
+    kapt 'com.alibaba:arouter-compiler:1.2.2'
+}
