@@ -11,7 +11,7 @@ import androidx.room.*
 
 
 open class Base {
-    var desc: String? = null
+    var desc: String? = ""
 }
 
 
@@ -23,12 +23,13 @@ open class Base {
 /**
  * 如果实体继承了父实体的字段，则使用 @Entity 属性的 ignoredColumns 属性来去掉类中的属性不创建在表中
  */
-@Entity(ignoredColumns = arrayOf("desc"),
+@Entity(
+//        ignoredColumns = arrayOf("desc"),
         /**
          * 为实体添加索引，请在 @Entity 注释中添加 indices 属性
          * 数据库中的某些字段或字段组必须是唯一的。您可以通过将 @Index 注释的 unique 属性设为 true，强制实施此唯一性属性
          */
-        indices = arrayOf(Index(value = ["first_name", "last_name"], unique = true))
+//        indices = arrayOf(Index(value = ["first_name", "last_name"], unique = true)   )
 )
 data class User(
         /**
@@ -37,25 +38,33 @@ data class User(
          */
         @PrimaryKey(autoGenerate = true)
         @ColumnInfo(name = "_id")
-        val userId: Int,
+        var userId: Int,
         /**
          * 请将 @ColumnInfo 注释添加到字段 表示修改列名
          */
-        @ColumnInfo(name = "first_name") val firstName: String?,
-        @ColumnInfo(name = "last_name") val lastName: String?,
+        @ColumnInfo(name = "first_name") var firstName: String?,
+        @ColumnInfo(name = "last_name") var lastName: String?,
 
-        val idNumber: String?,
+        var age: Int = 0,
+
+        var idNumber: String? = "",
         /**
          *   @Embedded 注释 ,可以 将另外一个 对象字段添加到当前对象表中
          */
-        @Embedded val address: Address?,
+//        @Embedded var address: Address? = null,
 
         /**
          * 使用 @Ignore 为这些字段添加注释 ,表示实体中的字段不想保留到表中
          */
-        @Ignore val picture: Bitmap?
+//        @Ignore var picture: Bitmap? = null,
 
-) : Base()
+        // 区域
+        var region: String? = ""
+
+)
+//        : Base() {
+////    constructor(userId: Int, firstName: String?, lastName: String?) : this(userId, firstName, lastName, 0, "",   null, "")
+//}
 
 data class Address(
         val street: String?,
@@ -108,3 +117,15 @@ data class UserWithPlaylists(
         )
         val playlists: List<Playlist>
 )
+
+/**
+ * 大多数情况下，您只需获取实体的几个字段。例如，您的界面可能仅显示用户的名字和姓氏，而不是用户的每一条详细信息。
+ * 通过仅提取应用界面中显示的列，您可以节省宝贵的资源，并且您的查询也能更快完成。
+ * 借助 Room，您可以从查询中返回任何基于 Java 的对象，前提是结果列集合会映射到返回的对象。
+ * 例如，您可以创建以下基于 Java 的普通对象 (POJO) 来获取用户的名字和姓氏：
+ */
+data class NameTuple(
+        @ColumnInfo(name = "first_name") val firstName: String?,
+        @ColumnInfo(name = "last_name") val lastName: String?
+)
+

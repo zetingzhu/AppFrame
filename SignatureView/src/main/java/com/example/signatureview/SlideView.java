@@ -1,6 +1,7 @@
 package com.example.signatureview;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -8,6 +9,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -56,6 +59,8 @@ public class SlideView extends View {
     private boolean isMove = false;
     // Bitmap Config
     private Bitmap.Config bitmapConfig = Bitmap.Config.ARGB_4444;
+    // 背景图片
+    private Drawable mSignBackground;
 
     public SlideView(Context context) {
         this(context, null);
@@ -69,8 +74,33 @@ public class SlideView extends View {
         super(context, attrs, defStyleAttr);
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.SignatureView);
         mPenColor = typedArray.getColor(R.styleable.SignatureView_penColor, PEN_COLOR);
-        mBackColor = typedArray.getColor(R.styleable.SignatureView_backColor, BACK_COLOR);
         mPentWidth = typedArray.getInt(R.styleable.SignatureView_penWidth, PEN_WIDTH);
+
+        try {
+            mSignBackground = typedArray.getDrawable(R.styleable.SignatureView_backColor);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.d(TAG, "错误的日志0：" + e);
+        }
+
+//        try {
+//            mBackColor = typedArray.getColor(R.styleable.SignatureView_backColor, BACK_COLOR);
+//            if (mBackColor != 0) {
+//                mSignBackground = new ColorDrawable(mBackColor);
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            Log.d(TAG, "错误的日志1：" + e);
+//        }
+//        try {
+//            int bc_ResourceId = typedArray.getResourceId(R.styleable.SignatureView_backColor, 0);
+//            if (bc_ResourceId != 0) {
+//                mSignBackground = getRootView().getContext().getResources().getDrawable(bc_ResourceId);
+//            }
+//        } catch (Resources.NotFoundException e) {
+//            e.printStackTrace();
+//            Log.d(TAG, "错误的日志2：" + e);
+//        }
         typedArray.recycle();
         init();
     }
@@ -115,7 +145,7 @@ public class SlideView extends View {
         if (mCanvas != null) {
             isTouched = false;
             mCanvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
-            mCanvas.drawColor(mBackColor);
+            CanvasDrawBack(mCanvas);
             invalidate();
         }
     }
@@ -136,7 +166,7 @@ public class SlideView extends View {
         imgWidth = (int) (getWidth() * widthScale);
         Bitmap newBitmap = Bitmap.createBitmap(imgWidth, getHeight(), bitmapConfig);
         mCanvas = new Canvas(newBitmap);
-        mCanvas.drawColor(mBackColor);
+        CanvasDrawBack(mCanvas);
         mCanvas.drawBitmap(cacheBitmap, 0f, 0f, mPaint);
         cacheBitmap = newBitmap;
         invalidate();
@@ -149,9 +179,22 @@ public class SlideView extends View {
         imgWidth = (int) (w * widthScale);
         cacheBitmap = Bitmap.createBitmap(imgWidth, getHeight(), bitmapConfig);
         mCanvas = new Canvas(cacheBitmap);
-        mCanvas.drawColor(mBackColor);
+        CanvasDrawBack(mCanvas);
         isTouched = false;
     }
+
+    /**
+     * 画布绘制背景
+     *
+     * @param canvas
+     */
+    private void CanvasDrawBack(Canvas canvas) {
+        if (mSignBackground != null) {
+            mSignBackground.setBounds(0, 0, getWidth(), getHeight());
+            mSignBackground.draw(canvas);
+        }
+    }
+
 
     @Override
     protected void onDraw(Canvas canvas) {

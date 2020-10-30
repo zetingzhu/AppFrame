@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
@@ -89,8 +90,18 @@ class ActivityGuide : AppCompatActivity(), View.OnClickListener {
         btn_guide_5.text = "弹出对话框"
         btn_guide_5.setOnClickListener {
             dialog = DialogWrapper.Builder(this@ActivityGuide)
+                    // 添加图片
                     .appendImageView(ContextCompat.getDrawable(this@ActivityGuide, R.drawable.icon_privacy)!!)
+                    // 添加文本
                     .appendTextView("这是个测试按钮", 24, ContextCompat.getColor(this@ActivityGuide, R.color.black))
+                    // 添加一个系统的View
+                    .appendAddView(object : DialogWrapper.AddSysViewListener<Button> {
+                        override fun getAddView(): Button {
+                            var btn = Button(this@ActivityGuide)
+                            btn.setText("这个是系统的View")
+                            return btn
+                        }
+                    })
                     .setBottomButton("确定", 24, ContextCompat.getColor(this@ActivityGuide, R.color.black),
                             ContextCompat.getColor(this@ActivityGuide, R.color.navajowhite), 10) { d, v ->
                         Log.d(TAG, "这个按钮有没有被点击")

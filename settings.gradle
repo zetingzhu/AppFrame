@@ -1,3 +1,5 @@
+include ':LurCacheSample'
+include ':MoveRecyclerView'
 include ':SignatureView'
 include ':RoomSample'
 include ':mypagingsamples'

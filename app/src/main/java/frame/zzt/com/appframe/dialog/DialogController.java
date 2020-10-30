@@ -25,6 +25,7 @@ import androidx.appcompat.app.AppCompatDialog;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +37,7 @@ import frame.zzt.com.appframe.R;
  * @date: 2020/6/22
  * dialog 数据控制
  */
-public class DialogConteroller {
+public class DialogController {
 
     private final Context mContext;
     final AppCompatDialog mDialog;
@@ -69,6 +70,8 @@ public class DialogConteroller {
     int bottomMarginRight;
     int bottomMarginTop;
     int bottomMarginBottom;
+    // 底部按钮高度
+    int bottomHeight;
 
     // 存在确定按钮时候，底部按钮布局
     private ConstraintLayout btn_layout;
@@ -81,8 +84,10 @@ public class DialogConteroller {
     int spaceButtonMiddle = 0;
     // 图片背景的圆角半径 默认为8 ，如果设置了弹框背景，就需要手动修改这个半径
     int cornerRadius = 8;
-    // 是否底部一个按钮 单一
+    // 是否底部一个按钮 单一，单一按钮的圆角为四个角
     boolean isBottomSingleBtn = false;
+    // 设置单独的一个按钮是否居中显示
+    boolean isGravityCenter = false;
 
     // 最外层背景图片
     FrameLayout dialog_layout_bg;
@@ -164,10 +169,10 @@ public class DialogConteroller {
         private static final int BUTTON_LEFT = -1;
         private static final int BUTTON_RIGHT = -2;
 
-        private WeakReference<DialogInterface> mDialog;
+        private WeakReference<DialogInterface> mHandleDialog;
 
         public ButtonHandler(DialogInterface dialog) {
-            mDialog = new WeakReference<>(dialog);
+            mHandleDialog = new WeakReference<>(dialog);
         }
 
         @Override
@@ -184,7 +189,7 @@ public class DialogConteroller {
         }
     }
 
-    public DialogConteroller(Context mContext, AppCompatDialog mDialog, Window mWindow) {
+    public DialogController(Context mContext, AppCompatDialog mDialog, Window mWindow) {
         this.mContext = mContext;
         this.mDialog = mDialog;
         this.mWindow = mWindow;
@@ -328,13 +333,60 @@ public class DialogConteroller {
     }
 
     /**
+     * 添加一个View
+     *
+     * @param view
+     */
+    public void appendAddView(@NonNull View view, DialogWrapper.GetViewListener<View> getViewListener) {
+        appendAddView(view, Gravity.CENTER_HORIZONTAL, 0, 0, 0, 0, getViewListener);
+    }
+
+    public void appendAddView(@NonNull View view, int left, int top, int right, int bottom) {
+        appendAddView(view, Gravity.CENTER_HORIZONTAL, left, top, right, bottom, null);
+    }
+
+    public void appendAddView(@NonNull View view, int layoutGravity, int left, int top, int right, int bottom, DialogWrapper.GetViewListener<View> getViewListener) {
+        if (view != null) {
+            // 设置边缘
+            LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) view.getLayoutParams();
+            if (lp != null) {
+                view.setLayoutParams(lp);
+            } else {
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                params.setMargins(dp2px(mContext, left), dp2px(mContext, top), dp2px(mContext, right), dp2px(mContext, bottom));
+                params.gravity = layoutGravity;
+                view.setLayoutParams(params);
+            }
+
+            // 设置dialog
+            view.setTag(mDialog);
+
+            // 获取当前对象
+            if (getViewListener != null) {
+                getViewListener.getDialogView(view);
+            }
+            mAddList.add(view);
+        }
+    }
+
+    /**
      * 添加图片
      *
      * @param img
      * @param getViewListener
      */
-    public void appendWImageView(@NonNull Drawable img, DialogWrapper.GetViewListener<DialogWrapper.WImageView> getViewListener) {
+    public void appendWImageView(Drawable img, DialogWrapper.GetViewListener<DialogWrapper.WImageView> getViewListener) {
         appendWImageView(img, ImageView.ScaleType.FIT_CENTER, Gravity.CENTER, 0, 0, 0, 0, getViewListener);
+    }
+
+    /**
+     * 添加图片
+     *
+     * @param imgUrl
+     * @param getViewListener
+     */
+    public void appendWImageView(@NonNull String imgUrl, DialogWrapper.GetViewListener<DialogWrapper.WImageView> getViewListener) {
+        appendWImageView(imgUrl, ImageView.ScaleType.FIT_CENTER, Gravity.CENTER, 0, 0, 0, 0, getViewListener);
     }
 
     /**
@@ -349,11 +401,35 @@ public class DialogConteroller {
      * @param bottom
      * @param getViewListener
      */
-    public void appendWImageView(@NonNull Drawable img, ImageView.ScaleType scaleType, int layoutGravity, int left, int top, int right, int bottom, DialogWrapper.GetViewListener<DialogWrapper.WImageView> getViewListener) {
-        if (img != null) {
+    public void appendWImageView(Drawable img, ImageView.ScaleType scaleType, int layoutGravity, int left, int top, int right, int bottom, DialogWrapper.GetViewListener<DialogWrapper.WImageView> getViewListener) {
+        appendWImageView(img, null, scaleType, layoutGravity, left, top, right, bottom, getViewListener);
+    }
+
+    public void appendWImageView(String imgUrl, ImageView.ScaleType scaleType, int layoutGravity, int left, int top, int right, int bottom, DialogWrapper.GetViewListener<DialogWrapper.WImageView> getViewListener) {
+        appendWImageView(null, imgUrl, scaleType, layoutGravity, left, top, right, bottom, getViewListener);
+    }
+
+    /**
+     * 添加图片
+     *
+     * @param imgUrl
+     * @param scaleType
+     * @param layoutGravity
+     * @param left
+     * @param top
+     * @param right
+     * @param bottom
+     * @param getViewListener
+     */
+    public void appendWImageView(Drawable imgDrawable, String imgUrl, ImageView.ScaleType scaleType, int layoutGravity, int left, int top, int right, int bottom, DialogWrapper.GetViewListener<DialogWrapper.WImageView> getViewListener) {
+        if (imgDrawable != null || imgUrl != null) {
             DialogWrapper.WImageView imageView = new DialogWrapper.WImageView(mContext);
             // 设置图片
-            imageView.setImageDrawable(img);
+            if (imgDrawable != null) {
+                imageView.setImageDrawable(imgDrawable);
+            } else if (imgUrl != null) {
+                imageView.setImageUrl(imgUrl);
+            }
             // 设图片显示位置
             imageView.setScaleType(scaleType);
             // 设置边缘
@@ -365,6 +441,8 @@ public class DialogConteroller {
             if (getViewListener != null) {
                 getViewListener.getDialogView(imageView);
             }
+            // 设置dialog
+            imageView.setDialog((DialogWrapper) mDialog);
             // 添加到列表中去
             mAddList.add(imageView);
         }
@@ -412,6 +490,8 @@ public class DialogConteroller {
             if (getViewListener != null) {
                 getViewListener.getDialogView(textView);
             }
+            // 设置dialog
+            textView.setDialog((DialogWrapper) mDialog);
             // 添加到列表中去
             mAddList.add(textView);
         }
@@ -470,6 +550,11 @@ public class DialogConteroller {
                     space_middle.setVisibility(View.GONE);
                     mButtonRight.setVisibility(View.VISIBLE);
                     if (isBottomSingleBtn) {
+                        space_top.setVisibility(View.GONE);
+                        // 单独一个按钮默认不是居中，是两边拉伸显示
+                        if (isGravityCenter) {
+                            mButtonRight.getLayoutParams().width = LinearLayout.LayoutParams.WRAP_CONTENT;
+                        }
                         //  如果是底部一个大按钮
                         mButtonRight.setBackground(getDrawableSignleRadius(rightBg, dp2px(mContext, cornerRadius)));
                     } else {
@@ -478,6 +563,10 @@ public class DialogConteroller {
                     }
                     setRightButton();
                 }
+            }
+            // 设置底部按钮高度
+            if (bottomHeight > 0) {
+                btn_layout.getLayoutParams().height = dp2px(mContext, bottomHeight);
             }
             // 修改线的颜色和宽度
             if (spaceButtonTop != 0) {

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.moverecyclerview">
+
+    <application android:theme="@style/AppTheme">
+
+        <activity
+            android:name=".MoveMainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ListViewActivity"
+            android:label="ListView"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".GridViewActivity"
+            android:label="GridView"
+            android:screenOrientation="portrait" />
+
+    </application>
+
+</manifest>

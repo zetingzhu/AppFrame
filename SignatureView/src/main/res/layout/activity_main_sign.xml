@@ -41,6 +41,7 @@
         android:id="@+id/view_slideview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:backColor="#E4D8E6" />
-
+        android:background="@drawable/bg_sign"
+        app:backColor="#E45C5C" />
+    <!--    app:backColor="@drawable/bg_sign"-->
 </LinearLayout>
