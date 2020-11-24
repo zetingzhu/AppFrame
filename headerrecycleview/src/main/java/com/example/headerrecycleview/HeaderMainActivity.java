@@ -14,7 +14,7 @@ import com.zzt.commonmodule.utils.ConfigARouter;
  * @author: zeting
  * @date: 2020/8/19
  */
-@Route(path = ConfigARouter.ACTIVITY_RECYCLEVIEW_HEADER )
+@Route(path = ConfigARouter.ACTIVITY_RECYCLEVIEW_HEADER)
 public class HeaderMainActivity extends AppCompatActivity {
 
     @Override
@@ -26,12 +26,12 @@ public class HeaderMainActivity extends AppCompatActivity {
     }
 
     public void linearlayout(View view) {
-        Intent intent = new Intent(this,LinearlayoutActivity.class);
+        Intent intent = new Intent(this, LinearlayoutActivity.class);
         startActivity(intent);
     }
 
     public void gridlayout(View view) {
-        Intent intent = new Intent(this,GridlayoutActivity.class);
+        Intent intent = new Intent(this, GridlayoutActivity.class);
         startActivity(intent);
     }
 }

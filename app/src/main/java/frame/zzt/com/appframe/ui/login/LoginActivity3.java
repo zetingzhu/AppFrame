@@ -116,6 +116,8 @@ public class LoginActivity3<P extends BasePresenter> extends BaseAppCompatActivi
 
         initView();
 
+
+//        mPasswordView.setInputType();
     }
 
     private void initView() {
@@ -180,7 +182,7 @@ public class LoginActivity3<P extends BasePresenter> extends BaseAppCompatActivi
     @OnClick(R.id.button4)
     public void testBtn() {
         onLoginSucc();
-        Toast.makeText(LoginActivity3.this , "登录。。。。。" , Toast.LENGTH_SHORT).show();
+        Toast.makeText(LoginActivity3.this, "登录。。。。。", Toast.LENGTH_SHORT).show();
     }
 
 

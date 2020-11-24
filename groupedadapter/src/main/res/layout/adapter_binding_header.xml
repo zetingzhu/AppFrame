@@ -2,9 +2,10 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
+
         <variable
             name="entity"
-            type="com.donkingliang.samples.entity.GroupEntity"/>
+            type="com.donkingliang.samples.entity.GroupEntity" />
     </data>
 
     <LinearLayout
@@ -20,7 +21,7 @@
             android:padding="10dp"
             android:textColor="@android:color/white"
             android:textSize="20sp"
-            android:text="@{entity.header}"/>
+            android:text="@{entity.header}" />
 
     </LinearLayout>
 </layout>

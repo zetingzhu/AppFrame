@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -16,7 +15,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/shape_bg_item"
         android:onClick="showListView"
-        android:text="List View （拖曳 + 滑动删除）"/>
+        android:text="List View （拖曳 + 滑动删除）" />
 
     <androidx.appcompat.widget.AppCompatButton
         style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
@@ -24,7 +23,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/shape_bg_item"
         android:onClick="showGridView"
-        android:text="Grid View（拖曳 + 固定首个）"/>
+        android:text="Grid View（拖曳 + 固定首个）" />
 
 
 </LinearLayout>

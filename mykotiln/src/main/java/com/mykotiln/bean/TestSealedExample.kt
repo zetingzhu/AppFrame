@@ -6,7 +6,7 @@ package com.mykotiln.bean
  * Date 18/12/3.
  */
 sealed class TestSealedExample {
-    data class User(var name: String , var age: Int ): TestSealedExample()
+    data class User(var name: String, var age: Int) : TestSealedExample()
 
     object user1 : TestSealedExample()// 单例模式
 

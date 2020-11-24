@@ -62,6 +62,7 @@ public class GroupedGridLayoutManager extends GridLayoutManager {
     /**
      * 提供这个方法可以使外部改变子项的SpanSize。
      * 这个方法的作用跟{@link SpanSizeLookup#getSpanSize(int)}一样。
+     *
      * @param groupPosition
      * @param childPosition
      * @return

@@ -39,7 +39,8 @@ class MyMessageUtil private constructor(internal var mContext: Context) {
     companion object {
         private var instance: MyMessageUtil? = null
 
-        @Synchronized fun getInstance(mContext: Context): MyMessageUtil {
+        @Synchronized
+        fun getInstance(mContext: Context): MyMessageUtil {
             if (instance == null) {
                 instance = MyMessageUtil(mContext)
             }

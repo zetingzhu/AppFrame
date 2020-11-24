@@ -69,12 +69,12 @@ public class Grid2Activity extends AppCompatActivity {
 
 
         //直接使用GroupGridLayoutManager实现子项的Grid效果
-        GroupedGridLayoutManager gridLayoutManager = new GroupedGridLayoutManager(this, 4, adapter){
+        GroupedGridLayoutManager gridLayoutManager = new GroupedGridLayoutManager(this, 4, adapter) {
             //重写这个方法 改变子项的SpanSize。
             //这个跟重写SpanSizeLookup的getSpanSize方法的使用是一样的。
             @Override
             public int getChildSpanSize(int groupPosition, int childPosition) {
-                if(groupPosition % 2 == 1){
+                if (groupPosition % 2 == 1) {
                     return 2;
                 }
                 return super.getChildSpanSize(groupPosition, childPosition);

@@ -5,29 +5,29 @@ package com.mykotiln.bean
  * Created by zeting
  * Date 18/12/3.
  */
-enum class TestEnumColor1(var argb : Int) {
-    RED(0xFF0000){
+enum class TestEnumColor1(var argb: Int) {
+    RED(0xFF0000) {
         override fun print() {
             println("我是枚举常量 RED ")
         }
     },
-    WHITE(0xFFFFFF){
+    WHITE(0xFFFFFF) {
         override fun print() {
             println("我是枚举常量 WHITE ")
         }
     },
-    BLACK(0x000000){
+    BLACK(0x000000) {
         override fun print() {
             println("我是枚举常量 BLACK ")
         }
     },
-    GREEN(0x00FF00){
+    GREEN(0x00FF00) {
         override fun print() {
             println("我是枚举常量 GREEN ")
         }
     },
-    BLUE(0x0000FF){
-        override fun print(){
+    BLUE(0x0000FF) {
+        override fun print() {
             println("我是枚举常量 BLUE ")
         }
     }

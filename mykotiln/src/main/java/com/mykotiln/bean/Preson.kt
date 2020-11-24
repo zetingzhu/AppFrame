@@ -5,6 +5,6 @@ package com.mykotiln.bean
  * Created by zeting
  * Date 18/12/3.
  */
-data class Preson(var name : String,
-                  val sex : Int,
-                  var age : Int)
+data class Preson(var name: String,
+                  val sex: Int,
+                  var age: Int)

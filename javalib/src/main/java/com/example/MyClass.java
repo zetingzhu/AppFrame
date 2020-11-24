@@ -2,12 +2,15 @@ package com.example;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 public class MyClass {
 
     public static void main(String[] args) {
 
+
+        HashMap map;
 
         int str11 = 0;
         String str22 = String.valueOf(null);
@@ -32,5 +35,7 @@ public class MyClass {
         System.out.println("-4-:" + unmodifiableList.toString());
 
         unmodifiableList.add("d");
+
+
     }
 }

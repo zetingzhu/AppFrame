@@ -1,6 +1,7 @@
 package com.mykotiln.activity;
 
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 
 import com.mykotiln.R;
@@ -12,7 +13,7 @@ import com.mykotiln.util.MyRecyclerViewJava;
 public class ActivityJava extends BaseActivity {
 
     private KotilnPersenter mPer;
-    private MyRecyclerViewJava rv_kotlin_list ;
+    private MyRecyclerViewJava rv_kotlin_list;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

@@ -22,33 +22,35 @@ class MyRecyclerViewKotlin : androidx.recyclerview.widget.RecyclerView {
      * var 声明为可变的
      * val 声明为不可变
      */
-    var mAdapterRecycle: AdapterRecycle ? = null
-    var mList : List<MyRecycleListItem>? = null
+    var mAdapterRecycle: AdapterRecycle? = null
+    var mList: List<MyRecycleListItem>? = null
     var mOnClick: MyRecycleOnClick? = null
-    var mContext : Context? = null
+    var mContext: Context? = null
 
     /**
      * 次构造函数, 类也可以有二级构造函数，需要加前缀 constructor:
      * context: Context? 后面加？ 表示可为空
      * */
-    constructor(context: Context?) : super(context!!){
-        initView(context)
-    }
-    constructor(context: Context?, attrs: AttributeSet?) : super(context!!, attrs){
-        initView(context)
-    }
-    constructor(context: Context?, attrs: AttributeSet?, defStyle: Int) : super(context!!, attrs, defStyle){
+    constructor(context: Context?) : super(context!!) {
         initView(context)
     }
 
-    fun initView(mContext : Context?){
+    constructor(context: Context?, attrs: AttributeSet?) : super(context!!, attrs) {
+        initView(context)
+    }
+
+    constructor(context: Context?, attrs: AttributeSet?, defStyle: Int) : super(context!!, attrs, defStyle) {
+        initView(context)
+    }
+
+    fun initView(mContext: Context?) {
         this.mContext = mContext
     }
 
     /**
      * 设备适配器
      */
-    fun setMyAdapter(mList : List<MyRecycleListItem> , mOnClick: MyRecycleOnClick){
+    fun setMyAdapter(mList: List<MyRecycleListItem>, mOnClick: MyRecycleOnClick) {
         this.mList = mList
         this.mOnClick = mOnClick
         mAdapterRecycle = AdapterRecycle()
@@ -64,14 +66,14 @@ class MyRecyclerViewKotlin : androidx.recyclerview.widget.RecyclerView {
     inner class AdapterRecycle : androidx.recyclerview.widget.RecyclerView.Adapter<DateHolder>() {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DateHolder {
 
-            var view = LayoutInflater.from(parent!!.context).inflate(R.layout.item_recycle , parent , false)
+            var view = LayoutInflater.from(parent!!.context).inflate(R.layout.item_recycle, parent, false)
             var viewHolder = DateHolder(view)
             return viewHolder
         }
 
         override fun onBindViewHolder(holder: DateHolder, position: Int) {
-            holder!!.mTextview!!.text =  mList!![position].itemId.toString() + " : " + mList!![position].itemValue.toString()
-            holder.mTextview!!.setOnClickListener(object :View.OnClickListener {
+            holder!!.mTextview!!.text = mList!![position].itemId.toString() + " : " + mList!![position].itemValue.toString()
+            holder.mTextview!!.setOnClickListener(object : View.OnClickListener {
                 override fun onClick(v: View?) {
                     mOnClick!!.onClickListener(mList!![position].itemId!!)
                 }
@@ -79,16 +81,17 @@ class MyRecyclerViewKotlin : androidx.recyclerview.widget.RecyclerView {
         }
 
         override fun getItemCount(): Int {
-               return mList!!.size
+            return mList!!.size
         }
     }
 
     /**
      * 定义一个viewholder
      */
-    inner class DateHolder(itemView: View ) : ViewHolder(itemView) {
+    inner class DateHolder(itemView: View) : ViewHolder(itemView) {
         /** internal   // 同一个模块中可见 */
         internal var mTextview: TextView? = null
+
         init {
             mTextview = itemView.findViewById<TextView>(R.id.textView) as TextView
         }

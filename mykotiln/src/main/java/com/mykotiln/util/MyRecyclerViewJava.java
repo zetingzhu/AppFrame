@@ -1,10 +1,12 @@
 package com.mykotiln.util;
 
 import android.content.Context;
+
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,11 +25,10 @@ import java.util.List;
 public class MyRecyclerViewJava extends RecyclerView {
 
 
-    private AdapterRecycle mAdapterRecycle ;
-    private Context mContext ;
+    private AdapterRecycle mAdapterRecycle;
+    private Context mContext;
     private List<MyRecycleListItem> mList;
     private MyRecycleOnClick mOnClick;
-
 
 
     public MyRecyclerViewJava(Context context) {
@@ -46,19 +47,19 @@ public class MyRecyclerViewJava extends RecyclerView {
     }
 
 
-    public void initView(Context mContext ){
-        this.mContext = mContext ;
+    public void initView(Context mContext) {
+        this.mContext = mContext;
     }
 
 
-    public void setMyAdapter(List<MyRecycleListItem> mList ,  MyRecycleOnClick mOnClick){
-        this.mList = mList ;
-        this.mOnClick = mOnClick ;
+    public void setMyAdapter(List<MyRecycleListItem> mList, MyRecycleOnClick mOnClick) {
+        this.mList = mList;
+        this.mOnClick = mOnClick;
 
         mAdapterRecycle = new AdapterRecycle();
         setLayoutManager(new LinearLayoutManager(mContext));
         //添加Android自带的分割线
-        addItemDecoration(new DividerItemDecoration(mContext , DividerItemDecoration.VERTICAL));
+        addItemDecoration(new DividerItemDecoration(mContext, DividerItemDecoration.VERTICAL));
         setAdapter(mAdapterRecycle);
 
     }
@@ -74,7 +75,7 @@ public class MyRecyclerViewJava extends RecyclerView {
 
         @Override
         public void onBindViewHolder(DateHolder holder, final int position) {
-            holder.mTextview.setText(mList.get(position).getItemId() +" : "+ mList.get(position).getItemValue());
+            holder.mTextview.setText(mList.get(position).getItemId() + " : " + mList.get(position).getItemValue());
             holder.mTextview.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {

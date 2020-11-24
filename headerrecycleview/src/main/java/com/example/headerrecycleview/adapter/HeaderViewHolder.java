@@ -18,12 +18,13 @@ import com.example.headerrecycleview.entity.ColumnField;
 public class HeaderViewHolder extends RecyclerView.ViewHolder {
 
     public TextView titleView;
+
     public HeaderViewHolder(@NonNull View itemView) {
         super(itemView);
         titleView = itemView.findViewById(R.id.header_title);
     }
 
-    public void render(String title){
+    public void render(String title) {
         titleView.setText(title);
     }
 }

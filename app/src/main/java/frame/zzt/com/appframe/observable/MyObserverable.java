@@ -1,7 +1,5 @@
 package frame.zzt.com.appframe.observable;
 
-import java.util.List;
-
 /**
  * 被观察者接口定义
  */

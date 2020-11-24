@@ -67,7 +67,6 @@ class KotilnUsePersenter : BasePersenter {
         mList!!.add(MyRecycleListItem(29, "Kotlin 统计操作符  "))
 
 
-
         /**
          * 接口实现方法 object : Class
          */
@@ -77,39 +76,39 @@ class KotilnUsePersenter : BasePersenter {
                  * when语句不仅可以替代掉switch语句，而且比switch语句更加强大
                  */
                 when (position) {
-                /**
-                 * 和逗号结合使用即添加了都好后 position = 0,1 都执行第一个方法。
-                 */
-                    -1, 0  ->  funLambda()
-                    1  ->  funLambda1()
-                    2  ->  funLambda2()
-                    3  ->  funLambda3()
-                    4  ->  funLambda4()
-                    5  ->  funLambdaTodo()
-                    6  ->  testRun1()
-                    7  ->  testRun2()
-                    8  ->  testRun3()
-                    9  ->  testWith1()
-                    10  ->  testApply()
-                    11  ->  testAlso()
-                    12  ->  testLet()
-                    13  ->  testTakeIf()
-                    14  ->  testTakeUnless()
-                    15  ->  testRepeat()
-                    16  ->  testComponent()
-                    17  ->  testReverse()
-                    18  ->  testList()
-                    19  ->  testMap()
-                    20  ->  testListV()
-                    21  ->  listToArray()
-                    22  ->  arrayToList()
-                    23  ->  listToList()
-                    24  ->  listOperator()
-                    25  ->  listOperator1()
-                    26  ->  listOperator2()
-                    27  ->  listOperator3()
-                    28  ->  listOperator4()
-                    29 ->  listOperator5()
+                    /**
+                     * 和逗号结合使用即添加了都好后 position = 0,1 都执行第一个方法。
+                     */
+                    -1, 0 -> funLambda()
+                    1 -> funLambda1()
+                    2 -> funLambda2()
+                    3 -> funLambda3()
+                    4 -> funLambda4()
+                    5 -> funLambdaTodo()
+                    6 -> testRun1()
+                    7 -> testRun2()
+                    8 -> testRun3()
+                    9 -> testWith1()
+                    10 -> testApply()
+                    11 -> testAlso()
+                    12 -> testLet()
+                    13 -> testTakeIf()
+                    14 -> testTakeUnless()
+                    15 -> testRepeat()
+                    16 -> testComponent()
+                    17 -> testReverse()
+                    18 -> testList()
+                    19 -> testMap()
+                    20 -> testListV()
+                    21 -> listToArray()
+                    22 -> arrayToList()
+                    23 -> listToList()
+                    24 -> listOperator()
+                    25 -> listOperator1()
+                    26 -> listOperator2()
+                    27 -> listOperator3()
+                    28 -> listOperator4()
+                    29 -> listOperator5()
 
                 }
             }
@@ -144,18 +143,18 @@ class KotilnUsePersenter : BasePersenter {
     foldRightIndexed{...} : 和reduceRightIndexed{}类似，但是foldRightIndexed{}有一个初始值
      */
     private fun listOperator5() {
-        val list1 = listOf(1,2,3,4,5)
+        val list1 = listOf(1, 2, 3, 4, 5)
 
         println("  ------   any -------")
         println(list1.any())
-        println(list1.any{it > 10})
+        println(list1.any { it > 10 })
 
         println("  ------   all -------")
         println(list1.all { it > 2 })
 
         println("  ------   none -------")
         println(list1.none())
-        println(list1.none{ it > 2})
+        println(list1.none { it > 2 })
 
         println("  ------   max -------")
         println(list1.max())
@@ -174,24 +173,24 @@ class KotilnUsePersenter : BasePersenter {
         println(list1.average())
 
         println("  ------   reduce  -------")
-        println(list1.reduce { result, next -> result  + next})
+        println(list1.reduce { result, next -> result + next })
         println(list1.reduceIndexed { index, result, next ->
             println(index.toString().plus(" : ").plus(result).plus("-").plus(next))
             result + next
         })
-        println(list1.reduceRight { result, next -> result  + next })
-        println(list1.reduceRightIndexed {index, result, next ->
+        println(list1.reduceRight { result, next -> result + next })
+        println(list1.reduceRightIndexed { index, result, next ->
             index + result + next
         })
 
         println("  ------   fold  -------")
-        println(list1.fold(3){result, next -> result  + next})
-        println(list1.foldIndexed(3){index,result, next ->
-            index + result  + next
+        println(list1.fold(3) { result, next -> result + next })
+        println(list1.foldIndexed(3) { index, result, next ->
+            index + result + next
         })
-        println(list1.foldRight(3){result, next -> result  + next})
-        println(list1.foldRightIndexed(3){index,result, next ->
-            index + result  + next
+        println(list1.foldRight(3) { result, next -> result + next })
+        println(list1.foldRightIndexed(3) { index, result, next ->
+            index + result + next
         })
     }
 
@@ -206,8 +205,8 @@ class KotilnUsePersenter : BasePersenter {
     partition : 判断元素是否满足条件把集合拆分为有两个Pair组成的新集合。
      */
     private fun listOperator4() {
-        val list1 = listOf(1,2,3,4)
-        val list2 = listOf("kotlin","Android","Java","PHP","JavaScript")
+        val list1 = listOf(1, 2, 3, 4)
+        val list2 = listOf("kotlin", "Android", "Java", "PHP", "JavaScript")
 
 // plus() 和 `+`一样
         println(list1.plus(list2))
@@ -215,22 +214,23 @@ class KotilnUsePersenter : BasePersenter {
 
 // zip
         println(list1.zip(list2))
-        println(list1.zip(list2){       // 组成的新集合由元素少的原集合决定
-            it1,it2-> it1.toString().plus("-").plus(it2)
+        println(list1.zip(list2) {       // 组成的新集合由元素少的原集合决定
+            it1, it2 ->
+            it1.toString().plus("-").plus(it2)
         })
 
 // unzip
-        val newList = listOf(Pair(1,"Kotlin"),Pair(2,"Android"),Pair(3,"Java"),Pair(4,"PHP"))
+        val newList = listOf(Pair(1, "Kotlin"), Pair(2, "Android"), Pair(3, "Java"), Pair(4, "PHP"))
         println(newList.unzip())
 
 // partition
         println(list2.partition { it.startsWith("Ja") })
 
-        var mPair : Pair<List<String>, List<String>>  =  list2.partition { it.startsWith("Ja") }
-        var mList1 : List<String> = mPair.first
-        var mList2 : List<String> = mPair.second
-        println( mList1  )
-        println( mList2  )
+        var mPair: Pair<List<String>, List<String>> = list2.partition { it.startsWith("Ja") }
+        var mList1: List<String> = mPair.first
+        var mList2: List<String> = mPair.second
+        println(mList1)
+        println(mList2)
 
     }
 
@@ -257,14 +257,14 @@ class KotilnUsePersenter : BasePersenter {
 
      */
     private fun listOperator3() {
-        val list1 = listOf(-1,-3,1,3,5,6,7,2,4,10,9,8)
-        val list2 = listOf(1,3,4,5,null,6,null,10)
-        val list3 = listOf(1,1,5,2,2,6,3,3,7,4,4,8)
+        val list1 = listOf(-1, -3, 1, 3, 5, 6, 7, 2, 4, 10, 9, 8)
+        val list2 = listOf(1, 3, 4, 5, null, 6, null, 10)
+        val list3 = listOf(1, 1, 5, 2, 2, 6, 3, 3, 7, 4, 4, 8)
 
-        println(list1 )
+        println(list1)
 
         println("  ------   filter -------")
-        println(list1.filter { it > 1  })
+        println(list1.filter { it > 1 })
         println(list1.filterIndexed { index, result ->
             index < 5 && result > 3
         })
@@ -288,8 +288,8 @@ class KotilnUsePersenter : BasePersenter {
         println(list3.distinctBy { it + 2 })
 
         println("  ------   slice -------")
-        println(list1.slice(listOf(1,3,5,7)))
-        println(list1.slice(IntRange(1,5)))
+        println(list1.slice(listOf(1, 3, 5, 7)))
+        println(list1.slice(IntRange(1, 5)))
     }
 
     /**
@@ -305,7 +305,7 @@ class KotilnUsePersenter : BasePersenter {
     groupBy{...} : 分组。即根据条件把集合拆分为为一个Map<K,List<T>>类型的集合。具体看实例
      */
     private fun listOperator2() {
-        val list1 = listOf("kotlin","Android","Java","PHP","JavaScript")
+        val list1 = listOf("kotlin", "Android", "Java", "PHP", "JavaScript")
 
         println(list1.map { "str-".plus(it) })
 
@@ -319,7 +319,7 @@ class KotilnUsePersenter : BasePersenter {
             index.toString().plus("-").plus(str)
         })
 
-        println( list1.flatMap { listOf(it,"new-".plus(it)) })
+        println(list1.flatMap { listOf(it, "new-".plus(it)) })
 
         println(list1.groupBy { if (it.startsWith("Java")) "big" else "latter" })
     }
@@ -354,8 +354,8 @@ class KotilnUsePersenter : BasePersenter {
     forEachIndexed{index,value} : 遍历元素，可获得集合中元素的下标。一般用作元素以及下标的打印
     componentX() ： 这个函数在前面的章节中提过多次了。用于获取元素。其中的X只能代表1..5。详情可看下面的例子
      */
-    fun listOperator(){
-        val list = listOf("kotlin","Android","Java","PHP","Python","IOS")
+    fun listOperator() {
+        val list = listOf("kotlin", "Android", "Java", "PHP", "Python", "IOS")
 
         println("  ------   contains -------")
         println(list.contains("JS"))
@@ -363,23 +363,23 @@ class KotilnUsePersenter : BasePersenter {
         println("  ------   elementAt -------")
 
         println(list.elementAt(2))
-        println(list.elementAtOrElse(10,{it}))
+        println(list.elementAtOrElse(10, { it }))
         println(list.elementAtOrNull(10))
 
         println("  ------   get -------")
         println(list.get(2))
-        println(list.getOrElse(10,{it}))
+        println(list.getOrElse(10, { it }))
         println(list.getOrNull(10))
 
         println("  ------   first -------")
         println(list.first())
-        println(list.first{ it == "Android" })
+        println(list.first { it == "Android" })
         println(list.firstOrNull())
         println(list.firstOrNull { it == "Android" })
 
         println("  ------   last -------")
         println(list.last())
-        println(list.last{ it == "Android" })
+        println(list.last { it == "Android" })
         println(list.lastOrNull())
         println(list.lastOrNull { it == "Android" })
 
@@ -440,7 +440,7 @@ class KotilnUsePersenter : BasePersenter {
 
     // 数组转集合
     fun arrayToList() {
-        val arr = arrayOf(1,3,5,7,9)
+        val arr = arrayOf(1, 3, 5, 7, 9)
         val list = arr.toList()
         println("变量arr的类型为：${arr.javaClass}")
         println("变量list的类型为：${list.javaClass}")
@@ -449,7 +449,7 @@ class KotilnUsePersenter : BasePersenter {
 
 // 集合转集合，这里用Set转List
 
-    fun listToList(){
+    fun listToList() {
         val set = setOf(1)
         val setTolist = set.toList()
 
@@ -460,7 +460,7 @@ class KotilnUsePersenter : BasePersenter {
 
     // 集合转数组
     private fun listToArray() {
-        val list = listOf<Int>(1,2,3,4,5,6)         // 声明一个Int类型的List
+        val list = listOf<Int>(1, 2, 3, 4, 5, 6)         // 声明一个Int类型的List
         val listArray = list.toIntArray()           // 转换
 
         println(list.javaClass.toString())          // 打印list的类型
@@ -471,36 +471,36 @@ class KotilnUsePersenter : BasePersenter {
 
     private fun testListV() {
         var listBasedao: List<Any>
-        val listDemo : List<DemoIn> = listOf( DemoIn(1), DemoIn(2) )
+        val listDemo: List<DemoIn> = listOf(DemoIn(1), DemoIn(2))
         listBasedao = listDemo
 
-        listBasedao.forEach { println(" list 赋值  ${it.toString() } " ) }
+        listBasedao.forEach { println(" list 赋值  ${it.toString()} ") }
     }
 
     private fun testMap() {
         // 以键值对的形式出现，键与值之间使用to
-        val map1 = mapOf("key1" to 2 , "key2" to 3)
-        val map2 = mapOf<Int,String>(1 to "value1" , 2 to "value2")
-        val mutableMap = mutableMapOf("key1" to 2 , "key2" to 3)
-        val hashMap = hashMapOf("key1" to 2 , "key1" to 3)   // 同Java中的HashMap
+        val map1 = mapOf("key1" to 2, "key2" to 3)
+        val map2 = mapOf<Int, String>(1 to "value1", 2 to "value2")
+        val mutableMap = mutableMapOf("key1" to 2, "key2" to 3)
+        val hashMap = hashMapOf("key1" to 2, "key1" to 3)   // 同Java中的HashMap
 
-        mutableMap.put("key3" , 4)
+        mutableMap.put("key3", 4)
 
-        mutableMap.forEach{
-            (key,value) -> println("mutableMap forEach key = $key \t value = $value")
+        mutableMap.forEach { (key, value) ->
+            println("mutableMap forEach key = $key \t value = $value")
         }
-        for ((key, value) in map2 ) {
+        for ((key, value) in map2) {
             println("map2 key = $key \t value = $value")
         }
 
-        map1.forEach{
-            (key,value) -> println("map1 key = $key \t value = $value")
+        map1.forEach { (key, value) ->
+            println("map1 key = $key \t value = $value")
         }
 
-        val map3 = mapOf("key1" to 2 , "key1" to 3 , "key1" to "value1" , "key2" to "value2")
+        val map3 = mapOf("key1" to 2, "key1" to 3, "key1" to "value1", "key2" to "value2")
 
-        map3.forEach{
-            (key,value) -> println("map3 --> $key \t $value")
+        map3.forEach { (key, value) ->
+            println("map3 --> $key \t $value")
         }
     }
 
@@ -510,35 +510,35 @@ class KotilnUsePersenter : BasePersenter {
      */
     private fun testList() {
         /** 使用listOf()初始化不可变的List类型集合 */
-        val arr = arrayOf("1","2",3,4,5)
-        val list1 = listOf(1,2,"3",4,"5")                // 随意创建
-        val list2 = listOf<String>("1","2","3","4","5")  // 确定元素的值类型
+        val arr = arrayOf("1", "2", 3, 4, 5)
+        val list1 = listOf(1, 2, "3", 4, "5")                // 随意创建
+        val list2 = listOf<String>("1", "2", "3", "4", "5")  // 确定元素的值类型
         val list3 = listOf(arr)                          // 可传入一个数组
         // 遍历
-        for(value in list1){
+        for (value in list1) {
             println(" list $value \t")
         }
         /**使用mutableListOf()初始化可变的List类型集合 */
-        val mutableList1 = mutableListOf(1,2,"3",4,"5")                // 随意创建
-        val mutableList2 = mutableListOf<String>("1","2","3","4","5")  // 确定元素的值类型
+        val mutableList1 = mutableListOf(1, 2, "3", 4, "5")                // 随意创建
+        val mutableList2 = mutableListOf<String>("1", "2", "3", "4", "5")  // 确定元素的值类型
         val mutableList3 = mutableListOf(arr)                          // 可传入一个数组
-        val mutableList : ArrayList<String>  // 这里的ArrayList<>和Java里面的ArrayList一致
+        val mutableList: ArrayList<String>  // 这里的ArrayList<>和Java里面的ArrayList一致
 
         mutableList1.add("6")  // 添加元素
         mutableList1.add("7")
         mutableList1.remove(1)   // 删除某一元素
 
         // 遍历
-        for(value in mutableList1){
+        for (value in mutableList1) {
             println(" mutable $value \t")
         }
         mutableList1.clear()   // 清空集合
 
-        val set1 = setOf(1,2,"3","4","2",1,2,3,4,5)
-        val mutableSet1 = mutableSetOf(1,2,"3","4","2",1,2,3,4,5)
-        val mutableSet2 : HashSet<String>  // 这里的HashSet<>和Java里面的HashSet<>一致
+        val set1 = setOf(1, 2, "3", "4", "2", 1, 2, 3, 4, 5)
+        val mutableSet1 = mutableSetOf(1, 2, "3", "4", "2", 1, 2, 3, 4, 5)
+        val mutableSet2: HashSet<String>  // 这里的HashSet<>和Java里面的HashSet<>一致
         // 遍历
-        for(value in set1){
+        for (value in set1) {
             println(" set $value \t")
         }
     }
@@ -547,11 +547,11 @@ class KotilnUsePersenter : BasePersenter {
      * 反转元素
      */
     private fun testReverse() {
-        val arr = arrayOf("1",2,3,4)
+        val arr = arrayOf("1", 2, 3, 4)
         arr.reverse()
 
         // 文章后面会讲解forEach高阶函数。比for循环简洁多了
-        for (index in arr){
+        for (index in arr) {
             println("$index \t")
         }
     }
@@ -560,7 +560,7 @@ class KotilnUsePersenter : BasePersenter {
      * 获取数组的前几个元素
      */
     private fun testComponent() {
-        val arr = arrayOf("1",2,3,4)
+        val arr = arrayOf("1", 2, 3, 4)
 
         println(arr.component1())
         println(arr.component2())
@@ -570,11 +570,12 @@ class KotilnUsePersenter : BasePersenter {
         // 程序崩溃，因为元素只有4个，所以在不确定元素个数的情况，慎用这些函数，还是使用遍历安全些。
 //        println(arr.component5())
     }
+
     /**
      * 根据传入的重复次数去重复执行一个我们想要的动作(函数)
      */
     private fun testRepeat() {
-        repeat(5){
+        repeat(5) {
             println("我是重复的第${it + 1}次，我的索引为：$it")
         }
     }
@@ -591,6 +592,7 @@ class KotilnUsePersenter : BasePersenter {
 
         println("result = $result")
     }
+
     /**
      * 传入一个你希望的一个条件，如果对象符合你的条件则返回自身，反之，则返回null。
      */
@@ -603,6 +605,7 @@ class KotilnUsePersenter : BasePersenter {
 
         println("result = $result")
     }
+
     /**
      * 它其实和T.also以及T.apply都很相似。而T.let的作用也不仅仅在使用空安全这一个点上
      */
@@ -654,66 +657,71 @@ class KotilnUsePersenter : BasePersenter {
             println("结果：${this.plus("-php")}")
         }
     }
+
     private fun testApply() {
         val mTvBtn = R.id.btn_1 as Button
-        mTvBtn.apply{
+        mTvBtn.apply {
             text = "kotlin"
             textSize = 13f
-        }.apply{
+        }.apply {
             // 这里可以继续去设置属性或一些TextView的其他一些操作
-        }.apply{
-            setOnClickListener{ view -> showToast("这个是点击事件")}
+        }.apply {
+            setOnClickListener { view -> showToast("这个是点击事件") }
         }
     }
+
     private fun testWith1() {
         val newStr = "kotlin"
-        with(newStr){
-            println( "length = ${this?.length}" )
-            println( "first = ${this?.first()}")
-            println( "last = ${this?.last()}" )
+        with(newStr) {
+            println("length = ${this?.length}")
+            println("first = ${this?.first()}")
+            println("last = ${this?.last()}")
         }
 
         newStr?.run {
-            println( "length = $length" )
-            println( "first = ${first()}")
-            println( "last = ${last()}" )
+            println("length = $length")
+            println("first = ${first()}")
+            println("last = ${last()}")
         }
     }
+
     private fun testRun3() {
-        val mTvBtn : Button =  R.id.btn_1 as Button
-        mTvBtn.run{
+        val mTvBtn: Button = R.id.btn_1 as Button
+        mTvBtn.run {
             text = "kotlin"
             textSize = 13f
         }
 
-        showToast( " Button 的字 ${mTvBtn.text} " )
+        showToast(" Button 的字 ${mTvBtn.text} ")
     }
 
     private fun testRun2() {
         val str = "kotlin"
         str.run {
-            println( "length = ${this.length}" )
-            println( "first = ${first()}")
-            println( "last = ${last()}" )
+            println("length = ${this.length}")
+            println("first = ${first()}")
+            println("last = ${last()}")
         }
     }
+
     private fun testRun1() {
         val str = "kotlin"
 
-        run{
+        run {
             val str = "java"   // 和上面的变量不会冲突
             println("str = $str")
         }
 
         println("str = $str")
     }
-    private fun funLambdaTodo(){
+
+    private fun funLambdaTodo() {
         TODO("测试TODO函数，是否显示抛出错误")
     }
 
 
     // 源代码
-    fun test(){
+    fun test() {
         println("无参数")
     }
 
@@ -723,22 +731,23 @@ class KotilnUsePersenter : BasePersenter {
     }
 
     // 源代码
-    fun test1(a : Int , b : Int) : Int{
+    fun test1(a: Int, b: Int): Int {
         return a + b
     }
 
     // lambda
-    val test2 : (Int , Int) -> Int = {a , b -> a + b}
+    val test2: (Int, Int) -> Int = { a, b -> a + b }
+
     // 或者
-    val test2_1 = {a : Int , b : Int -> a + b}
+    val test2_1 = { a: Int, b: Int -> a + b }
 
 
     private fun funLambda() {
         test()
         test0()
-        showToast("计算结果值1：${test1(1,2)}")
-        showToast("计算结果值2：${test2(2,3)}")
-        showToast("计算结果值3：${test2_1(3,4)}")
+        showToast("计算结果值1：${test1(1, 2)}")
+        showToast("计算结果值2：${test2(2, 3)}")
+        showToast("计算结果值3：${test2_1(3, 4)}")
 
     }
 
@@ -749,45 +758,48 @@ class KotilnUsePersenter : BasePersenter {
         println(arr.filter { it < 5 }.component1())
     }
 
-    fun test(num1 : Int, bool : (Int) -> Boolean) : Int{
-        return if (bool(num1)){ num1 } else 0
+    fun test(num1: Int, bool: (Int) -> Boolean): Int {
+        return if (bool(num1)) {
+            num1
+        } else 0
     }
+
     fun funLambda2() {
         println(test(10, { it > 5 }))
         println(test(4, { it > 5 }))
     }
 
-    var map = mapOf("key1" to "value1","key2" to "value2","key3" to "value3")
+    var map = mapOf("key1" to "value1", "key2" to "value2", "key3" to "value3")
     fun funLambda3() {
-        map.forEach{
-            (key , value) -> println("$key \t $value")
+        map.forEach { (key, value) ->
+            println("$key \t $value")
         }
 
         // 不需要key的时候
-        map.forEach{
-            (_ , value) -> println("$value")
+        map.forEach { (_, value) ->
+            println("$value")
         }
     }
 
-    fun resultByOpt(num1 : Int , num2 : Int , result : (Int ,Int) -> Int) : Int{
-        return result(num1,num2)
+    fun resultByOpt(num1: Int, num2: Int, result: (Int, Int) -> Int): Int {
+        return result(num1, num2)
     }
 
     fun funLambda4() {
-        val result1 = resultByOpt(1,2){
-            num1, num2 ->  num1 + num2
+        val result1 = resultByOpt(1, 2) { num1, num2 ->
+            num1 + num2
         }
 
-        val result2 = resultByOpt(3,4){
-            num1, num2 ->  num1 - num2
+        val result2 = resultByOpt(3, 4) { num1, num2 ->
+            num1 - num2
         }
 
-        val result3 = resultByOpt(5,6){
-            num1, num2 ->  num1 * num2
+        val result3 = resultByOpt(5, 6) { num1, num2 ->
+            num1 * num2
         }
 
-        val result4 = resultByOpt(6,3){
-            num1, num2 ->  num1 / num2
+        val result4 = resultByOpt(6, 3) { num1, num2 ->
+            num1 / num2
         }
 
         println("result1 = $result1")

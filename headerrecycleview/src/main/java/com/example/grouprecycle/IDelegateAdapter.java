@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 /**
  * @author: zeting
  * @date: 2020/8/19
- *  分组适配器 ViewHolder
+ * 分组适配器 ViewHolder
  */
 public interface IDelegateAdapter {
 

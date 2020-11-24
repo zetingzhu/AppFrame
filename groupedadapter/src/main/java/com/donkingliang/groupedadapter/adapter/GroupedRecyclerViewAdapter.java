@@ -28,7 +28,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 public abstract class GroupedRecyclerViewAdapter
         extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    public static final String TAG = GroupedRecyclerViewAdapter.class.getSimpleName() ;
+    public static final String TAG = GroupedRecyclerViewAdapter.class.getSimpleName();
 
     public static final int TYPE_HEADER = R.integer.type_header;
     public static final int TYPE_FOOTER = R.integer.type_footer;
@@ -95,7 +95,7 @@ public abstract class GroupedRecyclerViewAdapter
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (viewType == TYPE_EMPTY){
+        if (viewType == TYPE_EMPTY) {
             return new BaseViewHolder(getEmptyView(parent));
         } else {
             if (mUseBinding) {
@@ -114,7 +114,7 @@ public abstract class GroupedRecyclerViewAdapter
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
         int type = judgeType(position);
         final int groupPosition = getGroupPositionForPosition(position);
-        Log.d(TAG , "获取一组 的id:" + groupPosition + " - 获取当前type："+ type );
+        Log.d(TAG, "获取一组 的id:" + groupPosition + " - 获取当前type：" + type);
         if (type == TYPE_HEADER) {
             if (mOnHeaderClickListener != null) {
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -429,16 +429,17 @@ public abstract class GroupedRecyclerViewAdapter
 
     /**
      * 设置空布局显示。默认不显示
+     *
      * @param isShow
      */
-    public void showEmptyView(boolean isShow){
-        if (isShow != showEmptyView){
+    public void showEmptyView(boolean isShow) {
+        if (isShow != showEmptyView) {
             showEmptyView = isShow;
             notifyDataChanged();
         }
     }
 
-    public boolean isShowEmptyView(){
+    public boolean isShowEmptyView() {
         return showEmptyView;
     }
 
@@ -1112,10 +1113,11 @@ public abstract class GroupedRecyclerViewAdapter
 
     /**
      * 获取空布局
+     *
      * @param parent
      * @return
      */
-    public View getEmptyView(ViewGroup parent){
+    public View getEmptyView(ViewGroup parent) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.group_adapter_default_empty_view, parent, false);
         return view;
     }

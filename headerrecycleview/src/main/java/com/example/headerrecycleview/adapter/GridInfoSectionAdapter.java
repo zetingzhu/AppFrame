@@ -21,7 +21,7 @@ public class GridInfoSectionAdapter extends SectionDelegateAdapter {
 
     @Override
     public RecyclerView.ViewHolder onCreateHeaderViewHolder(@NonNull ViewGroup viewGroup) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_detail_header,viewGroup,false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_detail_header, viewGroup, false);
         return new HeaderViewHolder(view);
     }
 
@@ -32,7 +32,7 @@ public class GridInfoSectionAdapter extends SectionDelegateAdapter {
 
     @Override
     public RecyclerView.ViewHolder onCreateContentViewHolder(@NonNull ViewGroup viewGroup) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.listview_grid_detail_item,viewGroup,false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.listview_grid_detail_item, viewGroup, false);
         return new GridInfoViewHolder(view);
     }
 

@@ -9,10 +9,10 @@ import kotlinx.android.synthetic.main.activity_kotlin.*
 /**
  * kotlin Activity 的创建
  */
-class ActivityKotlinClass : BaseActivity()  {
+class ActivityKotlinClass : BaseActivity() {
 
     var mPer = KotilnClassPersenter(this)
-    var rv_kotlin_list : MyRecyclerViewKotlin?= null
+    var rv_kotlin_list: MyRecyclerViewKotlin? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,7 +21,7 @@ class ActivityKotlinClass : BaseActivity()  {
     }
 
 
-    fun initView(){
+    fun initView() {
         rv_kotlin_list = findViewById<MyRecyclerViewKotlin>(R.id.rv_kotlin_list)
         mPer.setItemKotlinClass(rv_kotlin_list!!)
 

@@ -83,39 +83,39 @@ class KotilnPersenter : BasePersenter {
                  * when语句不仅可以替代掉switch语句，而且比switch语句更加强大
                  */
                 when (position) {
-                /**
-                 * 和逗号结合使用即添加了都好后 position = 0,1 都执行第一个方法。
-                 */
+                    /**
+                     * 和逗号结合使用即添加了都好后 position = 0,1 都执行第一个方法。
+                     */
                     -1, 0 -> {
                         testIfElse()
                     }
                     1 -> {
                         testIfElseSY()
                     }
-                    2 ->  testForUntil()
-                    3 ->  testForDian()
-                    4 ->  testForDownTo()
-                    5 ->  testForStep()
-                    6 ->  testForInString()
-                    7 ->  testForInArray()
-                    8 ->  testForArrayIndices()
+                    2 -> testForUntil()
+                    3 -> testForDian()
+                    4 -> testForDownTo()
+                    5 -> testForStep()
+                    6 -> testForInString()
+                    7 -> testForInArray()
+                    8 -> testForArrayIndices()
                     9 -> testForArrayWithIndex()
-                    10 ->  testForArrayIterator()
-                    11 ->  testForWhen()
-                    12 ->  testForWhenIn()
-                    13 ->  testForWhenIs()
-                    14 ->  testForWhenOrIf()
-                    15 ->  testLen()
-                    16 ->  testEvils1()
-                    17 ->  testEvils2()
-                    18 ->  testEvils3()
-                    19 ->  testVararg()
-                    20 ->  testVararg2()
-                    21 ->  testStringFirst()
-                    22 ->  testStringLast()
-                    23 ->  testFindFindLast()
-                    24 ->  testIndex()
-                    25 ->  testSplit()
+                    10 -> testForArrayIterator()
+                    11 -> testForWhen()
+                    12 -> testForWhenIn()
+                    13 -> testForWhenIs()
+                    14 -> testForWhenOrIf()
+                    15 -> testLen()
+                    16 -> testEvils1()
+                    17 -> testEvils2()
+                    18 -> testEvils3()
+                    19 -> testVararg()
+                    20 -> testVararg2()
+                    21 -> testStringFirst()
+                    22 -> testStringLast()
+                    23 -> testFindFindLast()
+                    24 -> testIndex()
+                    25 -> testSplit()
                     26 -> funOperator()
                     27 -> funFHCZF()
                     28 -> funWYSCZF()
@@ -133,16 +133,16 @@ class KotilnPersenter : BasePersenter {
         val b = 5
 
         // 操作符实现
-        val s = 3 in a .. b     // true,因为3在区间[1,5]之内
+        val s = 3 in a..b     // true,因为3在区间[1,5]之内
         showToastW("s = $s")
-        for (index in a .. b){
+        for (index in a..b) {
             showToastI("index = $index \t")
         }
 
         // 操作符重载方式实现
         val t = 6 in a.rangeTo(b)
         showToastW("t = $t")
-        for (index in a.rangeTo(b)){
+        for (index in a.rangeTo(b)) {
             showToastI("index = $index \t")
         }
     }
@@ -188,7 +188,7 @@ class KotilnPersenter : BasePersenter {
     /**
      * 数组操作符
      */
-    fun funOperator(){
+    fun funOperator() {
 // 简单的二元操作
         val a = 10
         val b = 2
@@ -216,34 +216,34 @@ class KotilnPersenter : BasePersenter {
     isNotBlank() : 其源码是对isBlank()函数取反。不能直接用于可空的字符串
     isNotOrBlank() : 其源码判断该字符串是否为null。或者调用isBlank()函数
      */
-    fun testSplit(){
+    fun testSplit() {
         var str2 = "1 kotlin 2 java 3 Lua 4 JavaScript"
 
         val list3 = str2.split(Regex("[0-9]+"))
-        for (str in list3){
+        for (str in list3) {
             showToast("$str \t")
         }
 
 
         val list4 = str2.split(Pattern.compile("[0-9]+"))
-        for (str in list4){
+        for (str in list4) {
             showToast("$str \t")
         }
 
         val str1 = "Kotlin is a very good programming language"
         val list1 = str1.split(' ')
-        for (str in list1){
+        for (str in list1) {
             showToastW("$str \t")
         }
 
         val list2 = str1.split(" ")
-        for (str in list2){
+        for (str in list2) {
             showToastW("$str \t")
         }
         // 可变参数
         val str3 = "a b c d e f g h 2+3+4+5"
-        val list5 = str3.split(' ','+')
-        for (str in list5){
+        val list5 = str3.split(' ', '+')
+        for (str in list5) {
             showToast("$str \t")
         }
 
@@ -253,89 +253,92 @@ class KotilnPersenter : BasePersenter {
         showToast("字符串反转：${str4.reversed()}")
 
         // startsWith()判断其字符串是否由某一个字符或字符串起始。
-        showToastW ((str4.startsWith('k')  .toString() ))      // 是否有字符`k`起始
-        showToastW (str4.startsWith("Kot") .toString()  )   // 是否由字符串`kot`起始
-        showToastW (str4.startsWith("lin",3)  .toString() )  // 当起始位置为3时，是否由字符串`lin`起始
+        showToastW((str4.startsWith('k').toString()))      // 是否有字符`k`起始
+        showToastW(str4.startsWith("Kot").toString())   // 是否由字符串`kot`起始
+        showToastW(str4.startsWith("lin", 3).toString())  // 当起始位置为3时，是否由字符串`lin`起始
 //        endsWith() 判断其字符串是否由某一个字符或字符串结尾。
-        showToast(str4.endsWith("lin") .toString()  )  // 是否由字符串`lin`结尾
-        showToast(str4.endsWith('n') .toString()  )    // 是否由字符`n`结尾
+        showToast(str4.endsWith("lin").toString())  // 是否由字符串`lin`结尾
+        showToast(str4.endsWith('n').toString())    // 是否由字符`n`结尾
         // contains 包含某个字符串
-        showToastE(str4.contains("tli") .toString()  )    // 是否由字符`n`结尾
+        showToastE(str4.contains("tli").toString())    // 是否由字符`n`结尾
 
     }
 
-    fun testIndex(){
+    fun testIndex() {
         val str = "Kotlin is a very good programming language 1234a Kotlin 5678 3 is 4"
         showToast(str.indexOfFirst { it == 'o' })//查找某一个元素或字符串在原字符串中第一次出现的下标。
         showToast(str.indexOfLast { it == 'o' })//查找某一个元素或字符串在原字符串中最后一次出现的下标。
-        showToast(str.indexOf('o',0))//查找某一个元素或字符串在原字符串中第一次出现的下标。
-        showToast(str.indexOf("very",0))
+        showToast(str.indexOf('o', 0))//查找某一个元素或字符串在原字符串中第一次出现的下标。
+        showToast(str.indexOf("very", 0))
         showToast(str.lastIndexOf('o'))
         showToast(str.lastIndexOf("good"))
 
         showToast("s = ${str.substring(10)}")  // 当只有开始下标时，结束下标为length - 1
-        showToast(str.substring(0,15))
-        showToast(str.substring(IntRange(0,15)))
+        showToast(str.substring(0, 15))
+        showToast(str.substring(IntRange(0, 15)))
 
-        showToastI(str.replace('a','A'))
+        showToastI(str.replace('a', 'A'))
         // 正则的规则为检测数字，如果为数字则替换成字符串`kotlin`
-        showToastI(str.replace(Regex("[0-9]+"),"kotlin"))
-        showToastI(str.replace(Regex("[0-9]+"),{
+        showToastI(str.replace(Regex("[0-9]+"), "kotlin"))
+        showToastI(str.replace(Regex("[0-9]+"), {
             "abcd "
         }))
         //把满足条件的第一个字符或字符串替换成新的字符或字符串
-        showToastI(str.replaceFirst('a','A'))
-        showToastI(str.replaceFirst( "Kotlin","Java"))
+        showToastI(str.replaceFirst('a', 'A'))
+        showToastI(str.replaceFirst("Kotlin", "Java"))
         //截取满足条件的第一个字符或字符串后面的字符串，包含满足条件字符或字符串自身，并在其前面加上新的字符串。
-        showToastI(str.replaceBefore('a',"AA"))
-        showToastI(str.replaceBefore("Kotlin","Java"))
+        showToastI(str.replaceBefore('a', "AA"))
+        showToastI(str.replaceBefore("Kotlin", "Java"))
         //截取满足条件的最后一个字符或字符串后面的字符串，包含满足条件字符或字符串自身，并在其前面加上新的字符串。
-        showToastI(str.replaceBeforeLast('a',"AA"))
-        showToastI(str.replaceBeforeLast("Kotlin","Java"))
+        showToastI(str.replaceBeforeLast('a', "AA"))
+        showToastI(str.replaceBeforeLast("Kotlin", "Java"))
         //截取满足条件的第一个字符或字符串前面的字符串，包含满足条件字符或字符串自身，并在其后面加上新的字符串。
-        showToastI(str.replaceAfter('a',"AA"))
-        showToastI(str.replaceAfter("Kotlin","Java"))
+        showToastI(str.replaceAfter('a', "AA"))
+        showToastI(str.replaceAfter("Kotlin", "Java"))
         //截取满足条件的最后一个字符或字符串前面的字符串，包含满足条件字符或字符串自身，并在其后面加上新的字符串。
-        showToastI(str.replaceAfterLast('a',"AA"))
-        showToastI(str.replaceAfterLast("Kotlin","Java"))
+        showToastI(str.replaceAfterLast('a', "AA"))
+        showToastI(str.replaceAfterLast("Kotlin", "Java"))
 
 
     }
-    fun testFindFindLast(){
+
+    fun testFindFindLast() {
         val str = "kotlin very good"
-        showToast( "查找一个参数1  ${str.find { it == 't' } } " )
-        showToast( "查找一个参数2  ${str.findLast { it == 'y' } } " )
-        showToast( "查找一个参数3  ${str.findLast { it == 'z' } } " )
+        showToast("查找一个参数1  ${str.find { it == 't' }} ")
+        showToast("查找一个参数2  ${str.findLast { it == 'y' }} ")
+        showToast("查找一个参数3  ${str.findLast { it == 'z' }} ")
     }
 
-    fun testStringLast(){
+    fun testStringLast() {
         val str = "kotlin very good"
-        showToast( "获取最后一个参数1  ${str.last() } " )
-        showToast( "获取最后一个参数2  ${str.get(str.lastIndex) } " )
-        showToast( "获取最后一个参数3  ${str[str.lastIndex] } " )
+        showToast("获取最后一个参数1  ${str.last()} ")
+        showToast("获取最后一个参数2  ${str.get(str.lastIndex)} ")
+        showToast("获取最后一个参数3  ${str[str.lastIndex]} ")
         /**其中 lastIndex 是一个拓展属性，其实现是 length - 1 */
-        showToast( "获取最后一个参数5  ${str.lastOrNull{ it == 'z' } } " )
-        showToast( "获取最后一个参数6  ${str.last{ it == 'z' } } " )
+        showToast("获取最后一个参数5  ${str.lastOrNull { it == 'z' }} ")
+        showToast("获取最后一个参数6  ${str.last { it == 'z' }} ")
     }
 
-    fun testStringFirst(){
+    fun testStringFirst() {
         val str = "kotlin very good"
-        showToast( "获取第一个参数1  ${str.first()} " )
-        showToast( "获取第一个参数2  ${str[0]} " )
-        showToast( "获取第一个参数3  ${str.get(0)} " )
-        showToast( "获取第一个参数4  " + str.firstOrNull()   )
-        showToast( "获取第一个参数5  " + str.firstOrNull{ it == 'a' }   )
-        showToast( "获取第一个参数6  " + str.first{ it == 'a' }   )
+        showToast("获取第一个参数1  ${str.first()} ")
+        showToast("获取第一个参数2  ${str[0]} ")
+        showToast("获取第一个参数3  ${str.get(0)} ")
+        showToast("获取第一个参数4  " + str.firstOrNull())
+        showToast("获取第一个参数5  " + str.firstOrNull { it == 'a' })
+        showToast("获取第一个参数6  " + str.first { it == 'a' })
     }
 
-    fun testVararg () {
-        varargFun(1,"aaa","bbb","ccc","ddd","fff")
+    fun testVararg() {
+        varargFun(1, "aaa", "bbb", "ccc", "ddd", "fff")
     }
-    fun testVararg2 () {
-        val strArray = arrayOf("aaa","bbb","ccc","ddd","fff")
-        varargFun(1,*strArray)
+
+    fun testVararg2() {
+        val strArray = arrayOf("aaa", "bbb", "ccc", "ddd", "fff")
+        varargFun(1, *strArray)
     }
-    fun varargFun(numA: Int, vararg str : String){
+
+    fun varargFun(numA: Int, vararg str: String) {
         // 遍历
         for (s in str) {
             showToast("这个传入值: $numA  ,  $s ")
@@ -352,8 +355,8 @@ class KotilnPersenter : BasePersenter {
 
     }
 
-    fun testEvils1 () {
-        val testStr : String? = null
+    fun testEvils1() {
+        val testStr: String? = null
 
         var length = 0
 
@@ -367,27 +370,28 @@ class KotilnPersenter : BasePersenter {
         showToast(length)
     }
 
-    fun testEvils2 () {
+    fun testEvils2() {
         try {
-            val testStr : String? = null
+            val testStr: String? = null
             showToast("正常转换结果：" + testStr!!.length)
-        } catch(e: Exception) {
-            showToast("是不是异常了：" + e.message.toString() )
+        } catch (e: Exception) {
+            showToast("是不是异常了：" + e.message.toString())
         }
     }
-    fun testEvils3 () {
+
+    fun testEvils3() {
         try {// 会抛出ClassCastException异常
-            val num1 : Int? = "Koltin" as Int
+            val num1: Int? = "Koltin" as Int
             showToast("正常转换结果：nun1 = $num1")
-        } catch(e: Exception) {
-            showToast("是不是异常了： ${e.message as String }  " )
-            val num1 : Int? = "Koltin" as? Int
+        } catch (e: Exception) {
+            showToast("是不是异常了： ${e.message as String}  ")
+            val num1: Int? = "Koltin" as? Int
             showToast("正常转换结果：nun1 = $num1")
         }
     }
 
     fun testLen() {
-        val arrTest : Array<Int?> = arrayOf(1,2,null,3,null,5,6,null)
+        val arrTest: Array<Int?> = arrayOf(1, 2, null, 3, null, 5, 6, null)
 
         // 不去空
         for (index in arrTest) {
@@ -396,12 +400,11 @@ class KotilnPersenter : BasePersenter {
 
         // 传统写法
         for (index in arrTest) {
-            if (index == null){
+            if (index == null) {
                 continue
             }
             showToast("index => $index")
         }
-
 
 
         // let写法
@@ -411,12 +414,12 @@ class KotilnPersenter : BasePersenter {
     }
 
     fun testForWhen() {
-        var num:Int = 5
-        when(num > 5){
+        var num: Int = 5
+        when (num > 5) {
             true -> {
                 showToast("num > 5")
             }
-            false ->{
+            false -> {
                 showToast("num < 5")
             }
             else -> {
@@ -426,20 +429,21 @@ class KotilnPersenter : BasePersenter {
     }
 
     fun testForWhenIn() {
-        var arrayList = arrayOf(1,2,3,4,5)
-        when(1){
+        var arrayList = arrayOf(1, 2, 3, 4, 5)
+        when (1) {
             in arrayList.toIntArray() -> {
                 showToast("1 存在于 arrayList数组中")
             }
-            in 0 .. 10 -> showToast("1 属于于 0~10 中")
-            !in 5 .. 10 -> showToast("1 不属于 5~10 中")
+            in 0..10 -> showToast("1 属于于 0~10 中")
+            !in 5..10 -> showToast("1 不属于 5~10 中")
             else -> {
                 showToast("都错了 哈哈！")
             }
         }
     }
+
     fun testForWhenIs() {
-        when("abc"){
+        when ("abc") {
             is String -> showToast("abc是一个字符串")
             else -> {
                 showToast("abc不是一个字符串")
@@ -448,7 +452,7 @@ class KotilnPersenter : BasePersenter {
 
         // 智能转换
         var a: Int = 2
-        when(a){
+        when (a) {
             !is Int -> {
                 showToast("$a 不是一个Int类型的值")
             }
@@ -463,7 +467,7 @@ class KotilnPersenter : BasePersenter {
         val items = setOf("apple", "banana", "kiwi")
         when {
             "orange" in items -> showToast("这个值 在 数组中")
-            else ->  showToast("这个值 不在 数组中")
+            else -> showToast("这个值 不在 数组中")
         }
     }
 
@@ -527,28 +531,26 @@ class KotilnPersenter : BasePersenter {
     }
 
     fun testForArrayIterator() {
-        var arrayListThree = arrayOf(2,'a',3,false,9)
+        var arrayListThree = arrayOf(2, 'a', 3, false, 9)
         var iterator: Iterator<Any> = arrayListThree.iterator()
-        while (iterator.hasNext()){
+        while (iterator.hasNext()) {
             println(iterator.next())
         }
     }
 
 
-
-
-
     /**
      *  if  else 使用
      */
-    fun testIfElse(){
+    fun testIfElse() {
         var numA = 2
-        if (numA == 2){
+        if (numA == 2) {
             showToast("numA == $numA => true")
-        }else{
+        } else {
             showToast("numA == ${numA} => false")
         }
     }
+
     /**
      *  if  else 使用 三元运算
      */
@@ -560,15 +562,13 @@ class KotilnPersenter : BasePersenter {
     }
 
 
-
-
     // 测试
-    fun mainClazz (args: Array<String>) {
-        var person: DemoIn = DemoIn(0,0,null)
+    fun mainClazz(args: Array<String>) {
+        var person: DemoIn = DemoIn(0, 0, null)
 
         person.lastName = "wang"
 
-        showToast( " id:${person.id}  - lastName:${person.lastName}")
+        showToast(" id:${person.id}  - lastName:${person.lastName}")
 
         person.no = 9
         showToast("no:${person.no}")
@@ -594,7 +594,7 @@ class KotilnPersenter : BasePersenter {
     /**
      * NULL检查机制
      */
-    fun mainNull(args: Array<String>){
+    fun mainNull(args: Array<String>) {
         if (args.size < 2) {
             showToast("Two integers expected")
             return

@@ -29,8 +29,8 @@ dependencies {
     androidTestImplementation('androidx.test.espresso:espresso-core:3.1.0', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'com.google.android.material:material:1.1.0'
+    implementation "androidx.appcompat:appcompat:${depsVersion.androidx_appcompat}"
+    implementation "com.google.android.material:${depsVersion.android_material}"
     testImplementation 'junit:junit:4.13'
     // 添加kotlin 插件
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"

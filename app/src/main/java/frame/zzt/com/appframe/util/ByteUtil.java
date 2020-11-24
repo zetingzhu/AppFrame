@@ -385,4 +385,56 @@ public class ByteUtil {
         }
     }
 
+
+    /**
+     * 十进制 输出 二进制 字符串
+     */
+    public static String toBinaryString(int i) {
+        return toUnsignedString0(i, 1);
+    }
+
+    /**
+     * 十进制 输出 八进制 字符串
+     */
+    public static String toOctalString(int i) {
+        return toUnsignedString0(i, 3);
+    }
+
+    /**
+     * 十进制 输出 十六进制 字符串
+     */
+    public static String toHexString(int i) {
+        return toUnsignedString0(i, 4);
+    }
+
+
+    private static String toUnsignedString0(int val, int shift) {
+        int mag = Integer.SIZE - Integer.numberOfLeadingZeros(val);
+        int chars = Math.max(((mag + (shift - 1)) / shift), 1);
+        char[] buf = new char[chars];
+        formatUnsignedInt(val, shift, buf, 0, chars);
+        return new String(buf);
+    }
+
+    static int formatUnsignedInt(int val, int shift, char[] buf, int offset, int len) {
+        int charPos = len;
+        int radix = 1 << shift;
+        int mask = radix - 1;
+        do {
+            buf[offset + --charPos] = digits[val & mask];
+            val >>>= shift;
+        } while (charPos > 0);
+
+        return charPos;
+    }
+
+    final static char[] digits = {
+            '0', '1', '2', '3', '4', '5',
+            '6', '7', '8', '9', 'a', 'b',
+            'c', 'd', 'e', 'f', 'g', 'h',
+            'i', 'j', 'k', 'l', 'm', 'n',
+            'o', 'p', 'q', 'r', 's', 't',
+            'u', 'v', 'w', 'x', 'y', 'z'
+    };
+
 }

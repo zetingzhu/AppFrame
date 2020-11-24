@@ -8,7 +8,7 @@ package com.mykotiln.bean
 interface TestInterfaceD {
     val num1: Int
 
-    val num2 : Int
+    val num2: Int
 
     // 声明比那俩和提供默认值
     // 注意： val num3: Int = 3  这种方式不提供，为直接报错的

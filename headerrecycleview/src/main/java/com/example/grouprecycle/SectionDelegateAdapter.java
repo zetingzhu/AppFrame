@@ -22,11 +22,11 @@ public abstract class SectionDelegateAdapter implements IDelegateAdapter {
     protected Object footerObject;
     protected List<Object> contentData;
 
-    public void setHeader(Object object){
+    public void setHeader(Object object) {
         headerObject = object;
     }
 
-    public Object getHeader(){
+    public Object getHeader() {
         return headerObject;
     }
 
@@ -46,12 +46,12 @@ public abstract class SectionDelegateAdapter implements IDelegateAdapter {
         return footerObject != null;
     }
 
-    public void setContentData(List data){
+    public void setContentData(List data) {
         contentData = data;
     }
 
-    public Object getContentItemObject(int position){
-        if (position>0 && position<contentData.size()) {
+    public Object getContentItemObject(int position) {
+        if (position > 0 && position < contentData.size()) {
             return contentData.get(position);
         } else {
             return null;
@@ -84,22 +84,22 @@ public abstract class SectionDelegateAdapter implements IDelegateAdapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
-         int type = getItemViewType(position);
+        int type = getItemViewType(position);
         if (type == ITEM_TYPE_HEADER) {
-            onBindHeaderViewHolder(viewHolder,headerObject);
+            onBindHeaderViewHolder(viewHolder, headerObject);
         } else if (type == ITEM_TYPE_FOOTER) {
-            onBindFooterViewHolder(viewHolder,footerObject);
-        }else {
-            int contentPosition = hasHeader()? position-1 : position;
-            onBindContentViewHolder(viewHolder,contentPosition,contentData.get(contentPosition));
+            onBindFooterViewHolder(viewHolder, footerObject);
+        } else {
+            int contentPosition = hasHeader() ? position - 1 : position;
+            onBindContentViewHolder(viewHolder, contentPosition, contentData.get(contentPosition));
         }
     }
 
     @Override
     public int getItemViewType(int position) {
-        if (hasHeader()&& position==0) {
+        if (hasHeader() && position == 0) {
             return ITEM_TYPE_HEADER;
-        } else if (hasFooter() && position == getItemCount() -1) {
+        } else if (hasFooter() && position == getItemCount() - 1) {
             return ITEM_TYPE_FOOTER;
         } else {
             return ITEM_TYPE_CONTENT;
@@ -111,7 +111,7 @@ public abstract class SectionDelegateAdapter implements IDelegateAdapter {
         int count = 0;
         count += hasHeader() ? 1 : 0;
         count += hasFooter() ? 1 : 0;
-        count += contentData==null ? 0 : contentData.size();
+        count += contentData == null ? 0 : contentData.size();
         return count;
     }
 }

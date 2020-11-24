@@ -49,7 +49,7 @@ dependencies {
     api project(path: ':zztToolsLibrary')
 
     // 约束布局
-    api 'androidx.constraintlayout:constraintlayout:2.0.1'
+    api 'androidx.constraintlayout:constraintlayout:2.0.3'
     // recyclerview
     api 'androidx.recyclerview:recyclerview:1.1.0'
     // android x
@@ -57,7 +57,7 @@ dependencies {
     // kotlin
     api "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     // Kotlin 代码的扩展库
-    api 'androidx.core:core-ktx:1.3.1'
+    api 'androidx.core:core-ktx:1.3.2'
     // kotlin 协程
     api 'org.jetbrains.kotlinx:kotlinx-coroutines:0.19.2'
 

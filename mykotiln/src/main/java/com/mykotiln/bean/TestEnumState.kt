@@ -14,5 +14,5 @@ enum class TestEnumState {
         OTHER : 其他
     */
 
-    NORMAL,NO_DATA,NO_INTERNET,ERROR,OTHER
+    NORMAL, NO_DATA, NO_INTERNET, ERROR, OTHER
 }

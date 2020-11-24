@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.2"
+    compileSdkVersion getRootProject().compileSdkVersion
+    buildToolsVersion getRootProject().buildToolsVersion
 
     defaultConfig {
         applicationId "com.zzt.lurcache"
-        minSdkVersion 16
-        targetSdkVersion 30
+        minSdkVersion getRootProject().minSdkVersion
+        targetSdkVersion getRootProject().targetSdkVersion
         versionCode 2
         versionName "1.0"
 

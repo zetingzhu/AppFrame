@@ -17,7 +17,6 @@ public class DepthPageTransformer implements ViewPager2.PageTransformer {
     private static final float MIN_SCALE = 0.75f;
 
 
-
     public void transformPage(View view, float position) {
         Log.d(TAG, "动画 position:" + position);
         int pageWidth = view.getWidth();

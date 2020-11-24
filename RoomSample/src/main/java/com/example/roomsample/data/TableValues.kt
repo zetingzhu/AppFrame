@@ -19,7 +19,7 @@ object TableValues {
     val USER_DESC = "desc"
 
     val TABLE_LIBRARY = "Library"
-    val  LIBRARY_LIBRARYID = "libraryId"
-    val  LIBRARY_USEROWNERID = "userOwnerId"
+    val LIBRARY_LIBRARYID = "libraryId"
+    val LIBRARY_USEROWNERID = "userOwnerId"
 
 }

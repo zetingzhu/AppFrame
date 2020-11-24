@@ -13,10 +13,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.tabs.TabLayout;
 
 import com.zzt.viewpager2.R;
+
 /**
  * @author: zeting
  * @date: 2020/1/7
- *  一个布局的整体控制
+ * 一个布局的整体控制
  */
 public abstract class BaseActivityViewPager extends AppCompatActivity {
     private final static String TAG = BaseActivityViewPager.class.getSimpleName();

@@ -17,12 +17,14 @@
             <option value="$PROJECT_DIR$/RoomSample" />
             <option value="$PROJECT_DIR$/SignatureView" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/coordinatorlayoutsample" />
             <option value="$PROJECT_DIR$/groupedadapter" />
             <option value="$PROJECT_DIR$/headerrecycleview" />
             <option value="$PROJECT_DIR$/javalib" />
             <option value="$PROJECT_DIR$/mykotiln" />
             <option value="$PROJECT_DIR$/mypagingsamples" />
             <option value="$PROJECT_DIR$/myviewpager" />
+            <option value="$PROJECT_DIR$/viewautosizelayout" />
             <option value="$PROJECT_DIR$/zztToolsLibrary" />
           </set>
         </option>

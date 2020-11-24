@@ -18,7 +18,7 @@ import com.zzt.viewpager2.R;
 /**
  * @author: zeting
  * @date: 2020/1/7
- *  创建fragment布局
+ * 创建fragment布局
  */
 public class ItemFragment extends Fragment {
     public final static String TAG = ItemFragment.class.getSimpleName();
@@ -48,8 +48,8 @@ public class ItemFragment extends Fragment {
     }
 
 
-    public String getContent(){
-        return position ;
+    public String getContent() {
+        return position;
     }
 
     @Nullable

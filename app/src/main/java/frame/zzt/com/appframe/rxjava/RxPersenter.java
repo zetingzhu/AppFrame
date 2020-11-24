@@ -1,9 +1,6 @@
 package frame.zzt.com.appframe.rxjava;
 
-import android.app.ActionBar;
 import android.content.Context;
-import android.content.Intent;
-import android.icu.text.AlphabeticIndex;
 import android.os.SystemClock;
 import android.util.Log;
 
@@ -14,19 +11,16 @@ import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.TimeUnit;
 
 import frame.zzt.com.appframe.MyApplication;
 import frame.zzt.com.appframe.greendao.DaoSession;
 import frame.zzt.com.appframe.greendao.User;
 import frame.zzt.com.appframe.greendao.UserDao;
-import frame.zzt.com.appframe.modle.LoginResponse;
 import frame.zzt.com.appframe.modle.MyWeather;
 import frame.zzt.com.appframe.mvp.mvpbase.BasePresenter;
 import frame.zzt.com.appframe.retrofit.ApiRetrofitWeather;
@@ -55,9 +49,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.exceptions.Exceptions;
-import io.reactivex.flowables.GroupedFlowable;
 import io.reactivex.functions.Action;
-import io.reactivex.functions.BiConsumer;
 import io.reactivex.functions.BiFunction;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
@@ -76,8 +68,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
-
-import static android.R.id.list;
 
 
 /**

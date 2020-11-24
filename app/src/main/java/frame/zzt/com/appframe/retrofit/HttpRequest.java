@@ -5,8 +5,6 @@ import java.util.Map;
 import frame.zzt.com.appframe.modle.LoginResponse;
 import retrofit2.Call;
 import retrofit2.Callback;
-import retrofit2.http.Path;
-import retrofit2.http.Query;
 
 /**
  * Created by allen on 18/8/13.

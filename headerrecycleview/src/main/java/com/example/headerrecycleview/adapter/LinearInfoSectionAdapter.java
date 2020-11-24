@@ -19,19 +19,19 @@ public class LinearInfoSectionAdapter extends SectionDelegateAdapter {
 
     @Override
     public RecyclerView.ViewHolder onCreateHeaderViewHolder(@NonNull ViewGroup viewGroup) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_detail_header,viewGroup,false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_detail_header, viewGroup, false);
         return new HeaderViewHolder(view);
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateFooterViewHolder(@NonNull ViewGroup viewGroup) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_detail_footer,viewGroup,false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_detail_footer, viewGroup, false);
         return new FooterViewHolder(view);
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateContentViewHolder(@NonNull ViewGroup viewGroup) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.listview_linear_detail_item,viewGroup,false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.listview_linear_detail_item, viewGroup, false);
         return new LinearInfoViewHolder(view);
     }
 

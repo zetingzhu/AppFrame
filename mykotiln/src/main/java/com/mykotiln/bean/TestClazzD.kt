@@ -12,7 +12,7 @@ class TestClazzD(override val num1: Int, override val num2: Int) : TestInterface
 
     override val num4: Int = 4
 
-    fun sum() : Int{
+    fun sum(): Int {
         return num1 + num2
     }
 }

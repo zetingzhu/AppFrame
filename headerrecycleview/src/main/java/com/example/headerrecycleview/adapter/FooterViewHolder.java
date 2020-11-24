@@ -11,7 +11,6 @@ import com.example.headerrecycleview.R;
 import com.example.headerrecycleview.entity.ColumnField;
 
 
-
 /**
  * @author: zeting
  * @date: 2020/8/19
@@ -19,12 +18,13 @@ import com.example.headerrecycleview.entity.ColumnField;
 public class FooterViewHolder extends RecyclerView.ViewHolder {
 
     public TextView titleView;
+
     public FooterViewHolder(@NonNull View itemView) {
         super(itemView);
         titleView = itemView.findViewById(R.id.footer_title);
     }
 
-    public void render(String title){
+    public void render(String title) {
         titleView.setText(title);
     }
 }

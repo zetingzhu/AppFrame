@@ -7,13 +7,13 @@ package com.mykotiln.bean
  */
 class TestListenerClazz {
 
-    lateinit private var listener : TestOnClickListener
+    lateinit private var listener: TestOnClickListener
 
-    fun setOnClickListener(listener: TestOnClickListener){
+    fun setOnClickListener(listener: TestOnClickListener) {
         this.listener = listener
     }
 
-    fun testListener(){
+    fun testListener() {
         listener.onItemClick("我是匿名内部类的测试方法")
     }
 }

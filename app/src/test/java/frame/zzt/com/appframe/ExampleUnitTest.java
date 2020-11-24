@@ -36,14 +36,15 @@ public class ExampleUnitTest {
 
         byte byte1 = ByteUtil.bitToByte("00010010");
 
-        String byStr = ByteUtil.getBit(by02);
+        String byStr = ByteUtil.getBit(by01);
+//        String byStr = ByteUtil.getBit(by02);
         String byStr01 = ByteUtil.getBit(by03[0]);
         String byStr02 = ByteUtil.getBit(by03[1]);
         String byStr03 = ByteUtil.getBit(by03[2]);
         String byStr04 = ByteUtil.getBit(by03[3]);
 
         System.out.println("---- byStr：" + byStr);
-
+        System.out.println("---- byStr1：" + ByteUtil.toBinaryString(22222));
 
         System.out.println("----获取信号值：" + getProgressRssi(-70));
 
@@ -109,7 +110,7 @@ public class ExampleUnitTest {
         String strHex6 = ByteUtil.numToHex32(valueTen);
         System.out.println(valueTen + " [十进制]---->[十六进制] " + strHex6);
 
-        System.out.println(valueTen + " [十进制]---->[十六进制] " + Integer.toBinaryString(valueTen));
+        System.out.println(valueTen + " [十进制]---->[二进制] " + Integer.toBinaryString(valueTen));
 
 
         byte[] keyId = ByteUtil.intToByteArrayBig(valueTen);
@@ -133,6 +134,14 @@ public class ExampleUnitTest {
         // md5 加密后的byte
         byte[] md5DataDigest = MD5Util.getMD5Byte(byteMd5L);
         System.out.println("没有验证md5的时候 - 加密后：" + ByteUtil.bytesToHex2(md5DataDigest));
+
+
+        int vvv1 = 23;
+        System.out.println(valueTen + " [byte]---->[十六] " + ByteUtil.bytesToHex2(ByteUtil.intToBytes(vvv1)));
+        System.out.println(valueTen + " [十进制]---->[二进制] " + ByteUtil.toBinaryString(vvv1));
+        System.out.println(valueTen + " [十进制]---->[八进制] " + ByteUtil.toOctalString(vvv1));
+        System.out.println(valueTen + " [十进制]---->[十六进制] " + ByteUtil.toHexString(vvv1));
+
 
         System.out.println("--结束线--");
     }

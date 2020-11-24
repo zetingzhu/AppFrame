@@ -9,8 +9,8 @@ import android.graphics.Rect;
  */
 public interface IStickyHeaderDecoration {
 
-	Rect getStickyHeaderRect();
+    Rect getStickyHeaderRect();
 
-	int getStickyHeaderPosition();
+    int getStickyHeaderPosition();
 
 }

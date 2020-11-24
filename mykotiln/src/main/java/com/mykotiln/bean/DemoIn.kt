@@ -50,9 +50,6 @@ class DemoIn() : BaseDao() {
         private set
 
 
-
-
-
     /**
     getter 和 setter
     属性声明的完整语法：

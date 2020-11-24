@@ -18,9 +18,9 @@ public class SectionSpanSizeLookup extends GridLayoutManager.SpanSizeLookup {
 
     @Override
     public int getSpanSize(int position) {
-        if(groupRecycleViewAdapter.isSectionHeaderOrFooterPosition(position)){
+        if (groupRecycleViewAdapter.isSectionHeaderOrFooterPosition(position)) {
             return layoutManager.getSpanCount();
-        }else{
+        } else {
             return 1;
         }
         //return groupRecycleViewAdapter.getGridLookUpSpanSize(position);

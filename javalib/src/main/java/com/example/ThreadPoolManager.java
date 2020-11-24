@@ -14,10 +14,10 @@ import java.util.concurrent.atomic.AtomicInteger;
  * 调用方法：
  * ThreadPoolManager.getInstance().execute(command));
  * Runnable command =  new Runnable(){
- *   @Override
- *   public void run(){
- *       SystemClock.sleep(2000)
- *   }
+ *
+ * @Override public void run(){
+ * SystemClock.sleep(2000)
+ * }
  * }
  */
 
@@ -47,7 +47,7 @@ public class ThreadPoolManager {
     /**
      * 存活时间
      */
-    private long keepAliveTime = 1 * 60  ;
+    private long keepAliveTime = 1 * 60;
     private TimeUnit unit = TimeUnit.SECONDS;
     private ThreadPoolExecutor executor;
 
@@ -56,7 +56,7 @@ public class ThreadPoolManager {
          * 给corePoolSize赋值：当前设备可用处理器核心数*2 + 1,能够让cpu的效率得到最大程度执行（有研究论证的）
          */
         corePoolSize = Runtime.getRuntime().availableProcessors() * 2 + 1;
-        System.out.println("线程池核心线程数：" + corePoolSize );
+        System.out.println("线程池核心线程数：" + corePoolSize);
         //虽然maximumPoolSize用不到，但是需要赋值，否则报错
         maximumPoolSize = corePoolSize;
         executor = new ThreadPoolExecutor(

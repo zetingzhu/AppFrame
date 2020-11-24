@@ -3,10 +3,9 @@ package com.donkingliang.samples.adapter;
 import android.content.Context;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
-import com.donkingliang.samples.adapter.NoFooterAdapter;
+
 import com.donkingliang.samples.entity.ChildEntity;
 import com.donkingliang.samples.entity.ExpandableGroupEntity;
-import com.donkingliang.samples.model.GroupModel;
 import com.zzt.groupedadapter.R;
 import com.donkingliang.groupedadapter.adapter.GroupedRecyclerViewAdapter;
 import com.donkingliang.groupedadapter.holder.BaseViewHolder;
@@ -76,7 +75,7 @@ public class ExpandableAdapter extends GroupedRecyclerViewAdapter {
         ExpandableGroupEntity entity = mGroups.get(groupPosition);
         holder.setText(R.id.tv_expandable_header, entity.getHeader());
         ImageView ivState = holder.get(R.id.iv_state);
-        if(entity.isExpand()){
+        if (entity.isExpand()) {
             ivState.setRotation(90);
         } else {
             ivState.setRotation(0);

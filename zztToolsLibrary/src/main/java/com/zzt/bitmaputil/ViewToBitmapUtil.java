@@ -3,7 +3,9 @@ package com.zzt.bitmaputil;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+
 import androidx.core.content.ContextCompat;
+
 import android.view.View;
 
 import com.zzt.zztutillibrary.R;
@@ -30,19 +32,20 @@ public class ViewToBitmapUtil {
 
     public ViewToBitmapUtil(View view, float factor) {
         this.view = view;
-        this.memoryFactor = (factor > 0.9f || factor < 0.1f)? 0.5f: factor;
+        this.memoryFactor = (factor > 0.9f || factor < 0.1f) ? 0.5f : factor;
     }
 
 
     /**
      * 根据传入的得到的宽高计算biemap
+     *
      * @param context
      * @param mWidth
      * @param mHeight
      * @return
      */
-    public Bitmap getBitmap(Context context , int mWidth, int mHeight) {
-        Mode mode = chooseMode(mWidth , mHeight ) ;
+    public Bitmap getBitmap(Context context, int mWidth, int mHeight) {
+        Mode mode = chooseMode(mWidth, mHeight);
         if (mode == null) {
             return null;
         }
@@ -53,7 +56,7 @@ public class ViewToBitmapUtil {
             float scale = 1.f * mode.mWidth / mode.mSourceWidth;
             canvas.scale(scale, scale);
         }
-        canvas.drawColor(ContextCompat.getColor(context,  R.color.color_eef0f5 ));
+        canvas.drawColor(ContextCompat.getColor(context, R.color.color_eef0f5));
         view.draw(canvas);
 
         return target;
@@ -61,6 +64,7 @@ public class ViewToBitmapUtil {
 
     /**
      * 根据传入的view 得到图片的bitmap
+     *
      * @return
      */
     public Bitmap apply() {
@@ -92,7 +96,7 @@ public class ViewToBitmapUtil {
         long max = Runtime.getRuntime().maxMemory();
         long total = Runtime.getRuntime().totalMemory();
         long remain = max - total; // 剩余可用内存
-        remain = (long)(memoryFactor * remain);
+        remain = (long) (memoryFactor * remain);
 
         int w = width;
         int h = height;
@@ -117,7 +121,7 @@ public class ViewToBitmapUtil {
 
             // 判断是否可以继续
             if (w % 3 != 0) {
-                h = (int)(remain / 2 / w); // 计算出最大高度
+                h = (int) (remain / 2 / w); // 计算出最大高度
                 h = h / 2 * 2; // 喜欢偶数
 
                 mode = new Mode(Bitmap.Config.RGB_565, w, h, width, height);

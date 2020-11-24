@@ -35,7 +35,7 @@ public class MyLruCacheManager<V> extends LruCache<String, V> {
     @Override
     protected int sizeOf(@NonNull String key, @NonNull V value) {
         if (value instanceof Bitmap) {
-            return ((Bitmap) value).getByteCount() ;
+            return ((Bitmap) value).getByteCount();
         }
         return super.sizeOf(key, value);
     }

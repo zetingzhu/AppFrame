@@ -1,10 +1,8 @@
 package com.donkingliang.samples.adapter;
 
 import android.content.Context;
-import com.donkingliang.samples.adapter.NoFooterAdapter;
+
 import com.donkingliang.samples.entity.GroupEntity;
-import com.donkingliang.samples.model.GroupModel;
-import com.zzt.groupedadapter.R;
 
 import com.donkingliang.groupedadapter.holder.BaseViewHolder;
 import com.donkingliang.groupedadapter.adapter.GroupedRecyclerViewAdapter;

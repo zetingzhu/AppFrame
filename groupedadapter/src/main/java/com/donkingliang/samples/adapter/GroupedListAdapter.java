@@ -1,10 +1,9 @@
 package com.donkingliang.samples.adapter;
 
 import android.content.Context;
-import com.donkingliang.samples.adapter.NoFooterAdapter;
+
 import com.donkingliang.samples.entity.ChildEntity;
 import com.donkingliang.samples.entity.GroupEntity;
-import com.donkingliang.samples.model.GroupModel;
 import com.zzt.groupedadapter.R;
 import com.donkingliang.groupedadapter.adapter.GroupedRecyclerViewAdapter;
 import com.donkingliang.groupedadapter.holder.BaseViewHolder;
@@ -34,12 +33,12 @@ public class GroupedListAdapter extends GroupedRecyclerViewAdapter {
         return children == null ? 0 : children.size();
     }
 
-    public void clear(){
+    public void clear() {
         mGroups.clear();
         notifyDataChanged();
     }
 
-    public void setGroups(ArrayList<GroupEntity> groups){
+    public void setGroups(ArrayList<GroupEntity> groups) {
         mGroups = groups;
         notifyDataChanged();
     }

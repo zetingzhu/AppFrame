@@ -6,5 +6,5 @@ package com.mykotiln.bean
  * Date 18/12/3.
  */
 interface TestOnClickListener {
-    fun onItemClick(str : String)
+    fun onItemClick(str: String)
 }

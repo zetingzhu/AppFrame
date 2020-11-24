@@ -82,7 +82,7 @@ public class SlideViewUtil {
 
 
     public static String getImgBase64(Bitmap cacheBitmap) {
-        ByteArrayOutputStream  bos = new ByteArrayOutputStream();
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
         cacheBitmap.compress(Bitmap.CompressFormat.PNG, 100, bos);
         byte[] buffer = bos.toByteArray();
         return MyBase64.encode(buffer);
@@ -94,7 +94,7 @@ public class SlideViewUtil {
      *
      * @param blank 边界留多少个像素
      */
-    public Bitmap clearBlank(Bitmap bmp, int blank , int color) {
+    public Bitmap clearBlank(Bitmap bmp, int blank, int color) {
         int height = bmp.getHeight();
         int width = bmp.getWidth();
         int top = 0, left = 0, right = 0, bottom = 0;

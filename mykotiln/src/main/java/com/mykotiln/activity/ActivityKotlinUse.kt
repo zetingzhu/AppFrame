@@ -7,10 +7,10 @@ import com.mykotiln.util.MyRecyclerViewKotlin
 /**
  * kotlin Activity 的创建
  */
-class ActivityKotlinUse : BaseActivity()  {
+class ActivityKotlinUse : BaseActivity() {
 
     var mPer = KotilnUsePersenter(this)
-    var rv_kotlin_list : MyRecyclerViewKotlin?= null
+    var rv_kotlin_list: MyRecyclerViewKotlin? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,7 +19,7 @@ class ActivityKotlinUse : BaseActivity()  {
     }
 
 
-    fun initView(){
+    fun initView() {
         rv_kotlin_list = findViewById<MyRecyclerViewKotlin>(R.id.rv_kotlin_list)
         mPer.setItemKotlinClass(rv_kotlin_list!!)
 

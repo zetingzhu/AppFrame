@@ -63,11 +63,11 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     api 'androidx.appcompat:appcompat:1.2.0'
-    api 'androidx.constraintlayout:constraintlayout:1.1.3'
+    api "androidx.constraintlayout:constraintlayout:${depsVersion.androidx_constraintlayout}"
     api project(path: ':CommonModule')
 
     api 'androidx.viewpager2:viewpager2:1.0.0'
-    api 'com.google.android.material:material:1.3.0-alpha02'
+    api "com.google.android.material:material:${depsVersion.android_material}"
 
     //ARouter添加
     annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'

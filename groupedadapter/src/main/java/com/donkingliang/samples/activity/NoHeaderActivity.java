@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.donkingliang.samples.adapter.NoFooterAdapter;
 import com.donkingliang.samples.adapter.NoHeaderAdapter;
 import com.donkingliang.samples.model.GroupModel;
