@@ -14,6 +14,7 @@ import frame.zzt.com.appframe.widget.CircleProgressBar;
  */
 
 public class ActivityFirst extends Activity {
+    private static final String TAGG = ActivityFirst.class.getSimpleName() ;
     @BindView(R.id.circleProgressBar)
     public CircleProgressBar circleProgressBar; // 自定义的进度条
     @BindView(R.id.seekbar)

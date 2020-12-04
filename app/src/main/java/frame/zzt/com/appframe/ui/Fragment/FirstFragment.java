@@ -23,6 +23,7 @@ import frame.zzt.com.appframe.bluetooth.ActivityBluetooth4;
 import frame.zzt.com.appframe.bluetooth.ActivityBluetooth5;
 import frame.zzt.com.appframe.bluetooth.ActivityBluetooth6;
 import frame.zzt.com.appframe.bluetooth.ActivityBluetooth7;
+import frame.zzt.com.appframe.intentservice.ActivityIntentService;
 import frame.zzt.com.appframe.notification.ActivityNotification;
 import frame.zzt.com.appframe.R;
 import frame.zzt.com.appframe.bluetooth.ActivityBluetooth;
@@ -30,7 +31,7 @@ import frame.zzt.com.appframe.bluetooth.ActivityBluetooth2;
 import frame.zzt.com.appframe.bluetooth.ActivityBluetooth3;
 import frame.zzt.com.appframe.readcode.ActivityReadCodeClass;
 import frame.zzt.com.appframe.ui.Activity.ActivityFirst;
-import frame.zzt.com.appframe.ui.Activity.ActivitySystemUi;
+import frame.zzt.com.appframe.systembar.ActivitySystemUi;
 import frame.zzt.com.appframe.eventbus.ActivityEventBus;
 import frame.zzt.com.appframe.kotlin.ActivityKotlin;
 import frame.zzt.com.appframe.ui.Activity.ActivityProgress2;
@@ -98,6 +99,7 @@ public class FirstFragment extends Fragment {
     }
 
     private DemoInfo[] DEMOS = {
+            new DemoInfo(R.string.show_item_intent_service, R.string.show_item_intent_service, ActivityIntentService.class),
             new DemoInfo(R.string.tab_item_first, R.string.tab_item_desc, ActivityFirst.class),
             new DemoInfo(R.string.tab_item_bluetooth, R.string.tab_item_bluetooth_desc, ActivityBluetooth.class),
             new DemoInfo(R.string.tab_item_bluetooth2, R.string.tab_item_bluetooth_desc, ActivityBluetooth2.class),

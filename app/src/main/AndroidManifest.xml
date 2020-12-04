@@ -1,45 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="frame.zzt.com.appframe">
-
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
-
-    <!-- 网络权限 -->
+    <uses-permission android:name="android.permission.READ_CONTACTS" /> <!-- 网络权限 -->
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
-    <!-- 这个权限允许程序连接到已配对的蓝牙设备, 请求连接/接收连接/传输数据需要改权限, 主要用于对配对后进行操作; -->
-    <uses-permission android:name="android.permission.BLUETOOTH" />
-    <!-- 这个权限允许程序发现和配对蓝牙设备, 该权限用来管理蓝牙设备, 有了这个权限, 应用才能使用本机的蓝牙设备, 主要用于对配对前的操作; -->
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-    <!-- Android 6.0以后，这两个权限是必须的，蓝牙扫描周围的设备需要获取模糊的位置信息。这两个权限属于同一组危险权限，在清单文件中声明之后，还需要再运行时动态获取。 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 这个权限允许程序连接到已配对的蓝牙设备, 请求连接/接收连接/传输数据需要改权限, 主要用于对配对后进行操作; -->
+    <uses-permission android:name="android.permission.BLUETOOTH" /> <!-- 这个权限允许程序发现和配对蓝牙设备, 该权限用来管理蓝牙设备, 有了这个权限, 应用才能使用本机的蓝牙设备, 主要用于对配对前的操作; -->
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" /> <!-- Android 6.0以后，这两个权限是必须的，蓝牙扫描周围的设备需要获取模糊的位置信息。这两个权限属于同一组危险权限，在清单文件中声明之后，还需要再运行时动态获取。 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <!-- 当android:required为true的时候，app只能强制运行在支持BLE功能的设备商，为false的时候，可以运行在所有设备上， -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- 当android:required为true的时候，app只能强制运行在支持BLE功能的设备商，为false的时候，可以运行在所有设备上， -->
     <uses-feature
         android:name="android.hardware.bluetooth_le"
         android:required="true" />
-    <uses-feature android:name="android.hardware.location.gps" />
-
-    <!-- 读写文件权限 -->
+    <uses-feature android:name="android.hardware.location.gps" /> <!-- 读写文件权限 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
-
-    <!-- 添加默认震动效果,需要申请震动权限 -->
-    <uses-permission android:name="android.permission.VIBRATE" />
-
-    <!--获取WINDOW使用-->
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-
-    <!--日历权限-->
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" /> <!-- 添加默认震动效果,需要申请震动权限 -->
+    <uses-permission android:name="android.permission.VIBRATE" /> <!-- 获取WINDOW使用 -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> <!-- 日历权限 -->
     <uses-permission android:name="android.permission.READ_CALENDAR" />
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+    <!--    使用jobIntentService -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:name=".MyApplication"
@@ -48,6 +35,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".intentservice.ActivityIntentService"/>
         <activity
             android:name=".ui.login.LoginActivity"
             android:label="@string/app_name" />
@@ -96,7 +84,7 @@
         <activity android:name=".eventbus.ActivityEventBusOpt" />
         <activity android:name=".slidelock.ActivitySlideLock" />
         <activity android:name=".webview.AcvitityWebview" />
-        <activity android:name=".ui.Activity.ActivitySystemUi" />
+        <activity android:name=".systembar.ActivitySystemUi" />
         <activity android:name=".anim.AnimActivity" />
         <activity android:name=".anim.AnimShowActivity" />
         <activity android:name=".slidelock.ActivityHorizontalSlideLock" />
@@ -116,16 +104,12 @@
         <activity android:name=".guide.ActivityGuide" />
         <activity android:name=".fragment2.ActivityNavigationFragment" />
 
-
         <receiver android:name=".notification.ReceiverNotification" />
-
 
         <service android:name=".bluetooth.BleService" />
         <service android:name=".bluetooth.BleService19" />
         <service android:name="com.inuker.bluetooth.library.BluetoothService" />
-        <service android:name=".notification.ServiceNotification" />
-
-        <!-- 和蓝牙设备连接进行电话交互 -->
+        <service android:name=".notification.ServiceNotification" /> <!-- 和蓝牙设备连接进行电话交互 -->
         <service
             android:name=".notification.NotificationReceiver18"
             android:label="@string/app_name"
@@ -133,28 +117,50 @@
             <intent-filter>
                 <action android:name="android.service.notification.NotificationListenerService" />
             </intent-filter>
-        </service>
-        <!-- 和蓝牙设备连接进行电话交互 -->
-
+        </service> <!-- 和蓝牙设备连接进行电话交互 -->
         <receiver android:name=".widgetview.NewAppWidget">
             <intent-filter>
-                <!--这个是必须要有的系统规定-->
+
+                <!-- 这个是必须要有的系统规定 -->
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-                <!--这个是我们自定义的 action ，用来更新UI，还可以自由添加更多 -->
+                <!-- 这个是我们自定义的 action ，用来更新UI，还可以自由添加更多 -->
                 <action android:name="com.lyl.widget.UPDATE_ALL" />
             </intent-filter>
 
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/new_app_widget_info" />
-        </receiver>
-        <!-- 用来计时，发送 通知桌面部件更新 -->
+        </receiver> <!-- 用来计时，发送 通知桌面部件更新 -->
         <service android:name=".widgetview.WidgetService">
             <intent-filter>
-                <!--用来启动服务-->
+
+                <!-- 用来启动服务 -->
                 <action android:name="android.appwidget.action.APP_WIDGET_SERVICE" />
             </intent-filter>
         </service>
-    </application>
 
+        <service
+            android:name=".intentservice.MyIntentService"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.zzt.test.MyIntentService1" />
+                <action android:name="com.zzt.test.MyIntentService2" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".intentservice.MyJobIntentService"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE">
+            <intent-filter>
+                <action android:name="com.zzt.test.MyIntentService1" />
+                <action android:name="com.zzt.test.MyIntentService2" />
+            </intent-filter>
+        </service>
+
+        <service
+            android:name=".intentservice.MyJobService"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
+    </application>
 </manifest>

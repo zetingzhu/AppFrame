@@ -1,4 +1,4 @@
-package com.trade.eight.moudle.initDialog
+package frame.zzt.com.appframe.singlelist;
 
 /**
  * @author: zeting

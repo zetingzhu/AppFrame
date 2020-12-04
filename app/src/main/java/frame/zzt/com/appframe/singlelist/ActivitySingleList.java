@@ -16,7 +16,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.RadioButton;
 
-import com.trade.eight.moudle.initDialog.InitDialogUtil;
 
 import frame.zzt.com.appframe.R;
 

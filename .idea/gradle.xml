@@ -12,6 +12,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/CommonModule" />
+            <option value="$PROJECT_DIR$/DataBindSample" />
             <option value="$PROJECT_DIR$/LurCacheSample" />
             <option value="$PROJECT_DIR$/MoveRecyclerView" />
             <option value="$PROJECT_DIR$/RoomSample" />

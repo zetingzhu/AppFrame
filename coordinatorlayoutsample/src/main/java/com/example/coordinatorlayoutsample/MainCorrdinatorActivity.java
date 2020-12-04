@@ -11,15 +11,19 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.SparseArray;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class MainCorrdinatorActivity extends AppCompatActivity {
 
 
     RecyclerView recyclerView;
+    LinearLayout add_layout;
     SparseArray<String> sparseArray = new SparseArray<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +31,10 @@ public class MainCorrdinatorActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recycleview);
 
         recyclerView = findViewById(R.id.recyclerView);
+        add_layout = findViewById(R.id.add_layout);
+
+
+//        add_layout.addView(view);
 
         for (int i = 0; i < 60; i++) {
             sparseArray.put(i, "v_" + i);
@@ -100,9 +108,22 @@ public class MainCorrdinatorActivity extends AppCompatActivity {
                     paint.setTextSize(30);
                     c.drawText("这个是第：" + pos, left + 20, top + 60, paint);
                 }
-
-                View view = new View(context);
-                view.draw(c);
+                if (pos == 3) {
+                    // 添加一个布局
+                    int saveCount = c.save();
+                    View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_view, null, true);
+                    int width = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+                    int height = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+                    view.measure(width, height);
+                    System.out.println("width====================获取宽度=" + width);
+                    System.out.println("height====================获取高度=" + height);
+                    view.layout(0, 0, view.getMeasuredWidth(), view.getMeasuredHeight());
+                    System.out.println("width====================获取宽度=" + width);
+                    System.out.println("height====================获取高度=" + height);
+                    c.translate(0, child.getTop());
+                    view.draw(c);
+                    c.restoreToCount(saveCount);
+                }
             }
 
         }

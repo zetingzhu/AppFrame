@@ -1,33 +1,65 @@
 package com.example.viewautosizelayout;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.zzt.zztutillibrary.ByteUtils;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.TreeMap;
 
-@RequiresApi(api = Build.VERSION_CODES.N)
+/**
+ * https://github.com/JessYanCoding/AndroidAutoSize/issues/13
+ * 屏幕适配方案 AndroidAutoSize
+ */
 public class AutoSizeActivity extends AppCompatActivity {
 
     private static final String TAG = AutoSizeActivity.class.getSimpleName();
 
 
     HashMap<String, String> map;
+    TreeMap<String, String> treeMap;
+    LinkedHashMap<String, String> linkedHashMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        AutoContextDensityUtil.getWidthHeight(getApplication());
+
+
+        map = new HashMap<>();
+        map.put("z", "z");
+        map.get("z");
+        map.remove("z");
+
+        linkedHashMap = new LinkedHashMap<>();
+        linkedHashMap.put("c", "c");
+        linkedHashMap.get("c");
+
         testMap();
         logBaseMapFun();
         testByte();
-        finish();
+        testTreeMap();
+    }
+
+    private void testTreeMap() {
+        treeMap = new TreeMap<>();
+        treeMap.put("3", "x");
+        treeMap.put("1", "x");
+        treeMap.put("4", "x");
+        treeMap.put("2", "x");
+        treeMap.put("5", "x");
+        Log.d(TAG, "树打印:" + treeMap.toString());
+        Log.d(TAG, "树打印:" + treeMap.firstKey());
+        Log.d(TAG, "树打印:" + treeMap.firstEntry());
+        Log.d(TAG, "树打印:" + treeMap.lastKey());
+        Log.d(TAG, "树打印:" + treeMap.lowerKey("4"));
+        treeMap.get("x");
     }
 
     private void testByte() {
@@ -56,18 +88,87 @@ public class AutoSizeActivity extends AppCompatActivity {
         LogE(to6, " >>> 10", to6 >>> 10);
 
 
-        Object key = "qqqww";
+        Object key = "zzzzzzzz";
+        Log.w(TAG, "处理数据 key           ：" + key);
         int h = key.hashCode();
-        Log.w(TAG, "hashCode    值 ：" + h + "  -  " + ByteUtils.toBinaryString(h));
-        Log.w(TAG, "hashCode 位移值 ：" + (h >>> 16) + "  -  " + ByteUtils.toBinaryString(h >>> 16));
-        Log.w(TAG, "hashCode 位移值 ：" + (h ^ (h >>> 16)) + "  -  " + ByteUtils.toBinaryString(h ^ (h >>> 16)));
+        Log.w(TAG, "hashCode            值 ：" + ByteUtils.toBinaryString(h));
+        Log.w(TAG, "(h >>> 16)       位移值 ：" + ByteUtils.toBinaryString(h >>> 16));
+        Log.w(TAG, "(h ^ (h >>> 16)) 位移值 ：" + ByteUtils.toBinaryString(h ^ (h >>> 16)));
         /***
          hashCode    值 ：107836657   -  0000 0110 0110 1101 0111 0100 1111 0001
          hashCode 位移值 ：1645       -  0000 0000 0000 0000 0000 0110 0110 1101
          hashCode 位移值 ：107836060  -  0000 0110 0110 1101 0111 0010 1001 1100
          **/
 
+
+        Log.i(TAG, "(n - 1) & hash 运算");
+
+        Log.e(TAG, "幂运算 " + Math.pow(2, 0));
+        Log.e(TAG, "幂运算 " + Math.pow(2, 1));
+        Log.e(TAG, "幂运算 " + Math.pow(2, 2));
+        Log.e(TAG, "幂运算 " + Math.pow(2, 3));
+        Log.e(TAG, "幂运算 " + Math.pow(2, 4));
+        Log.e(TAG, "幂运算 " + Math.pow(2, 5));
+        Log.e(TAG, "幂运算 " + Math.pow(2, 6));
+        Log.e(TAG, "幂运算 " + Math.pow(2, 7));
+
+        Object kk = "z";
+        int kkHash = hash(kk);
+        int n = 128;
+        Log.i(TAG, "kk hashCode值   ：" + ByteUtils.toBinaryString(kkHash));
+        Log.w(TAG, "8  hashCode值   ：" + ByteUtils.toBinaryString(8));
+        Log.w(TAG, "16  hashCode值  ：" + ByteUtils.toBinaryString(16));
+        Log.w(TAG, "32  hashCode值  ：" + ByteUtils.toBinaryString(32));
+        Log.w(TAG, "64  hashCode值  ：" + ByteUtils.toBinaryString(64));
+        Log.w(TAG, "128  hashCode值 ：" + ByteUtils.toBinaryString(128));
+        Log.i(TAG, "n-1 hashCode值  ：" + ByteUtils.toBinaryString(n - 1));
+        Log.i(TAG, "kk hashCode值   ：" + ((n - 1) & kkHash));
+        Log.i(TAG, "kk hashCode值   ：" + ByteUtils.toBinaryString((n - 1) & kkHash));
+        Log.i(TAG, "(16 - 1) & kkHash) hashCode值    ：" + ((16 - 1) & kkHash));
+        Log.i(TAG, "(32 - 1) & kkHash) hashCode值    ：" + ((32 - 1) & kkHash));
+        Log.i(TAG, "(64 - 1) & kkHash) hashCode值    ：" + ((64 - 1) & kkHash));
+        Log.i(TAG, "(128 - 1) & kkHash) hashCode值   ：" + ((128 - 1) & kkHash));
+
+
+        Log.i(TAG, "扩容后的阀值和容量 运算");
+        int oldCap = 1 << 4;
+        int oldThr = (int) (0.75f * oldCap);
+        Log.v(TAG, "旧数组的容量" + oldCap + "和阀值" + oldThr);
+        Log.i(TAG, "旧数组的容量：" + ByteUtils.toBinaryString(oldCap) + "和阀值:" + ByteUtils.toBinaryString(oldThr));
+        int newCap = oldCap << 1;
+        int newThr = oldThr << 1;
+        Log.v(TAG, "新数组的容量" + newCap + "和阀值" + newThr);
+        Log.i(TAG, "旧数组的容量：" + ByteUtils.toBinaryString(newCap) + "和阀值:" + ByteUtils.toBinaryString(newThr));
+
+        LogNCapV(0.6f);
+        LogNCapV(0.65f);
+        LogNCapV(0.7f);
+        LogNCapV(0.75f);
+
+        int newCap1 = newCap << 1;
+        int newThr1 = newThr << 1;
+        Log.v(TAG, "新数组的容量" + newCap1 + "和阀值" + newThr1);
+        Log.i(TAG, "旧数组的容量：" + ByteUtils.toBinaryString(newCap1) + "和阀值:" + ByteUtils.toBinaryString(newThr1));
     }
+
+
+    private void LogNCapV(float fac) {
+        Log.e(TAG, "double 二进制：" + Long.toBinaryString(1));
+        Log.e(TAG, "double 二进制：" + Long.toBinaryString(Double.doubleToRawLongBits(1.1)));
+        Log.e(TAG, "double 二进制：" + Long.toBinaryString(2));
+        Log.e(TAG, "扩展因子：" + fac);
+        int oldCap = 1 << 4;
+        int oldThr = (int) (fac * oldCap);
+        Log.v(TAG, "旧容量" + oldCap + "和阀值" + oldThr);
+        Log.i(TAG, "旧容量：" + ByteUtils.toBinaryString(oldCap) + "和阀值:" + ByteUtils.toBinaryString(oldThr));
+        int newCap = oldCap << 1;
+        int newThr = oldThr << 1;
+        Log.v(TAG, "新容量" + newCap + "和阀值" + newThr);
+        Log.i(TAG, "新容量：" + ByteUtils.toBinaryString(newCap) + "和阀值:" + ByteUtils.toBinaryString(newThr));
+
+        Log.e(TAG, "新阀值和新数组因子是多少" + ((float) (newThr / newCap)));
+    }
+
 
     private void LogE(int i) {
         Log.e(TAG, "\n\t");
@@ -217,7 +318,7 @@ public class AutoSizeActivity extends AppCompatActivity {
         log2Base(2, 30);
         Log.d(TAG, "输入值 15：" + enterTenToTwo(15));
 
-        int size = tableSizeFor(17);
+        int size = tableSizeFor(1111);
         Log.d(TAG, "扩容机制 结果 ：" + size);
 
         getHash("key_1");
@@ -278,11 +379,11 @@ public class AutoSizeActivity extends AppCompatActivity {
         n |= n >>> 2;
         Log.d(TAG, "扩容机制 2：" + n + " =二进制：" + enterTenToTwo(n) + " =n >>> 4：" + enterTenToTwo(n >>> 4));
         n |= n >>> 4;
-        Log.d(TAG, "扩容机制 4：" + n + " =二进制：" + enterTenToTwo(n) + " =n >>> 5：" + enterTenToTwo(n >>> 5));
+        Log.d(TAG, "扩容机制 4：" + n + " =二进制：" + enterTenToTwo(n) + " =n >>> 8：" + enterTenToTwo(n >>> 5));
         n |= n >>> 8;
         Log.d(TAG, "扩容机制 8：" + n + " =二进制：" + enterTenToTwo(n) + " =n >>> 16：" + enterTenToTwo(n >>> 16));
         n |= n >>> 16;
-        Log.d(TAG, "扩容机制 16：" + n + " =二进制：" + enterTenToTwo(n) + " =n >>> 16：" + enterTenToTwo(n >>> 16));
+        Log.d(TAG, "扩容机制 16：" + n + " =二进制：" + enterTenToTwo(n));
         Log.d(TAG, "扩容机制 最后结果：" + (n + 1) + " 二进制输出：" + enterTenToTwo(n + 1));
         return (n < 0) ? 1 : (n >= MAXIMUM_CAPACITY) ? MAXIMUM_CAPACITY : n + 1;
     }

@@ -27,6 +27,8 @@
     <color name="dark">#803cbcb7</color>
     <color name="light">#800de6e8</color>
 
+    <color name="color_FF00FF_10">#1AFF00FF</color>
+
 
     <integer-array name="gradient_arc_color">
         <item>@color/green</item>

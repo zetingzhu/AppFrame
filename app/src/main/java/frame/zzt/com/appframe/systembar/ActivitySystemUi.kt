@@ -1,13 +1,20 @@
-package frame.zzt.com.appframe.ui.Activity
+package frame.zzt.com.appframe.systembar
 
 import android.app.Activity
 import android.os.Bundle
+import android.util.Log
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Button
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
-import android.view.View
-import android.widget.Button
-import android.widget.TextView
+import androidx.appcompat.widget.ViewStubCompat
 import frame.zzt.com.appframe.R
+import frame.zzt.com.appframe.ui.Activity.ActivityFirst
+import frame.zzt.com.appframe.ui.Activity.SysUISetting
+import kotlinx.android.synthetic.main.activity_system_ui.*
 
 /**
  * 显示状态栏
@@ -15,6 +22,9 @@ import frame.zzt.com.appframe.R
  * Date 19/1/8.
  */
 class ActivitySystemUi : AppCompatActivity() {
+    companion object {
+        val TAG = ActivityFirst::class.java.simpleName
+    }
 
     private lateinit var button1: Button
     private val button2 by bindView<Button>(R.id.button2)
@@ -34,14 +44,76 @@ class ActivitySystemUi : AppCompatActivity() {
 //        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);// 设置全屏
         setContentView(R.layout.activity_system_ui)
 
-//        val actionBar = supportActionBar
-//        actionBar!!.hide()
+//        showSystemBarView()
+//        initView()
+    }
 
-        initView()
+    private fun showSystemBarView() {
+        val decorView = window.decorView as ViewGroup
+        decorView.postDelayed({
+            decorView.setBackgroundColor(resources.getColor(R.color.blue))
+            decorView?.setPadding(50, 10, 50, 10)
 
+            var decorChild: LinearLayout = decorView.getChildAt(0) as LinearLayout
+            decorChild?.setBackgroundColor(resources.getColor(R.color.green))
+            decorChild.setPadding(50, decorChild.paddingTop, 50, 10)
+            Log.e(TAG, "padding L:" + decorChild.paddingLeft + " T:" + decorChild.paddingTop + " R:" + decorChild.paddingRight + " B:" + decorChild.paddingBottom)
+
+            val statusBar = findViewById<View>(android.R.id.statusBarBackground)
+            statusBar?.setBackgroundColor(resources.getColor(R.color.color_FF00FF_10))
+//            statusBar.setBackgroundColor(resources.getColor(android.R.color.transparent))
+
+            val navigationBar = findViewById<View>(android.R.id.navigationBarBackground)
+            navigationBar?.setBackgroundColor(resources.getColor(R.color.oldlace))
+
+
+            val barStubViewGroup = findViewById<ViewStubCompat>(R.id.action_mode_bar_stub)
+            barStubViewGroup?.setBackgroundColor(resources.getColor(R.color.deepskyblue))
+//            barStubViewGroup.setPadding(50, 50, 50, 50)
+
+            val barViewGroup = findViewById<ViewGroup>(R.id.action_bar_root)
+            barViewGroup?.setBackgroundColor(resources.getColor(R.color.lightslategray))
+            barViewGroup?.setPadding(50, 10, 50, 10)
+
+            val view = findViewById<ViewGroup>(android.R.id.content)
+            view.setBackgroundColor(resources.getColor(R.color.greenyellow))
+            view.setPadding(50, 10, 50, 10)
+
+        }, 1000)
     }
 
     fun initView() {
+        //  设置导航栏为浅色模式
+//        BarUtils.setNavBarLightMode(window, true)
+        // 透明状态栏
+//        BarUtils.transparentStatusBar(window)
+        var booLight = false
+        button10.setText("深色，浅色状态栏")
+        button10.postDelayed({
+            BarUtils.setStatusBarLightMode(window, true)
+            Log.d("222", "222222222222222")
+        }, 100)
+        button10.setOnClickListener {
+            // 是否为浅色状态栏
+            booLight = !booLight
+            BarUtils.setStatusBarLightMode(window, booLight)
+        }
+
+        button11.setText("透明状态栏，深浅模式")
+        button11.setOnClickListener {
+            // 透明状态栏
+            BarUtils.transparentStatusBar(window)
+            // 深色模式
+            booLight = !booLight
+            BarUtils.setStatusBarLightMode(window, booLight)
+        }
+        button12.setText("添加一个透明状态栏模式")
+        button11.setOnClickListener {
+            // 透明状态栏
+            BarUtils.transparentStatusBar(window)
+        }
+
+
         textView.text = "ActivitySystemUi"
 
         button1 = findViewById<Button>(R.id.button1)

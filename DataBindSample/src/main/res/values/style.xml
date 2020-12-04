@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="signing_switch">
+        <item name="android:thumb">@drawable/switch_thumb_signing</item>
+        <item name="android:track">@drawable/switch_track_signing</item>
+    </style>
+</resources>

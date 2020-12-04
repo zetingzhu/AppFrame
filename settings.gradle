@@ -1,3 +1,4 @@
+include ':DataBindSample'
 include ':coordinatorlayoutsample'
 include ':viewautosizelayout'
 include ':LurCacheSample'

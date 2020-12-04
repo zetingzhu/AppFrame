@@ -125,5 +125,7 @@
     <string name="show_item_viewpager2">ViewPager2 的简单使用</string>
     <string name="show_item_paging3">paging3 分页的简单使用</string>
     <string name="show_item_handview">手写签名</string>
+    <string name="show_item_viewpager_loop">循环的播放图片</string>
+    <string name="show_item_intent_service">IntentService 使用</string>
 
 </resources>

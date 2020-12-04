@@ -1,4 +1,4 @@
-package com.trade.eight.moudle.initDialog
+package frame.zzt.com.appframe.singlelist;
 
 import android.view.LayoutInflater
 import android.view.View
