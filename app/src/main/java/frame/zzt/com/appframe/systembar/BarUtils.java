@@ -35,7 +35,7 @@ import static android.Manifest.permission.EXPAND_STATUS_BAR;
  * @author: zeting
  * @date: 2020/12/3
  * 系统状态栏操作
- *
+ * <p>
  * getStatusBarHeight                   : 获取状态栏高度（px）
  * setStatusBarVisibility               : 设置状态栏是否可见
  * isStatusBarVisible                   : 判断状态栏是否可见

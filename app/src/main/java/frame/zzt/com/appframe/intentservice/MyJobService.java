@@ -10,11 +10,10 @@ import androidx.annotation.RequiresApi;
 /**
  * @author: zeting
  * @date: 2020/12/4
- *  间隔时间不能小于15分钟，不然将不会执行
- *
+ * 间隔时间不能小于15分钟，不然将不会执行
  */
 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-public class MyJobService  extends JobService {
+public class MyJobService extends JobService {
 
     private String TAG = MyJobIntentService.class.getSimpleName();
     public static final int MYJOBSERVICE_JOB_ID = 0;

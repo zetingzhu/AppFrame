@@ -2,4 +2,9 @@
 <resources>
     <item type="id" name="statusbarutil_fake_status_bar_view" />
     <item type="id" name="statusbarutil_translucent_view" />
+
+
+<!--    Android沉浸式状态栏最简单的实现-->
+    <item name="fake_status_bar_view" type="id"/>
+
 </resources>

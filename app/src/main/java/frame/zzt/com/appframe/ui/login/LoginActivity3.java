@@ -10,6 +10,9 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.util.Log;
 import android.view.View;
@@ -25,6 +28,7 @@ import android.widget.Toast;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.zzt.commonmodule.utils.ConfigARouter;
 
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindString;
@@ -33,8 +37,14 @@ import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import frame.zzt.com.appframe.R;
+import frame.zzt.com.appframe.retrofit.loginvm.LoginApi;
+import frame.zzt.com.appframe.retrofit.loginvm.RequestBody;
 import frame.zzt.com.appframe.ui.BaseAppCompatActivity;
 import frame.zzt.com.appframe.ui.home.HomeActivity;
+import frame.zzt.com.appframe.ui.vm.HttpResponse;
+import frame.zzt.com.appframe.ui.vm.LoginKotlinVm2;
+import frame.zzt.com.appframe.ui.vm.LoginVm;
+import frame.zzt.com.appframe.ui.vm.LoginKotlinVm;
 import frame.zzt.com.appframe.util.BuildHelper;
 import frame.zzt.com.appframe.mvp.mvpbase.BasePresenter;
 
@@ -176,7 +186,72 @@ public class LoginActivity3<P extends BasePresenter> extends BaseAppCompatActivi
 
     @OnClick(R.id.button3)
     public void login03() {
-        presenter.login3();
+//        presenter.login3();
+        LoginVm loginVm = new ViewModelProvider(this).get(LoginVm.class);
+        loginVm.getLoginStatus().observe(this, new Observer<HttpResponse<Integer>>() {
+            @Override
+            public void onChanged(HttpResponse<Integer> integerHttpResponse) {
+                if (integerHttpResponse != null) {
+                    Log.w(TAG_BASE, integerHttpResponse.toString());
+                } else {
+                    Log.w(TAG_BASE, "请求数据为空");
+                }
+            }
+        });
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                loginVm.requestLoginStatus("91", "963001");
+            }
+        }).start();
+
+
+        LiveData<HttpResponse<Integer>> bannerList = LoginApi.getApi().getLoginStatus1("91", "963001");
+        bannerList.observe(LoginActivity3.this, new Observer<HttpResponse<Integer>>() {
+            @Override
+            public void onChanged(HttpResponse<Integer> integerHttpResponse) {
+                Log.w(TAG_BASE, "getLoginStatus1:" + integerHttpResponse.toString());
+            }
+        });
+
+        HashMap<String, String> map = new HashMap<>();
+        map.put("telCode", "91");
+        map.put("username", "963001");
+
+        LiveData<HttpResponse<Integer>> bannerList1 = LoginApi.getApi().getLoginStatus2(RequestBody.getParamMap(map));
+        bannerList1.observe(LoginActivity3.this, new Observer<HttpResponse<Integer>>() {
+            @Override
+            public void onChanged(HttpResponse<Integer> integerHttpResponse) {
+                Log.w(TAG_BASE, "getLoginStatus2:" + integerHttpResponse.toString());
+            }
+        });
+
+        LoginKotlinVm loginVm1 = new ViewModelProvider(this).get(LoginKotlinVm.class);
+        loginVm1.getLoginStatus().observe(this, new Observer<HttpResponse<Integer>>() {
+            @Override
+            public void onChanged(HttpResponse<Integer> integerHttpResponse) {
+                if (integerHttpResponse != null) {
+                    Log.w(TAG_BASE, "getLoginStatus3:" + integerHttpResponse.toString());
+                } else {
+                    Log.w(TAG_BASE, "请求数据为空 vm1");
+                }
+            }
+        });
+        loginVm1.loadData(RequestBody.getParamMap(map));
+        LoginKotlinVm2 loginVm2 = new ViewModelProvider(this).get(LoginKotlinVm2.class);
+        loginVm2.getLoginStatus().observe(this, new Observer<HttpResponse<Integer>>() {
+            @Override
+            public void onChanged(HttpResponse<Integer> integerHttpResponse) {
+                if (integerHttpResponse != null) {
+                    Log.w(TAG_BASE, "getLoginStatus4:" + integerHttpResponse.toString());
+                } else {
+                    Log.w(TAG_BASE, "请求数据为空 vm1");
+                }
+            }
+        });
+        loginVm2.loadData(RequestBody.getParamMap(map));
+
+
     }
 
     @OnClick(R.id.button4)

@@ -68,8 +68,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_4dp"
                     android:text="@{`+`+itemData.credit }"
-                    android:textColor="@{SigningDataUtil.getStatusSetTextColor(itemData)}"
-                    />
+                    android:textColor="@{SigningDataUtil.getStatusSetTextColor(itemData)}" />
                 <!--   android:text="@{`+`+itemData.credit }"-->
                 <!--                   android:textColor="@{SigningDataUtil.getStatusSetTextColor(itemData)}"-->
 

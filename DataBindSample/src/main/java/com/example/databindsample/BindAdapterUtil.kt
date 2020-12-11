@@ -133,7 +133,7 @@ object BindAdapterUtil {
      */
     @BindingAdapter("backgroundTintColor")
     @JvmStatic
-    fun setBackgroundTint(view:  TextView, color: Int) {
+    fun setBackgroundTint(view: TextView, color: Int) {
 //        view.setBackgroundTintList(color)
     }
 

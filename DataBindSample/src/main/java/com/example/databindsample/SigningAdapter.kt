@@ -2,9 +2,11 @@ package com.example.databindsample
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.databindsample.databinding.ActSignInCalendarItem7thBinding
 import com.example.databindsample.databinding.ActSignInCalendarItemBinding
+
 
 /**
  * @author: zeting
@@ -30,6 +32,14 @@ class SigningAdapter(var mList: MutableList<BindSingingItemObj>?) : RecyclerView
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         if (viewType == BindSingingItemObj.TYPE_SIGN_GOLD) {
             var bindingOther = ActSignInCalendarItem7thBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false)
+
+            /**
+             * 下面两张方式
+
+            val bingding1: ActSignInCalendarItem7thBinding = ActSignInCalendarItem7thBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false)
+            val bingding2: ActSignInCalendarItem7thBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.act_sign_in_calendar_item_7th, parent, false)
+
+             */
             return Sign7ThViewHolder(bindingOther)
         } else {
             var bindingOther = ActSignInCalendarItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false)

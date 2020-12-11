@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.ViewStubCompat
+import androidx.core.content.ContextCompat
 import frame.zzt.com.appframe.R
 import frame.zzt.com.appframe.ui.Activity.ActivityFirst
 import frame.zzt.com.appframe.ui.Activity.SysUISetting
@@ -20,6 +21,9 @@ import kotlinx.android.synthetic.main.activity_system_ui.*
  * 显示状态栏
  * Created by zeting
  * Date 19/1/8.
+ *
+ * 确定显示状态栏的层级关系
+ *
  */
 class ActivitySystemUi : AppCompatActivity() {
     companion object {
@@ -42,10 +46,20 @@ class ActivitySystemUi : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 //        requestWindowFeature(Window.FEATURE_NO_TITLE);// 隐藏标题
 //        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);// 设置全屏
+
+        /**
+         *   千万不要设置  android:fitsSystemWindows="true"
+         */
+        StatusBarUtils.setColor(this, ContextCompat.getColor(this, R.color.dimgrey))
+        StatusBarUtils.setTextDark(this, false)
+
         setContentView(R.layout.activity_system_ui)
 
+
+
+
 //        showSystemBarView()
-//        initView()
+        initView()
     }
 
     private fun showSystemBarView() {
@@ -79,7 +93,7 @@ class ActivitySystemUi : AppCompatActivity() {
             view.setBackgroundColor(resources.getColor(R.color.greenyellow))
             view.setPadding(50, 10, 50, 10)
 
-        }, 1000)
+        }, 10000)
     }
 
     fun initView() {
@@ -89,10 +103,10 @@ class ActivitySystemUi : AppCompatActivity() {
 //        BarUtils.transparentStatusBar(window)
         var booLight = false
         button10.setText("深色，浅色状态栏")
-        button10.postDelayed({
-            BarUtils.setStatusBarLightMode(window, true)
-            Log.d("222", "222222222222222")
-        }, 100)
+//        button10.postDelayed({
+//            BarUtils.setStatusBarLightMode(window, true)
+//            Log.d("222", "222222222222222")
+//        }, 100)
         button10.setOnClickListener {
             // 是否为浅色状态栏
             booLight = !booLight

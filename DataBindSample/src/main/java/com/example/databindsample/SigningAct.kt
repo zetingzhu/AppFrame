@@ -5,8 +5,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Html
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.databindsample.R
 import com.example.databindsample.databinding.ActSignInBinding
 import com.google.gson.Gson
 
@@ -49,6 +49,16 @@ class SigningAct : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActSignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        /**
+            一。
+        val binding: ActSignInBinding = DataBindingUtil.setContentView(this, R.layout.act_sign_in)
+            二。
+        binding = ActSignInBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        */
+
         initView()
         initData()
     }
