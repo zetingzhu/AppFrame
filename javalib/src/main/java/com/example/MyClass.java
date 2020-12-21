@@ -5,10 +5,28 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
+import sun.rmi.runtime.Log;
+
 public class MyClass {
 
     public static void main(String[] args) {
+        a:
+        for (int i = 0; i < 5; i++) {
+            b:
+            for (int j = 0; j < 3; j++) {
 
+                if (j > 2 && i > 3) {
+                    continue a;
+                }
+
+                if (j > 1) {
+                    break b;
+                }
+                System.out.println("循环 b:" + j);
+            }
+            System.out.println("循环 a:" + i);
+        }
+        System.out.println("循环 结束");
 
         HashMap map;
 
