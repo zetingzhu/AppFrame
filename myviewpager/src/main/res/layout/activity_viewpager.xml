@@ -97,6 +97,14 @@
                 android:layout_height="wrap_content"
                 android:text="测试按钮2"
                 android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/btn_nested_sliding"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="嵌套滑动"
+                android:textAllCaps="false" />
+
         </LinearLayout>
     </HorizontalScrollView>
 

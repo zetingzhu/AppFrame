@@ -22,6 +22,8 @@ import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import frame.zzt.com.appframe.dialogFragment.DialogFragmentActivity;
+import frame.zzt.com.appframe.dialogFragment.MyDialogFragment;
 import frame.zzt.com.appframe.dragview.DragLayoutActivity;
 import frame.zzt.com.appframe.R;
 import frame.zzt.com.appframe.anim.AnimActivity;
@@ -100,10 +102,17 @@ public class ThirdFragment extends Fragment {
         } else if (DEMOS[index].arouter != null && !DEMOS[index].arouter.isEmpty()) {
             // 路由不为空就跳转到路由
             ARouter.getInstance().build(DEMOS[index].arouter).navigation();
+        } else if (DEMOS[index].clickIndex > 0) {
+            switch (DEMOS[index].clickIndex) {
+                case 1:
+
+                    break;
+            }
         }
     }
 
     private DemoInfo[] DEMOS = {
+            new DemoInfo(R.string.show_item_dialog_fragment, R.string.show_item_dialog_fragment, DialogFragmentActivity.class),
             new DemoInfo(R.string.show_item_viewpager_loop, R.string.show_item_viewpager_loop, ConfigARouter.ACTIVITY_HANDVIEW_MAIN),
             new DemoInfo(R.string.show_item_handview, R.string.show_item_handview, ConfigARouter.ACTIVITY_HANDVIEW_MAIN),
             new DemoInfo(R.string.show_item_paging3, R.string.show_item_paging3, ConfigARouter.ACTIVITY_PAGING3_MAIN),

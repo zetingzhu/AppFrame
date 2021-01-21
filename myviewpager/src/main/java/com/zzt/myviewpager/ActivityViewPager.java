@@ -85,6 +85,14 @@ public class ActivityViewPager extends BaseActivityViewPager {
             }
         });
 
+        findViewById(R.id.btn_nested_sliding).setVisibility(View.VISIBLE);
+        findViewById(R.id.btn_nested_sliding).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ActivityViewPager.this, ActivityNestedSliding.class));
+            }
+        });
+
         ARouter.getInstance().inject(this);
     }
 

@@ -4,12 +4,22 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import sun.rmi.runtime.Log;
 
 public class MyClass {
 
     public static void main(String[] args) {
+
+
+
+        testList();
+
+
+
+
+
         a:
         for (int i = 0; i < 5; i++) {
             b:
@@ -55,5 +65,22 @@ public class MyClass {
         unmodifiableList.add("d");
 
 
+    }
+
+    private static void testList() {
+
+        List<String> ss = new ArrayList<>();
+        ss.add("1");
+        ss.add("10");
+        ss.add("2");
+        ss.add("4");
+        ss.add("434");
+        ss.add("dsdfgh");
+        System.out.println("循环ss:" + ss);
+        CopyOnWriteArrayList<String> csl = new CopyOnWriteArrayList<>(ss);
+        System.out.println("循环csl:" + csl);
+
+        List<String> al = new ArrayList<>(csl) ;
+        System.out.println("循环 al:" + al);
     }
 }

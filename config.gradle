@@ -1,16 +1,11 @@
 ext {
 
-    compileSdkVersion = 28
-    buildToolsVersion = '28.0.3'
+    compileSdkVersion = 29
+    buildToolsVersion = '29.0.2'
     minSdkVersion = 18
     targetSdkVersion = 28
 
-    android = [
-            compileSdkVersion: 28,
-            buildToolsVersion: '28.0.3',
-            minSdkVersion    : 18,
-            targetSdkVersion : 28,
-    ]
+
 
     depsVersion = [
             androidx_appcompat       : "1.2.0",

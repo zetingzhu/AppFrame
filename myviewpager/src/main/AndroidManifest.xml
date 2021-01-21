@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name="com.zzt.myviewpager.ActivityNestedSliding"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
             android:name="com.zzt.myviewpager.ActivityViewPager"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
@@ -19,7 +22,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name="com.zzt.myviewpager.ActivityViewPagerFragment"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />

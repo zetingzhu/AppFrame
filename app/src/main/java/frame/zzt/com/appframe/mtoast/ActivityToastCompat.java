@@ -1,6 +1,7 @@
 package frame.zzt.com.appframe.mtoast;
 
 import android.Manifest;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,6 +13,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.zzt.utils.ToastUtils;
 
 import java.util.Random;
 
@@ -52,11 +55,14 @@ public class ActivityToastCompat extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_common);
         findViewById(R.id.button_0).setOnClickListener(v -> {
-                    ToastCompat.makeText(ActivityToastCompat.this, "这个是特殊toast：" + random.nextInt(100), ToastCompat.LENGTH_SHORT).show();
+//                    ToastCompat.makeText(ActivityToastCompat.this, "这个是特殊toast：" + random.nextInt(100), ToastCompat.LENGTH_SHORT).show();
+                    ToastUtils.showShort(ActivityToastCompat.this, "这个是自定义的  " + (int) (Math.random() * 1000));
+
                 }
         );
         findViewById(R.id.button_1).setOnClickListener(v ->
-                handler.sendEmptyMessageDelayed(0, 100)
+//                handler.sendEmptyMessageDelayed(0, 100)
+                        ToastUtils.make().setTextColor(Color.GREEN).show(ActivityToastCompat.this, "这个是自定义的" + (int) (Math.random() * 1000), Toast.LENGTH_SHORT)
         );
 
         ((Button) findViewById(R.id.button_2)).setText("系统的");

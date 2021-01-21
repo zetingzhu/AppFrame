@@ -1,3 +1,14 @@
+  signingConfigs {
+        releaseSign {
+            keyAlias 'key0'
+            keyPassword 'android'
+            storeFile file('../dev/ktingKey.jks')
+            storePassword 'android'
+        }
+    }
+
+
+
 1. 多渠道打包jar
 walle-cli-all.jar
 https://github.com/Meituan-Dianping/walle

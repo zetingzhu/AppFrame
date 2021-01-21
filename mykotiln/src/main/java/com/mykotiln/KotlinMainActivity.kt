@@ -9,23 +9,21 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import com.google.android.material.navigation.NavigationView
 import android.widget.BaseAdapter
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
-import com.google.android.material.navigation.NavigationView
-import com.mykotiln.activity.ActivityJava
-import com.mykotiln.activity.ActivityKotlin
-import com.mykotiln.activity.ActivityKotlinClass
-import com.mykotiln.activity.ActivityKotlinUse
+import com.mykotiln.activity.*
 import kotlinx.android.synthetic.main.content_main.*
 
 
-class KotlinMainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class KotlinMainActivity : AppCompatActivity() {
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.kotlin_activity_main)
+        setContentView(R.layout.content_main)
 
         initView()
 
@@ -41,16 +39,17 @@ class KotlinMainActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
 
     /**内部类 内部类使用 inner 关键字来表示。 */
     inner class DemoInfo(
-            var title: Int,
-            var desc: Int,
-            var demoClass: Class<out Activity>
+        var title: Int,
+        var desc: Int,
+        var demoClass: Class<out Activity>
     )
 
     private val DEMOS = arrayOf(
-            DemoInfo(R.string.tab_item, R.string.tab_item_desc, ActivityKotlin::class.java),
-            DemoInfo(R.string.tab_item_2, R.string.tab_item_2_desc, ActivityJava::class.java),
-            DemoInfo(R.string.tab_item_3, R.string.tab_item_3_desc, ActivityKotlinClass::class.java),
-            DemoInfo(R.string.tab_item_4, R.string.tab_item_4_desc, ActivityKotlinUse::class.java)
+        DemoInfo(R.string.tab_item, R.string.tab_item_desc, ActivityKotlin::class.java),
+        DemoInfo(R.string.tab_item_2, R.string.tab_item_2_desc, ActivityJava::class.java),
+        DemoInfo(R.string.tab_item_3, R.string.tab_item_3_desc, ActivityKotlinClass::class.java),
+        DemoInfo(R.string.tab_item_4, R.string.tab_item_4_desc, ActivityKotlinUse::class.java),
+        DemoInfo(R.string.tab_item_5, R.string.tab_item_5, ActivityKotlinArray::class.java)
     )
 
 
@@ -102,7 +101,11 @@ class KotlinMainActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
 
     fun initView() {
         listView_content.setAdapter(DemoListAdapter())
-        listView_content.setOnItemClickListener(AdapterView.OnItemClickListener { arg0, v, index, arg3 -> onListItemClick(index) })
+        listView_content.setOnItemClickListener(AdapterView.OnItemClickListener { arg0, v, index, arg3 ->
+            onListItemClick(
+                index
+            )
+        })
 
 //        val toolbar = findViewById<android.widget.Toolbar>(R.id.toolbar)
 //        setSupportActionBar(toolbar)
@@ -124,55 +127,5 @@ class KotlinMainActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
 
     }
 
-    override fun onBackPressed() {
-        val drawer = findViewById<androidx.drawerlayout.widget.DrawerLayout>(R.id.drawer_layout)
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START)
-        } else {
-            super.onBackPressed()
-        }
-    }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.main, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        val id = item.itemId
-
-
-        if (id == R.id.action_settings) {
-            return true
-        }
-
-        return super.onOptionsItemSelected(item)
-    }
-
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        // Handle navigation view item clicks here.
-        val id = item.itemId
-
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        }
-
-        val drawer = findViewById<androidx.drawerlayout.widget.DrawerLayout>(R.id.drawer_layout)
-        drawer.closeDrawer(GravityCompat.START)
-        return true
-    }
 }

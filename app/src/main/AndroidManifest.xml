@@ -24,8 +24,7 @@
     <uses-permission android:name="android.permission.VIBRATE" /> <!-- 获取WINDOW使用 -->
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> <!-- 日历权限 -->
     <uses-permission android:name="android.permission.READ_CALENDAR" />
-    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
-    <!--    使用jobIntentService -->
+    <uses-permission android:name="android.permission.WRITE_CALENDAR" /> <!-- 使用jobIntentService -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
@@ -35,6 +34,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".dialogFragment.DialogFragmentActivity"/>
         <activity android:name=".intentservice.ActivityIntentService" />
         <activity
             android:name=".ui.login.LoginActivity"
@@ -138,7 +138,6 @@
                 <action android:name="android.appwidget.action.APP_WIDGET_SERVICE" />
             </intent-filter>
         </service>
-
         <service
             android:name=".intentservice.MyIntentService"
             android:exported="true">
@@ -156,11 +155,10 @@
                 <action android:name="com.zzt.test.MyIntentService2" />
             </intent-filter>
         </service>
-
         <service
             android:name=".intentservice.MyJobService"
             android:exported="true"
             android:permission="android.permission.BIND_JOB_SERVICE" />
-
     </application>
+
 </manifest>

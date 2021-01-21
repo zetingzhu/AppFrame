@@ -19,5 +19,6 @@
     <string name="tab_item_4">Kotlin Use </string>
     <string name="tab_item_4_desc">Kotlin 高级篇实际使用</string>
 
+    <string name="tab_item_5">Kotlin Array 使用 </string>
 
 </resources>

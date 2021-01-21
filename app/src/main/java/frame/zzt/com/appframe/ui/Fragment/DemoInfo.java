@@ -12,6 +12,13 @@ public class DemoInfo {
     public int desc;
     public Class<? extends Activity> demoClass;
     public String arouter;// 路由地址
+    public int clickIndex = -1;
+
+    public DemoInfo(int title, int desc, int clickIndex) {
+        this.title = title;
+        this.desc = desc;
+        this.clickIndex = clickIndex;
+    }
 
     public DemoInfo(int title, int desc, String arouter) {
         this.title = title;

@@ -1,22 +1,20 @@
 package com.mykotiln.util
 
 import android.content.Context
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.mykotiln.R
-import kotlinx.android.synthetic.main.item_recycle.*
 
 /**
  * Created by allen on 18/11/15.
  */
 
-class MyRecyclerViewKotlin : androidx.recyclerview.widget.RecyclerView {
+class MyRecyclerViewKotlin : RecyclerView {
+
 
     /**
      * var 声明为可变的

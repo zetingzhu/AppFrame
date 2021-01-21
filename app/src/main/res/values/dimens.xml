@@ -45,6 +45,7 @@
     <dimen name="dimen_28dp">28dp</dimen>
     <dimen name="dimen_40dp">40dp</dimen>
     <dimen name="dimen_50dp">50dp</dimen>
+    <dimen name="margin_520dp">520dip</dimen>
 
     <dimen name="widget_margin">8dp</dimen>
 

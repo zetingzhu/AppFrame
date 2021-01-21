@@ -49,6 +49,7 @@ public abstract class BaseActivityViewPager extends AppCompatActivity {
         findViewById(R.id.btn_rotation).setVisibility(View.GONE);
         findViewById(R.id.btn_test).setVisibility(View.GONE);
         findViewById(R.id.btn_test2).setVisibility(View.GONE);
+        findViewById(R.id.btn_nested_sliding).setVisibility(View.GONE);
 
 
         tab_layout = findViewById(R.id.tab_layout);
