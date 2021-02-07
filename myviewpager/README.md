@@ -1,1 +1,4 @@
 这是一个  Viewpager2 的使用
+
+
+ViewPager2Container 为嵌套viewpager2 的时候工具类，处理recycleview嵌套viewpager2 的时候viewpager2 可以正常拦截事件
