@@ -1,14 +1,15 @@
 include ':mypagingsamples'
 paging 分页
 
-include ':groupedadapter'
+groupedadapter
+自定义布局分组列表
+headerrecycleview
 头部分组悬停recycleview
+SideHeadRecycleSamples
+侧边字母工具栏
 
-SignatureView
-手势签名
-
-myviewpager
-ViewPager2 使用
+MoveRecyclerView
+手指移动切换位置
 
 1. 嘿嘿
 把自己平时使用的功能整理起来
@@ -18,6 +19,8 @@ DataBind 简单使用
 
 RoomSample
 room 数据库简单使用
+
+
 
 - 1 project build.gradle
 
