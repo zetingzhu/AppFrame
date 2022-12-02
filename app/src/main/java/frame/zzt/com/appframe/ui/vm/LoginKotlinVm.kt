@@ -4,8 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import com.bumptech.glide.load.engine.Engine
-import frame.zzt.com.appframe.retrofit.loginvm.LoginApi
+import frame.zzt.com.appframe.retrofit.loginvm.WheatherApi
 
 /**
  * @author: zeting
@@ -14,7 +13,7 @@ import frame.zzt.com.appframe.retrofit.loginvm.LoginApi
  */
 class LoginKotlinVm : ViewModel() {
     private val requestMap = MutableLiveData<Map<String, String>>()
-    private val api = LoginApi.getApi()
+    private val api = WheatherApi.getApi()
     var loginStatus: LiveData<HttpResponse<Int>> = Transformations.switchMap(requestMap) {
         api.getLoginStatus3(it)
     }

@@ -13,7 +13,7 @@ import retrofit2.http.POST
 interface LoginKotlinApi {
     companion object {
         fun getApi(): LoginKotlinApi {
-            return ApiRetrofitUtils.getInstance().getApiService(LoginApi.baseUrl, LoginKotlinApi::class.java)
+            return ApiRetrofitUtils.getInstance().getApiService(WheatherApi.baseUrl, LoginKotlinApi::class.java)
         }
     }
 

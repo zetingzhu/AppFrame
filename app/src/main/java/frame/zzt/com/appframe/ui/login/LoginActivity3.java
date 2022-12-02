@@ -37,7 +37,7 @@ import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import frame.zzt.com.appframe.R;
-import frame.zzt.com.appframe.retrofit.loginvm.LoginApi;
+import frame.zzt.com.appframe.retrofit.loginvm.WheatherApi;
 import frame.zzt.com.appframe.retrofit.loginvm.RequestBody;
 import frame.zzt.com.appframe.ui.BaseAppCompatActivity;
 import frame.zzt.com.appframe.ui.home.HomeActivity;
@@ -206,7 +206,7 @@ public class LoginActivity3<P extends BasePresenter> extends BaseAppCompatActivi
         }).start();
 
 
-        LiveData<HttpResponse<Integer>> bannerList = LoginApi.getApi().getLoginStatus1("91", "963001");
+        LiveData<HttpResponse<Integer>> bannerList = WheatherApi.getApi().getLoginStatus1("91", "963001");
         bannerList.observe(LoginActivity3.this, new Observer<HttpResponse<Integer>>() {
             @Override
             public void onChanged(HttpResponse<Integer> integerHttpResponse) {
@@ -218,7 +218,7 @@ public class LoginActivity3<P extends BasePresenter> extends BaseAppCompatActivi
         map.put("telCode", "91");
         map.put("username", "963001");
 
-        LiveData<HttpResponse<Integer>> bannerList1 = LoginApi.getApi().getLoginStatus2(RequestBody.getParamMap(map));
+        LiveData<HttpResponse<Integer>> bannerList1 = WheatherApi.getApi().getLoginStatus2(RequestBody.getParamMap(map));
         bannerList1.observe(LoginActivity3.this, new Observer<HttpResponse<Integer>>() {
             @Override
             public void onChanged(HttpResponse<Integer> integerHttpResponse) {
